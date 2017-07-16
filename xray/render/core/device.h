@@ -94,6 +94,7 @@ private:
 	ID3DDepthStencilView*	get_depth_stencil		() const 	{ return m_base_zb;}
 
 private:
+	IDXGIFactory*			m_factory;
 	IDXGIAdapter*			m_adapter;	//	pD3D equivalent
 	ID3DDevice*				m_device;	//	pDevice	//	render device
 	ID3DDevice1*			m_device1;	//	DX10.1

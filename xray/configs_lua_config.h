@@ -14,17 +14,15 @@
 namespace xray {
 	namespace memory {class stream;}
 namespace configs {
-	void initialize();
-/*
+
 class binary_config;
 XRAY_CORE_API void				create_binary_config_buffer( lua_config_value value, xray::memory::stream& fat );
 XRAY_CORE_API binary_config_ptr	create_binary_config( lua_config_value value );
 XRAY_CORE_API binary_config_ptr	create_binary_config( mutable_buffer const& buffer );
-*/
+
 class XRAY_CORE_API lua_config : public resources::unmanaged_resource {
 public:
 								lua_config			( pcstr file_name, ::luabind::object const& object );
-								lua_config			( pcstr file_name, cJSON* js);
 	virtual						~lua_config			( );
 
 	inline						lua_config			( lua_config const& other ) : m_root( other.m_root ){ }
@@ -32,14 +30,14 @@ public:
 	inline	lua_config_value&	assign_lua_value	( lua_config_value const& value )					{ m_root.assign_lua_value( value ); return m_root; }
 	inline	void				swap				( lua_config& other )								{ m_root.swap( other.m_root ); }
 
-			void				save				( );// const;
-			void				save_as				( pcstr file_name );// const;
-			void				save				( xray::strings::stream& stream );// const;
+			void				save				( ) const;
+			void				save_as				( pcstr file_name ) const;
+			void				save				( xray::strings::stream& stream ) const;
 
 	//virtual	void				recalculate_memory_usage_impl	() { m_memory_usage_self.unmanaged = get_size(); }
 
 	inline  pstr				get_file_name		( ) const											{ return m_file_name; }
-//	inline	binary_config_ptr	get_binary_config	( ) const											{ return create_binary_config( get_root() ); }
+	inline	binary_config_ptr	get_binary_config	( ) const											{ return create_binary_config( get_root() ); }
 
 	inline	lua_config_value const&	get_root		( ) const											{ return m_root; }
 	inline	lua_config_value&	get_root			( )													{ return m_root; }
@@ -91,7 +89,7 @@ XRAY_CORE_API	lua_config_ptr  create_lua_config	( mutable_buffer const & buffer,
 XRAY_CORE_API	lua_config_ptr	create_lua_config	( pcstr file_name = 0 );
 XRAY_CORE_API	lua_config_ptr	create_lua_config	( pcstr file_name, lua_config_value const& value );
 XRAY_CORE_API	lua_config_ptr	create_lua_config_from_string ( pcstr string );
-//XRAY_CORE_API	lua_config_ptr	create_lua_config	( binary_config_ptr config );
+XRAY_CORE_API	lua_config_ptr	create_lua_config	( binary_config_ptr config );
 
 } // namespace configs
 } // namespace xray

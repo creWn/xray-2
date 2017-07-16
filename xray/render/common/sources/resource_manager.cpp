@@ -770,7 +770,7 @@ res_texture* resource_manager::create_texture( char const* user_name, math::uint
 
 	ID3DTexture2D*	d3d_texture = 0;
 	R_CHK( D3DXCreateTexture(	hw_wrapper::get_ref().device(), 
-								size.x, size.y, D3DX_DEFAULT /*needed to determine correct mip levels*/,
+								size.x, size.y, mip_levels,
 								usage,
 								format,
 								D3DPOOL_MANAGED,
@@ -814,7 +814,6 @@ struct load_texture_delegate
 	void execute(resources::queries_result& data)
 	{
 		ASSERT		(data.is_successful());
-
 		ASSERT		( data[0].get_managed_resource());
 
 		RECT rect;
@@ -826,10 +825,24 @@ struct load_texture_delegate
 
 		resources::pinned_ptr_const<u8> ptr  (data[0].get_managed_resource());
 
-		ID3DSurface* surface;
-		((ID3DTexture2D*)dest_texture->get_surface())->GetSurfaceLevel(0, &surface);
-		D3DXLoadSurfaceFromFileInMemory( surface, NULL, &rect, ptr.c_ptr(), ptr.size(), &src_rect, D3DX_FILTER_NONE, 0, NULL);
-		surface->Release();
+		DWORD levels = ((ID3DTexture2D*)dest_texture->get_surface())->GetLevelCount();
+
+		for(DWORD l = 0; l < levels; l++)
+		{
+			RECT r;
+			ID3DSurface* surface;
+
+			((ID3DTexture2D*)dest_texture->get_surface())->GetSurfaceLevel(l, &surface);
+
+			r.left = rect.left >> l;
+			r.top = rect.top >> l;
+			r.right = math::max(rect.right >> l, 1);
+			r.bottom = math::max(rect.bottom >> l, 1);
+
+			D3DXLoadSurfaceFromFileInMemory( surface, NULL, &r, ptr.c_ptr(), ptr.size(), NULL, D3DX_FILTER_TRIANGLE, 0, NULL);
+
+			surface->Release();
+		}
 
 		((ID3DTexture2D*)dest_texture->get_surface())->AddDirtyRect( &rect);
 //		HRESULT res = ((ID3DTexture2D*)dest_texture->get_surface())->SetAutoGenFilterType(D3DTEXF_PYRAMIDALQUAD);

@@ -7,7 +7,7 @@
 #ifndef XRAY_RENDER_CORE_RENDER_INCLUDE_H_INCLUDED
 #define XRAY_RENDER_CORE_RENDER_INCLUDE_H_INCLUDED
 
-#define USE_DX10						0
+#define USE_DX10						1
 
 #include <xray/os_preinclude.h>
 #undef NOUSER

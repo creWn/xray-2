@@ -23,6 +23,7 @@ inline void	free_render_mode_list		() {;}
 device::device		( xray::render::engine::wrapper * wrapper, HWND hwnd, bool windowed):
 // --Porting to DX10_
 //	m_d3d			( 0),
+m_factory			( 0),
 m_device			( 0),
 m_context			( 0),
 m_base_rt			( 0),
@@ -57,8 +58,7 @@ device::~device()
 
 void device::create_d3d()
 {
-	IDXGIFactory * factory;
-	HRESULT res = CreateDXGIFactory( __uuidof( IDXGIFactory), ( void**)( &factory));
+	HRESULT res = CreateDXGIFactory( __uuidof( IDXGIFactory), ( void**)( &m_factory));
 	R_CHK(res);
 	
 	m_adapter = 0;
@@ -68,7 +68,7 @@ void device::create_d3d()
 	// Look for 'NVIDIA NVPerfHUD' adapter
 	// If it is present, override default settings
 	UINT i = 0;
-	while( factory->EnumAdapters( i, &m_adapter) != DXGI_ERROR_NOT_FOUND)
+	while( m_factory->EnumAdapters( i, &m_adapter) != DXGI_ERROR_NOT_FOUND)
 	{
 		m_adapter->GetDesc( &m_adapter_desc);
 		if( !wcscmp( m_adapter_desc.Description,L"NVIDIA PerfHUD"))
@@ -86,15 +86,15 @@ void device::create_d3d()
 #endif	//	MASTER_GOLD
 
 	if ( !m_adapter)
-		factory->EnumAdapters( 0, &m_adapter);
-
-	factory->Release();
+		m_factory->EnumAdapters( 0, &m_adapter);
 }
 
 void device::destroy_d3d()
 {
 	log_ref_count	( "m_Adapter", m_adapter);
 	safe_release	( m_adapter);
+
+	m_factory->Release();
 }
 
 void device::update_targets()
@@ -264,7 +264,7 @@ void device::create( HWND hwnd, bool move_window)
 	}
 #else
 
-	D3D_DRIVER_TYPE driver_type = D3D_DRIVER_TYPE_HARDWARE;
+	D3D_DRIVER_TYPE driver_type = D3D_DRIVER_TYPE_UNKNOWN;
 	// driver_type = m_caps.bForceGPU_REF ? D3D_DRIVER_TYPE_REFERENCE : D3D_DRIVER_TYPE_HARDWARE;
 
 	if ( m_use_perfhud)
@@ -281,8 +281,8 @@ void device::create( HWND hwnd, bool move_window)
 		D3D_FEATURE_LEVEL_9_1,
 	};
 
-	R =  D3D11CreateDeviceAndSwapChain( 0,//m_adapter,//What wrong with adapter??? We should use another version of DXGI?????
-		driver_type,
+	R =  D3D11CreateDeviceAndSwapChain( NULL,//m_adapter,//What wrong with adapter??? We should use another version of DXGI?????
+		D3D_DRIVER_TYPE_HARDWARE,
 		NULL,
 		createDeviceFlags,
 		feature_levels,

@@ -131,8 +131,7 @@ void xray::core::initialize			(
 	
 	strings::initialize		( );
 	fs::initialize			( );
-//	core::configs::initialize ( s_engine->get_resource_path(), s_engine->get_underscore_G_path() );
-	xray::configs::initialize ( );
+	core::configs::initialize ( s_engine->get_resource_path(), s_engine->get_underscore_G_path() );
 
 	tasks::initialize		(	2 * threading::core_count(),	// tasks thread count
 								64,								// user thread count

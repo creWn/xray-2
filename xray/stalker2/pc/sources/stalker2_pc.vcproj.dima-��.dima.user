@@ -66,8 +66,8 @@
 			>
 			<DebugSettings
 				Command="$(TargetPath)"
-				WorkingDirectory=""
-				CommandArguments=""
+				WorkingDirectory="$(SolutionDir)..\binaries\Win32"
+				CommandArguments="-editor -no_network -dx10"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -78,7 +78,7 @@
 				SQLDebugging=""
 				Environment=""
 				EnvironmentMerge="true"
-				DebuggerFlavor=""
+				DebuggerFlavor="0"
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""

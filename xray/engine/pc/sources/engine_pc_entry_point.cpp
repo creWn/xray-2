@@ -16,6 +16,7 @@
 #include <xray/maya_animation/library_linkage.h>
 #include <vorbis/library_linkage.h>
 #include <xray/render/library_linkage.h>
+#include <luabind/library_linkage.h>
 
 #pragma comment(lib,"libboost_system-vc90-mt-1_54.lib")
 #pragma comment(lib,"xray_ode.lib")

@@ -19,9 +19,9 @@ m_textures_count	( m_tiles.x*m_tiles.y)
 
 
 	if( hw_wrapper::get_ref().support(D3DFMT_DXT1,D3DRTYPE_TEXTURE,D3DUSAGE_AUTOGENMIPMAP) )
-		m_pool_texture	= resource_manager::get_ref().create_texture( get_pool_texture_name(), m_tiles*size, D3DFMT_DXT1, D3DUSAGE_AUTOGENMIPMAP, D3DX_DEFAULT);
-		
-// 	else if( hw_wrapper::get_ref().support( D3DFMT_R8G8B8,D3DRTYPE_TEXTURE,D3DUSAGE_AUTOGENMIPMAP))
+		m_pool_texture	= resource_manager::get_ref().create_texture( get_pool_texture_name(), m_tiles*size, D3DFMT_DXT1, 0, 1);//, 10); // MAGIC! 10 is levels need for 1024 texture
+//		
+// 	if( hw_wrapper::get_ref().support( D3DFMT_R8G8B8,D3DRTYPE_TEXTURE,D3DUSAGE_AUTOGENMIPMAP))
 // 		m_pool_texture	= resource_manager::get_ref().create_texture( get_pool_texture_name(), m_tiles*size, D3DFMT_R8G8B8, D3DUSAGE_AUTOGENMIPMAP, 0);
 // 	
 // 	else if( hw_wrapper::get_ref().support( D3DFMT_A8R8G8B8,D3DRTYPE_TEXTURE,D3DUSAGE_AUTOGENMIPMAP))
@@ -90,7 +90,7 @@ math::rectangle<int2>	terrain_texture_pool::get_tile_rect	(u32 ind)
 	int top		= ind/m_tiles.x;
 	int left	= ind-top*m_tiles.x;
 
-	return math::rectangle<int2>( int2(left*m_tile_size, top*m_tile_size), int2((left+1)*m_tile_size, (top+1)*m_tile_size));
+	return math::rectangle<int2>( int2(left*m_tile_size, top*m_tile_size), int2((left+1)*m_tile_size, (top+1)*m_tile_size) );
 }
 
 bool	terrain_texture_pool::exchange_texture( texture_string const & old_texture, texture_string const &  new_texture, bool deffered_load)

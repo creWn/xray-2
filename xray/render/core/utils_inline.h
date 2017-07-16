@@ -32,7 +32,7 @@ bool calc_lists_diff_range( list const& first, list const& second, u32 &min, u32
 
 	min = max = 0;
 	for( ; it != end && it_oth != end_oth; ++it, ++it_oth, ++min)
-		if( *it != *end_oth)
+		if( *it != *it_oth) // end_oth
 			break;
 
 
@@ -45,7 +45,7 @@ bool calc_lists_diff_range( list const& first, list const& second, u32 &min, u32
 	int ind = min;
 	for( ; it != end && it_oth != end_oth; ++it, ++it_oth, ++ind)
 	{
-		if( *it != *end_oth)
+		if( *it != *it_oth) // end_oth
 		{
 			max = ind+1;
 //			*it = *it_oth;

@@ -187,7 +187,9 @@ void project_group::clear()
 		delete pi;
 	}
 	m_items->Clear		();
-	m_tree_node->Remove	();
+
+	if(m_tree_node)
+		m_tree_node->Remove	();
 }
 
 void project_group::remove(project_group^ pg)
