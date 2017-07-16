@@ -2,7 +2,7 @@
 #include "light_tool_tab.h"
 #include "tool_light.h"
 #include "library_object_tab.h"
-//#include "editor_world.h"
+#include "level_editor.h"
 
 using xray::editor::tool_light;
 using xray::editor::light_tool_tab;
@@ -34,10 +34,9 @@ System::Void light_tool_tab::on_after_select(System::Object^, System::Windows::F
 
 System::Void light_tool_tab::on_context_menu_opening(System::Object^, System::ComponentModel::CancelEventArgs^)
 {
-	ASSERT(0); // uncomment next
-	//bool b_on_item					= (treeView->SelectedNode!=nullptr) && (treeView->SelectedNode->Nodes->Count==0);
-	//bool b_lib_wnd_visible			= m_tool->world().m_tool_windows.m_library_object_tab->Visible;
-	//new_item_menu->Visible			= !b_lib_wnd_visible;
-	//properties_item_menu->Visible	= b_on_item && !b_lib_wnd_visible;
-	//remove_item_menu->Visible		= b_on_item && !b_lib_wnd_visible;
+	bool b_on_item					= (treeView->SelectedNode!=nullptr) && (treeView->SelectedNode->Nodes->Count==0);
+	bool b_lib_wnd_visible			= m_tool->get_level_editor()->get_library_object_tab()->Visible;
+	new_item_menu->Visible			= !b_lib_wnd_visible;
+	properties_item_menu->Visible	= b_on_item && !b_lib_wnd_visible;
+	remove_item_menu->Visible		= b_on_item && !b_lib_wnd_visible;
 }
