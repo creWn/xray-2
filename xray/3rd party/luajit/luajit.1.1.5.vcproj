@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="luajit.1.1.5"
 	ProjectGUID="{F6C4F74A-152C-4612-9E3B-D02346234855}"
 	RootNamespace="lua"
@@ -74,7 +74,7 @@
 				IgnoreImportLibrary="true"
 				OutputFile="$(SolutionDir)../binaries/$(PlatformName)/xray_$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(SolutionDir)../binaries/$(PlatformName)/libraries/"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)../binaries/$(PlatformName)/libraries/&quot;;&quot;$(SolutionDir)../SDK/libraries&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(SolutionDir)../binaries/$(PlatformName)/$(TargetName).pdb"
 				GenerateMapFile="false"

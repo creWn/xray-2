@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="engine_pc"
 	ProjectGUID="{AC5DD91F-CE10-4E05-B48A-E1DDEC5CCD9C}"
 	RootNamespace="engine_pc"
@@ -49,8 +49,8 @@
 				EnableIntrinsicFunctions="true"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/stlport&quot;;&quot;$(SolutionDir)&quot;;../../../../../SDK/include"
-				PreprocessorDefinitions="WIN32;NDEBUG;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/stlport&quot;;&quot;$(SolutionDir)&quot;;../../../../../SDK/include;&quot;$(SolutionDir)/xray/3rd party/luabind/include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG"
 				StringPooling="true"
 				ExceptionHandling="0"
 				RuntimeLibrary="2"
@@ -76,6 +76,7 @@
 				OutputFile="$(SolutionDir)../binaries/$(PlatformName)/xray_$(ProjectName).dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)../binaries/$(PlatformName)/libraries/&quot;;&quot;$(SolutionDir)cs/libraries/$(PlatformName)&quot;;&quot;$(SolutionDir)../SDK/libraries&quot;"
+				IgnoreAllDefaultLibraries="false"
 				IgnoreDefaultLibraryNames="libcmt.lib, libcmtd.lib"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -231,7 +232,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/stlport&quot;;&quot;$(SolutionDir)&quot;;&quot;$(SolutionDir)../SDK/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/stlport&quot;;&quot;$(SolutionDir)&quot;;&quot;$(SolutionDir)../SDK/include&quot;;&quot;$(SolutionDir)/xray/3rd party/luabind/include&quot;;&quot;$(SolutionDir)/xray/3rd party/luajit/include&quot;"
 				PreprocessorDefinitions="WIN32;"
 				StringPooling="false"
 				MinimalRebuild="true"

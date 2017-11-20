@@ -109,9 +109,9 @@ static LONG WINAPI unhandled_exception_handler_on_top_of_bugtrap( _EXCEPTION_POI
 		DEBUG_BREAK				( );
 
 	epilogue					( exception_information );
-#if !defined(NDEBUG)
+//#if !defined(NDEBUG)
 	return						( EXCEPTION_CONTINUE_SEARCH );
-#endif // #if !defined(NDEBUG) || !XRAY_PLATFORM_XBOX_360
+//#endif // #if !defined(NDEBUG) || !XRAY_PLATFORM_XBOX_360
 }
 
 static LONG WINAPI unhandled_exception_handler					( _EXCEPTION_POINTERS* const exception_information )
@@ -128,9 +128,9 @@ static LONG WINAPI unhandled_exception_handler					( _EXCEPTION_POINTERS* const 
 	prologue					( exception_information );
 	epilogue					( exception_information );
 
-#if !defined(NDEBUG)
+//#if !defined(NDEBUG)
 	return						( EXCEPTION_CONTINUE_SEARCH );
-#endif // #if !defined(NDEBUG) || !XRAY_PLATFORM_XBOX_360
+//#endif // #if !defined(NDEBUG) || !XRAY_PLATFORM_XBOX_360
 }
 
 int   xray::debug::unhandled_exception_filter	( int const exception_code, _EXCEPTION_POINTERS* const exception_information )

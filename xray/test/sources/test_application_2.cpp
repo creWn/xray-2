@@ -21,7 +21,13 @@ using namespace xray;
 #include <xray/core/simple_engine.h>
 #include <xray/uninitialized_reference.h>
 #include <xray/type_variant.h>
-#include <xray/configs_lua_config.h>
+//#include <xray/configs_lua_config.h>
+
+#include <luabind/lua_include.hpp>
+#include <luabind/luabind.hpp>
+#include <luabind/class_info.hpp>
+
+#include <typeinfo>
 
 xray::memory::doug_lea_allocator_type		g_test_allocator;
 
@@ -69,12 +75,12 @@ struct resource_with_children : public unmanaged_resource
 
 void   application::execute ()
 {
-	/*
+/*
 	resource_with_children	c;
 	sub_resource			a;
 	c.set_child				(& a);
 */
-
+/*
 	configs::lua_config_ptr cfg = configs::create_lua_config("test.json");
 	configs::lua_config_value root = cfg->get_root()["main"];
 
@@ -84,11 +90,39 @@ void   application::execute ()
 
 	configs::lua_config_value v = root["test_assign"];
 
-	v.assign_lua_value(cJSON_CreateString("strstrstr"));
-
 	cfg->save();
-	
+*/
 
+	class LuaClass
+	{
+		public:
+		int z;
+
+		LuaClass() { z = 0; }
+	};
+
+	lua_State * ls = lua_open();
+	luabind::open(ls);
+
+
+	luabind::module(ls) [ luabind::class_<LuaClass>("LuaClass").def(luabind::constructor<>()) ];
+
+	{
+		luabind::object o1(ls, LuaClass() );
+		o1.push(ls);
+
+		if(luabind::detail::object_rep * c = luabind::detail::is_class_object(ls, -1))
+		{
+			LOG_INFO(c->crep()->name());
+			LOG_INFO("OK");
+		}
+		else
+			LOG_INFO("FAIL");
+
+		lua_pop(ls, 1);
+	}
+
+	lua_close(ls);
 	m_exit_code								=	0;
 }
 
