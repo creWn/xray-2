@@ -1,0 +1,4 @@
+syntax: glob
+xray2.ncb
+*.user
+*.orig
