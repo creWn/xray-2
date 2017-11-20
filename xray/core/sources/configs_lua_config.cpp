@@ -25,21 +25,16 @@
 #	define CS_SCRIPT_USE_DEBUG_LIBRARY
 #endif // #ifdef DEBUG
 
-//#include <cs/lua/library_linkage.h>
 #include <luajit/library_linkage.h>
 #include <luabind/library_linkage.h>
 #include <luabind/luabind.hpp>
 #include <luabind/lua_include.hpp>
-//#include <cs/core/library_linkage.h>
-//#include <cs/script/library_linkage.h>
-//#include <cs/core/memory.h>
 
 //using xray::core::script_engine_wrapper;
 
 //static xray::uninitialized_reference<script_engine_wrapper>		s_wrapper;
 static xray::uninitialized_reference<xray::threading::mutex>	s_mutex;
 
-//static cs::script::world* s_world	= 0;
 static pcstr s_super_tables_id		= "__super_tables__";
 static pcstr s_super_tables_ids_id	= "__super_tables";
 
@@ -53,20 +48,21 @@ namespace configs {
 } // namespace core
 } // namespace xray
 
-static void* allocate		( luabind::memory_allocation_function_parameter, void const* current_buffer, size_t const needed_size )
+static void* allocate(luabind::memory_allocation_function_parameter, void const* current_buffer, size_t const needed_size)
 {
-	xray::core::configs::g_lua_allocator.user_current_thread_id	( );
+	xray::core::configs::g_lua_allocator.user_current_thread_id();
 
-	pvoid buffer					= const_cast<pvoid>(current_buffer);
-	if ( !needed_size ) {
-		XRAY_FREE_IMPL				( xray::core::configs::g_lua_allocator, buffer );
-		return						0;
+	pvoid buffer = const_cast<pvoid>(current_buffer);
+	if (!needed_size) 
+	{
+		XRAY_FREE_IMPL(xray::core::configs::g_lua_allocator, buffer);
+		return 0;
 	}
 
-	if ( !current_buffer )
-		return						XRAY_MALLOC_IMPL( xray::core::configs::g_lua_allocator, (u32)needed_size, "lua" );
+	if (!current_buffer)
+		return XRAY_MALLOC_IMPL(xray::core::configs::g_lua_allocator, (u32)needed_size, "lua");
 
-	return							XRAY_REALLOC_IMPL( xray::core::configs::g_lua_allocator, buffer, (u32)needed_size, "lua" );
+	return XRAY_REALLOC_IMPL(xray::core::configs::g_lua_allocator, buffer, (u32)needed_size, "lua");
 }
 
 static int lua_error_callback(lua_State *state)
@@ -172,17 +168,13 @@ namespace configs {
 
 void initialize						( pcstr resource_path, pcstr underscore_G_path )
 {
-//	cs::core::memory_allocator		( &allocate, 0 );
+	XRAY_UNREFERENCED_PARAMETERS(resource_path, underscore_G_path);
+
 	luabind::allocator = allocate;
 	luabind::allocator_parameter = 0;
 
 //	XRAY_CONSTRUCT_REFERENCE		( s_wrapper, script_engine_wrapper ) ( resource_path, underscore_G_path );
 	XRAY_CONSTRUCT_REFERENCE		( s_mutex, threading::mutex );
-
-//	R_ASSERT						( !s_world );
-//	s_world							= cs_script_create_world( *s_wrapper );
-//  .?
-//	lua_pop							( s_world->virtual_machine(), lua_gettop( s_world->virtual_machine() ) );
 
 	s_virtual_machine = lua_open();
 	luabind::open(s_virtual_machine);

@@ -173,7 +173,7 @@ void xray::core::finalize			( )
 
 	fs::finalize_watcher	( ); // must be finalized before resources
 	resources::finalize		( );
-//	core::configs::finalize	( );
+	core::configs::finalize	( );
 	fs::finalize			( );
 	strings::finalize		( );
 //	build::finalize			( );
