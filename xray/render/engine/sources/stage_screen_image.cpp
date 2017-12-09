@@ -41,7 +41,6 @@ public:
 					.set_alpha_blend	( false)
 					.set_stencil		( false)
 					//.def_sampler( "s_base", r2_rt_albedo)
-					.set_texture		( "t_generic0", r2_rt_generic0);
 				.end_pass()
 			.end_technique();
 	}
