@@ -34,7 +34,10 @@ public:
 		m_material_id(0),
 		m_usage(0), 
 		m_use_steep_parallax(0)
-	{}
+	{
+		m_detail_name	= "";
+		m_bump_name		= "";
+	}
 
 	~material();
 	void _free() const;

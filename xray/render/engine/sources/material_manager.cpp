@@ -262,9 +262,12 @@ ref_material material_manager::get_material(const shared_string& name)
 	{
 		return it->second;
 	}
-	
-	ASSERT( false, "Material \"%s\"not found !", name.c_str() );
-	return 0;
+	else
+	{
+		//ASSERT( false, "Material \"%s\"not found !", name.c_str() );
+		LOG_ERROR( "Material \"%s\" not found!", name.c_str() );
+		return m_materials[name] = NEW(material);
+	}
 }
 
 } // namespace render 
