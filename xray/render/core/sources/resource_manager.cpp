@@ -416,7 +416,7 @@ res_vs_hw*	resource_manager::create_vs_hw( char const * name, shader_defines_lis
 		//make_defines( local_opts, defines);
 		
 		map_shader_sources::iterator src_it = m_sources.find( sh_name);
-		ASSERT( src_it != m_sources.end()); //What to do if file not found?????
+		R_ASSERT( src_it != m_sources.end(), "Shader '%s' not found", sh_name);
 		ASSERT( !src_it->second.empty());
 
 
@@ -517,7 +517,7 @@ res_ps_hw* resource_manager::create_ps_hw( LPCSTR name, shader_defines_list& def
 		//make_defines( local_opts, defines);
 
 		map_shader_sources::iterator src_it = m_sources.find( sh_name);
-		ASSERT( src_it != m_sources.end()); //What to do if file not found?????
+		R_ASSERT( src_it != m_sources.end(), "Shader '%s' not found", sh_name);
 		ASSERT( !src_it->second.empty());
 
 		HRESULT hr = shader_compile( name,

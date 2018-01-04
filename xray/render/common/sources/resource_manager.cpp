@@ -369,7 +369,7 @@ res_vs*	resource_manager::create_vs(const char* name, shader_defines_list& defin
 		//make_defines(local_opts, defines);
 		
 		map_shader_sources::iterator src_it = m_sources.find(sh_name);
-		ASSERT(src_it != m_sources.end()); //What to do if file not found?????
+		R_ASSERT(src_it != m_sources.end(), "Shader '%s' not found", sh_name);
 		ASSERT(!src_it->second.empty());
 
 		HRESULT hr = shader_compile(name,
@@ -464,7 +464,7 @@ res_ps* resource_manager::create_ps(LPCSTR name, shader_defines_list& defines)
 		//make_defines(local_opts, defines);
 
 		map_shader_sources::iterator src_it = m_sources.find(sh_name);
-		ASSERT(src_it != m_sources.end()); //What to do if file not found?????
+		R_ASSERT( src_it != m_sources.end(), "Shader '%s' not found", sh_name);
 		ASSERT(!src_it->second.empty());
 
 		HRESULT hr = shader_compile(name,
