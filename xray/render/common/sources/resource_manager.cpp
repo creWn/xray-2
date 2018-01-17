@@ -724,7 +724,13 @@ res_texture* resource_manager::create_texture(LPCSTR name)
 
 void resource_manager::load_texture(resources::queries_result& data)
 {
-	ASSERT(data.is_successful());
+	if (!data.is_successful())
+	{
+		if (!data.empty())
+			LOG_ERROR("Can't load texture '%s'", data[0].get_requested_path());
+
+		return;
+	}
 
 	if (!data[0].get_managed_resource())
 		return;
