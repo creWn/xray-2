@@ -17,6 +17,8 @@ public:
 	float3 					get_char_tc_ts	(u8 const& ch)	const;
 	float const&			get_height		()	const					{return m_height;}
 	float					get_height_ts	()	const;
+private:
+	void					on_config_loaded(xray::resources::queries_result &data);
 };
 
 class font_manager
