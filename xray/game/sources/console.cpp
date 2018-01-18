@@ -249,8 +249,8 @@ void console::tick( )
 		txt->w()->set_size		(float2(line_width, line_height));
 		txt->w()->set_visible	(true);
 		txt->set_text_mode		(ui::tm_default);
-		txt->set_color			(string_color(log_str_buffer));
 		txt->set_font			(ui::fnt_arial);
+
 		if(line==NULL)
 		{
 			l->read_next_line	(log_str_buffer);
@@ -258,6 +258,8 @@ void console::tick( )
 		}
 		else
 			txt->split_and_set_text( line, line_width, line );
+
+		txt->set_color			(string_color(log_str_buffer));
 
 		m_ui_view->add_item		( txt->w(), false );
 	}
