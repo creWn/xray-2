@@ -342,12 +342,12 @@ float4x4 const&	game::get_inverted_view_matrix( ) const
 	return m_inverted_view;
 }
 
-void game::toggle_console			( )
+void game::toggle_console		( )
 {
 	if ( m_console->get_active() )
-		m_console->on_deactivate	( );
+		switch_to_scene			( m_game_world );
 	else
-		m_console->on_activate		( );
+		switch_to_scene			( m_console );
 }
 
 void game::exit( pcstr str )
