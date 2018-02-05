@@ -3,16 +3,9 @@
 //	Author		: Dmitriy Iassenev
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef XRAY_DEBUG_STATIC_CAST_CHECKED_H_INCLUDED
-#define XRAY_DEBUG_STATIC_CAST_CHECKED_H_INCLUDED
+#pragma once
 
 #ifdef DEBUG
-
-#include <boost/type_traits/remove_pointer.hpp>
-#include <boost/type_traits/remove_reference.hpp>
-#include <boost/type_traits/is_polymorphic.hpp>
-#include <boost/type_traits/is_base_and_derived.hpp>
 
 namespace xray {
 namespace debug {
@@ -58,32 +51,23 @@ struct helper<source_type, destination_type, false> {
 template < typename destination_type, typename source_type >
 inline destination_type static_cast_checked	( source_type const& source )
 {
-	typedef typename boost::remove_pointer<source_type>::type			pointerless_type;
-	typedef typename boost::remove_reference<pointerless_type>::type	pure_source_type;
+	typedef typename std::remove_pointer<source_type>::type			pointerless_type;
+	typedef typename std::remove_reference<pointerless_type>::type	pure_source_type;
 
-	debug::detail::static_cast_checked::helper<
-		source_type const &,
-		destination_type,
-		boost::is_polymorphic<
-			pure_source_type
-		>::value
-	>::check		( source );
+	debug::detail::static_cast_checked::helper<source_type const &, destination_type, std::is_polymorphic<pure_source_type>::value>::check( source );
 
-	return			( static_cast< destination_type >( source ) );
+	return ( static_cast< destination_type >( source ) );
 }
 
 template < typename destination_type, typename source_type >
 inline destination_type static_cast_checked	( source_type& source )
 {
-	typedef typename boost::remove_pointer<source_type>::type			pointerless_type;	typedef typename boost::remove_reference<pointerless_type>::type	pure_source_type;	debug::detail::static_cast_checked::helper<
+	typedef typename std::remove_pointer<source_type>::type			pointerless_type;	typedef typename std::remove_reference<pointerless_type>::type	pure_source_type;	debug::detail::static_cast_checked::helper<
 		source_type&,
 		destination_type,
-		boost::is_polymorphic<
-			pure_source_type
-		>::value
-	>::check		( source );
+		std::is_polymorphic<pure_source_type>::value>::check( source );
 
-	return			( static_cast< destination_type >( source ) );
+	return ( static_cast< destination_type >( source ) );
 }
 
 } // namespace xray
@@ -107,7 +91,3 @@ inline destination_type static_cast_checked	( source_type & source )
 } // namespace xray
 
 #endif // #ifdef DEBUG
-
-
-
-#endif // #ifndef XRAY_DEBUG_STATIC_CAST_CHECKED_H_INCLUDED

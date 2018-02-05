@@ -4,3 +4,9 @@
 *.db
 *.db-shm
 *.db-wal
+.vs/xray2/v15/.suo
+.vs/xray2/v15/Browse.VC.opendb
+*.lock
+*.ide
+*.ide-wal
+*.ide-shm

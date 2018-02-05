@@ -3,11 +3,7 @@
 //	Author		: Dmitriy Iassenev
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef XRAY_ALLOCATOR_HELPER_INLINE_H_INCLUDED
-#define XRAY_ALLOCATOR_HELPER_INLINE_H_INCLUDED
-
-#include <boost/type_traits/is_pod.hpp>
+#pragma once
 
 namespace xray {
 namespace memory {
@@ -73,7 +69,7 @@ void   call_constructor		( T* const begin, T* const end )
 #ifdef _MSC_VER
 	call_constructor_helper<T, __is_pod(T) >::call 	(begin, end);
 #else // #ifdef _MSC_VER
-	call_constructor_helper<T, boost::is_pod<T>::value >::call 	(begin, end);
+	call_constructor_helper<T, std::is_pod<T>::value >::call 	(begin, end);
 #endif // #ifdef _MSC_VER
 }
 
@@ -111,7 +107,7 @@ void   free_helper_impl	( A& allocator, T*& pointer, pvoid const top_pointer XRA
 template < typename T >
 pvoid   get_top_pointer ( T*& pointer )
 {
-	return	get_top_pointer_helper<T,boost::is_polymorphic< T >::value >::call (pointer);
+	return	get_top_pointer_helper<T,std::is_polymorphic< T >::value >::call (pointer);
 }
 
 template <typename A, typename T, typename P>
@@ -152,7 +148,7 @@ void   free_helper				( A& allocator, T*& pointer XRAY_CORE_DEBUG_PARAMETERS_DEC
 	if ( !pointer )
 		return;
 
-	detail::free_helper_impl	( allocator, pointer, (typename boost::remove_cv<T>::type *)pointer XRAY_CORE_DEBUG_PARAMETERS );
+	detail::free_helper_impl	( allocator, pointer, (typename std::remove_cv<T>::type *)pointer XRAY_CORE_DEBUG_PARAMETERS );
 }
 #endif // #ifdef _MANAGED
 
@@ -246,5 +242,3 @@ pvoid   realloc_helper			( A& allocator, T* pointer, size_t const size XRAY_CORE
 
 } // namespace memory
 } // namespace xray
-
-#endif // #ifndef XRAY_ALLOCATOR_HELPER_INLINE_H_INCLUDED

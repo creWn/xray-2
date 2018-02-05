@@ -11,13 +11,13 @@ namespace xray {
 namespace detail {
 
 class XRAY_CORE_API noncopyable {
-	protected:
-		inline						noncopyable	( ) { }
-		inline						~noncopyable( ) { }
+protected:
+	inline noncopyable	( ) { }
+	inline ~noncopyable( ) { }
 
-	private:  // emphasize the following members are private
-									noncopyable	( const noncopyable& );
-		inline	noncopyable const&	operator=	( const noncopyable& );
+private:  // emphasize the following members are private
+	noncopyable(const noncopyable&) = delete;
+	noncopyable& operator=(const noncopyable&) = delete;
 };
 
 } // namespace detail

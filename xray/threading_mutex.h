@@ -32,7 +32,11 @@ private:
 #endif // #elif XRAY_PLATFORM_XBOX_360
 };
 
-class mutex_raii : private boost::noncopyable {
+class mutex_raii
+{
+private:
+	mutex_raii(const mutex_raii&) = delete;
+	mutex_raii& operator=(const mutex_raii&) = delete;
 public:
 	inline			mutex_raii	( mutex& mutex ) : m_mutex( mutex )	{ m_mutex.lock		( ); }
 					~mutex_raii	( )									{ m_mutex.unlock	( ); }

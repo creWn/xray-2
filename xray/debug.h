@@ -25,10 +25,7 @@ namespace debug {
 
 enum assert_enum;
 enum process_error_enum;
-
-namespace logging {
-	enum verbosity;
-} // namespace logging
+#include "core\sources\logging.h"
 
 namespace debug {
 

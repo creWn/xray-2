@@ -2196,6 +2196,7 @@
     <ClInclude Include="game_resources_manager.h" />
     <ClInclude Include="intrusive_mpmc_queue.h" />
     <ClInclude Include="logging.h" />
+    <ClInclude Include="logging.hpp" />
     <ClInclude Include="logging_path_parts.h" />
     <ClInclude Include="logging_rule_tree_node.h" />
     <ClInclude Include="math_utils.h" />

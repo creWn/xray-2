@@ -38,9 +38,9 @@ public:
 	virtual	size_t	allocated_size		( ) const = 0;
 
 protected:
-	virtual	pvoid	call_malloc			( size_t size_t XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION ) = 0;
-	virtual	pvoid	call_realloc		( pvoid pointer, size_t new_size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION ) = 0;
-	virtual	void	call_free			( pvoid pointer XRAY_CORE_DEBUG_PARAMETERS_DECLARATION ) = 0;
+	virtual	pvoid	call_malloc(size_t size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION) {}
+	virtual	pvoid	call_realloc(pvoid pointer, size_t new_size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION) {}
+	virtual	void	call_free(pvoid pointer XRAY_CORE_DEBUG_PARAMETERS_DECLARATION) {}
 
 protected:
 			void	copy				( base_allocator const& allocator );

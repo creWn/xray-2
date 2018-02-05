@@ -3,10 +3,7 @@
 //	Author		: Dmitriy Iassenev
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef XRAY_COMMAND_LINE_EXTENSIONS_H_INCLUDED
-#define XRAY_COMMAND_LINE_EXTENSIONS_H_INCLUDED
-
+#pragma once
 #include <xray/fixed_string.h>
 
 namespace xray {
@@ -84,5 +81,3 @@ XRAY_CORE_API	void	set_finger_print ( pcstr );
 
 } // namespace command_line
 } // namespace xray
-
-#endif // #ifndef XRAY_COMMAND_LINE_EXTENSIONS_H_INCLUDED

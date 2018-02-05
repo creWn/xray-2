@@ -3,11 +3,12 @@
 //	Author		: Dmitriy Iassenev
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
+#pragma once
 
-#ifndef XRAY_STRINGS_FUNCTIONS_H_INCLUDED
-#define XRAY_STRINGS_FUNCTIONS_H_INCLUDED
-
+using u32 = unsigned;
 #include <string.h>					// for strcmp
+#include "debug_macros.h"
+#include <xray\core\sources\memory.h>
 
 namespace xray {
 namespace strings {
@@ -47,7 +48,7 @@ inline bool	iterate_items			( pcstr string, predicate_type const& predicate, cha
 
 inline pcstr get_token				( pcstr string, pstr result, u32 result_size, char const separator )
 {
-	pcstr found				= strchr(string, separator);
+	pcstr found				= strchr((char*)string, separator);
 	if ( !found ) {
 		strings::copy		( result, result_size, string );
 		return				0;
@@ -69,7 +70,7 @@ inline pcstr get_token				( pcstr string, char (&result)[count], char const sepa
 
 inline pcstr get_token_reverse		( pcstr string, pstr result, u32 result_size, char const separator )
 {
-	pcstr found				= strrchr(string, separator);
+	pcstr found				= strrchr((char*)string, separator);
 	if ( !found ) {
 		strings::copy		( result, result_size, string );
 		return				0;
@@ -113,5 +114,3 @@ inline bool ends_with				( pcstr const source, u32 const source_length, pcstr co
 } // namespace xray
 
 #include <xray/strings_functions_inline.h>
-
-#endif // #ifndef XRAY_STRINGS_FUNCTIONS_H_INCLUDED

@@ -8,9 +8,6 @@
 #define XRAY_DEBUG_MACROS_INLINE_H_INCLUDED
 
 #include <stdarg.h>
-#include <boost/type_traits/is_integral.hpp>
-#include <boost/type_traits/is_float.hpp>
-#include <boost/type_traits/is_enum.hpp>
 namespace xray {
 namespace debug {
 namespace detail {
@@ -50,7 +47,7 @@ template <class T>
 struct to_string_helper<T,to_string_flag_integer> {
 	static inline string_helper	convert (T const value)
 	{
-		COMPILE_ASSERT	(boost::is_integral<T>::value || boost::is_enum<T>::value, wrong_type_T);
+		COMPILE_ASSERT	(std::is_integral<T>::value || std::is_enum<T>::value, wrong_type_T);
 		string_helper	string;
 		s64				value64	=	(s64)value;
 		string.appendf	("%I64i", value64);
@@ -62,7 +59,8 @@ template <class T>
 struct to_string_helper<T,to_string_flag_float> {
 	static inline string_helper	convert (T const value)
 	{
-		COMPILE_ASSERT	(boost::is_float<T>::value, wrong_type_T);
+		std::is_floating_point
+		COMPILE_ASSERT	(std::is_floating_point<T>::value, wrong_type_T);
 		string_helper	string;
 		string.appendf	("%f", double(value));
 		return			string;
@@ -72,8 +70,8 @@ struct to_string_helper<T,to_string_flag_float> {
 template <class T>
 string_helper		to_string (T const & value)
 {
-	return		to_string_helper<T, (boost::is_integral<T>::value || boost::is_enum<T>::value) ? to_string_flag_integer:
-		(boost::is_float<T>::value ? to_string_flag_float : to_string_flag_unknown)	>::convert(value);
+	return		to_string_helper<T, (std::is_integral<T>::value || std::is_enum<T>::value) ? to_string_flag_integer:
+		(std::is_floating_point<T>::value ? to_string_flag_float : to_string_flag_unknown)	>::convert(value);
 }
 
 template <class T1, class T2>

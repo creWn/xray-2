@@ -7,7 +7,7 @@
 #ifndef LOGGING_H_INCLUDED
 #define LOGGING_H_INCLUDED
 
-#include <fastdelegate/fastdelegate.h>
+#include "fastdelegate/fastdelegate.h"
 #include <xray/core/core.h>
 
 namespace xray {

@@ -2220,6 +2220,9 @@
       <Filter>include\containers\policy\intrusive_queue</Filter>
     </ClInclude>
     <ClInclude Include="core_entry_point.h" />
+    <ClInclude Include="logging.hpp">
+      <Filter>include\debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fs_file_system.h">

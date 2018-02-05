@@ -3,11 +3,7 @@
 //	Author		: Dmitriy Iassenev, Sergey Chechin
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef XRAY_MEMORY_ALLOCATOR_HELPER_H_INCLUDED
-#define XRAY_MEMORY_ALLOCATOR_HELPER_H_INCLUDED
-
-#include <boost/type_traits/is_polymorphic.hpp>
+#pragma once
 #include <xray/memory_debug_parameters.h>
 #include <typeinfo>
 
@@ -79,5 +75,3 @@ T&				strip_pointer		( T& t ) { return t; }
 } // namespace xray
 
 #include <xray/memory_allocator_helper_inline.h>
-
-#endif // #ifndef XRAY_MEMORY_allocator_helper_H_INCLUDED

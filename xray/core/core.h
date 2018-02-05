@@ -36,11 +36,11 @@ enum debug_initialization {
 	delay_debug_initialization,
 	perform_debug_initialization,
 }; // enum bugtrap_usage
-
+#include <xray/command_line_extensions.h>
 XRAY_CORE_API	void	preinitialize	(
 							core::engine * engine,
 							pcstr command_line,
-							command_line::contains_application_bool,
+							xray::command_line::contains_application_bool,
 							pcstr application,
 							pcstr build_date
 						);

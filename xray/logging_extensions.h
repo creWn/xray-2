@@ -4,9 +4,6 @@
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
 
-#ifndef XRAY_LOGGING_EXTENSIONS_H_INCLUDED
-#define XRAY_LOGGING_EXTENSIONS_H_INCLUDED
-
 #if XRAY_CORE_BUILDING
 #	define XRAY_LOG_MODULE_INITIATOR			"core"
 #endif // #if XRAY_CORE_BUILDING
@@ -15,24 +12,9 @@
 #	error you should define XRAY_LOG_MODULE_INITIATOR macro before including this header
 #endif // #ifndef XRAY_LOG_MODULE_INITIATOR
 
-#include <fastdelegate/fastdelegate.h>
+#include "fastdelegate/fastdelegate.h"
 
-namespace xray {
-namespace logging {
-
-enum verbosity {
-	silent	= 1 << 0,
-	error	= 1 << 1,
-	warning	= 1 << 2,
-	info	= 1 << 3,
-	debug	= 1 << 4,
-	trace	= 1 << 5,
-	unset	= 1 << 31,
-}; // enum verbosity
-
-} // namespace logging
-} // namespace xray
-
+#include "core\sources\logging.h"
 #include <xray/logging_helper.h>
 #include <xray/logging_settings.h>
 
@@ -68,16 +50,6 @@ XRAY_CORE_API	void			on_thread_spawn		( );
 } // namespace logging
 } // namespace xray
 
-#ifdef LOG_ERROR
-#	error do not define LOG_ERROR macro
-#endif // #ifdef LOG_ERROR
-#ifdef LOG_WARNING
-#	error do not define LOG_WARNING macro
-#endif // #ifdef LOG_WARNING
-#ifdef LOG_INFO
-#	error do not define LOG_INFO macro
-#endif // #ifdef LOG_INFO
-
 #define LOG_ERROR( ... )				::xray::logging::helper	( __FILE__, __FUNCSIG__, __LINE__, XRAY_LOG_MODULE_INITIATOR ":", ::xray::logging::error	) ( ##__VA_ARGS__ )
 #define LOG_WARNING( ... )				::xray::logging::helper	( __FILE__, __FUNCSIG__, __LINE__, XRAY_LOG_MODULE_INITIATOR ":", ::xray::logging::warning	) ( ##__VA_ARGS__ )
 #define LOG_INFO( ... )					::xray::logging::helper	( __FILE__, __FUNCSIG__, __LINE__, XRAY_LOG_MODULE_INITIATOR ":", ::xray::logging::info		) ( ##__VA_ARGS__ )
@@ -102,5 +74,3 @@ XRAY_CORE_API	void			on_thread_spawn		( );
 #define LOGI_WARNING( initiator, ... )	::xray::logging::helper	( __FILE__, __FUNCSIG__, __LINE__, XRAY_LOG_MODULE_INITIATOR ":" initiator ":", ::xray::logging::warning) ( ##__VA_ARGS__ )
 #define LOGI_INFO( initiator, ... )		::xray::logging::helper	( __FILE__, __FUNCSIG__, __LINE__, XRAY_LOG_MODULE_INITIATOR ":" initiator ":", ::xray::logging::info) ( ##__VA_ARGS__ )
 #define LOGI( initiator, type, ... )	::xray::logging::helper	( __FILE__, __FUNCSIG__, __LINE__, XRAY_LOG_MODULE_INITIATOR ":" initiator ":", type) ( ##__VA_ARGS__ )
-
-#endif // #ifndef XRAY_LOGGING_EXTENSIONS_H_INCLUDED
