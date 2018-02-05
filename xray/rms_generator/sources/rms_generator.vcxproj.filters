@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{3e98573d-ca35-4df6-a4f2-2e425741565b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{1ed2c950-52f0-41af-b4e1-fc7924b3a0af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application\rms_evaluator">
+      <UniqueIdentifier>{193cef49-a61f-4d5c-b66b-a7c9877571c2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="rms_generator_library_linkage.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="rms_generator_application.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="rms_evaluator.cpp">
+      <Filter>application\rms_evaluator</Filter>
+    </ClCompile>
+    <ClCompile Include="rms_generator_entry_point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="rms_generator_memory.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="rms_generator_application.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="rms_evaluator.h">
+      <Filter>application\rms_evaluator</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

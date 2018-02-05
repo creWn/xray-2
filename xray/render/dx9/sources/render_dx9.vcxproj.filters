@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{3735d879-f3ae-4332-a1e2-47daea8508d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{f3e66e20-4135-4411-a470-ac85e35e8515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\dx9">
+      <UniqueIdentifier>{81dfa4ac-5265-4f07-8960-4d5d5b218aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects">
+      <UniqueIdentifier>{40f64fb0-0ccd-43fc-a4f1-e1ac8e1f92a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\terrain">
+      <UniqueIdentifier>{a464d95a-4b12-4e61-8783-80ddd08340e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common">
+      <UniqueIdentifier>{5f3d6bb5-f65f-46d2-abff-6804ed12bc56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\misc">
+      <UniqueIdentifier>{19c16c75-a152-44e9-8e06-65b2e59cca73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\hw_wrapper">
+      <UniqueIdentifier>{5610b585-289d-4888-aa1c-06cc4de87351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\hw_wrapper\hw_caps">
+      <UniqueIdentifier>{b9fe48db-6b01-48a2-960e-1edff2e03612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\render_device">
+      <UniqueIdentifier>{2f867dc7-92de-4bf6-b482-a6599b95e498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\resources">
+      <UniqueIdentifier>{b960f353-7093-4894-85bb-1c110b635d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\resources\resource_manager">
+      <UniqueIdentifier>{45ebd547-b9ad-41a9-9667-dabbd49a28c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\resources\shader_manager">
+      <UniqueIdentifier>{4e2e7cc8-b169-42cf-a5ca-251512b62957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\resources\shader_manager\blenders">
+      <UniqueIdentifier>{6c521feb-f468-47eb-9a76-11dd7706cdc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\backend">
+      <UniqueIdentifier>{e5699594-4f76-417a-b941-456e192c0f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render_common\math &amp; algorithm">
+      <UniqueIdentifier>{cc4a6fc7-8081-420c-a086-03aac0e0b858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene_render">
+      <UniqueIdentifier>{7c547d69-e41c-4311-9ea1-2df6aa7018be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene_render\stages">
+      <UniqueIdentifier>{6edd6d93-2ccc-4c3c-8b72-e5558004c856}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\environment.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\light.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\lights_db.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="model_manager.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="visual.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\terrain.cpp">
+      <Filter>objects\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\terrain_texture_pool.cpp">
+      <Filter>objects\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\hw_wrapper_dx9.cpp">
+      <Filter>render_common\hw_wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\hw_caps.cpp">
+      <Filter>render_common\hw_wrapper\hw_caps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\render_device.cpp">
+      <Filter>render_common\render_device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\render_device_dx9.cpp">
+      <Filter>render_common\render_device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\res_atomic.cpp">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\res_const_table.cpp">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\res_rt.cpp">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\res_shader.cpp">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\res_texture.cpp">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\resource_manager.cpp">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\simulator_states.cpp">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender.cpp">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_compiler.cpp">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\material_manager.cpp">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\shader_manager.cpp">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_combine.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_deffer.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_deffer_aref.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_deffer_base.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_deffer_materials.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_forward_system.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_light_direct.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_light_mask.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_light_spot.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_notexture.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_terrain.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_terrain_new.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\blender_tree.cpp">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClCompile>
+    <ClCompile Include="backend.cpp">
+      <Filter>render_common\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="constant_cache.cpp">
+      <Filter>render_common\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="index_stream.cpp">
+      <Filter>render_common\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="vertex_stream.cpp">
+      <Filter>render_common\backend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\convex_volume.cpp">
+      <Filter>render_common\math &amp; algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sources\du_sphere.cpp">
+      <Filter>render_common\math &amp; algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="scene_render.cpp">
+      <Filter>scene_render</Filter>
+    </ClCompile>
+    <ClCompile Include="scene_context.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_combine.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_gbuffer.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_lights.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_pre_lighting.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_screen_image.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_skybox.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_sun.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_sun_materials.cpp">
+      <Filter>scene_render\stages</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\library_linkage.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\world.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api.h">
+      <Filter>include\dx9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\library_linkage.h">
+      <Filter>include\dx9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\renderer.h">
+      <Filter>include\dx9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\environment.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\light.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\lights_db.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="model_manager.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="model_manager_inline.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="visual.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\terrain.h">
+      <Filter>objects\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\terrain_texture_pool.h">
+      <Filter>objects\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\pix_event_wrapper.h">
+      <Filter>render_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\shared_names.h">
+      <Filter>render_common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\com_utils.h">
+      <Filter>render_common\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\d3d_defs.h">
+      <Filter>render_common\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\fvf.h">
+      <Filter>render_common\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\namespace_wrapper.h">
+      <Filter>render_common\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\quasi_singleton.h">
+      <Filter>render_common\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\utils.h">
+      <Filter>render_common\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\utils_inline.h">
+      <Filter>render_common\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\hw_wrapper.h">
+      <Filter>render_common\hw_wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\hw_wrapper_base_dx10.h">
+      <Filter>render_common\hw_wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\hw_wrapper_base_dx9.h">
+      <Filter>render_common\hw_wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\hw_caps.h">
+      <Filter>render_common\hw_wrapper\hw_caps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\hw_wrapper_inline.h">
+      <Filter>render_common\hw_wrapper\hw_caps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\render_device.h">
+      <Filter>render_common\render_device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\manager_common_inline.h">
+      <Filter>render_common\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\res_atomic.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\res_common.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\res_common_inline.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\res_const_table.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\res_rt.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\res_shader.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\res_texture.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\resource_manager.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\resource_manager_inline.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\simulator_states.h">
+      <Filter>render_common\resources\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender.h">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_compiler.h">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_defines.h">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\material_manager.h">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\shader_manager.h">
+      <Filter>render_common\resources\shader_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_combine.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_deffer.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_deffer_aref.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_deffer_base.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_deffer_materials.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_forward_system.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_light_direct.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_light_mask.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_light_spot.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_notexture.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_terrain.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_terrain_new.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\blender_tree.h">
+      <Filter>render_common\resources\shader_manager\blenders</Filter>
+    </ClInclude>
+    <ClInclude Include="backend.h">
+      <Filter>render_common\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="backend_inline.h">
+      <Filter>render_common\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="constant_cache.h">
+      <Filter>render_common\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="index_stream.h">
+      <Filter>render_common\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_stream.h">
+      <Filter>render_common\backend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\convex_volume.h">
+      <Filter>render_common\math &amp; algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sources\du_sphere.h">
+      <Filter>render_common\math &amp; algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="render_queue.h">
+      <Filter>scene_render</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_render.h">
+      <Filter>scene_render</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_context.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_combine.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_gbuffer.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_lights.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_pre_lighting.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_screen_image.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_skybox.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_sun.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_sun_materials.h">
+      <Filter>scene_render\stages</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

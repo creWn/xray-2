@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{f8b3add5-cfac-4262-aa19-d452ef1c0ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{adb377bb-41af-44e0-b5fa-8767cbea39c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls">
+      <UniqueIdentifier>{44775df1-4706-488a-8530-c7535676aedc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\property_grid">
+      <UniqueIdentifier>{ea649c10-bd71-4850-abb7-f8ad6c9cc681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\hypergraph">
+      <UniqueIdentifier>{4cb47e99-15ef-4368-b002-d29dc185670f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\tree_view">
+      <UniqueIdentifier>{f896dbeb-8e86-4270-be5f-55ab00345e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\scalable_scroll_bar">
+      <UniqueIdentifier>{10520afc-5a0f-4a65-98af-b89b3c1e901a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\drag_cursor_collection">
+      <UniqueIdentifier>{3cc01e32-9477-4b71-884d-b05961c5ad1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\document_editor_base">
+      <UniqueIdentifier>{c314f788-f265-4ef9-b107-a428fd2fb29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\document_editor_base\document_base">
+      <UniqueIdentifier>{349e95d0-a89b-416a-a4b0-d61620807147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\document_editor_base\file_view_panel_base">
+      <UniqueIdentifier>{dc625599-4929-4ed4-a9d5-cdf41463375a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\document_editor_base\item_properties_panel_base">
+      <UniqueIdentifier>{6ae01027-84dd-4cfe-8c06-991b935e359e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\document_editor_base\toolbar_panel_base">
+      <UniqueIdentifier>{3f2150e3-7924-449c-8f89-54cff28e1f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controls\dock_panel_serializer">
+      <UniqueIdentifier>{0452ae23-350a-4253-97b9-635f90f90e2e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="property_grid.cpp">
+      <Filter>controls\property_grid</Filter>
+    </ClCompile>
+    <ClCompile Include="drawing2d_utils.cpp">
+      <Filter>controls\hypergraph</Filter>
+    </ClCompile>
+    <ClCompile Include="hypergraph.cpp">
+      <Filter>controls\hypergraph</Filter>
+    </ClCompile>
+    <ClCompile Include="hypergraph_draw.cpp">
+      <Filter>controls\hypergraph</Filter>
+    </ClCompile>
+    <ClCompile Include="hypergraph_node.cpp">
+      <Filter>controls\hypergraph</Filter>
+    </ClCompile>
+    <ClCompile Include="hypergraph_node_draw.cpp">
+      <Filter>controls\hypergraph</Filter>
+    </ClCompile>
+    <ClCompile Include="hypergraph_node_style.cpp">
+      <Filter>controls\hypergraph</Filter>
+    </ClCompile>
+    <ClCompile Include="node_connection_point.cpp">
+      <Filter>controls\hypergraph</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_node.cpp">
+      <Filter>controls\tree_view</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_view.cpp">
+      <Filter>controls\tree_view</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_view_filter_panel.cpp">
+      <Filter>controls\tree_view</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_view_initialize.cpp">
+      <Filter>controls\tree_view</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_view_multiselection.cpp">
+      <Filter>controls\tree_view</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_view_search_panel.cpp">
+      <Filter>controls\tree_view</Filter>
+    </ClCompile>
+    <ClCompile Include="scalable_scroll_bar.cpp">
+      <Filter>controls\scalable_scroll_bar</Filter>
+    </ClCompile>
+    <ClCompile Include="drag_cursor_collection.cpp">
+      <Filter>controls\drag_cursor_collection</Filter>
+    </ClCompile>
+    <ClCompile Include="document_editor_base.cpp">
+      <Filter>controls\document_editor_base</Filter>
+    </ClCompile>
+    <ClCompile Include="document_base.cpp">
+      <Filter>controls\document_editor_base\document_base</Filter>
+    </ClCompile>
+    <ClCompile Include="file_view_panel_base.cpp">
+      <Filter>controls\document_editor_base\file_view_panel_base</Filter>
+    </ClCompile>
+    <ClCompile Include="item_properties_panel_base.cpp">
+      <Filter>controls\document_editor_base\item_properties_panel_base</Filter>
+    </ClCompile>
+    <ClCompile Include="toolbar_panel_base.cpp">
+      <Filter>controls\document_editor_base\toolbar_panel_base</Filter>
+    </ClCompile>
+    <ClCompile Include="dock_panel_serializer.cpp">
+      <Filter>controls\dock_panel_serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_controls_entry_point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\property_container_interface.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\property_incrementable.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\property_mouse_events.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\property_value.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="property_grid.h">
+      <Filter>controls\property_grid</Filter>
+    </ClInclude>
+    <ClInclude Include="drawing2d_utils.h">
+      <Filter>controls\hypergraph</Filter>
+    </ClInclude>
+    <ClInclude Include="hypergraph.h">
+      <Filter>controls\hypergraph</Filter>
+    </ClInclude>
+    <ClInclude Include="hypergraph_defines.h">
+      <Filter>controls\hypergraph</Filter>
+    </ClInclude>
+    <ClInclude Include="hypergraph_node.h">
+      <Filter>controls\hypergraph</Filter>
+    </ClInclude>
+    <ClInclude Include="hypergraph_node_style.h">
+      <Filter>controls\hypergraph</Filter>
+    </ClInclude>
+    <ClInclude Include="node_connection_point.h">
+      <Filter>controls\hypergraph</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_node.h">
+      <Filter>controls\tree_view</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_view.h">
+      <Filter>controls\tree_view</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_view_event_args.h">
+      <Filter>controls\tree_view</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_view_filter_panel.h">
+      <Filter>controls\tree_view</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_view_search_panel.h">
+      <Filter>controls\tree_view</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_view_source.h">
+      <Filter>controls\tree_view</Filter>
+    </ClInclude>
+    <ClInclude Include="scalable_scroll_bar.h">
+      <Filter>controls\scalable_scroll_bar</Filter>
+    </ClInclude>
+    <ClInclude Include="scroller_event_args.h">
+      <Filter>controls\scalable_scroll_bar</Filter>
+    </ClInclude>
+    <ClInclude Include="drag_cursor_collection.h">
+      <Filter>controls\drag_cursor_collection</Filter>
+    </ClInclude>
+    <ClInclude Include="delegates.h">
+      <Filter>controls\document_editor_base</Filter>
+    </ClInclude>
+    <ClInclude Include="document_editor_base.h">
+      <Filter>controls\document_editor_base</Filter>
+    </ClInclude>
+    <ClInclude Include="document_event_args.h">
+      <Filter>controls\document_editor_base</Filter>
+    </ClInclude>
+    <ClInclude Include="document_base.h">
+      <Filter>controls\document_editor_base\document_base</Filter>
+    </ClInclude>
+    <ClInclude Include="file_view_panel_base.h">
+      <Filter>controls\document_editor_base\file_view_panel_base</Filter>
+    </ClInclude>
+    <ClInclude Include="item_properties_panel_base.h">
+      <Filter>controls\document_editor_base\item_properties_panel_base</Filter>
+    </ClInclude>
+    <ClInclude Include="toolbar_panel_base.h">
+      <Filter>controls\document_editor_base\toolbar_panel_base</Filter>
+    </ClInclude>
+    <ClInclude Include="dock_panel_serializer.h">
+      <Filter>controls\dock_panel_serializer</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

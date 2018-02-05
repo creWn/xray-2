@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="application">
+      <UniqueIdentifier>{1d30a56e-b307-401f-8f12-7762e205f4aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{68f8a5ff-e048-4cbf-8568-5262f56e7bf8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="finger_printer_application.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="finger_printer_library_linkage.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="finger_printer_entry_point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="finger_printer_application.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="finger_printer_memory.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{9c4755e7-b851-4722-bb23-8ff571d161db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{5d5ca94b-06d4-4ae0-ad2f-3f06f4d11d53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{f16ec529-c03e-4b81-bf4f-5282a2ed6fb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_module_proxy">
+      <UniqueIdentifier>{82673a36-482b-4920-87a9-d2e9c704eb57}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\finger_print.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="math_error_win.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="stalker2_pc_library_linkage.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="stalker2_pc_application.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="stalker2_pc_application_win.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\game_module_proxy.cpp">
+      <Filter>game_module_proxy</Filter>
+    </ClCompile>
+    <ClCompile Include="stalker2_pc_entry_point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="stalker2_pc_application.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\game_module_proxy.h">
+      <Filter>game_module_proxy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="stalker2_pc.rc">
+      <Filter>resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

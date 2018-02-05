@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{ba45cc08-88e1-4034-8770-002eb02b8787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animation">
+      <UniqueIdentifier>{227919d9-6a15-44e0-9dd5-55d76ec93b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animation\track">
+      <UniqueIdentifier>{a3f0b590-afed-4096-9b1d-e579cc28c4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animation\export">
+      <UniqueIdentifier>{b9c5aaa9-bb65-4b13-8df5-4fb76f7bca6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animation\text">
+      <UniqueIdentifier>{711a4685-09a3-4f23-959f-9ef64e4f97da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{aebb0914-e895-40b7-8909-1a22d77217e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\commands">
+      <UniqueIdentifier>{e79484ac-5705-4029-b06c-72c8bbeee5cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\commands\create_body">
+      <UniqueIdentifier>{bc7d7979-0dca-4a52-b956-470335bab1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\commands\create_collision">
+      <UniqueIdentifier>{4103e311-8818-4b1e-85b7-8dbf1455cd63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\commands\create_joint">
+      <UniqueIdentifier>{81744bf5-8131-4df3-a4a2-afc7295fb017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\commands\build_collision">
+      <UniqueIdentifier>{2dbabebf-5844-4bbb-a78c-3b939418704f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\nodes">
+      <UniqueIdentifier>{617c3655-c233-4364-8616-3d4c6bf00dc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\nodes\collision">
+      <UniqueIdentifier>{3f34fc4f-f035-4665-9986-2f5a50e3e536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\nodes\body">
+      <UniqueIdentifier>{2f186ec8-8d02-4858-9109-df740ce36acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\nodes\joint">
+      <UniqueIdentifier>{d584937c-4369-46de-8ef1-8f4dea7f0058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\exporter">
+      <UniqueIdentifier>{aa492a81-3bdf-43ea-a66a-fca6d308527e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics\maya_engine">
+      <UniqueIdentifier>{6cd0a4d0-1080-41b4-b037-1f6baf738eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="solid visual">
+      <UniqueIdentifier>{5990c2e6-f8f2-4f2b-979f-5ebfdc3b9d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{ef7d3e4c-f9c8-4d5b-91d8-d6b340ca65ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MeshMender">
+      <UniqueIdentifier>{27acd22e-d900-4b96-a779-687c6a900144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="material">
+      <UniqueIdentifier>{1747535a-30f7-43c8-8bd3-ebc68e832c06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="maya_library_linkage.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="anim_track_assemble.cpp">
+      <Filter>animation\track</Filter>
+    </ClCompile>
+    <ClCompile Include="anim_export_util.cpp">
+      <Filter>animation\export</Filter>
+    </ClCompile>
+    <ClCompile Include="skeleton_export_util.cpp">
+      <Filter>animation\export</Filter>
+    </ClCompile>
+    <ClCompile Include="anim_text_file_export.cpp">
+      <Filter>animation\text</Filter>
+    </ClCompile>
+    <ClCompile Include="xray_body.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="create_body_cmd.cpp">
+      <Filter>physics\commands\create_body</Filter>
+    </ClCompile>
+    <ClCompile Include="create_collision_cmd.cpp">
+      <Filter>physics\commands\create_collision</Filter>
+    </ClCompile>
+    <ClCompile Include="create_joint_cmd.cpp">
+      <Filter>physics\commands\create_joint</Filter>
+    </ClCompile>
+    <ClCompile Include="build_collision_cmd.cpp">
+      <Filter>physics\commands\build_collision</Filter>
+    </ClCompile>
+    <ClCompile Include="fake_drawing_locator.cpp">
+      <Filter>physics\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="geom_sources.cpp">
+      <Filter>physics\nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="collision_node.cpp">
+      <Filter>physics\nodes\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="body_node.cpp">
+      <Filter>physics\nodes\body</Filter>
+    </ClCompile>
+    <ClCompile Include="body_node_manip.cpp">
+      <Filter>physics\nodes\body</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_node.cpp">
+      <Filter>physics\nodes\joint</Filter>
+    </ClCompile>
+    <ClCompile Include="node_exportable.cpp">
+      <Filter>physics\exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="physics_exporter.cpp">
+      <Filter>physics\exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp.cpp">
+      <Filter>physics\exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="maya_engine.cpp">
+      <Filter>physics\maya_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="solid_visual_exporter.cpp">
+      <Filter>solid visual</Filter>
+    </ClCompile>
+    <ClCompile Include="solid_visual_writer.cpp">
+      <Filter>solid visual</Filter>
+    </ClCompile>
+    <ClCompile Include="solid_visual_writer_geom_extractor.cpp">
+      <Filter>solid visual</Filter>
+    </ClCompile>
+    <ClCompile Include="solid_visual_writer_serialize.cpp">
+      <Filter>solid visual</Filter>
+    </ClCompile>
+    <ClCompile Include="solid_visual_writer_translator.cpp">
+      <Filter>solid visual</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderRoutines.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="NvMender2003\NVMeshMender.cpp">
+      <Filter>MeshMender</Filter>
+    </ClCompile>
+    <ClCompile Include="xray_shader_node.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
+    <ClCompile Include="xray_shader_node_calculate.cpp">
+      <Filter>material</Filter>
+    </ClCompile>
+    <ClCompile Include="maya_entry_point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="maya_memory.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="node_identifiers.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ogf.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="anim_export_util.h">
+      <Filter>animation\export</Filter>
+    </ClInclude>
+    <ClInclude Include="skeleton_export_util.h">
+      <Filter>animation\export</Filter>
+    </ClInclude>
+    <ClInclude Include="anim_text_file_export.h">
+      <Filter>animation\text</Filter>
+    </ClInclude>
+    <ClInclude Include="xray_body.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="create_body_cmd.h">
+      <Filter>physics\commands\create_body</Filter>
+    </ClInclude>
+    <ClInclude Include="create_collision_cmd.h">
+      <Filter>physics\commands\create_collision</Filter>
+    </ClInclude>
+    <ClInclude Include="create_joint_cmd.h">
+      <Filter>physics\commands\create_joint</Filter>
+    </ClInclude>
+    <ClInclude Include="build_collision_cmd.h">
+      <Filter>physics\commands\build_collision</Filter>
+    </ClInclude>
+    <ClInclude Include="fake_drawing_locator.h">
+      <Filter>physics\nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_node.h">
+      <Filter>physics\nodes\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="body_node.h">
+      <Filter>physics\nodes\body</Filter>
+    </ClInclude>
+    <ClInclude Include="body_node_manip.h">
+      <Filter>physics\nodes\body</Filter>
+    </ClInclude>
+    <ClInclude Include="transform_drawable.h">
+      <Filter>physics\nodes\body</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_node.h">
+      <Filter>physics\nodes\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="node_exportable.h">
+      <Filter>physics\exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="physics_exporter.h">
+      <Filter>physics\exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="maya_engine.h">
+      <Filter>physics\maya_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="solid_visual_exporter.h">
+      <Filter>solid visual</Filter>
+    </ClInclude>
+    <ClInclude Include="solid_visual_writer.h">
+      <Filter>solid visual</Filter>
+    </ClInclude>
+    <ClInclude Include="solid_visual_writer_translator.h">
+      <Filter>solid visual</Filter>
+    </ClInclude>
+    <ClInclude Include="tootle\tootlelib.h">
+      <Filter>solid visual</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderRoutines.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="NvMender2003\NVMeshMender.h">
+      <Filter>MeshMender</Filter>
+    </ClInclude>
+    <ClInclude Include="xray_shader_node.h">
+      <Filter>material</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

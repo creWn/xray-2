@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{d1a41513-9bd7-440a-877a-3453cde14a4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{475826d6-15a0-47ea-9fd6-dc204ae04316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world">
+      <UniqueIdentifier>{7d75d6df-edd5-4133-a799-78294487cc14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\temp_storage">
+      <UniqueIdentifier>{afb9f433-3f8a-4208-a74f-811a1fd2ddf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="integrator">
+      <UniqueIdentifier>{aa908779-30eb-4e6e-a88a-2088bebc834c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="space">
+      <UniqueIdentifier>{c552b44f-5d7c-4b04-bcb3-56f468ba1181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="element">
+      <UniqueIdentifier>{5318fa30-5db5-4245-a7f9-04e54a67c5ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="body">
+      <UniqueIdentifier>{059c4a28-ea62-48ac-aa23-730b4578c038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shell">
+      <UniqueIdentifier>{64a85530-6e7a-4b2c-871c-3e746c05a082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="step_object">
+      <UniqueIdentifier>{a0a2494c-7275-49ea-9552-e46eb8d8e28c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scheduler">
+      <UniqueIdentifier>{0feb8184-28fd-427e-837e-a1fc4644e0d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="island">
+      <UniqueIdentifier>{628ce500-2ea4-4422-9e03-7f4d72c64ec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint">
+      <UniqueIdentifier>{24787d0b-0fff-4c35-b451-b1ee48a9166e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\contact">
+      <UniqueIdentifier>{1f931c88-e080-4974-9ce6-41d9f9dd25d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\contact\contact_info">
+      <UniqueIdentifier>{6cc4589c-5216-4111-a961-69e598fd1fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\joint_ode">
+      <UniqueIdentifier>{7fd709cc-5552-4ed4-9007-df69322f87ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\joint_base_impl">
+      <UniqueIdentifier>{256b9cc0-385d-41b3-8031-533ec276d785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\ball">
+      <UniqueIdentifier>{40f3906a-e24d-47fc-9d7b-2ec1c0ddf2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\euler_hinge">
+      <UniqueIdentifier>{c067e30c-e902-4384-9e6b-79dc536b5068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\hinge">
+      <UniqueIdentifier>{da07d3fa-811d-4532-9426-8843cd5383d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\joint_wheel">
+      <UniqueIdentifier>{db49cc22-ecea-4299-9fb5-9e2096ad20d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\joint_slider_hinge">
+      <UniqueIdentifier>{fd45bbfd-70ff-410f-a2f3-b661c97321b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="joint\fixed">
+      <UniqueIdentifier>{50bdb40d-9979-4555-b9b6-07b440118169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ode_include">
+      <UniqueIdentifier>{d7497770-bf7d-4397-bd9a-c32010e3681d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="constants">
+      <UniqueIdentifier>{901f374e-72b2-48c5-b52a-88091c1b38ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math_utils">
+      <UniqueIdentifier>{0d3f53d5-7764-417d-b094-2837275d229f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collide_form">
+      <UniqueIdentifier>{a0cf3ee7-f7f7-4ae0-a049-3d6f8e08ae71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="static_object">
+      <UniqueIdentifier>{0bfc53b7-2f9b-4716-bbe9-0b6775ce453c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamic_object">
+      <UniqueIdentifier>{e43add95-9d2a-4867-ad6d-69bc6666b2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pose_anchor">
+      <UniqueIdentifier>{b2a5f97a-7e4c-45f4-b8f8-a10652c2fd3d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="physics_library_linkage.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="generic_joint_create_lua_config.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="physics_world.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="shell_create_binary_config.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="shell_create_lua_config.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="contact_storage.cpp">
+      <Filter>world\temp_storage</Filter>
+    </ClCompile>
+    <ClCompile Include="temp_storage_holder.cpp">
+      <Filter>world\temp_storage</Filter>
+    </ClCompile>
+    <ClCompile Include="integrator_ode.cpp">
+      <Filter>integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="space_item.cpp">
+      <Filter>space</Filter>
+    </ClCompile>
+    <ClCompile Include="space_object.cpp">
+      <Filter>space</Filter>
+    </ClCompile>
+    <ClCompile Include="collide_element.cpp">
+      <Filter>element</Filter>
+    </ClCompile>
+    <ClCompile Include="element.cpp">
+      <Filter>element</Filter>
+    </ClCompile>
+    <ClCompile Include="static_element.cpp">
+      <Filter>element</Filter>
+    </ClCompile>
+    <ClCompile Include="auto_sleep.cpp">
+      <Filter>body</Filter>
+    </ClCompile>
+    <ClCompile Include="autosleep_params.cpp">
+      <Filter>body</Filter>
+    </ClCompile>
+    <ClCompile Include="body.cpp">
+      <Filter>body</Filter>
+    </ClCompile>
+    <ClCompile Include="body_ode.cpp">
+      <Filter>body</Filter>
+    </ClCompile>
+    <ClCompile Include="shell.cpp">
+      <Filter>shell</Filter>
+    </ClCompile>
+    <ClCompile Include="shell_static.cpp">
+      <Filter>shell</Filter>
+    </ClCompile>
+    <ClCompile Include="step_object.cpp">
+      <Filter>step_object</Filter>
+    </ClCompile>
+    <ClCompile Include="scheduler.cpp">
+      <Filter>scheduler</Filter>
+    </ClCompile>
+    <ClCompile Include="island.cpp">
+      <Filter>island</Filter>
+    </ClCompile>
+    <ClCompile Include="contact.cpp">
+      <Filter>joint\contact</Filter>
+    </ClCompile>
+    <ClCompile Include="contact_ode.cpp">
+      <Filter>joint\contact</Filter>
+    </ClCompile>
+    <ClCompile Include="contact_info_buffer.cpp">
+      <Filter>joint\contact\contact_info</Filter>
+    </ClCompile>
+    <ClCompile Include="generate_contact.cpp">
+      <Filter>joint\contact\contact_info</Filter>
+    </ClCompile>
+    <ClCompile Include="generate_contact_base.cpp">
+      <Filter>joint\contact\contact_info</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_ode.cpp">
+      <Filter>joint\joint_ode</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_ode_base.cpp">
+      <Filter>joint\joint_ode</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_base_impl.cpp">
+      <Filter>joint\joint_base_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_double_base_impl.cpp">
+      <Filter>joint\joint_base_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_single_base_impl.cpp">
+      <Filter>joint\joint_base_impl</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_ball.cpp">
+      <Filter>joint\ball</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_euler_hinge.cpp">
+      <Filter>joint\euler_hinge</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_hinge.cpp">
+      <Filter>joint\hinge</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_wheel.cpp">
+      <Filter>joint\joint_wheel</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_slider_hinge.cpp">
+      <Filter>joint\joint_slider_hinge</Filter>
+    </ClCompile>
+    <ClCompile Include="joint_fixed.cpp">
+      <Filter>joint\fixed</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry_cform.cpp">
+      <Filter>collide_form</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamic_object.cpp">
+      <Filter>dynamic_object</Filter>
+    </ClCompile>
+    <ClCompile Include="pose_anchor.cpp">
+      <Filter>pose_anchor</Filter>
+    </ClCompile>
+    <ClCompile Include="physics_entry_point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="physics_memory.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\engine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\library_linkage.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shell.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\world.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="generic_joint_create_lua_config.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="physics_world.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="contact_storage.h">
+      <Filter>world\temp_storage</Filter>
+    </ClInclude>
+    <ClInclude Include="temp_storage_holder.h">
+      <Filter>world\temp_storage</Filter>
+    </ClInclude>
+    <ClInclude Include="integratable.h">
+      <Filter>integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="integrator_ode.h">
+      <Filter>integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="space_item.h">
+      <Filter>space</Filter>
+    </ClInclude>
+    <ClInclude Include="space_object.h">
+      <Filter>space</Filter>
+    </ClInclude>
+    <ClInclude Include="collide_element.h">
+      <Filter>element</Filter>
+    </ClInclude>
+    <ClInclude Include="collide_element_interface.h">
+      <Filter>element</Filter>
+    </ClInclude>
+    <ClInclude Include="element.h">
+      <Filter>element</Filter>
+    </ClInclude>
+    <ClInclude Include="shell_element.h">
+      <Filter>element</Filter>
+    </ClInclude>
+    <ClInclude Include="static_element.h">
+      <Filter>element</Filter>
+    </ClInclude>
+    <ClInclude Include="auto_sleep.h">
+      <Filter>body</Filter>
+    </ClInclude>
+    <ClInclude Include="autosleep_params.h">
+      <Filter>body</Filter>
+    </ClInclude>
+    <ClInclude Include="body.h">
+      <Filter>body</Filter>
+    </ClInclude>
+    <ClInclude Include="body_ode.h">
+      <Filter>body</Filter>
+    </ClInclude>
+    <ClInclude Include="shell.h">
+      <Filter>shell</Filter>
+    </ClInclude>
+    <ClInclude Include="shell_static.h">
+      <Filter>shell</Filter>
+    </ClInclude>
+    <ClInclude Include="step_object.h">
+      <Filter>step_object</Filter>
+    </ClInclude>
+    <ClInclude Include="scheduler.h">
+      <Filter>scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="step_counter.h">
+      <Filter>scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="step_globals.h">
+      <Filter>scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="island.h">
+      <Filter>island</Filter>
+    </ClInclude>
+    <ClInclude Include="island_object.h">
+      <Filter>island</Filter>
+    </ClInclude>
+    <ClInclude Include="joint.h">
+      <Filter>joint</Filter>
+    </ClInclude>
+    <ClInclude Include="contact.h">
+      <Filter>joint\contact</Filter>
+    </ClInclude>
+    <ClInclude Include="contact_joint_info.h">
+      <Filter>joint\contact</Filter>
+    </ClInclude>
+    <ClInclude Include="contact_ode.h">
+      <Filter>joint\contact</Filter>
+    </ClInclude>
+    <ClInclude Include="contact_info_buffer.h">
+      <Filter>joint\contact\contact_info</Filter>
+    </ClInclude>
+    <ClInclude Include="generate_contact.h">
+      <Filter>joint\contact\contact_info</Filter>
+    </ClInclude>
+    <ClInclude Include="generate_contact_base.h">
+      <Filter>joint\contact\contact_info</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_ode.h">
+      <Filter>joint\joint_ode</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_ode_base.h">
+      <Filter>joint\joint_ode</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_base_impl.h">
+      <Filter>joint\joint_base_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_double_base_impl.h">
+      <Filter>joint\joint_base_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_single_base_impl.h">
+      <Filter>joint\joint_base_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_ball.h">
+      <Filter>joint\ball</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_euler_hinge.h">
+      <Filter>joint\euler_hinge</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_hinge.h">
+      <Filter>joint\hinge</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_wheel.h">
+      <Filter>joint\joint_wheel</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_slider_hinge.h">
+      <Filter>joint\joint_slider_hinge</Filter>
+    </ClInclude>
+    <ClInclude Include="joint_fixed.h">
+      <Filter>joint\fixed</Filter>
+    </ClInclude>
+    <ClInclude Include="ode_convert.h">
+      <Filter>ode_include</Filter>
+    </ClInclude>
+    <ClInclude Include="ode_include.h">
+      <Filter>ode_include</Filter>
+    </ClInclude>
+    <ClInclude Include="ode_include_joint.h">
+      <Filter>ode_include</Filter>
+    </ClInclude>
+    <ClInclude Include="integration_constants.h">
+      <Filter>constants</Filter>
+    </ClInclude>
+    <ClInclude Include="math_utils.h">
+      <Filter>math_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="collide_form.h">
+      <Filter>collide_form</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_cform.h">
+      <Filter>collide_form</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamic_object.h">
+      <Filter>dynamic_object</Filter>
+    </ClInclude>
+    <ClInclude Include="pose_anchor.h">
+      <Filter>pose_anchor</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

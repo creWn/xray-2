@@ -1,93 +1,95 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "xray\core\sources\core.vcproj", "{39624382-B2EB-46C8-A54B-733AC2D1C83F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collision", "xray\collision\sources\collision.vcproj", "{0FA0F2D0-73D3-4C9A-84F7-1D6873024F96}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_base", "xray\render\base\sources\render_base.vcproj", "{C2FEBAE9-7A0D-483E-89B7-1FF2388187E4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_engine_dx11", "xray\render\engine\sources\render_engine_dx11.vcproj", "{10688643-85EA-4C0B-A19C-FFE025323791}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_dx9", "xray\render\dx9\sources\render_dx9.vcproj", "{F6DF8113-67EE-4891-8BA1-987BD0B77FB0}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_core_dx11", "xray\render\core\sources\render_core_dx11.vcproj", "{056D4C47-10DD-49AD-8213-8201E2114B06}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "physics", "xray\physics\sources\physics.vcproj", "{3ABCF987-4236-460A-87DD-40DA98BA3B31}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor_base", "xray\editor\base\sources\editor_base.vcproj", "{D48CBBFF-8B47-4E0F-915B-3220F3BC2402}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor_controls", "xray\editor\controls\sources\editor_controls.vcproj", "{FDDFC8AD-1E92-4A92-8937-152C64C5B980}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dialog_editor", "xray\editor\dialog\sources\dialog_editor.vcproj", "{5EC58FB8-223B-4991-9074-AB7739DD7773}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "xray\editor\world\sources\editor.vcproj", "{F9523302-4516-4FEC-863B-01031632EC37}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "animation", "xray\animation\sources\animation.vcproj", "{E479FF54-6317-42C2-8B50-7522D869814F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sound", "xray\sound\sources\sound.vcproj", "{3C336F8E-48C1-4EEC-815C-027D836222BC}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utils", "utils", "{F39A4CF8-2144-47A4-A550-8D7FC2993A6D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "editors", "editors", "{40DCC088-3B7B-420A-9778-F6A883A3E985}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "graphics_benchmark", "xray\graphics_benchmark\sources\graphics_benchmark.vcproj", "{827DD5DE-6CBC-44E7-9178-A1786BF4EC8A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "network", "xray\network\sources\network.vcproj", "{A20C1E29-2B0A-4036-A258-BAB22695D214}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maya_animation", "xray\maya_animation\sources\maya_animation.vcproj", "{82E59A6B-049A-412E-AEB1-3B679AAEC50F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "input", "xray\input\sources\input.vcproj", "{92742045-96DC-424A-883F-F4E463F4C39A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fs_pack", "xray\fs_pack\sources\fs_pack.vcproj", "{4728470A-7290-4A72-8505-1D9A1944C7C4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "finger_printer", "xray\finger_printer\sources\finger_printer.vcproj", "{71960015-743E-4366-B1CD-F128CBE6CA7C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maya", "xray\maya\sources\maya.vcproj", "{5A9538ED-593C-40A1-979E-1ADF9312B6C5}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ui", "xray\ui\sources\ui.vcproj", "{C739B7EC-C9C7-497D-8A9F-735AFC484914}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{D3FB2A9B-B04B-4E98-ACDF-DA32A169F5DB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game", "xray\game\sources\game.vcproj", "{9D1B540F-5E44-4ECA-B371-2BBF93B9DBC2}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rtp", "xray\rtp\sources\rtp.vcproj", "{03011367-A6E5-4163-B06F-1E56531ADEBE}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stalker2 - PC - Windows", "xray\stalker2\pc\sources\stalker2_pc.vcproj", "{2C0244D2-EF70-45C5-A088-1594FCCB428F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "texture_compressor_test", "xray\texture_compressor_test\sources\texture_compressor_test.vcproj", "{EAFB22ED-6CE8-4740-AF16-6AE6DB773462}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_form", "xray\test_form\test_form.vcproj", "{58D6D4F2-6C9A-4FD8-AFA5-DE0991A26D36}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shader_compiler", "xray\shader_compiler\sources\shader_compiler.vcproj", "{F28D31F1-5A42-4235-8F19-EA92E9BED50E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shader_generator", "xray\shader_generator\sources\shader_generator.vcproj", "{73FED916-1AB3-426C-A6D6-14A428B424A6}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rms_generator", "xray\rms_generator\sources\rms_generator.vcproj", "{951FE628-A044-4AB5-86E6-253295216330}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "xray\test\sources\test.vcproj", "{32340157-C4AF-4380-9239-D5ECA5DDDC65}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_animations", "xray\test_animations\sources\test_animations.vcproj", "{9288AF70-7995-42D1-AE8F-CE14825FBC60}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xbox_debug_client", "xray\xbox_debug_client\xbox_debug_client.vcproj", "{04E6D09D-9AF5-471F-82B3-0BC09DB09B7D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xbox", "xbox", "{7A987E13-4287-4B95-91E8-BC4ECD86D7B7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stalker2 - PS3", "xray\stalker2\ps3\sources\stalker2_ps3.vcproj", "{DF2483FF-540E-4953-ACFE-520EDCC5FA37}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "engine_pc", "xray\engine\pc\sources\engine_pc.vcproj", "{AC5DD91F-CE10-4E05-B48A-E1DDEC5CCD9C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "engine", "xray\engine\sources\engine.vcproj", "{81243BA2-540C-4118-B99F-DC3CDBA53A34}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rd party", "3rd party", "{EC6D7ACD-BB79-421E-A466-5323ADAAF5F8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "xray\core\sources\core.vcxproj", "{39624382-B2EB-46C8-A54B-733AC2D1C83F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collision", "xray\collision\sources\collision.vcxproj", "{0FA0F2D0-73D3-4C9A-84F7-1D6873024F96}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_base", "xray\render\base\sources\render_base.vcxproj", "{C2FEBAE9-7A0D-483E-89B7-1FF2388187E4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_engine_dx11", "xray\render\engine\sources\render_engine_dx11.vcxproj", "{10688643-85EA-4C0B-A19C-FFE025323791}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_dx9", "xray\render\dx9\sources\render_dx9.vcxproj", "{F6DF8113-67EE-4891-8BA1-987BD0B77FB0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render_core_dx11", "xray\render\core\sources\render_core_dx11.vcxproj", "{056D4C47-10DD-49AD-8213-8201E2114B06}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "physics", "xray\physics\sources\physics.vcxproj", "{3ABCF987-4236-460A-87DD-40DA98BA3B31}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor_base", "xray\editor\base\sources\editor_base.vcxproj", "{D48CBBFF-8B47-4E0F-915B-3220F3BC2402}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor_controls", "xray\editor\controls\sources\editor_controls.vcxproj", "{FDDFC8AD-1E92-4A92-8937-152C64C5B980}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dialog_editor", "xray\editor\dialog\sources\dialog_editor.vcxproj", "{5EC58FB8-223B-4991-9074-AB7739DD7773}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "xray\editor\world\sources\editor.vcxproj", "{F9523302-4516-4FEC-863B-01031632EC37}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "animation", "xray\animation\sources\animation.vcxproj", "{E479FF54-6317-42C2-8B50-7522D869814F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sound", "xray\sound\sources\sound.vcxproj", "{3C336F8E-48C1-4EEC-815C-027D836222BC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "graphics_benchmark", "xray\graphics_benchmark\sources\graphics_benchmark.vcxproj", "{827DD5DE-6CBC-44E7-9178-A1786BF4EC8A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "network", "xray\network\sources\network.vcxproj", "{A20C1E29-2B0A-4036-A258-BAB22695D214}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maya_animation", "xray\maya_animation\sources\maya_animation.vcxproj", "{82E59A6B-049A-412E-AEB1-3B679AAEC50F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "input", "xray\input\sources\input.vcxproj", "{92742045-96DC-424A-883F-F4E463F4C39A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fs_pack", "xray\fs_pack\sources\fs_pack.vcxproj", "{4728470A-7290-4A72-8505-1D9A1944C7C4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "finger_printer", "xray\finger_printer\sources\finger_printer.vcxproj", "{71960015-743E-4366-B1CD-F128CBE6CA7C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maya", "xray\maya\sources\maya.vcxproj", "{5A9538ED-593C-40A1-979E-1ADF9312B6C5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ui", "xray\ui\sources\ui.vcxproj", "{C739B7EC-C9C7-497D-8A9F-735AFC484914}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game", "xray\game\sources\game.vcxproj", "{9D1B540F-5E44-4ECA-B371-2BBF93B9DBC2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rtp", "xray\rtp\sources\rtp.vcxproj", "{03011367-A6E5-4163-B06F-1E56531ADEBE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stalker2 - PC - Windows", "xray\stalker2\pc\sources\stalker2_pc.vcxproj", "{2C0244D2-EF70-45C5-A088-1594FCCB428F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "texture_compressor_test", "xray\texture_compressor_test\sources\texture_compressor_test.vcxproj", "{EAFB22ED-6CE8-4740-AF16-6AE6DB773462}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_form", "xray\test_form\test_form.vcxproj", "{58D6D4F2-6C9A-4FD8-AFA5-DE0991A26D36}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shader_compiler", "xray\shader_compiler\sources\shader_compiler.vcxproj", "{F28D31F1-5A42-4235-8F19-EA92E9BED50E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shader_generator", "xray\shader_generator\sources\shader_generator.vcxproj", "{73FED916-1AB3-426C-A6D6-14A428B424A6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rms_generator", "xray\rms_generator\sources\rms_generator.vcxproj", "{951FE628-A044-4AB5-86E6-253295216330}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "xray\test\sources\test.vcxproj", "{32340157-C4AF-4380-9239-D5ECA5DDDC65}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_animations", "xray\test_animations\sources\test_animations.vcxproj", "{9288AF70-7995-42D1-AE8F-CE14825FBC60}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xbox_debug_client", "xray\xbox_debug_client\xbox_debug_client.vcxproj", "{04E6D09D-9AF5-471F-82B3-0BC09DB09B7D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stalker2 - PS3", "xray\stalker2\ps3\sources\stalker2_ps3.vcxproj", "{DF2483FF-540E-4953-ACFE-520EDCC5FA37}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "engine_pc", "xray\engine\pc\sources\engine_pc.vcxproj", "{AC5DD91F-CE10-4E05-B48A-E1DDEC5CCD9C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "engine", "xray\engine\sources\engine.vcxproj", "{81243BA2-540C-4118-B99F-DC3CDBA53A34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpf_controls", "xray\wpf_controls\wpf_controls.csproj", "{1351B0D6-E811-43F6-B57D-08655826DE18}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luajit.1.1.5", "xray\3rd party\luajit\luajit.1.1.5.vcproj", "{F6C4F74A-152C-4612-9E3B-D02346234855}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luajit.1.1.5", "xray\3rd party\luajit\luajit.1.1.5.vcxproj", "{F6C4F74A-152C-4612-9E3B-D02346234855}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luabind.0.8.1", "xray\3rd party\luabind\sources\luabind.0.8.1.vcproj", "{CC52E0B3-CC35-4934-9302-035B748F3F2C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luabind.0.8.1", "xray\3rd party\luabind\sources\luabind.0.8.1.vcxproj", "{CC52E0B3-CC35-4934-9302-035B748F3F2C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ode", "xray\3rd party\ode\build\vs2008\ode.vcproj", "{89936E52-6D15-454E-A777-46F04ABD338A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ode", "xray\3rd party\ode\build\vs2008\ode.vcxproj", "{89936E52-6D15-454E-A777-46F04ABD338A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3011,15 +3013,15 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{D48CBBFF-8B47-4E0F-915B-3220F3BC2402} = {40DCC088-3B7B-420A-9778-F6A883A3E985}
 		{FDDFC8AD-1E92-4A92-8937-152C64C5B980} = {40DCC088-3B7B-420A-9778-F6A883A3E985}
 		{5EC58FB8-223B-4991-9074-AB7739DD7773} = {40DCC088-3B7B-420A-9778-F6A883A3E985}
 		{F9523302-4516-4FEC-863B-01031632EC37} = {40DCC088-3B7B-420A-9778-F6A883A3E985}
-		{D48CBBFF-8B47-4E0F-915B-3220F3BC2402} = {40DCC088-3B7B-420A-9778-F6A883A3E985}
-		{1351B0D6-E811-43F6-B57D-08655826DE18} = {40DCC088-3B7B-420A-9778-F6A883A3E985}
 		{827DD5DE-6CBC-44E7-9178-A1786BF4EC8A} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
 		{82E59A6B-049A-412E-AEB1-3B679AAEC50F} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
 		{4728470A-7290-4A72-8505-1D9A1944C7C4} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
 		{71960015-743E-4366-B1CD-F128CBE6CA7C} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
+		{5A9538ED-593C-40A1-979E-1ADF9312B6C5} = {D3FB2A9B-B04B-4E98-ACDF-DA32A169F5DB}
 		{EAFB22ED-6CE8-4740-AF16-6AE6DB773462} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
 		{58D6D4F2-6C9A-4FD8-AFA5-DE0991A26D36} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
 		{F28D31F1-5A42-4235-8F19-EA92E9BED50E} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
@@ -3027,10 +3029,13 @@ Global
 		{951FE628-A044-4AB5-86E6-253295216330} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
 		{32340157-C4AF-4380-9239-D5ECA5DDDC65} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
 		{9288AF70-7995-42D1-AE8F-CE14825FBC60} = {F39A4CF8-2144-47A4-A550-8D7FC2993A6D}
-		{5A9538ED-593C-40A1-979E-1ADF9312B6C5} = {D3FB2A9B-B04B-4E98-ACDF-DA32A169F5DB}
 		{04E6D09D-9AF5-471F-82B3-0BC09DB09B7D} = {7A987E13-4287-4B95-91E8-BC4ECD86D7B7}
+		{1351B0D6-E811-43F6-B57D-08655826DE18} = {40DCC088-3B7B-420A-9778-F6A883A3E985}
 		{F6C4F74A-152C-4612-9E3B-D02346234855} = {EC6D7ACD-BB79-421E-A466-5323ADAAF5F8}
 		{CC52E0B3-CC35-4934-9302-035B748F3F2C} = {EC6D7ACD-BB79-421E-A466-5323ADAAF5F8}
 		{89936E52-6D15-454E-A777-46F04ABD338A} = {EC6D7ACD-BB79-421E-A466-5323ADAAF5F8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EB5AC78-04C4-421D-AE9C-DAC9EEFDB26C}
 	EndGlobalSection
 EndGlobal
