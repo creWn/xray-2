@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{b55b9c18-f711-4915-af0e-4c70b91827bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{d2a86775-d872-4bab-8652-0a2d8986b799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders">
+      <UniqueIdentifier>{efc4732e-2a16-4ca9-b733-e2039c51b23f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\ray">
+      <UniqueIdentifier>{7fbb4e7f-ef18-494d-97c5-01e4242e9883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\ray\base">
+      <UniqueIdentifier>{5b2950d9-e933-4a06-93b8-2d1fb7781ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\ray\geometry">
+      <UniqueIdentifier>{0b4a89e8-3e53-4f67-97bf-e6c370c7d335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\ray\geometry\base">
+      <UniqueIdentifier>{551950fb-6d39-4524-89c7-e13a0e6eab1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\ray\geometry\query">
+      <UniqueIdentifier>{c4e3a362-9bc2-4918-994e-2344962b05f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\ray\geometry\test">
+      <UniqueIdentifier>{d0d5ce93-3b54-4983-9ee6-68344b52468c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\ray\object">
+      <UniqueIdentifier>{c54ba50d-c74b-4fb8-93de-cbaebe92ea83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\aabb">
+      <UniqueIdentifier>{31913acb-0dee-4f87-a3fc-08929124c49a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\aabb\geometry">
+      <UniqueIdentifier>{b4eadc0e-9d36-4a01-84c6-0fe60ced2636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\aabb\object">
+      <UniqueIdentifier>{f7cda297-916a-41ea-8194-9cba7ad4d2eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\aabb\base">
+      <UniqueIdentifier>{c86e80bb-e436-485f-8ea8-d6d432d8737f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\cuboid">
+      <UniqueIdentifier>{da576489-47ce-4eac-9ae0-cc948217d3ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\cuboid\geometry">
+      <UniqueIdentifier>{03135c8a-52e6-411f-b5b7-1e8b64e45e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="colliders\cuboid\object">
+      <UniqueIdentifier>{74f8cdfc-39ce-4cc5-815a-ce270bab9d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loose_oct_tree">
+      <UniqueIdentifier>{c94b8e61-cb73-4f9c-93c9-5635a8c513df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry">
+      <UniqueIdentifier>{4b1bab35-e6f9-4652-97e0-7a023079f72d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\instance">
+      <UniqueIdentifier>{7da32b92-4e14-4098-829b-9481812cdb9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\object">
+      <UniqueIdentifier>{41781717-393f-4252-91c0-f1ddb3cabdc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries">
+      <UniqueIdentifier>{42a24193-d90b-4fba-8a72-795025aa288b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\box">
+      <UniqueIdentifier>{2ba4ee33-84ed-4955-ac54-57c69813941d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\cylinder">
+      <UniqueIdentifier>{b0ea79ff-ca2d-4dd2-975f-2c76b8431d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\sphere">
+      <UniqueIdentifier>{4e3bab6e-2021-4b63-b168-4c29faf15c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh">
+      <UniqueIdentifier>{b83e6605-67b2-490d-ac5d-35ad947b492b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\resource">
+      <UniqueIdentifier>{b22f6743-048e-415e-a02f-47cc22e0c31b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\base">
+      <UniqueIdentifier>{cac76c57-21fc-406b-87f8-e4aa0e4d0347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\buffer">
+      <UniqueIdentifier>{e07b6322-640f-48d8-b78f-7ebe18e19ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\primitive_collision">
+      <UniqueIdentifier>{314629fa-9417-417e-b6ed-ed754bdca5e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere">
+      <UniqueIdentifier>{067a6c5f-ef75-49c0-a8c4-53c5155fb6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere\triangle_sphere_contact_tests">
+      <UniqueIdentifier>{a675fa91-9111-4340-b1ee-04ed7e66526f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\primitive_collision\triangle_cylinder">
+      <UniqueIdentifier>{1e8e28d3-c341-4da6-96d3-fcbe91d447a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\triangle_mesh\primitive_collision\triangle_box">
+      <UniqueIdentifier>{0eb5ef04-74ec-4f64-a66e-5b713a98c413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry\geometries\compound">
+      <UniqueIdentifier>{527b3834-5450-405c-b027-924704b42f16}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="collision_library_linkage.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_ray_base_multi.cpp">
+      <Filter>colliders\ray\base</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_ray_base_win.cpp">
+      <Filter>colliders\ray\base</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_ray_geometry_base.cpp">
+      <Filter>colliders\ray\geometry\base</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_ray_query_geometry.cpp">
+      <Filter>colliders\ray\geometry\query</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_ray_test_geometry.cpp">
+      <Filter>colliders\ray\geometry\test</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_ray_object.cpp">
+      <Filter>colliders\ray\object</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_aabb_geometry.cpp">
+      <Filter>colliders\aabb\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_aabb_object.cpp">
+      <Filter>colliders\aabb\object</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_cuboid_geometry.cpp">
+      <Filter>colliders\cuboid\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="colliders_cuboid_object.cpp">
+      <Filter>colliders\cuboid\object</Filter>
+    </ClCompile>
+    <ClCompile Include="loose_oct_tree.cpp">
+      <Filter>loose_oct_tree</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry_instance.cpp">
+      <Filter>geometry\instance</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry_object.cpp">
+      <Filter>geometry\object</Filter>
+    </ClCompile>
+    <ClCompile Include="box_geometry.cpp">
+      <Filter>geometry\geometries\box</Filter>
+    </ClCompile>
+    <ClCompile Include="cylinder_geometry.cpp">
+      <Filter>geometry\geometries\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="sphere_geometry.cpp">
+      <Filter>geometry\geometries\sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_mesh_resource.cpp">
+      <Filter>geometry\geometries\triangle_mesh\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_mesh_base.cpp">
+      <Filter>geometry\geometries\triangle_mesh\base</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_mesh_buffer.cpp">
+      <Filter>geometry\geometries\triangle_mesh\buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_mesh_primitiv_res.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_mesh_primitive_contact_tests.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_mesh_sphere.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_sphere.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_sphere_contact_tests.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere\triangle_sphere_contact_tests</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_cylinder_contact_tests.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_box_contact_tests.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_box</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_box_contact_tests_old.cpp">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_box</Filter>
+    </ClCompile>
+    <ClCompile Include="compound_geometry.cpp">
+      <Filter>geometry\geometries\compound</Filter>
+    </ClCompile>
+    <ClCompile Include="api.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="opcode_include.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_types.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\contact_info.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geometry.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geometry_instance.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\library_linkage.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\object.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space_partitioning_tree.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_ray_base.h">
+      <Filter>colliders\ray\base</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_ray_geometry_base.h">
+      <Filter>colliders\ray\geometry\base</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_ray_query_geometry.h">
+      <Filter>colliders\ray\geometry\query</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_ray_test_geometry.h">
+      <Filter>colliders\ray\geometry\test</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_ray_object.h">
+      <Filter>colliders\ray\object</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_aabb_geometry.h">
+      <Filter>colliders\aabb\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_aabb_object.h">
+      <Filter>colliders\aabb\object</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_aabb_base.h">
+      <Filter>colliders\aabb\base</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_aabb_base_inline.h">
+      <Filter>colliders\aabb\base</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_cuboid_geometry.h">
+      <Filter>colliders\cuboid\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="colliders_cuboid_object.h">
+      <Filter>colliders\cuboid\object</Filter>
+    </ClInclude>
+    <ClInclude Include="loose_oct_tree.h">
+      <Filter>loose_oct_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="loose_oct_tree_inline.h">
+      <Filter>loose_oct_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_instance.h">
+      <Filter>geometry\instance</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_object.h">
+      <Filter>geometry\object</Filter>
+    </ClInclude>
+    <ClInclude Include="box_geometry.h">
+      <Filter>geometry\geometries\box</Filter>
+    </ClInclude>
+    <ClInclude Include="cylinder_geometry.h">
+      <Filter>geometry\geometries\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="sphere_geometry.h">
+      <Filter>geometry\geometries\sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_resource.h">
+      <Filter>geometry\geometries\triangle_mesh\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_base.h">
+      <Filter>geometry\geometries\triangle_mesh\base</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_base_inline.h">
+      <Filter>geometry\geometries\triangle_mesh\base</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_buffer.h">
+      <Filter>geometry\geometries\triangle_mesh\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_primitiv_res.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_primitiv_res_inline.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_primitive_contact_tests.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_mesh_primitive_contact_tests_inline.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_sphere.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_sphere_inline.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_sphere_contact_tests.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere\triangle_sphere_contact_tests</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_sphere_contact_tests_inline.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_sphere\triangle_sphere_contact_tests</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_cylinder_contact_tests.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_cylinder_contact_tests_inline.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_cylinder_res.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_box_contact_tests.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_box</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_box_contact_tests_inline.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_box</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_box_res.h">
+      <Filter>geometry\geometries\triangle_mesh\primitive_collision\triangle_box</Filter>
+    </ClInclude>
+    <ClInclude Include="compound_geometry.h">
+      <Filter>geometry\geometries\compound</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{3c5d0bd2-2c0a-4813-836e-aba1d8b12f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{d542c6ec-57a4-4e77-8c64-f08b67633e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\base">
+      <UniqueIdentifier>{27b3e2d6-f1f4-4b79-9780-a12310803521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world">
+      <UniqueIdentifier>{87d0e88b-9705-420c-8c07-6706757ca50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\debug_renderer">
+      <UniqueIdentifier>{30ee74ce-a517-47e4-9157-3f99e60edea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\debug_renderer\commands">
+      <UniqueIdentifier>{b9f2610c-9f2d-4123-a1bd-a55363ee0a87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\debug_renderer\commands\draw_triangles">
+      <UniqueIdentifier>{eb33ae4c-e43a-4952-b732-b7cd4c98cb2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\debug_renderer\commands\draw_lines">
+      <UniqueIdentifier>{1d92cd39-0380-423b-b94d-40c9d63a96b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\engine_renderer">
+      <UniqueIdentifier>{f1813582-aa6f-4eb3-8cfd-c817b265b0b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\game_renderer">
+      <UniqueIdentifier>{5b8c306d-0e8f-424e-a6d0-14ee5910d952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\ui_renderer">
+      <UniqueIdentifier>{8c476ba3-2fca-4b2a-889c-f21da0f15db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer">
+      <UniqueIdentifier>{d9e644d8-5c5a-4352-9a65-fa9cd51a1ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer\commands">
+      <UniqueIdentifier>{efcaaa4a-843b-4416-a962-2b83c6fced23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer\commands\clear_zbuffer">
+      <UniqueIdentifier>{c4b2d734-2478-4a60-87f3-ef942e3208f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer\commands\draw_screen_lines">
+      <UniqueIdentifier>{0788405b-215c-4a48-b228-6cc633c258d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer\commands\flush">
+      <UniqueIdentifier>{6e99d50d-0b33-4cce-9b7c-cf8b6fed3973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer\commands\setup_grid_render_mode">
+      <UniqueIdentifier>{1dc60e7c-ad17-4a0e-a796-cb49e602d0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer\commands\setup_rotation_control_modes">
+      <UniqueIdentifier>{a46679e9-ab11-4005-995b-8788d2a7e6cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world\editor_renderer\commands\draw_3d_screen_lines">
+      <UniqueIdentifier>{51184369-85b4-4fc4-8779-3a6a5eb3af49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands">
+      <UniqueIdentifier>{42e578cf-b3f9-4257-a9f0-4e012134db49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\processor">
+      <UniqueIdentifier>{ef0c7504-b47f-42f6-8371-dee16cbb5a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\delegate">
+      <UniqueIdentifier>{af74f947-6a70-43d7-a41a-91b930adbc36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\view_matrix">
+      <UniqueIdentifier>{07a60f2c-473e-4273-87cf-49eb3f35b6a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\add_static">
+      <UniqueIdentifier>{6530cf08-1a7e-4e84-88aa-08c99f85112f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\projection_matrix">
+      <UniqueIdentifier>{cd3b9495-ab26-45be-b0af-d4ae3328313f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\visual">
+      <UniqueIdentifier>{6d630034-ccb9-4395-b053-234182dedfa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\light">
+      <UniqueIdentifier>{38befd08-4d3f-4a73-809e-eeb056adbc6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="commands\terrain">
+      <UniqueIdentifier>{2b768ba0-3701-4e4f-aebb-1822f67979ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platforms">
+      <UniqueIdentifier>{acb5e7c8-3a4b-44aa-a0e2-3a42b855c113}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platforms\pc">
+      <UniqueIdentifier>{0e6565f6-fdc9-40ab-bf05-03f82213ccc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platforms\xbox360">
+      <UniqueIdentifier>{1f8c489a-a03e-4d82-b2cd-d63f3850f21b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platforms\ps3">
+      <UniqueIdentifier>{1859fd0e-2a99-4dd9-9926-8e3d182b0597}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="render_base_library_linkage.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="render_base_world.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_renderer.cpp">
+      <Filter>world\debug_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_draw_triangles_command.cpp">
+      <Filter>world\debug_renderer\commands\draw_triangles</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_draw_lines_command.cpp">
+      <Filter>world\debug_renderer\commands\draw_lines</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_renderer.cpp">
+      <Filter>world\engine_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="game_renderer.cpp">
+      <Filter>world\game_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_renderer.cpp">
+      <Filter>world\ui_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_renderer.cpp">
+      <Filter>world\editor_renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_clear_zbuffer_command.cpp">
+      <Filter>world\editor_renderer\commands\clear_zbuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_draw_screen_lines_command.cpp">
+      <Filter>world\editor_renderer\commands\draw_screen_lines</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_flush_command.cpp">
+      <Filter>world\editor_renderer\commands\flush</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_setup_grid_render_mode_command.cpp">
+      <Filter>world\editor_renderer\commands\setup_grid_render_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_setup_rotation_control_modes_command.cpp">
+      <Filter>world\editor_renderer\commands\setup_rotation_control_modes</Filter>
+    </ClCompile>
+    <ClCompile Include="editor_draw_3d_screen_lines_command.cpp">
+      <Filter>world\editor_renderer\commands\draw_3d_screen_lines</Filter>
+    </ClCompile>
+    <ClCompile Include="command_processor.cpp">
+      <Filter>commands\processor</Filter>
+    </ClCompile>
+    <ClCompile Include="command_delegate.cpp">
+      <Filter>commands\delegate</Filter>
+    </ClCompile>
+    <ClCompile Include="command_view_matrix.cpp">
+      <Filter>commands\view_matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="command_add_static.cpp">
+      <Filter>commands\add_static</Filter>
+    </ClCompile>
+    <ClCompile Include="command_projection_matrix.cpp">
+      <Filter>commands\projection_matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="command_add_visual.cpp">
+      <Filter>commands\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="command_change_visual_shader.cpp">
+      <Filter>commands\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="command_draw_visual.cpp">
+      <Filter>commands\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="command_remove_visual.cpp">
+      <Filter>commands\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="command_render_visuals.cpp">
+      <Filter>commands\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="command_update_visual.cpp">
+      <Filter>commands\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="command_update_visual_vertex_buffer.cpp">
+      <Filter>commands\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="command_add_light.cpp">
+      <Filter>commands\light</Filter>
+    </ClCompile>
+    <ClCompile Include="command_remove_light.cpp">
+      <Filter>commands\light</Filter>
+    </ClCompile>
+    <ClCompile Include="command_update_light.cpp">
+      <Filter>commands\light</Filter>
+    </ClCompile>
+    <ClCompile Include="command_terrain_add_cell.cpp">
+      <Filter>commands\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="command_terrain_cell_add_texture.cpp">
+      <Filter>commands\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="command_terrain_cell_remove_texture.cpp">
+      <Filter>commands\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="command_terrain_cell_set_visible.cpp">
+      <Filter>commands\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="command_terrain_cell_update_buffer.cpp">
+      <Filter>commands\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="command_terrain_exchange_texture.cpp">
+      <Filter>commands\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="command_terrain_remove_cell.cpp">
+      <Filter>commands\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_api_pc.cpp">
+      <Filter>platforms\pc</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_dx11.cpp">
+      <Filter>platforms\pc</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_dx9.cpp">
+      <Filter>platforms\pc</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_dx9_static.cpp">
+      <Filter>platforms\pc</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_api_xbox360.cpp">
+      <Filter>platforms\xbox360</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_xbox360.cpp">
+      <Filter>platforms\xbox360</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_api_ps3.cpp">
+      <Filter>platforms\ps3</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_ps3.cpp">
+      <Filter>platforms\ps3</Filter>
+    </ClCompile>
+    <ClCompile Include="render_base_entry_point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\api.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\library_linkage.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\world.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\api.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\command_common.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_types.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\debug_renderer.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\editor_allocator.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\editor_renderer.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\engine_renderer.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\engine_wrapper.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extended_renderer.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\game_renderer.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\library_linkage.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logic_allocator.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\memory.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\platform.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\render_allocator.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\transform_control.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ui_renderer.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\visual.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\world.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_renderer.h">
+      <Filter>world\debug_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_draw_triangles_command.h">
+      <Filter>world\debug_renderer\commands\draw_triangles</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_draw_triangles_command_inline.h">
+      <Filter>world\debug_renderer\commands\draw_triangles</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_draw_lines_command.h">
+      <Filter>world\debug_renderer\commands\draw_lines</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_draw_lines_command_inline.h">
+      <Filter>world\debug_renderer\commands\draw_lines</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_renderer.h">
+      <Filter>world\engine_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="game_renderer.h">
+      <Filter>world\game_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_renderer.h">
+      <Filter>world\ui_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="editor_renderer.h">
+      <Filter>world\editor_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="editor_clear_zbuffer_command.h">
+      <Filter>world\editor_renderer\commands\clear_zbuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="editor_draw_screen_lines_command.h">
+      <Filter>world\editor_renderer\commands\draw_screen_lines</Filter>
+    </ClInclude>
+    <ClInclude Include="editor_flush_command.h">
+      <Filter>world\editor_renderer\commands\flush</Filter>
+    </ClInclude>
+    <ClInclude Include="editor_setup_grid_render_mode_command.h">
+      <Filter>world\editor_renderer\commands\setup_grid_render_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="editor_setup_rotation_control_modes_command.h">
+      <Filter>world\editor_renderer\commands\setup_rotation_control_modes</Filter>
+    </ClInclude>
+    <ClInclude Include="editor_draw_3d_screen_lines_command.h">
+      <Filter>world\editor_renderer\commands\draw_3d_screen_lines</Filter>
+    </ClInclude>
+    <ClInclude Include="command_processor.h">
+      <Filter>commands\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="command_delegate.h">
+      <Filter>commands\delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="command_view_matrix.h">
+      <Filter>commands\view_matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="command_add_static.h">
+      <Filter>commands\add_static</Filter>
+    </ClInclude>
+    <ClInclude Include="command_projection_matrix.h">
+      <Filter>commands\projection_matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="command_add_visual.h">
+      <Filter>commands\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="command_change_visual_shader.h">
+      <Filter>commands\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="command_draw_visual.h">
+      <Filter>commands\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="command_remove_visual.h">
+      <Filter>commands\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="command_render_visuals.h">
+      <Filter>commands\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="command_update_visual.h">
+      <Filter>commands\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="command_update_visual_vertex_buffer.h">
+      <Filter>commands\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="command_add_light.h">
+      <Filter>commands\light</Filter>
+    </ClInclude>
+    <ClInclude Include="command_remove_light.h">
+      <Filter>commands\light</Filter>
+    </ClInclude>
+    <ClInclude Include="command_update_light.h">
+      <Filter>commands\light</Filter>
+    </ClInclude>
+    <ClInclude Include="command_terrain_add_cell.h">
+      <Filter>commands\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="command_terrain_cell_add_texture.h">
+      <Filter>commands\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="command_terrain_cell_remove_texture.h">
+      <Filter>commands\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="command_terrain_cell_set_visible.h">
+      <Filter>commands\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="command_terrain_cell_update_buffer.h">
+      <Filter>commands\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="command_terrain_exchange_texture.h">
+      <Filter>commands\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="command_terrain_remove_cell.h">
+      <Filter>commands\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="platform_api.h">
+      <Filter>platforms</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="platform_dx11.h">
+      <Filter>platforms\pc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="platform_dx9.h">
+      <Filter>platforms\pc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="platform_dx9_inline.h">
+      <Filter>platforms\pc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="platform_xbox360.h">
+      <Filter>platforms\xbox360</Filter>
+    </CustomBuild>
+    <CustomBuild Include="platform_xbox360_inline.h">
+      <Filter>platforms\xbox360</Filter>
+    </CustomBuild>
+    <CustomBuild Include="platform_ps3.h">
+      <Filter>platforms\ps3</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
