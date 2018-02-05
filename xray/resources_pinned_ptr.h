@@ -20,16 +20,16 @@ public:
 							~pinned_ptr_base () { m_resource->unpin(m_data); }
 
 	operator				const_buffer	() const { return const_buffer(c_ptr(), size()); }
-	u32						size			() const { return m_size; }
+	unsigned						size			() const { return m_size; }
 	T *						c_ptr			() const { return (T *)m_data; }
 	T *						operator ->		() const { return (T *)m_data; }
 	T &						operator *		() const { return *(T *)m_data; }
-	T &						operator []		(u32 i) const { R_ASSERT(i < m_resource->get_size()); return m_data[i]; }
+	T &						operator []		(unsigned i) const { R_ASSERT(i < m_resource->get_size()); return m_data[i]; }
 
 private:
 	managed_resource_ptr	m_resource;
 	pcbyte					m_data;
-	u32						m_size;
+	unsigned						m_size;
 	friend class			managed_resource;
 };
 

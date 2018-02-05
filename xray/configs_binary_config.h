@@ -25,10 +25,10 @@ public:
 	virtual								~binary_config	( )	{ }
 	inline	binary_config_value const&	get_root		( ) const					{ return *m_root; }
 	inline	bool						empty			( ) const					{ return get_root().empty(); }
-	inline	u32							size			( ) const					{ return get_root().size(); }
+	inline	unsigned							size			( ) const					{ return get_root().size(); }
 	inline	const_iterator				begin			( ) const					{ return get_root().begin(); }
 	inline	const_iterator				end				( ) const					{ return get_root().end(); }
-	inline	binary_config_value const&	operator[]		( u32 const index ) const	{ return get_root()[ index ]; }
+	inline	binary_config_value const&	operator[]		( unsigned const index ) const	{ return get_root()[ index ]; }
 	inline	binary_config_value const&	operator[]		( int const index ) const	{ return get_root()[ index ]; }
 	inline	binary_config_value const&	operator[]		( pcstr const key ) const	{ return get_root()[ key ]; }
 

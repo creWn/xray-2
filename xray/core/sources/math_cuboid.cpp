@@ -55,7 +55,7 @@ cuboid::cuboid					( cuboid const& other, float4x4 const& matrix )
 
 intersection cuboid::test_inexact		( aabb const& aabb) const
 {
-	u32 inside_count				= 0;
+	unsigned inside_count				= 0;
 
 	aabb_plane const* i				= m_planes;
 	aabb_plane const* const	e		= m_planes + plane_count;

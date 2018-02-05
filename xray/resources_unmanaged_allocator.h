@@ -10,7 +10,7 @@
 namespace xray {
 namespace resources {
 
-XRAY_CORE_API managed_resource *		allocate_managed_resource	(u32 size);
+XRAY_CORE_API managed_resource *		allocate_managed_resource	(unsigned size);
 XRAY_CORE_API void						free_managed_resource		(managed_resource *);
 
 #define UNMANAGED_NEW( out_pointer, type )	(((out_pointer) = allocate_unmanaged_memory(sizeof(type), typeid(type).name())) == 0) ? 0 : new (type)
@@ -20,7 +20,7 @@ XRAY_CORE_API void						free_managed_resource		(managed_resource *);
 
 // use UNMANAGED_* macro instead
 XRAY_CORE_API memory::base_allocator *	unmanaged_allocator			();
-XRAY_CORE_API pvoid						allocate_unmanaged_memory	(u32 size, pcstr type_name);
+XRAY_CORE_API pvoid						allocate_unmanaged_memory	(unsigned size, pcstr type_name);
 
 } // namespace resources
 } // namespace xray

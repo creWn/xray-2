@@ -11,7 +11,7 @@
 using xray::strings::shared::profile;
 using xray::threading::mutex;
 
-u32 profile::create_checksum		( pcvoid const begin, pcvoid const end )
+unsigned profile::create_checksum		( pcvoid const begin, pcvoid const end )
 {
 	boost::crc_32_type			processor;
 	processor.process_block		( begin, end );
@@ -24,7 +24,7 @@ profile* profile::create			( mutex& mutex, pcstr const value, profile const& tem
 	ASSERT						( strings::length( value ) == temp.m_length, "shared string is corrupted" );
 	ASSERT						( create_checksum( value, value + temp.m_length ) == temp.m_checksum, "shared string is corrupted" );
 
-	u32							buffer_length = ( temp.m_length + 1 )*sizeof( char );
+	unsigned							buffer_length = ( temp.m_length + 1 )*sizeof( char );
 	R_ASSERT					( ( sizeof( profile ) + buffer_length ) < max_length, "alignment is corrupted, check compiler options" );
 
 	mutex.lock					( );

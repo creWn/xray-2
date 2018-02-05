@@ -22,8 +22,8 @@ bool	key_is_set	( pcstr key_raw );
 
 bool   xray::build::print_build_id_command_line ()
 {
-	static u32 s_out_result						=	u32(-1);
-	if ( s_out_result == u32(-1) )
+	static unsigned s_out_result						=	unsigned(-1);
+	if ( s_out_result == unsigned(-1) )
 	{
 		if ( xray::command_line::initialized() )
 			s_out_result						=	s_print_build_id;
@@ -35,11 +35,11 @@ bool   xray::build::print_build_id_command_line ()
 }
 
 struct date {
-	u32	day;
-	u32 month;
-	u32 year;
+	unsigned	day;
+	unsigned month;
+	unsigned year;
 
-	inline	date				( u32 const day_, u32 const month_, u32 const year_ ) :
+	inline	date				( unsigned const day_, unsigned const month_, unsigned const year_ ) :
 		day						( day_ ),
 		month					( month_ ),
 		year					( year_ )
@@ -47,14 +47,14 @@ struct date {
 	}
 }; // struct date
 
-static u32	day_count			( date const &date )
+static unsigned	day_count			( date const &date )
 {
-	u32 const years				= date.year;
-	u32 const extra_day_count	= ((years % 400 == 0) || ((years % 4 == 0) && (years % 100 != 0))) ? 1 : 0;
-	u32 const years_minus_1		= u32(years - 1);
-	u32	result					= years_minus_1*365 + years_minus_1/4 - years_minus_1/100 + years_minus_1/400;
+	unsigned const years				= date.year;
+	unsigned const extra_day_count	= ((years % 400 == 0) || ((years % 4 == 0) && (years % 100 != 0))) ? 1 : 0;
+	unsigned const years_minus_1		= unsigned(years - 1);
+	unsigned	result					= years_minus_1*365 + years_minus_1/4 - years_minus_1/100 + years_minus_1/400;
 
-	u32 const months			= date.month;
+	unsigned const months			= date.month;
 	if ( months >  1 ) result	+= 31;
 	if ( months >  2 ) result	+= 28 + extra_day_count;
 	if ( months >  3 ) result	+= 31;
@@ -70,7 +70,7 @@ static u32	day_count			( date const &date )
 	return						( result + date.day - 1 );
 }
 
-static u32 build_id				( u32 const day, u32 const month, u32 const year, pcstr current_date )
+static unsigned build_id				( unsigned const day, unsigned const month, unsigned const year, pcstr current_date )
 {
 	date						current(1,1,1);
 	string16					month_string;
@@ -91,13 +91,13 @@ static u32 build_id				( u32 const day, u32 const month, u32 const year, pcstr c
 		break;
 	}
 
-	u32							start_days = day_count( date ( day, month, year ) );
-	u32							stop_days = day_count( current );
+	unsigned							start_days = day_count( date ( day, month, year ) );
+	unsigned							stop_days = day_count( current );
 	ASSERT						( stop_days >= start_days );
 	return						( stop_days - start_days );
 }
 
-u32 xray::build::calculate_build_id ( pcstr current_date )
+unsigned xray::build::calculate_build_id ( pcstr current_date )
 {
 	// start development date (26.08.2008)
 	return						build_id( 26, 8, 2008, current_date );
@@ -110,7 +110,7 @@ void xray::build::preinitialize	( pcstr const build_date )
 
 void xray::build::initialize	( core::engine *  )
 {
-	u32 const id	=	calculate_build_id ( s_build_date );
+	unsigned const id	=	calculate_build_id ( s_build_date );
 	LOG_INFO					(
 		"%s build %d(internal id %d), %s",
 		XRAY_ENGINE_ID,

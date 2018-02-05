@@ -259,7 +259,7 @@ void   resources_manager::dispatch_query_finished_callbacks ()
 	}
 }
 
-thread_local_data*   resources_manager::get_thread_local_data (u32 const thread_id, bool create_if_not_exist)
+thread_local_data*   resources_manager::get_thread_local_data (unsigned const thread_id, bool create_if_not_exist)
 {
 	thread_local_data *	local_data		=	NULL;
 	

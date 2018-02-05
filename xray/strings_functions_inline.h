@@ -7,9 +7,9 @@
 #ifndef XRAY_STRINGS_FUNCTIONS_INLINE_H_INCLUDED
 #define XRAY_STRINGS_FUNCTIONS_INLINE_H_INCLUDED
 
-inline u32 xray::strings::length		( pcstr string )
+inline unsigned xray::strings::length		( pcstr string )
 {
-	return				( ( u32 )strlen( string ) );
+	return				( ( unsigned )strlen( string ) );
 }
 
 inline int xray::strings::compare		( pcstr left, pcstr right )
@@ -39,7 +39,7 @@ inline int xray::strings::compare_insensitive	( pcstr left, pcstr right )
 #endif // #ifdef _MSC_VER
 }
 
-inline pstr xray::strings::copy			( pstr destination, u32 destination_size, pcstr source )
+inline pstr xray::strings::copy			( pstr destination, unsigned destination_size, pcstr source )
 {
 #ifdef _MSC_VER
 	errno_t const error	= strcpy_s( destination, destination_size, source );
@@ -76,14 +76,14 @@ inline pstr xray::strings::copy_n		( pstr const destination, size_t const destin
 template < typename allocator_type >
 inline pstr xray::strings::duplicate	( allocator_type& allocator, pcstr const string )
 {
-	u32 const size		= (length( string ) + 1)*sizeof(char);
+	unsigned const size		= (length( string ) + 1)*sizeof(char);
 	pstr const result	= ( char* )XRAY_MALLOC_IMPL(allocator, size, "strings::duplicate" );
 	memory::copy		( result, size, string, size );
 	return				( result );
 }
 
 template <typename predicate_type>
-inline bool	xray::strings::iterate_items( pcstr string, u32 length, predicate_type const& predicate, char const separator )
+inline bool	xray::strings::iterate_items( pcstr string, unsigned length, predicate_type const& predicate, char const separator )
 {
 	pcstr I				= string;
 

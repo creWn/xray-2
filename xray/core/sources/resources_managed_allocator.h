@@ -21,27 +21,27 @@ class managed_resource_allocator : public resource_allocator, public memory::bas
 public:
 	// note: when defragmentation starts, it first marks some nodes of device managers as unmovable,
 	// so they can read in parallel with defragmentation
-	static const u32	max_parallel_with_defragmentation_file_operations_allowed	=	10;
+	static const unsigned	max_parallel_with_defragmentation_file_operations_allowed	=	10;
 
 public:
 						// temp_arena_size parameter is also max allocation request 
 						// more reserved_size makes defragmentations less frequent
-						managed_resource_allocator		(u32 			temp_arena_size,
-														 u32 			reserved_size, 
+						managed_resource_allocator		(unsigned 			temp_arena_size,
+														 unsigned 			reserved_size, 
 #if XRAY_PLATFORM_WINDOWS_64
-														 u32 			granularity = 128
+														 unsigned 			granularity = 128
 #else // #if XRAY_PLATFORM_WINDOWS_64
-														 u32 			granularity = 128
+														 unsigned 			granularity = 128
 #endif // #if XRAY_PLATFORM_WINDOWS_64
 														 );
 
 						~managed_resource_allocator 	() {}
 
-	bool				can_allocate					(u32 buffer_size) const;
-	managed_resource *	allocate 						(u32 size);
+	bool				can_allocate					(unsigned buffer_size) const;
+	managed_resource *	allocate 						(unsigned size);
 
 	void				deallocate						(managed_resource *	ptr);
-	void				defragment						(u32				sufficient_contigous_space);
+	void				defragment						(unsigned				sufficient_contigous_space);
 	bool				is_defragmenting				() const { return m_defragmenting; }
 
 	void				test_defragment					();
@@ -106,15 +106,15 @@ private:
 		}
 	};
 
-	managed_node *		to_next_ignored_unmovable		(u32 &					index);
-	u32					calculate_place_pos_and_free_space(buffer_vector<u32>&	looses,
-														 u32 const				start_index,
+	managed_node *		to_next_ignored_unmovable		(unsigned &					index);
+	unsigned					calculate_place_pos_and_free_space(buffer_vector<unsigned>&	looses,
+														 unsigned const				start_index,
 														 pbyte					place_pos,
-														 u32 &					result_index);
+														 unsigned &					result_index);
 
-	void				calculate_unmovables_state		(u32 					start_index,
+	void				calculate_unmovables_state		(unsigned 					start_index,
 														 pbyte					place_pos,
-														 u32					sufficient_contigous_space);
+														 unsigned					sufficient_contigous_space);
 
 	threading::mutex &	get_defragmentation_mutex		() { return m_defragmentation_mutex; }
 
@@ -129,21 +129,21 @@ private:
 		managed_node *	node;
 		managed_node *	place_node;
 		pbyte			place_pos;
-		u32				unmovable_index;
-		u32				unmovable_place_index;
+		unsigned				unmovable_index;
+		unsigned				unmovable_place_index;
 	};
 
 	void				correct_place_pos_and_node		(mode_state * 						mode);
 
 	void				init_mode						(mode_state *						mode);
 
-	size_t 				get_contigous_space_defrag		(u32								unmovable_index);
+	size_t 				get_contigous_space_defrag		(unsigned								unmovable_index);
 
 	void				move_next_mode_node				();
-	void				handle_unmovable				(u32 const	sufficient_contigous_space,
+	void				handle_unmovable				(unsigned const	sufficient_contigous_space,
 														 bool &		call_continue_in_main_cycle);
 
-	void				calculate_nodes_place_pos_and_unmovable_state (u32 sufficient_contigous_space);
+	void				calculate_nodes_place_pos_and_unmovable_state (unsigned sufficient_contigous_space);
 
 	//----------------------------------------------------
 	// testing
@@ -151,10 +151,10 @@ private:
 	bool				check_valid_place_node			() const;
 	void				test							();
 	void				test_speed						();
-	void				remove_test_resource			(u32 index);
+	void				remove_test_resource			(unsigned index);
 #if !XRAY_PLATFORM_PS3
-	void				test_unmovable_init				(u32 start_ms);
-	void				test_unmovable_unlock_expired	(u32 cur_ms);
+	void				test_unmovable_init				(unsigned start_ms);
+	void				test_unmovable_unlock_expired	(unsigned cur_ms);
 	void				test_unmovables_list_valid		() const;
 #endif // #if !XRAY_PLATFORM_PS3
 	void				log_test_resources				() const;
@@ -162,7 +162,7 @@ private:
 
 
 	bool												m_defragmenting;
-	u32													m_reserved_size;
+	unsigned													m_reserved_size;
 	mode_state											m_main_mode;
 	mode_state											m_no_temp_mode;
 	mode_state *										m_mode;
@@ -170,8 +170,8 @@ private:
 	size_t												m_num_moved_bytes;
 	u64													m_whole_moved_bytes;
 
-	u32													m_defrag_iteration;
-	mutable u32											m_log_iteration;
+	unsigned													m_defrag_iteration;
+	mutable unsigned											m_log_iteration;
 
 	buffer_vector<unmovable> *							m_defrag_unmovables;
 

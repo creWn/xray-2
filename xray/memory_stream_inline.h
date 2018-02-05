@@ -20,7 +20,7 @@ inline xray::memory::stream::~stream			( )
 	XRAY_FREE_IMPL	( *m_allocator, m_buffer );
 }
 
-inline void xray::memory::stream::append		( u32 const value )
+inline void xray::memory::stream::append		( unsigned const value )
 {
 	append			( &value, sizeof(value) );
 }
@@ -40,7 +40,7 @@ inline pbyte xray::memory::stream::get_buffer	( ) const
 	return			m_buffer;
 }
 
-inline u32 xray::memory::stream::get_buffer_size( ) const
+inline unsigned xray::memory::stream::get_buffer_size( ) const
 {
 	return			m_buffer_size;
 }

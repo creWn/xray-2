@@ -10,7 +10,7 @@
 namespace xray {
 namespace memory {
 
-inline reader::reader			( non_null< u8 const, u8 const* >::ptr const data, u32 const size, u32 const position ) :
+inline reader::reader			( non_null< u8 const, u8 const* >::ptr const data, unsigned const size, unsigned const position ) :
 	m_data		( &*data ),
 	m_pointer	( m_data + position ),
 	m_size		( size )
@@ -18,7 +18,7 @@ inline reader::reader			( non_null< u8 const, u8 const* >::ptr const data, u32 c
 	ASSERT		( m_size >= position );
 }
 
-inline void reader::r			( pvoid const destination, u32 const destination_size, u32 const size )
+inline void reader::r			( pvoid const destination, unsigned const destination_size, unsigned const size )
 {
 	ASSERT		( m_pointer >= m_data );
 	ASSERT		( m_pointer <= (m_data + m_size) );
@@ -28,7 +28,7 @@ inline void reader::r			( pvoid const destination, u32 const destination_size, u
 	m_pointer	+= size;
 }
 
-inline void reader::advance		( u32 offset )
+inline void reader::advance		( unsigned offset )
 {
 	ASSERT		( m_pointer >= m_data );
 	ASSERT		( m_pointer <= (m_data + m_size) );
@@ -37,7 +37,7 @@ inline void reader::advance		( u32 offset )
 	m_pointer	+= offset;
 }
 
-inline void reader::seek		( u32 new_position )
+inline void reader::seek		( unsigned new_position )
 {
 	ASSERT		( m_pointer >= m_data );
 	ASSERT		( m_pointer <= (m_data + m_size) );
@@ -56,10 +56,10 @@ inline bool	reader::eof			( ) const
 	ASSERT		( m_pointer >= m_data );
 	ASSERT		( m_pointer <= (m_data + m_size) );
 
-	return		( u32(m_pointer - m_data) >= m_size );
+	return		( unsigned(m_pointer - m_data) >= m_size );
 }
 
-inline u32 reader::elapsed		( ) const
+inline unsigned reader::elapsed		( ) const
 {
 	ASSERT		( m_pointer >= m_data );
 	ASSERT		( m_pointer <= (m_data + m_size) );
@@ -67,15 +67,15 @@ inline u32 reader::elapsed		( ) const
 	return		( m_size - tell( ) );
 }
 
-inline u32 reader::tell			( ) const
+inline unsigned reader::tell			( ) const
 {
 	ASSERT		( m_pointer >= m_data );
 	ASSERT		( m_pointer <= (m_data + m_size) );
 
-	return		( u32(m_pointer - m_data) );
+	return		( unsigned(m_pointer - m_data) );
 }
 
-inline u32 reader::length		( ) const
+inline unsigned reader::length		( ) const
 {
 	ASSERT		( m_pointer >= m_data );
 	ASSERT		( m_pointer <= (m_data + m_size) );

@@ -13,7 +13,7 @@ using xray::core::configs::binary_config;
 using xray::configs::binary_config_value;
 using xray::memory::base_allocator;
 
-binary_config::binary_config		(pcbyte const buffer, u32 const buffer_size, base_allocator* allocator) 
+binary_config::binary_config		(pcbyte const buffer, unsigned const buffer_size, base_allocator* allocator) 
 :m_allocator(allocator)
 {
 	m_root		= 0;
@@ -35,12 +35,12 @@ binary_config::~binary_config()
 //	return							true;
 //}
 
-void binary_config::load			( pcbyte const buffer, u32 const buffer_size )
+void binary_config::load			( pcbyte const buffer, unsigned const buffer_size )
 {
 	pcbyte reader			= buffer;
 
 	m_root					= (binary_config_value*)XRAY_MALLOC_IMPL(m_allocator, buffer_size, "binary_config");
 	memory::copy			(m_root, buffer_size, reader, buffer_size);
 
-	m_root->fix_up			( horrible_cast<binary_config_value*,u32>(m_root).second );
+	m_root->fix_up			( horrible_cast<binary_config_value*,unsigned>(m_root).second );
 }

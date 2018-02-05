@@ -41,9 +41,9 @@ console_command* find(pcstr str)
 	return	result;
 }
 
-u32 get_similar(pcstr starts_from, console_command** dst, u32 dst_size)
+unsigned get_similar(pcstr starts_from, console_command** dst, unsigned dst_size)
 {
-	u32 result = 0;
+	unsigned result = 0;
 	console_command* current = s_console_command_root;
 
 	while(current && result<dst_size)
@@ -155,9 +155,9 @@ void save(pcstr name)
 
 static bool is_line_term (char a) {	return (a==13)||(a==10); };
 
-static u32	advance_term_string(memory::reader& F)
+static unsigned	advance_term_string(memory::reader& F)
 {
-	u32 sz		= 0;
+	unsigned sz		= 0;
 	while (!F.eof()) 
 	{
 		F.advance(1);				//Pos++;
@@ -175,7 +175,7 @@ static u32	advance_term_string(memory::reader& F)
 static void r_string(memory::reader& F, string4096& dest)
 {
 	char *src 	= (char *) F.pointer();
-	u32 sz 		= advance_term_string(F);
+	unsigned sz 		= advance_term_string(F);
 	xray::strings::copy_n	(dest, sizeof(dest), src, sz);
 }
 

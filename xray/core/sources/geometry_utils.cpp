@@ -23,13 +23,13 @@ void create_primitive(	geom_vertices_type& avertices,
 						 geom_indices_type& aindices, 
 						 float4x4 transform, 
 						 float const* vertices,  
-						 u32 vertex_count, 
+						 unsigned vertex_count, 
 						 u16 const* faces, 
-						 u32 index_count )
+						 unsigned index_count )
 {
 	float3 tmp_vertex;
 	avertices.resize( vertex_count );
-	for( u32 i = 0, j = 0 ; i < vertex_count; ++i, j+=3 )
+	for( unsigned i = 0, j = 0 ; i < vertex_count; ++i, j+=3 )
 	{
 		tmp_vertex.x = vertices[j];
 		tmp_vertex.y = vertices[j+1];
@@ -39,7 +39,7 @@ void create_primitive(	geom_vertices_type& avertices,
 	}
 
 	aindices.resize( index_count );
-	for( u32 i = 0; i < index_count; ++i)
+	for( unsigned i = 0; i < index_count; ++i)
 		aindices[i] = faces[i];
 }
 
@@ -51,14 +51,14 @@ void create_primitive(	geom_vertices_type& avertices,
 //	bool result = create_torus	( tmp_vertices, tmp_indices, float4x4().identity(), outer_raduius,  inner_raduius, outer_segments, inner_segments );
 //
 //	vertices.resize( tmp_vertices.size() );
-//	for ( u32 i = 0; i < tmp_vertices.size(); ++i)
+//	for ( unsigned i = 0; i < tmp_vertices.size(); ++i)
 //	{
 //		vertices[i].position = tmp_vertices[i];
 //		vertices[i].color = color;
 //	}
 //
 //	indices.resize( tmp_indices.size() );
-//	for ( u32 i = 0; i < tmp_indices.size(); ++i)
+//	for ( unsigned i = 0; i < tmp_indices.size(); ++i)
 //		indices[i] = tmp_indices[i];
 //
 //	return result;
@@ -138,7 +138,7 @@ bool create_ring( geom_vertices_type& vertices,
 
 	float segment_ang		= math::pi_x2/segments_count;
 	u16 i					= 0;
-	u32 vidx				= 0;
+	unsigned vidx				= 0;
 	float outer_radius		= inner_radius+width;
 	for(i=0; i<segments_count;++i)
 	{
@@ -147,7 +147,7 @@ bool create_ring( geom_vertices_type& vertices,
 		vertices[vidx++].set(outer_radius*sincos.cosine, 0.0f, -outer_radius*sincos.sine);
 	}
 
-	u32 iidx				= 0;
+	unsigned iidx				= 0;
 	for(i=0; i<segments_count-1; ++i)
 	{
 		indices[iidx++]		= (i*2);

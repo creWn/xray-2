@@ -64,13 +64,13 @@ inline xray::strings::detail::tuples::tuples		( T0 p0, T1 p1, T2 p2, T3 p3, T4 p
 	helper<5>::add_string	(*this, p5);
 }
 
-inline u32 xray::strings::detail::tuples::size		( ) const
+inline unsigned xray::strings::detail::tuples::size		( ) const
 {
 	ASSERT			(m_count > 0);
 
-	u32				result = m_strings[0].second;
+	unsigned				result = m_strings[0].second;
 	
-	for (u32 j = 1; j < m_count; ++j)
+	for (unsigned j = 1; j < m_count; ++j)
 		result		+= m_strings[j].second;
 
 	if ( result > max_concat_result_size )
@@ -90,7 +90,7 @@ inline void xray::strings::detail::tuples::concat	( pcstr const result ) const
 	memory::copy	(i, m_strings[0].second + 1, m_strings[0].first, m_strings[0].second*sizeof(*m_strings[0].first));
 	i				+= m_strings[0].second;
 
-	for (u32 j = 1; j < m_count; ++j) {
+	for (unsigned j = 1; j < m_count; ++j) {
 		memory::copy(i, m_strings[j].second + 1, m_strings[j].first, m_strings[j].second*sizeof(*m_strings[j].first));
 		i			+= m_strings[j].second;
 	}
@@ -98,11 +98,11 @@ inline void xray::strings::detail::tuples::concat	( pcstr const result ) const
 	*i				= 0;
 }
 
-#define TEMPLATE_SIGNATURE	template < u32 index >
+#define TEMPLATE_SIGNATURE	template < unsigned index >
 #define HELPER				xray::strings::detail::tuples::helper< index >
 
 TEMPLATE_SIGNATURE
-inline u32 HELPER::length									( pcstr const string )
+inline unsigned HELPER::length									( pcstr const string )
 {
 	return		( string ? ( unsigned int )strings::length(string) : 0 );
 }

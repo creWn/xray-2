@@ -16,7 +16,7 @@ using xray::console_commands::cc_delegate;
 using xray::console_commands::cc_string;
 using xray::console_commands::cc_bool;
 using xray::console_commands::cc_float;
-using xray::console_commands::cc_u32;
+using xray::console_commands::cc_unsigned;
 using xray::console_commands::cc_float2;
 using xray::console_commands::cc_float3;
 
@@ -76,7 +76,7 @@ void cc_delegate::execute(pcstr str)
 };
 
 //--string
-cc_string::cc_string(pcstr name, pstr value, u32 size)
+cc_string::cc_string(pcstr name, pstr value, unsigned size)
 :super(name), m_value(value), m_size(size)
 {
 	m_need_args		= true;
@@ -183,14 +183,14 @@ void cc_float::syntax(syntax_str& dest) const
 {
 	sprintf	(dest, "range [%3.3f,%3.3f]", m_min, m_max);
 }
-//--u32
-cc_u32::cc_u32(pcstr name, u32& value, u32 const min, u32 const max)
+//--unsigned
+cc_unsigned::cc_unsigned(pcstr name, unsigned& value, unsigned const min, unsigned const max)
 :super(name, value, min, max)
 {}
 
-void cc_u32::execute(pcstr args)
+void cc_unsigned::execute(pcstr args)
 {
-	u32 v;
+	unsigned v;
 	if(1!=XRAY_SSCANF(args, "%d", &v) || v<m_min || v>m_max)
 	{
 		on_invalid_syntax(args);
@@ -200,17 +200,17 @@ void cc_u32::execute(pcstr args)
 	m_value = v;
 }
 
-void cc_u32::status(status_str& dest) const
+void cc_unsigned::status(status_str& dest) const
 {
 	sprintf	(dest, "%d", m_value);
 }
 
-void cc_u32::info(info_str& dest) const
+void cc_unsigned::info(info_str& dest) const
 {
 	sprintf	(dest, "unsigned integer value.");
 }
 
-void cc_u32::syntax(syntax_str& dest) const
+void cc_unsigned::syntax(syntax_str& dest) const
 {
 	sprintf	(dest, "range [%d,%d]", m_min, m_max);
 }
@@ -301,8 +301,8 @@ static cc_help	s_help_cmd("help");
 static float s_float_test = 3.0f;
 static cc_float s_test_float("test_float", s_float_test, -10.0f, 300.0f);
 
-static u32 s_u32_test = 18;
-static cc_u32 s_test_u32("test_u32", s_u32_test, 100, 300);
+static unsigned s_unsigned_test = 18;
+static cc_unsigned s_test_unsigned("test_unsigned", s_unsigned_test, 100, 300);
 
 static float2 s_float2_test(-13.0f, 20.0f);
 static cc_float2 s_test_float2("test_float2", s_float2_test, float2(-100,-50), float2(800, 40));

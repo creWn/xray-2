@@ -73,8 +73,8 @@ void xray::memory::platform::dump_memory		( )
 	printf_all		("\n\n");
 
 	MEMORY_BASIC_INFORMATION	memory_info;
-//	u32 const		max_address = ( ( u32(1) << 31 ) /**| ( u64(1) << 30 ) /**/);
-	u32 count		= 0;
+//	unsigned const		max_address = ( ( unsigned(1) << 31 ) /**| ( u64(1) << 30 ) /**/);
+	unsigned count		= 0;
 	for (size_t i=0; ; ) {
 		size_t		return_value = 
 			VirtualQuery(
@@ -96,8 +96,8 @@ void xray::memory::platform::dump_memory		( )
 //			break;
 
 		printf_all	("Region:             %d\n", count);
-		printf_all	("Base Address:       0x%08x\n", *(u32*)&memory_info.BaseAddress);
-		printf_all	("Allocation Base:    0x%08x\n", *(u32*)&memory_info.AllocationBase);
+		printf_all	("Base Address:       0x%08x\n", *(unsigned*)&memory_info.BaseAddress);
+		printf_all	("Allocation Base:    0x%08x\n", *(unsigned*)&memory_info.AllocationBase);
 		printf_all	("Allocation Protect: 0x%08x [%s | %s]\n", memory_info.AllocationProtect, protect_to_string(memory_info.AllocationProtect), protect_modifier_to_string(memory_info.AllocationProtect));
 		printf_all	("Region Size:        0x%08x [%d]\n", memory_info.RegionSize, memory_info.RegionSize);
 		printf_all	("State:              0x%08x [%s]\n", memory_info.State, state_to_string(memory_info.State));
@@ -149,7 +149,7 @@ void xray::memory::platform::set_low_fragmentation_heap		( )
 	}
 }
 
-static u32 allocation_granularity				( )
+static unsigned allocation_granularity				( )
 {
 	SYSTEM_INFO					system_info;
 	GetSystemInfo				( &system_info );
@@ -226,7 +226,7 @@ void xray::memory::platform::calculated_desirable_arena_sizes	(
 	if ( memory_slack >= os_memory )
 		os_memory				= 0;
 
-	u32 const granularity		= allocation_granularity( );
+	unsigned const granularity		= allocation_granularity( );
 
 	float const proportion				= 1.f/4.f;
 	float const unmanaged_proportion	= 1.f/4.f;
@@ -243,7 +243,7 @@ void xray::memory::platform::calculated_desirable_arena_sizes	(
 
 static xray::command_line::key	s_fill_arenas_with_garbage("fill_arenas_with_garbage", "", "memory", "fills all the memory in all the arenas with garbage; could slowdown startup significantly!");
 
-pvoid allocate_region							( u64 const size, pvoid const address, u32 const additional_flags, bool assert_on_failure = true )
+pvoid allocate_region							( u64 const size, pvoid const address, unsigned const additional_flags, bool assert_on_failure = true )
 {
 	pvoid const result		= 
 		VirtualAlloc	(
@@ -261,7 +261,7 @@ pvoid allocate_region							( u64 const size, pvoid const address, u32 const add
 
 #ifndef MASTER_GOLD
 	if ( result && s_fill_arenas_with_garbage.is_set() )
-		xray::memory::fill32( result, (size_t)size, xray::memory::uninitialized_value<u32>(), (size_t)size/sizeof(u32) );
+		xray::memory::fill32( result, (size_t)size, xray::memory::uninitialized_value<unsigned>(), (size_t)size/sizeof(unsigned) );
 #endif // #ifndef MASTER_GOLD
 
 	return					result;
@@ -289,7 +289,7 @@ void xray::memory::platform::free_region		( pvoid buffer, u64 const buffer_size 
 }
 
 template < typename P >
-void iterate_regions		( u32 const start_address, u32 const allocation_granularity, u64 const min_buffer_size, P& predicate )
+void iterate_regions		( unsigned const start_address, unsigned const allocation_granularity, u64 const min_buffer_size, P& predicate )
 {
 	MEMORY_BASIC_INFORMATION	memory_info;
 	u64 i						= start_address;
@@ -368,7 +368,7 @@ static xray::memory::platform::regions_type::iterator& select_best_region(
 		xray::memory::platform::regions_type::iterator& largest,
 		u64 const size,
 		xray::memory::platform::regions_type& resource_arenas,
-		u32 const allocation_granularity
+		unsigned const allocation_granularity
 	)
 {
 	u64 const result0			= select_best_region( largest_but_two_size, (*largest_but_one).size - size, (*largest).size, resource_arenas, allocation_granularity );
@@ -388,7 +388,7 @@ struct regions_count {
 		++m_region_count;
 	}
 
-	u32 m_region_count;
+	unsigned m_region_count;
 };
 
 struct regions_filler : private boost::noncopyable {
@@ -409,7 +409,7 @@ struct regions_filler : private boost::noncopyable {
 static void allocate_arenas					(
 		xray::memory::platform::regions_type& arenas,
 		xray::memory::platform::regions_type& resource_arenas,
-		u32 const start_address
+		unsigned const start_address
 	)
 {
 	R_ASSERT					( !arenas.empty() );
@@ -424,7 +424,7 @@ static void allocate_arenas					(
 	
 	regions_count				counter;
 	u64 const min_buffer_size	= arenas.front().size;
-	u32 const allocation_granularity = ::allocation_granularity( );
+	unsigned const allocation_granularity = ::allocation_granularity( );
 	iterate_regions				( start_address, allocation_granularity, min_buffer_size, counter );
 
 	using xray::memory::platform::regions_type;
@@ -534,7 +534,7 @@ bool xray::memory::platform::try_allocate_arenas_as_a_single_block	(
 		regions_type& arenas,
 		regions_type& resource_arenas,
 		u64 start_address,
-		u32 const additional_flags,
+		unsigned const additional_flags,
 		bool assert_on_failure
 	)
 {
@@ -558,7 +558,7 @@ bool xray::memory::platform::try_allocate_arenas_as_a_single_block	(
 
 #ifndef MASTER_GOLD
 	if ( s_fill_arenas_with_garbage.is_set() )
-		memory::fill32			( arena, (size_t)pure_total_size, memory::uninitialized_value<u32>(), (size_t)pure_total_size/sizeof(u32) );
+		memory::fill32			( arena, (size_t)pure_total_size, memory::uninitialized_value<unsigned>(), (size_t)pure_total_size/sizeof(unsigned) );
 #endif // #ifndef MASTER_GOLD
 
 	s_single_block_arena			= arena;
@@ -585,7 +585,7 @@ bool xray::memory::platform::try_allocate_arenas_as_a_single_block	(
 
 void xray::memory::platform::allocate_arenas	( regions_type& arenas, regions_type& resource_arenas )
 {
-	u32 const granularity		= allocation_granularity( );
+	unsigned const granularity		= allocation_granularity( );
 	if ( try_allocate_arenas_as_a_single_block(arenas, resource_arenas, 0, 0, false ) )
 		return;
 

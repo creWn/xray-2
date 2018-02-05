@@ -88,8 +88,8 @@ public:
 	void				get_full_path		(fs::path_string &) const;
 	void				get_disk_path		(fs::path_string &) const;
 	
-	u32					get_num_children	() const; // O(n)
-	u32					get_num_nodes		() const; // O(n)
+	unsigned					get_num_children	() const; // O(n)
+	unsigned					get_num_nodes		() const; // O(n)
 	bool				is_folder			() const;
 
 	bool				is_disk				() const;
@@ -97,10 +97,10 @@ public:
 	bool				is_replicated		() const;
 	bool				is_compressed		() const;
 
-	u32					get_file_size		() const;
+	unsigned					get_file_size		() const;
 	file_size_type		get_file_offs		() const;
-	u32					get_compressed_file_size	() const;
-	u32					get_raw_file_size	() const;
+	unsigned					get_compressed_file_size	() const;
+	unsigned					get_raw_file_size	() const;
 
 	fs_iterator			children_begin		() const;
 	fs_iterator			children_end		() const;

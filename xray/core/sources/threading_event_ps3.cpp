@@ -11,7 +11,7 @@
 namespace xray { 
 namespace threading { 
 
-u32 const event::wait_time_infinite	= u32(-1);
+unsigned const event::wait_time_infinite	= unsigned(-1);
 
 event::event			( bool const initial_state )
 {
@@ -71,7 +71,7 @@ void event::set			( bool const value )
 	R_ASSERT_CMP		( error, ==, CELL_OK );
 }
 
-event::wait_result_enum event::wait	( u32 const max_wait_time_ms )
+event::wait_result_enum event::wait	( unsigned const max_wait_time_ms )
 {
 	u64 result;
 	int const error		=

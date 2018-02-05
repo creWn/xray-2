@@ -68,7 +68,7 @@ public:
 	}
 
 	// raw_file_data can be NULL, when no file is found
-	virtual	u32		calculate_resource_size		(const_buffer in_raw_file_data, bool file_exist)
+	virtual	unsigned		calculate_resource_size		(const_buffer in_raw_file_data, bool file_exist)
 	{
 		R_ASSERT								(in_raw_file_data.size() || !file_exist);
 

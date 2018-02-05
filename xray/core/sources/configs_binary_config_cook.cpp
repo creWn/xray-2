@@ -62,7 +62,7 @@ void change_substring(fs::path_string& src_and_dest, pcstr what, pcstr to)
 
 	if(pos!=src_and_dest.npos)
 	{
-		u32 what_len = xray::strings::length(what);
+		unsigned what_len = xray::strings::length(what);
 		result.assign(src_and_dest.begin(), src_and_dest.begin()+pos); // head
 		result.append(to); // body
 		result.append(src_and_dest.begin()+pos+what_len, src_and_dest.end()); // tail

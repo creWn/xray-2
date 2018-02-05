@@ -51,7 +51,7 @@ void   resources_manager::end_query_transaction ()
 
 long   resources_manager::query_resources_impl   (request   				const requests[],
 												  creation_request			const requests_create[],
-										  		  u32						const requests_count,
+										  		  unsigned						const requests_count,
 										  		  query_callback const &		  callback,
 										  		  memory::base_allocator *	const allocator,
 												  user_data_variant const *	const user_data[],
@@ -60,10 +60,10 @@ long   resources_manager::query_resources_impl   (request   				const requests[]
 												  query_type_enum			const query_type)
 {
 	R_ASSERT								(requests || requests_create || !requests_count);
-	u32* strings_lengths_with_zero		=	(u32 *)ALLOCA(sizeof(u32) * requests_count);
-	u32	 additional_strings_length		=	0;
-	u32  user_data_variant_count		=	0;
-	for ( u32 i=0; i<requests_count; ++i )
+	unsigned* strings_lengths_with_zero		=	(unsigned *)ALLOCA(sizeof(unsigned) * requests_count);
+	unsigned	 additional_strings_length		=	0;
+	unsigned  user_data_variant_count		=	0;
+	for ( unsigned i=0; i<requests_count; ++i )
 	{
 		if ( user_data && user_data[i] )
 			++user_data_variant_count;
@@ -95,17 +95,17 @@ long   resources_manager::query_resources_impl   (request   				const requests[]
 			additional_strings_length	+=	strings_lengths_with_zero[i];
 	}
 
-	u32 const queries_size				=	sizeof(queries_result) + (sizeof(query_result) * requests_count);
-	u32 const user_data_size			=	(sizeof(user_data_variant) * user_data_variant_count);
-	u32 const full_allocation_size		=	queries_size + user_data_size + additional_strings_length;
+	unsigned const queries_size				=	sizeof(queries_result) + (sizeof(query_result) * requests_count);
+	unsigned const user_data_size			=	(sizeof(user_data_variant) * user_data_variant_count);
+	unsigned const full_allocation_size		=	queries_size + user_data_size + additional_strings_length;
 	
 	queries_result * const queries		=	(queries_result *)
 											XRAY_ALLOC_IMPL(* allocator, 
 															char, 
 															full_allocation_size);
 
-	u32 const user_thread_id			=	threading::current_thread_id();
-	new ( queries )							queries_result((u32)requests_count, 
+	unsigned const user_thread_id			=	threading::current_thread_id();
+	new ( queries )							queries_result((unsigned)requests_count, 
 															callback, 
 															allocator, 
 															user_thread_id,
@@ -115,8 +115,8 @@ long   resources_manager::query_resources_impl   (request   				const requests[]
 
 	user_data_variant *	cur_user_data_pos	=	(user_data_variant *)((pstr)queries + queries_size);
 	pstr	cur_string_pos				=	(pstr)queries + queries_size + user_data_size;
-	u32     space_left					=	additional_strings_length;
-	for ( u32 i=0; i<requests_count; ++i )
+	unsigned     space_left					=	additional_strings_length;
+	for ( unsigned i=0; i<requests_count; ++i )
 	{
 		query_result & query			=	queries->at(i);
 		if ( user_data && user_data[i] )
@@ -171,7 +171,7 @@ long   resources_manager::query_resources_impl   (request   				const requests[]
 
 	if ( locked_mutex_mount_task_add && has_no_pending_mount_ops() )
 	{
-		for ( u32 i=0; i<requests_count; ++i )
+		for ( unsigned i=0; i<requests_count; ++i )
 		{
 			query_result & query		=	queries->at(i);
 
@@ -231,7 +231,7 @@ long   resources_manager::query_resources_impl   (request   				const requests[]
 		bool const in_transaction				=	local_data && local_data->in_transaction && (query_type == query_type_normal);
 		
 		// ASYNC WAY
-		for ( u32 i=0; i<requests_count; ++i )
+		for ( unsigned i=0; i<requests_count; ++i )
 		{
 			query_result & query		=	queries->at(i);
 			if ( query.has_flag(query_result::flag_finished) )
@@ -312,7 +312,7 @@ private:
 	{
 		if ( iterator.is_end() )
 		{
-			u32 const user_thread_id		=	threading::current_thread_id();
+			unsigned const user_thread_id		=	threading::current_thread_id();
 			queries_result*	queries			=	(queries_result*)
 												XRAY_ALLOC_IMPL(*m_allocator, char, sizeof(queries_result));
 
@@ -326,7 +326,7 @@ private:
 			return;
 		}
 
-		u32 const num_children				=	!!(m_flags & query_flag_recursive) ? 
+		unsigned const num_children				=	!!(m_flags & query_flag_recursive) ? 
 												iterator.get_num_nodes() : iterator.get_num_children();
 
 		path_string* requests_pathes_ptr	=	XRAY_ALLOC_IMPL(*m_allocator, path_string, num_children);
@@ -338,7 +338,7 @@ private:
 
 		request*	requests_ptr		=	requests.size() ? &requests.front() : NULL;
 		query_resources						(requests_ptr, 
-											 (u32)requests.size(), 
+											 (unsigned)requests.size(), 
 											 m_user_callback, 
 											 m_allocator, 
 											 NULL,
@@ -380,7 +380,7 @@ void   resources_manager::query_resources_by_mask (pcstr					const request_mask,
 		dir_path.append						(request_mask, dir_end);
 
 	pcstr const		mask				=	dir_end ? dir_end+1 : request_mask;
-	u32 const		mask_len			=	strings::length(mask);
+	unsigned const		mask_len			=	strings::length(mask);
 
 	query_resources_helper* const helper	=	XRAY_ALLOC_IMPL
 												(*allocator,
@@ -460,7 +460,7 @@ void   resources_manager::delete_delayed_unmanaged_resources ()
 
 void   resources_manager::dispatch_callbacks (bool const finalizing_thread)
 {
-	u32 const thread_id					=	threading::current_thread_id();
+	unsigned const thread_id					=	threading::current_thread_id();
 
 	delete_delayed_unmanaged_resources		();
 
@@ -521,15 +521,15 @@ void   resources_manager::dispatch_fs_tasks_callbacks (fs_task*		ready_fs_tasks,
 	}
 }
 
-void   resources_manager::on_added_queries (u32 const num_queries)
+void   resources_manager::on_added_queries (unsigned const num_queries)
 {
-	for ( u32 i=0; i<num_queries; ++i )
+	for ( unsigned i=0; i<num_queries; ++i )
 		threading::interlocked_increment	(m_pending_queries_count);
 }
 
-void   resources_manager::on_dispatched_queries (u32 const num_queries)
+void   resources_manager::on_dispatched_queries (unsigned const num_queries)
 {
-	for ( u32 i=0; i<num_queries; ++i )
+	for ( unsigned i=0; i<num_queries; ++i )
 		threading::interlocked_decrement	(m_pending_queries_count);
 }
 
@@ -592,7 +592,7 @@ void   resources_manager::push_to_translate_query (query_result * query)
 	class_id const class_id				=	query->get_class_id();
 	translate_query_cook * const cook	=	cook_base::find_translate_query_cook(class_id);
 	R_ASSERT_U								(cook);
-	u32 const allocate_thread_id		=	query->allocate_thread_id();
+	unsigned const allocate_thread_id		=	query->allocate_thread_id();
 	if ( allocate_thread_id == threading::current_thread_id() )
 	{
 		translate_query						(query);

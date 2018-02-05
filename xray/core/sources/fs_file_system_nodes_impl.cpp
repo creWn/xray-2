@@ -230,7 +230,7 @@ bool   fat_node<pointer_for_fat_size>::same_path (fat_node const * n) const
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-u32   fat_node<pointer_for_fat_size>::get_file_size () const
+unsigned   fat_node<pointer_for_fat_size>::get_file_size () const
 {
 	if ( !is_folder() )
 	{
@@ -255,7 +255,7 @@ u32   fat_node<pointer_for_fat_size>::get_file_size () const
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-u32   fat_node<pointer_for_fat_size>::get_raw_file_size () const
+unsigned   fat_node<pointer_for_fat_size>::get_raw_file_size () const
 {
 	if ( !is_folder() )
 	{
@@ -280,7 +280,7 @@ u32   fat_node<pointer_for_fat_size>::get_raw_file_size () const
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-u32   fat_node<pointer_for_fat_size>::get_compressed_file_size	() const
+unsigned   fat_node<pointer_for_fat_size>::get_compressed_file_size	() const
 {
 	CURE_ASSERT						(is_compressed(), return 0);
 	return							get_raw_file_size();
@@ -312,7 +312,7 @@ typename fat_node<pointer_for_fat_size>::file_size_type   fat_node<pointer_for_f
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-bool   fat_node<pointer_for_fat_size>::get_hash (u32 * out_hash) const
+bool   fat_node<pointer_for_fat_size>::get_hash (unsigned * out_hash) const
 {
 	* out_hash					=	0;
 	if ( is_folder() )
@@ -336,7 +336,7 @@ bool   fat_node<pointer_for_fat_size>::get_hash (u32 * out_hash) const
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-void   fat_node<pointer_for_fat_size>::set_hash (u32 hash)
+void   fat_node<pointer_for_fat_size>::set_hash (unsigned hash)
 {
 	R_ASSERT						(!is_folder());
 	R_ASSERT						(is_db());
@@ -358,9 +358,9 @@ void   fat_node<pointer_for_fat_size>::set_hash (u32 hash)
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-u32   fat_node<pointer_for_fat_size>::get_num_children () const
+unsigned   fat_node<pointer_for_fat_size>::get_num_children () const
 {
-	u32	num						=	0;
+	unsigned	num						=	0;
 
 	if ( is_folder() )
 	{
@@ -376,9 +376,9 @@ u32   fat_node<pointer_for_fat_size>::get_num_children () const
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-u32   fat_node<pointer_for_fat_size>::get_num_nodes () const
+unsigned   fat_node<pointer_for_fat_size>::get_num_nodes () const
 {
-	u32	num						=	1;
+	unsigned	num						=	1;
 
 	if ( is_folder() )
 	{
@@ -394,7 +394,7 @@ u32   fat_node<pointer_for_fat_size>::get_num_nodes () const
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-void   fat_node<pointer_for_fat_size>::get_num_nodes (u32 & num_folders, u32 & num_files) const
+void   fat_node<pointer_for_fat_size>::get_num_nodes (unsigned & num_folders, unsigned & num_files) const
 {
 	num_folders	=	0;
 	num_files	=	0;
@@ -405,7 +405,7 @@ void   fat_node<pointer_for_fat_size>::get_num_nodes (u32 & num_folders, u32 & n
 								child	!=	NULL;
 								child	=	child->get_next() )
 		{
-			u32 child_folders, child_files;
+			unsigned child_folders, child_files;
 			child->get_num_nodes	(child_folders, child_files);
 			num_folders		+=	child_folders;
 			num_files		+=	child_files;
@@ -425,20 +425,20 @@ fat_node<pointer_for_fat_size> *   fat_node<pointer_for_fat_size>::get_first_chi
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-u32   fat_node<pointer_for_fat_size>::get_max_fat_size (fat_inline_data const & inline_data) const
+unsigned   fat_node<pointer_for_fat_size>::get_max_fat_size (fat_inline_data const & inline_data) const
 {
-	u32 out_size			=	inline_data.total_size_for_extensions_with_limited_size();
+	unsigned out_size			=	inline_data.total_size_for_extensions_with_limited_size();
 	return						out_size + get_max_fat_size_impl(inline_data);
 }
 
 template <pointer_for_fat_size_enum pointer_for_fat_size>
-u32   fat_node<pointer_for_fat_size>::get_max_fat_size_impl (fat_inline_data const & inline_data) const
+unsigned   fat_node<pointer_for_fat_size>::get_max_fat_size_impl (fat_inline_data const & inline_data) const
 {
-	u32 const max_node_size	=	(u32)math::max(	math::max(	sizeof(fat_db_file_node<pointer_for_fat_size>),
+	unsigned const max_node_size	=	(unsigned)math::max(	math::max(	sizeof(fat_db_file_node<pointer_for_fat_size>),
 															sizeof(fat_folder_node<pointer_for_fat_size>) ),
 															sizeof(fat_db_compressed_file_node<pointer_for_fat_size>)	);
 		
-	u32 size				=	max_node_size;
+	unsigned size				=	max_node_size;
 	size					+=	strings::length(m_name) + 1;
 	size					+=	sizeof(void*);
 
@@ -527,7 +527,7 @@ void   fat_node<pointer_for_fat_size>::set_associated (resources::resource_base 
 {
 	R_ASSERT								(! is_folder());
 
-	COMPILE_ASSERT							(sizeof(long) == sizeof(u32),
+	COMPILE_ASSERT							(sizeof(long) == sizeof(unsigned),
 											 use_32_bit_version_of_interlocked_or_on_this_platform);
 
 	lock_associated							();
@@ -785,15 +785,15 @@ fat_db_inline_compressed_file_node<pointer_for_fat_size> *	 fat_node<pointer_for
 template <pointer_for_fat_size_enum pointer_for_fat_size>
 void   fat_node<pointer_for_fat_size>::get_full_path (path_string & str) const
 {
-	u32			path_part_lengths		[64];
-	u32			num_path_parts		=	0;
+	unsigned			path_part_lengths		[64];
+	unsigned			num_path_parts		=	0;
 
-	u32			size				=	0;
+	unsigned			size				=	0;
 	fat_node const * parent			=	this;
 
 	while ( parent && parent->m_name[0] )
 	{
-		u32 const path_part_length			=	strings::length (parent->m_name);
+		unsigned const path_part_length			=	strings::length (parent->m_name);
 		path_part_lengths[num_path_parts]	=	path_part_length;
 		++num_path_parts;
 
@@ -808,13 +808,13 @@ void   fat_node<pointer_for_fat_size>::get_full_path (path_string & str) const
 
 	str.set_length						(size);
 
-	u32		path_part				=	0;
-	u32		index					=	size;
+	unsigned		path_part				=	0;
+	unsigned		index					=	size;
 	parent							=	this;
 	char*	buffer					=	str.get_buffer();
 	while ( parent && parent->m_name[0] )
 	{
-		const u32 path_part_length	=	path_part_lengths[path_part];
+		const unsigned path_part_length	=	path_part_lengths[path_part];
 
 		index						-=	path_part_length;
 		memory::copy					(buffer+index, path_part_length, parent->m_name, path_part_length);

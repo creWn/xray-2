@@ -83,11 +83,11 @@ void	  delete_array_helper_impl	( A& allocator,
 									  P const& call_destructor_predicate )
 {
 	pvoid 	  real_pointer		= get_top_pointer<T>(pointer);
-	u32*	  result			= ( ( u32* )real_pointer ) - 2;
-	u32 const count				= result[0];
-	ASSERT						( count < ( u32(1) << 31 ) );
+	unsigned*	  result			= ( ( unsigned* )real_pointer ) - 2;
+	unsigned const count				= result[0];
+	ASSERT						( count < ( unsigned(1) << 31 ) );
 
-	u32 const size				= result[1];
+	unsigned const size				= result[1];
 
 	pbyte i						= ( pbyte )pointer;
 	pbyte e						= i + size*count;
@@ -164,10 +164,10 @@ pvoid   new_helper<T>::call		( A& allocator XRAY_CORE_DEBUG_PARAMETERS_DECLARATI
 
 template <typename T>
 template <typename A>
-T*   new_array_helper<T>::call	( A& allocator, u32 const count XRAY_CORE_DEBUG_PARAMETERS_DECLARATION )
+T*   new_array_helper<T>::call	( A& allocator, unsigned const count XRAY_CORE_DEBUG_PARAMETERS_DECLARATION )
 {
-	u32*		result			= ( u32* )allocator.malloc_impl(
-									2*sizeof( u32 ) + count*sizeof(T) 
+	unsigned*		result			= ( unsigned* )allocator.malloc_impl(
+									2*sizeof( unsigned ) + count*sizeof(T) 
 									XRAY_CORE_DEBUG_PARAMETERS_TYPEID(T) XRAY_CORE_DEBUG_PARAMETERS );
 
 	*result++					= count;

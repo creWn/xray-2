@@ -21,15 +21,15 @@ enum execute_children_result_enum	{	execute_children_result_thread_should_sleep,
 class thread_pool
 {
 public:
-						thread_pool					(u32	max_task_threads, 
-													 u32	max_user_threads,
-													 u32	min_permanent_working_threads,
+						thread_pool					(unsigned	max_task_threads, 
+													 unsigned	max_user_threads,
+													 unsigned	min_permanent_working_threads,
 													 execute_while_wait_for_children_enum,
 													 do_logging_bool do_logging);
 					   ~thread_pool					();
 
-	u32					thread_tls_key				() const { return m_thread_tls_key; }
-	u32					time_elapsed				() const { return m_time_elapsed; }
+	unsigned					thread_tls_key				() const { return m_thread_tls_key; }
+	unsigned					time_elapsed				() const { return m_time_elapsed; }
 	thread_tls *		get_thread_tls				();
 	void				on_new_task					();
 
@@ -48,12 +48,12 @@ public:
 	bool				paused						() const { return !!m_paused; }
 
 	// can return false in case when some parallel thread resumed this thread faster
-	bool				try_activate_task_thread	(thread_tls & tls, u32 use_hardware_thread);
+	bool				try_activate_task_thread	(thread_tls & tls, unsigned use_hardware_thread);
 	bool				deactivate_if_oversubscribed(thread_tls * tls);
 	void 				on_current_thread_locks		();
 	void 				on_current_thread_unlocks	();
 	void 				register_current_thread_as_core_user		();
-	u32					calculate_active_task_thread_count			() const;
+	unsigned					calculate_active_task_thread_count			() const;
 	bool				current_thread_core_is_oversubscribed		() const;
 
 	threading::event &	get_current_thread_wait_for_children_event	();
@@ -75,22 +75,22 @@ private:
 	threading::event						m_all_task_threads_resumed;
 	threading::event						m_all_task_threads_started;
 	timing::timer							m_timer;
-	u32										m_time_elapsed;
+	unsigned										m_time_elapsed;
 
 	threading::atomic32_type				m_num_task_threads_exited;
 	threading::atomic32_type				m_num_task_threads_started;
 	tasks::event							m_all_task_threads_destroyed;
 	threading::atomic32_type				m_active_task_thread_count;
 
-	u32										m_thread_tls_key;
-	u32										m_user_thread_index;
+	unsigned										m_thread_tls_key;
+	unsigned										m_user_thread_index;
 	typedef buffer_vector<thread_tls>		thread_tls_container;
 	thread_tls_container					m_task_thread_tls;
 	thread_tls_container					m_user_thread_tls;
 
 	typedef buffer_vector<threading::atomic32_type>	core_thread_count_container;
 	core_thread_count_container				m_core_thread_count;
-	u32										m_min_permanent_working_threads;
+	unsigned										m_min_permanent_working_threads;
 	threading::atomic32_type				m_destroying;
 	threading::atomic32_type				m_paused;
 	threading::atomic32_type				m_num_paused_threads;

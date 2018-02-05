@@ -16,7 +16,7 @@ template <class T, class ThreadPolicy = threading::multi_threading_mutex_policy>
 class fixed_size_allocator : public base_allocator
 {
 public:
-					fixed_size_allocator	(u32 granularity = sizeof(node));
+					fixed_size_allocator	(unsigned granularity = sizeof(node));
 
 	T *				allocate			();
 	void			deallocate			(T * );
@@ -40,8 +40,8 @@ private:
 	};
 
 	pcstr				m_arena_id;
-	u32					m_granularity;
-	u32					m_max_count;
+	unsigned					m_granularity;
+	unsigned					m_max_count;
 
 #if defined(_MSC_VER)
 #pragma warning(push)
@@ -52,7 +52,7 @@ private:
 #if !XRAY_PLATFORM_WINDOWS_64
 		struct {
 			node *		pointer;
-			u32			counter;
+			unsigned			counter;
 		};
 #else // #if XRAY_PLATFORM_WINDOWS_64
 		node *			pointer;
@@ -70,7 +70,7 @@ private:
 		threading::atomic64_type	whole;
 		struct {
 			node *		pointer;
-			u32			counter;
+			unsigned			counter;
 		};
 	};
 #endif // #if defined(_MSC_VER)

@@ -52,14 +52,14 @@ public:
 	static	profile*	create					( threading::mutex& mutex, pcstr value, profile const& temp );
 	static	void		create_temp				( pcstr value, profile & result );
 	static	void		destroy					( threading::mutex& mutex, profile *string );
-	static	u32			create_checksum			( pcvoid begin, pcvoid end );
+	static	unsigned			create_checksum			( pcvoid begin, pcvoid end );
 
 public:
 	inline	threading::atomic32_type const& reference_count( ) const;
-	inline	u32 const&	length					( ) const;
-	inline	u32 const&	length_no_check			( ) const;
-	inline	u32 const&	checksum				( ) const;
-	inline	u32 const&	checksum_no_check		( ) const;
+	inline	unsigned const&	length					( ) const;
+	inline	unsigned const&	length_no_check			( ) const;
+	inline	unsigned const&	checksum				( ) const;
+	inline	unsigned const&	checksum_no_check		( ) const;
 	inline	pcstr		value					( ) const;
 	inline	profile*	get_next_hash_node		( ) const;
 	inline	void		set_next_hash_node		( profile* value );
@@ -71,8 +71,8 @@ private:
 
 private:
 	profile*		m_next;
-	u32				m_length;
-	u32				m_checksum;
+	unsigned				m_length;
+	unsigned				m_checksum;
 #if defined(DEBUG) && !defined(__GNUC__)
 #	pragma warning( push )
 #	pragma warning( disable:4200 )

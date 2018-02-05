@@ -38,7 +38,7 @@ void   log_fs_iterator_impl (fs_iterator it, buffer_string & prefix)
 										 file_info.c_str());
 
 	char const prefix_inc[]			=	"  ";
-	u32 const prefix_inc_len		=	array_size(prefix_inc) - 1;
+	unsigned const prefix_inc_len		=	array_size(prefix_inc) - 1;
 	prefix							+=	prefix_inc;
 	for ( fs_iterator			jt	=	it.children_begin();
 								jt	!=	it.children_end();
@@ -150,12 +150,12 @@ void   fs_iterator::get_disk_path (fs::path_string& path) const
 	g_fat->get_disk_path		(wrapper_to_fat_it(m_fat_it), path);
 }
 
-u32   fs_iterator::get_num_children () const
+unsigned   fs_iterator::get_num_children () const
 {
 	return						wrapper_to_fat_it(m_fat_it).get_num_children();
 }
 
-u32   fs_iterator::get_num_nodes () const
+unsigned   fs_iterator::get_num_nodes () const
 {
 	return						wrapper_to_fat_it(m_fat_it).get_num_nodes();
 }
@@ -185,17 +185,17 @@ bool   fs_iterator::is_compressed () const
 	return						wrapper_to_fat_it(m_fat_it).is_compressed();
 }
 
-u32   fs_iterator::get_file_size () const
+unsigned   fs_iterator::get_file_size () const
 {
 	return						wrapper_to_fat_it(m_fat_it).get_file_size();
 }
 
-u32   fs_iterator::get_compressed_file_size () const
+unsigned   fs_iterator::get_compressed_file_size () const
 {
 	return						wrapper_to_fat_it(m_fat_it).get_compressed_file_size();
 }
 
-u32   fs_iterator::get_raw_file_size () const
+unsigned   fs_iterator::get_raw_file_size () const
 {
 	return						wrapper_to_fat_it(m_fat_it).get_raw_file_size();
 }

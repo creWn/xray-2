@@ -102,7 +102,7 @@ public:
 		LOGI_INFO					("test", "test '%s' started", m_test_class_name);
 		detail::set_current_test	(m_suite_class_name, m_test_class_name);
 		m_test->test				(suite_class::singleton()); 
-		u32 const test_length_ms	=	timer.get_elapsed_ms();
+		unsigned const test_length_ms	=	timer.get_elapsed_ms();
 		LOGI_INFO					("test", "test '%s' finished (%d ms)", m_test_class_name, test_length_ms);
 		XRAY_DESTROY_REFERENCE		(m_test);
 	}

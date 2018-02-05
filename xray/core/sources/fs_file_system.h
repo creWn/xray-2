@@ -29,7 +29,7 @@ bool				initialize				();
 void				finalize				();
 void				initialize_watcher		();
 void    			flush_replications		();
-void XRAY_CORE_API	set_allocator_thread_id	(u32 thread_id);
+void XRAY_CORE_API	set_allocator_thread_id	(unsigned thread_id);
 
 typedef				boost::function< void ( resources::resource_base *	resource ) >
 					on_resource_leaked_callback;
@@ -46,10 +46,10 @@ public:
 	{
 							item	() : max_size(0),  compression_rate(0), allow_compression_in_db(true) {}
 		fixed_string<32>	extension;
-		u32					max_size;
+		unsigned					max_size;
 		float				compression_rate; // 0 - no compression, 1 - compress all
 		bool				allow_compression_in_db;
-		enum				{ no_limit = u32(-1) };
+		enum				{ no_limit = unsigned(-1) };
 	};
 
 	typedef	buffer_vector<item>	container;
@@ -62,8 +62,8 @@ public:
 	bool	find_by_extension (item * * out_item, pcstr extension);
 	bool	find_by_extension (item const * * out_item, pcstr extension) const;
 
-	bool	try_fit_for_inlining (pcstr file_name, u32 file_size, u32 compressed_size);
-	u32		total_size_for_extensions_with_limited_size () const;
+	bool	try_fit_for_inlining (pcstr file_name, unsigned file_size, unsigned compressed_size);
+	unsigned		total_size_for_extensions_with_limited_size () const;
 
 	float	highest_compression_rate () const { return m_highest_compression_rate; }
 	
@@ -94,7 +94,7 @@ public:
  	class					iterator;
  	typedef const iterator	const_iterator;
 
-	typedef	fastdelegate::FastDelegate< void (const u32 num_saved, u32 num_whole, pcstr name, u32 flags) >::BaseType			db_callback;
+	typedef	fastdelegate::FastDelegate< void (const unsigned num_saved, unsigned num_whole, pcstr name, unsigned flags) >::BaseType			db_callback;
 	
 	enum				watch_directory_bool	{ watch_directory_false, watch_directory_true };
 
@@ -115,7 +115,7 @@ public:
 	bool				save_db				(pcstr 		 				fat_file_path, 
 											 pcstr 		 				db_file_path,
 											 bool		 				no_duplicates,
-											 u32		 				fat_alignment,
+											 unsigned		 				fat_alignment,
 											 memory::base_allocator *	alloc,
 											 compressor * 				compressor,
 											 float		 				compress_smallest_rate,
@@ -172,8 +172,8 @@ public:
 	void				get_full_path		(path_string &) const;
 	path_string			get_full_path		() const;
 	
-	u32					get_num_children	() const;
-	u32					get_num_nodes		() const;
+	unsigned					get_num_children	() const;
+	unsigned					get_num_nodes		() const;
 	bool				is_folder			() const;
 
 	bool				is_disk				() const;
@@ -183,11 +183,11 @@ public:
 	bool				is_inlined			() const;
 
 	int					get_flags			() const;
-	void				set_flags			(u32 flags);
-	bool				get_hash			(u32 * out_hash) const;
-	u32					get_compressed_file_size	() const;
-	u32					get_raw_file_size	() const;
-	u32					get_file_size		() const;
+	void				set_flags			(unsigned flags);
+	bool				get_hash			(unsigned * out_hash) const;
+	unsigned					get_compressed_file_size	() const;
+	unsigned					get_raw_file_size	() const;
+	unsigned					get_file_size		() const;
 	file_size_type		get_file_offs		() const;
 
 	iterator			children_begin		() const;

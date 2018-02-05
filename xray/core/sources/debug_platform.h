@@ -35,7 +35,7 @@ enum error_type_enum
 	error_type_unhandled_exception,
 };
 
-void on_error							( bool* do_debug_break, char* const message, u32 const message_size, bool* ignore_always, _EXCEPTION_POINTERS* exception_information, error_type_enum );
+void on_error							( bool* do_debug_break, char* const message, unsigned const message_size, bool* ignore_always, _EXCEPTION_POINTERS* exception_information, error_type_enum );
 template < int count >
 inline void on_error					( bool* do_debug_break, char (&message)[count], bool* ignore_always, _EXCEPTION_POINTERS* exception_information, error_type_enum const error_type )
 {
@@ -43,7 +43,7 @@ inline void on_error					( bool* do_debug_break, char (&message)[count], bool* i
 	on_error							( do_debug_break, message, sizeof(message), ignore_always, exception_information, error_type );
 }
 
-void on_error_message_box				( bool* do_debug_break, char* const message, u32 const message_size, bool* ignore_always, _EXCEPTION_POINTERS* exception_information, error_type_enum);
+void on_error_message_box				( bool* do_debug_break, char* const message, unsigned const message_size, bool* ignore_always, _EXCEPTION_POINTERS* exception_information, error_type_enum);
 template < int count >
 inline void on_error_message_box		( bool* do_debug_break, char (&message)[count], bool* ignore_always, _EXCEPTION_POINTERS* exception_information, error_type_enum const error_type )
 {

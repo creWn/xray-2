@@ -32,7 +32,7 @@ static void __stdcall out_of_memory		( mspace const space, void const* const par
 	FATAL						( "not enough memory for arena [%s]", (( doug_lea_allocator* )parameter)->arena_id( ) );
 }
 
-void doug_lea_allocator::user_thread_id	( u32 user_thread_id ) const
+void doug_lea_allocator::user_thread_id	( unsigned user_thread_id ) const
 {
 	threading::interlocked_exchange	( (threading::atomic32_value_type&)m_user_thread_id, user_thread_id );
 }
@@ -61,7 +61,7 @@ inline bool doug_lea_allocator::initialized	( ) const
 	if ( !super::initialized( ) )
 		return					( false );
 
-	u32 const current_thread_id	= xray::threading::current_thread_id ( );
+	unsigned const current_thread_id	= xray::threading::current_thread_id ( );
 	XRAY_UNREFERENCED_PARAMETER	( current_thread_id );
 	R_ASSERT					( current_thread_id == m_user_thread_id );
 	return						( true );
@@ -131,7 +131,7 @@ void doug_lea_allocator::call_free		( pvoid pointer XRAY_CORE_DEBUG_PARAMETERS_D
 
 size_t doug_lea_allocator::total_size	( ) const
 {
-	u32 const owner_thread_id	= m_user_thread_id;
+	unsigned const owner_thread_id	= m_user_thread_id;
 	user_current_thread_id		( );
 
 	ASSERT						( initialized ( ) );
@@ -146,15 +146,15 @@ size_t doug_lea_allocator::total_size	( ) const
 
 size_t doug_lea_allocator::allocated_size( ) const
 {
-	u32 const owner_thread_id	= m_user_thread_id;
+	unsigned const owner_thread_id	= m_user_thread_id;
 	user_current_thread_id		( );
 
 	ASSERT						( initialized ( ) );
-	u32 result					= (u32)xray_mspace_mallinfo( m_arena ).uordblks;
+	unsigned result					= (unsigned)xray_mspace_mallinfo( m_arena ).uordblks;
 
 	m_user_thread_id			= owner_thread_id;
 
-	u32 const min_size			= pad_request( sizeof( malloc_state ) );
+	unsigned const min_size			= pad_request( sizeof( malloc_state ) );
 	ASSERT						( result >= min_size );
 	result						-= min_size;
 	return						( result );

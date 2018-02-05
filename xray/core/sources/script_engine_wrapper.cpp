@@ -46,7 +46,7 @@ void script_engine_wrapper::log							( cs::message_initiator const &message_ini
 	LOGI					( "script", verbosity, "%s", string );
 }
 
-pcstr script_engine_wrapper::get_file_name	( int const file_type, pcstr const file_name, pstr const result, u32 const result_size, bool add_extension )
+pcstr script_engine_wrapper::get_file_name	( int const file_type, pcstr const file_name, pstr const result, unsigned const result_size, bool add_extension )
 {
 	pcstr					extension = "";
 	pcstr					folder = "";
@@ -96,7 +96,7 @@ bool script_engine_wrapper::file_exists					( int file_type, const char *file_na
 	return					true;
 }
 
-file_handle script_engine_wrapper::open_file_buffer		( int file_type, const char *file_name, cs::script::file_buffer &file_buffer, u32 &buffer_size )
+file_handle script_engine_wrapper::open_file_buffer		( int file_type, const char *file_name, cs::script::file_buffer &file_buffer, unsigned &buffer_size )
 {
 	string_path				real_file_name;
 	FILE*					file;
@@ -107,9 +107,9 @@ file_handle script_engine_wrapper::open_file_buffer		( int file_type, const char
 		}
 	}
 	
-	buffer_size				= (u32)fseek64(file,0,SEEK_END);
+	buffer_size				= (unsigned)fseek64(file,0,SEEK_END);
 	fseek64					( file, 0, SEEK_SET);
-	pvoid const buffer		= MT_MALLOC( (u32)buffer_size, "script" );
+	pvoid const buffer		= MT_MALLOC( (unsigned)buffer_size, "script" );
 	fread					( buffer, 1, buffer_size, file );
 	fclose					( file );
 
@@ -125,13 +125,13 @@ void script_engine_wrapper::close_file_buffer			( cs::script::file_handle file_h
 	MT_FREE					( buffer );
 }
 
-bool script_engine_wrapper::create_file					( int file_type, const char *file_name, const cs::script::file_buffer &file_buffer, const u32 &buffer_size )
+bool script_engine_wrapper::create_file					( int file_type, const char *file_name, const cs::script::file_buffer &file_buffer, const unsigned &buffer_size )
 {
 	XRAY_UNREFERENCED_PARAMETERS(file_type, file_name, file_buffer, buffer_size);
 	UNREACHABLE_CODE		(return false);
 }
 
-void script_engine_wrapper::lua_studio_backend_file_path( int file_type, const char *file_name, char *path, const u32 &max_size )
+void script_engine_wrapper::lua_studio_backend_file_path( int file_type, const char *file_name, char *path, const unsigned &max_size )
 {
 	FILE*					file;
 	if ( !fs::open_file( &file, fs::open_file_read, get_file_name( file_type, file_name, path, max_size, false), false) ) {

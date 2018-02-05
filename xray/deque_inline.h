@@ -42,9 +42,9 @@ inline typename DEQUE::self_type& DEQUE::operator=			( self_type const& other )
 }
 
 TEMPLATE_SIGNATURE
-inline u32 DEQUE::size											( ) const
+inline unsigned DEQUE::size											( ) const
 {
-	return					( ( u32 ) super::size( ) );
+	return					( ( unsigned ) super::size( ) );
 }
 
 #undef DEQUE

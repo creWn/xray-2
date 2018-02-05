@@ -68,7 +68,7 @@ const int MAX_O=16;                         /* maximum allowed model order  */
 #	define ASSERT_is_defined_in_ppmdtype_h
 #endif // #ifndef ASSERT
 	typedef unsigned char	u8;
-	typedef unsigned int	u32;
+	typedef unsigned int	unsigned;
 #	include "compressor_ppmd_stream.h"
 
 #ifdef ASSERT_is_defined_in_ppmdtype_h
@@ -204,11 +204,11 @@ public:
 	typedef xray::ppmd_compressor::model_restoration_enum	MR_METHOD;
 
 							ppmd_compressor_impl (xray::memory::base_allocator* allocator, 
-												  u32 sub_allocator_size,
+												  unsigned sub_allocator_size,
 												  MR_METHOD mr_method);
 
-	virtual void			compress		(xray::const_buffer src, xray::mutable_buffer dest, u32& out_size);
-	virtual void			decompress		(xray::const_buffer src, xray::mutable_buffer dest, u32& out_size);
+	virtual void			compress		(xray::const_buffer src, xray::mutable_buffer dest, unsigned& out_size);
+	virtual void			decompress		(xray::const_buffer src, xray::mutable_buffer dest, unsigned& out_size);
 
 	void _STDCALL			StartModelRare	(int MaxOrder, MR_METHOD MRMethod);
 	void					RestoreModelRare (PPM_CONTEXT* pc1,PPM_CONTEXT* MinContext, PPM_CONTEXT* FSuccessor);
@@ -354,7 +354,7 @@ void   ppmd_compressor_impl::rcBinCorrect1(UINT tmp,UINT f1) { m_low += tmp;   m
 namespace xray {
 
 ppmd_compressor::ppmd_compressor (memory::base_allocator* const		allocator, 
-								  u32	const						sub_allocator_size_mb,
+								  unsigned	const						sub_allocator_size_mb,
 								  model_restoration_enum const		model_restoration)
 {
 	m_model_restoration	=	model_restoration;
@@ -364,13 +364,13 @@ ppmd_compressor::ppmd_compressor (memory::base_allocator* const		allocator,
 	R_ASSERT				(m_impl);
 }
 
-signalling_bool   ppmd_compressor::compress (const_buffer src, mutable_buffer dest, u32& out_size)
+signalling_bool   ppmd_compressor::compress (const_buffer src, mutable_buffer dest, unsigned& out_size)
 {
 	m_impl->compress		(src, dest, out_size);
 	return					true;
 }
 
-signalling_bool   ppmd_compressor::decompress (const_buffer src, mutable_buffer dest, u32& out_size)
+signalling_bool   ppmd_compressor::decompress (const_buffer src, mutable_buffer dest, unsigned& out_size)
 {
 	m_impl->decompress		(src, dest, out_size);
 	return					true;
@@ -388,9 +388,9 @@ ppmd_compressor::~ppmd_compressor ()
 // ppmd_compressor_impl implementation
 //--------------------------------------------------------
 
-const u32		order_model					=	8;
+const unsigned		order_model					=	8;
 
-void   ppmd_compressor_impl::compress (xray::const_buffer src, xray::mutable_buffer dest, u32& out_size)
+void   ppmd_compressor_impl::compress (xray::const_buffer src, xray::mutable_buffer dest, unsigned& out_size)
 {
 	typedef		compression::ppmd::stream	stream;
 
@@ -401,7 +401,7 @@ void   ppmd_compressor_impl::compress (xray::const_buffer src, xray::mutable_buf
 	out_size			=	dest_stream.tell() + 1;
 }
 
-void   ppmd_compressor_impl::decompress (xray::const_buffer src, xray::mutable_buffer dest, u32& out_size)
+void   ppmd_compressor_impl::decompress (xray::const_buffer src, xray::mutable_buffer dest, unsigned& out_size)
 {
 	typedef		compression::ppmd::stream	stream;
 
@@ -432,7 +432,7 @@ void   StateCpy (PPM_CONTEXT::STATE& s1, const PPM_CONTEXT::STATE& s2)
 }
 
 ppmd_compressor_impl::ppmd_compressor_impl (xray::memory::base_allocator* const allocator, 
-											u32 const							sub_allocator_size,
+											unsigned const							sub_allocator_size,
 											MR_METHOD const						mr_method) 
 											: m_allocator(allocator, sub_allocator_size)
 {
@@ -1449,7 +1449,7 @@ public:
 namespace xray {
 
 ppmd_compressor::ppmd_compressor (memory::base_allocator* const		allocator, 
-								  u32	const						sub_allocator_size_mb,
+								  unsigned	const						sub_allocator_size_mb,
 								  model_restoration_enum const		model_restoration)
 {
 	m_model_restoration	=	model_restoration;
@@ -1460,12 +1460,12 @@ ppmd_compressor::~ppmd_compressor ()
 {
 }
 
-signalling_bool   ppmd_compressor::compress (const_buffer src, mutable_buffer dest, u32& out_size)
+signalling_bool   ppmd_compressor::compress (const_buffer src, mutable_buffer dest, unsigned& out_size)
 {
 	return					true;
 }
 
-signalling_bool   ppmd_compressor::decompress (const_buffer src, mutable_buffer dest, u32& out_size)
+signalling_bool   ppmd_compressor::decompress (const_buffer src, mutable_buffer dest, unsigned& out_size)
 {
 	return					true;
 }

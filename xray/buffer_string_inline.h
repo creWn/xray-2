@@ -83,8 +83,8 @@ void   buffer_string::append (pcstr const begin_src, pcstr const end_src)
 {
 	R_ASSERT					(m_end + (end_src-begin_src) < m_max_end);
 
-	u32 const range			=	(u32)(end_src - begin_src);
-	memory::copy				(m_end, u32(m_max_end - m_end), begin_src, range);
+	unsigned const range			=	(unsigned)(end_src - begin_src);
+	memory::copy				(m_end, unsigned(m_max_end - m_end), begin_src, range);
 	m_end					+=	range; 
 	*m_end					=	NULL;
 }
@@ -94,8 +94,8 @@ void   buffer_string::append (pcstr const c_string)
 {
 	R_ASSERT					(m_end + strings::length(c_string) < m_max_end);
 
-	u32 const range			=	strings::length(c_string);
-	memory::copy				(m_end, u32(m_max_end - m_end), c_string, range);
+	unsigned const range			=	strings::length(c_string);
+	memory::copy				(m_end, unsigned(m_max_end - m_end), c_string, range);
 	m_end					+=	range; 
 	*m_end					=	NULL;
 }
@@ -261,15 +261,15 @@ buffer_string::value_type   buffer_string::operator [] (size_type i) const
 }
 
 inline
-u32   buffer_string::length	() const
+unsigned   buffer_string::length	() const
 {
-	return						(u32)(m_end - m_begin); 
+	return						(unsigned)(m_end - m_begin); 
 }
 
 inline
-u32   buffer_string::max_length	() const
+unsigned   buffer_string::max_length	() const
 {
-	return						(u32)(m_max_end - m_begin); 
+	return						(unsigned)(m_max_end - m_begin); 
 }
 
 inline

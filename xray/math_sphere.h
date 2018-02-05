@@ -32,7 +32,7 @@ public:
 
 	inline					sphere			( );
 	inline					sphere			( float3 const& center, type radius );
-			intersection	intersect_ray	( float3 const& position, float3 const& direction, type range, u32& count, type (&results)[2] ) const;
+			intersection	intersect_ray	( float3 const& position, float3 const& direction, type range, unsigned& count, type (&results)[2] ) const;
 			intersection	intersect_ray	( float3 const& position, float3 const& direction, type& range ) const;
 	inline	bool			intersect_ray	( float3 const& position, float3 const& direction ) const;
 	inline	bool			intersect		( sphere const& other ) const;

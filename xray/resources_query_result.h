@@ -80,10 +80,10 @@ public:
 	void							save_generated_resource	(const_buffer const & in_data);
 	void							set_request_path		(pcstr path);
 	void							finish_query			(cook_base::result_enum result);
-	u32								get_raw_file_size		() const;
+	unsigned								get_raw_file_size		() const;
 	query_result_for_cook *			get_parent_query		() const;
 	void							set_error_type			(error_type_enum error_type, bool check_was_unset = true);
-	void							set_unmanaged_resource	(unmanaged_resource_ptr ptr, memory_type const & memory_type, u32 resource_size, u32 pool_id = 0);
+	void							set_unmanaged_resource	(unmanaged_resource_ptr ptr, memory_type const & memory_type, unsigned resource_size, unsigned pool_id = 0);
 	void							set_unmanaged_resource	(unmanaged_resource_ptr ptr, memory_usage const & memory_usage);
 	void							set_managed_resource	(managed_resource_ptr ptr) { R_ASSERT(!m_managed_resource); m_managed_resource = ptr; }
 	user_data_variant *				user_data				() const { return m_user_data; }
@@ -96,7 +96,7 @@ protected:
 	queries_result *				m_parent;
 	user_data_variant *				m_user_data;
 	string_path						m_request_path_default_storage;
-	u32								m_request_path_max_size;
+	unsigned								m_request_path_max_size;
 
 }; // query_result_for_cook
 
@@ -109,12 +109,12 @@ public:
 									query_result			(u16 flags							=	0,
 															 queries_result * parent			=	NULL,
 															 memory::base_allocator * allocator	=	NULL,
-															 u32 user_thread_id					=	0);
+															 unsigned user_thread_id					=	0);
 
 									~query_result			();
 
 	fat_it_wrapper					get_fat_it				() const { return m_fat_it; }
-	u32								get_priority			() const { return m_priority; }
+	unsigned								get_priority			() const { return m_priority; }
 	bool							is_load_type			() const { return has_flag(flag_load); }
 	bool							is_save_type			() const { return has_flag(flag_save); }
 	bool							is_replication_type		() const { return has_flag(flag_replication); }
@@ -166,9 +166,9 @@ private:
 
 	void							clear_reference			();
 	void							add_referrer			(query_result *	referrer, bool log_that_referer_query_added = true);
-	void							set_flag				(u32 flag);
-	bool							has_flag				(u32 flag) const { return !!(m_flags & flag); }
-	void							unset_flag				(u32 flag);
+	void							set_flag				(unsigned flag);
+	bool							has_flag				(unsigned flag) const { return !!(m_flags & flag); }
+	void							unset_flag				(unsigned flag);
 
 	bool							check_fat_for_resource_reusage				();
 
@@ -217,7 +217,7 @@ private:
 
 	void							set_raw_is_unmovable		(bool is_unmovable);
 	device_manager *				find_capable_device_manager ();
-	u32								get_user_thread_id			() const { return m_user_thread_id; }
+	unsigned								get_user_thread_id			() const { return m_user_thread_id; }
 
 	void							process_request_path		();
 
@@ -261,7 +261,7 @@ private:
 	void							unpin_compressed_file				(const_buffer const & pinned_compressed_file);
 	const_buffer					pin_compressed_or_raw_file	();
 	void							unpin_compressed_or_raw_file	(const_buffer const & pinned_file);
-	u32								raw_buffer_size						();
+	unsigned								raw_buffer_size						();
 
 	bool							has_uncompressed_inline_data				();
 	bool							has_inline_data								();
@@ -270,17 +270,17 @@ private:
 	bool							copy_inline_data_to_resource_if_needed		();
 	bool							copy_creation_data_to_resource_if_needed	();
 	void							copy_data_to_resource						(const_buffer data);
-	u32								loaded_bytes								() const { return m_loaded_bytes; }
-	void							set_loaded_bytes							(u32 byte_count);
-	void							add_loaded_bytes							(u32 byte_count);
-	u32								compressed_or_raw_file_size					() const;
+	unsigned								loaded_bytes								() const { return m_loaded_bytes; }
+	void							set_loaded_bytes							(unsigned byte_count);
+	void							add_loaded_bytes							(unsigned byte_count);
+	unsigned								compressed_or_raw_file_size					() const;
 	fat_it_wrapper					get_fat_it_zero_if_physical_path_it			() const;
 	void							set_creation_source_for_resource 			(unmanaged_resource_ptr resource);
 	void							set_creation_source_for_resource 			(managed_resource_ptr resource);
 	resource_base::creation_source_enum   creation_source_for_resource			();
 
 	void							set_deleter_object							(unmanaged_resource * resource);
-	u32								allocate_thread_id							() const;
+	unsigned								allocate_thread_id							() const;
 	virtual void					recalculate_memory_usage_impl				() { ; } // not used
 	void							set_create_resource_result					(cook_base::result_enum result);
 	void							finish_normal_query							(cook_base::result_enum create_resource_result);
@@ -316,13 +316,13 @@ private:
 	mutable_buffer					m_unmanaged_buffer; 
 	name_registry_entry				m_name_registry_entry;
 
-	u32								m_offset_to_file;
-	u32								m_loaded_bytes;
+	unsigned								m_offset_to_file;
+	unsigned								m_loaded_bytes;
 
-	u32								m_priority;
+	unsigned								m_priority;
 	threading::atomic32_type		m_flags;
-	u32								m_final_resource_size;
-	u32								m_user_thread_id;
+	unsigned								m_final_resource_size;
+	unsigned								m_user_thread_id;
 	memory::base_allocator *		m_temp_disk_fat_it_allocator;
 	bool							m_is_unmovable;
 

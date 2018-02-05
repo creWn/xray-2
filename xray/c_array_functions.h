@@ -9,19 +9,19 @@
 
 namespace xray {
 
-template <class T, u32 Count>
-inline u32 array_size ( T (&)[Count] )
+template <class T, unsigned Count>
+inline unsigned array_size ( T (&)[Count] )
 {
 	return	Count;
 }
 
-template <class T, u32 Count>
+template <class T, unsigned Count>
 inline T * array_begin ( T (&array)[Count] )
 {
 	return	& array[0];
 }
 
-template <class T, u32 Count>
+template <class T, unsigned Count>
 inline T * array_end ( T (&array)[Count] )
 {
 	return	& array[Count];

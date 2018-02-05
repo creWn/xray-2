@@ -27,19 +27,19 @@ public:
 						   ~managed_resource		();
 
 	void					get_full_path			(fs::path_string & dest) const;
-	u32						get_size				() const	{ return m_size; }
+	unsigned						get_size				() const	{ return m_size; }
 
 private:
-							managed_resource		(u32 size, class_id	class_id = unknown_data_class);
+							managed_resource		(unsigned size, class_id	class_id = unknown_data_class);
 
 	pcbyte					pin						();
 	void					unpin					(pcbyte pinned_data);
 
 	managed_resource *		get_next_delay_delete	() const { return m_next_delay_delete; }
-	void					resize_down				(u32 new_size);
+	void					resize_down				(unsigned new_size);
 	void					set_is_unmovable		(bool is_unmovable);
 	bool					is_unmovable			() const;
-	u32						get_buffer_size			() const;
+	unsigned						get_buffer_size			() const;
 	class_id				get_class_id			() const { return m_class_id; }
 	void					late_set_fat_it			(fat_it_wrapper it);
 	fat_it_wrapper			get_fat_it				() const { return m_fat_it; }
@@ -50,7 +50,7 @@ private:
 	fat_it_wrapper			m_fat_it;
 	managed_node *			m_node;
 	managed_resource *		m_next_delay_delete;
-	u32						m_size;
+	unsigned						m_size;
 	class_id				m_class_id;
 #ifndef MASTER_GOLD
 	fs::path_string			m_request_path;

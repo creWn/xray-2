@@ -13,7 +13,7 @@ namespace tasks {
 void	on_current_thread_locks					();
 void	on_current_thread_unlocks				();
 
-void   yield (u32 const ms)
+void   yield (unsigned const ms)
 {
 	if ( ms != 0 )
 		tasks::on_current_thread_locks			();

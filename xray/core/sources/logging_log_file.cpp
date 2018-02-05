@@ -19,7 +19,7 @@ namespace logging {
 
 log_file::log_file				( xray::core::log_file_usage const log_file_usage, pcstr const file_name ) :
 	m_line_groups			( LOG_NEW( line_groups_type ) ),
-	m_transaction_thread_id (u32(-1))
+	m_transaction_thread_id (unsigned(-1))
 {
 	ASSERT				( file_name && *file_name );
 	strings::copy			( m_file_name, file_name );
@@ -97,7 +97,7 @@ void log_file::flush			( pcstr file_name )
 	fclose				( file );
 }
 
-void log_file::append			( pcstr data, u32 const length )
+void log_file::append			( pcstr data, unsigned const length )
 {
 	ASSERT				( data );
 	ASSERT				( length );
@@ -105,7 +105,7 @@ void log_file::append			( pcstr data, u32 const length )
 	int const seek_res	= fseek ( m_file, 0, SEEK_END );
 	ASSERT_U			( !seek_res );
 
-	u32 pos				= ftell( m_file );
+	unsigned pos				= ftell( m_file );
 	
 	size_t const		num_written = fwrite(data, 1, length, m_file);
 	ASSERT				( num_written == length );
@@ -117,12 +117,12 @@ void log_file::append			( pcstr data, u32 const length )
 		pcstr const		next_line = strchr( data, '\n' );
 		const size_t	line_length = next_line ? ( next_line-data+1 ) : ( last_symbol - data );
 
-		pos				+= (u32)line_length;
+		pos				+= (unsigned)line_length;
 		if ( next_line )
 		{
 			++m_last_line;
 
-			u32 const line_groups_needed = (m_last_line / log_file_group_size) + 1;
+			unsigned const line_groups_needed = (m_last_line / log_file_group_size) + 1;
 		
 			if ( m_line_groups->size() < line_groups_needed &&
 				 !(m_last_line % log_file_group_size) ) 
@@ -136,7 +136,7 @@ void log_file::append			( pcstr data, u32 const length )
 void log_file::start_transaction	( )
 {
 	get_log_mutex().lock			( );
-	R_ASSERT						( m_transaction_thread_id == u32(-1),
+	R_ASSERT						( m_transaction_thread_id == unsigned(-1),
 									"transaction was not ended or mutex was unlocked by "
 									"someone other then end_transaction");
 	m_transaction_thread_id		=	threading::current_thread_id();
@@ -144,7 +144,7 @@ void log_file::start_transaction	( )
 
 void log_file::assert_transaction_in_current_thread	( ) const
 {
-	R_ASSERT						( m_transaction_thread_id != u32(-1), 
+	R_ASSERT						( m_transaction_thread_id != unsigned(-1), 
 									 "you must call start_transaction first");
 	R_ASSERT						( m_transaction_thread_id == threading::current_thread_id(),
 									 "transaction was started in another thread");
@@ -153,21 +153,21 @@ void log_file::assert_transaction_in_current_thread	( ) const
 void log_file::end_transaction		( )
 {
 	assert_transaction_in_current_thread	( );
-	m_transaction_thread_id		=	u32(-1);
+	m_transaction_thread_id		=	unsigned(-1);
 	get_log_mutex().unlock			( );
 }
 
-u32	log_file::get_lines_count		( ) const
+unsigned	log_file::get_lines_count		( ) const
 { 
 	assert_transaction_in_current_thread	( );
 	return							m_last_line; 
 }
 
-void log_file::goto_line		( u32 const line )
+void log_file::goto_line		( unsigned const line )
 {
 	assert_transaction_in_current_thread	( );
 	ASSERT				(line  <= m_last_line);
-	u32 const group		= line / log_file_group_size;
+	unsigned const group		= line / log_file_group_size;
 	ASSERT				( group < m_line_groups->size( ) );
 
 	m_current_pos		= (*m_line_groups)[group];
@@ -175,7 +175,7 @@ void log_file::goto_line		( u32 const line )
 	int const seek_error = fseek ( m_file, m_current_pos, SEEK_SET );
 	ASSERT_U			( !seek_error );
 
-	u32 num2skip		= line - log_file_group_size*group;
+	unsigned num2skip		= line - log_file_group_size*group;
 
 	for ( ; num2skip; --num2skip )
 		skip_next_line	( );
@@ -199,7 +199,7 @@ char log_file::read_next_char	( )
 }
 
 template <typename processor_type>
-bool log_file::process_next_line ( u32 const buffer_size, processor_type const& processor )
+bool log_file::process_next_line ( unsigned const buffer_size, processor_type const& processor )
 {
 	if ( m_current_pos == m_file_size )
 	{
@@ -238,7 +238,7 @@ struct processor {
 	}
 };
 
-bool log_file::read_next_line	(pstr const buffer, const u32 buffer_size)
+bool log_file::read_next_line	(pstr const buffer, const unsigned buffer_size)
 {
 	assert_transaction_in_current_thread	( );
 

@@ -14,7 +14,7 @@ class XRAY_CORE_API event : detail::noncopyable
 {
 public:
 	enum wait_result_enum			{ wait_result_failed, wait_result_signaled, wait_result_still_nonsignaled };
-	static u32 const				wait_time_infinite;
+	static unsigned const				wait_time_infinite;
 
 public:
 						event		( bool initial_state = false );
@@ -22,7 +22,7 @@ public:
 public:
 
 	void				set			( bool value);
-	wait_result_enum	wait		( u32 max_wait_time_ms );
+	wait_result_enum	wait		( unsigned max_wait_time_ms );
 
 public:
 	pvoid				get_handle	( ) const;

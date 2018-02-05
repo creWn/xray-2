@@ -34,7 +34,7 @@ void   resources_manager::register_cook	(cook_base * const cook)
 
 bool   resources_manager::thread_can_exit ()
 {
-	u32	const current_thread_id				=	threading::current_thread_id();
+	unsigned	const current_thread_id				=	threading::current_thread_id();
 	thread_local_data*	const local_data	=	get_thread_local_data(current_thread_id, false);
 	
 	if ( !local_data )
@@ -122,7 +122,7 @@ void   resources_manager::add_resource_to_create (query_result * const query)
 	cook_base *	const cook					=	find_cook(query->m_class_id);
 	R_ASSERT									(cook);
 	
-	u32 const creation_thread_id			=	cook->creation_thread_id();
+	unsigned const creation_thread_id			=	cook->creation_thread_id();
 
 	if ( creation_thread_id == m_cooker_thread_id )
 	{
@@ -178,8 +178,8 @@ void   resources_manager::decompress_resource (query_result* const query)
 	const_buffer	src_file				=	query->pin_compressed_file();
 	mutable_buffer	dest_file				=	cast_away_const(query->pin_raw_file());
 
-	u32 out_size;
-	u32 const uncompressed_size				=	query->get_raw_file_size();
+	unsigned out_size;
+	unsigned const uncompressed_size				=	query->get_raw_file_size();
 	if ( !m_compressor->decompress(src_file, dest_file, out_size) || out_size != uncompressed_size )
 	{
 		R_ASSERT								(identity(false), "failed to decompress file: '%s'", query->get_requested_path());

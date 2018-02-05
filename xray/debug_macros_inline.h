@@ -21,7 +21,7 @@ public:
 	string_helper () { m_buffer[0] = 0; }
 
 	pcstr	c_str () const		{ return m_buffer; }
-	u32		size () const;
+	unsigned		size () const;
 	void	appendf				(pcstr format, ...);
 	void	appendf_va_list		(pcstr const format, va_list argptr);
 

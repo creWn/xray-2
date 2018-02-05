@@ -9,7 +9,7 @@
 
 namespace xray {
 
-void XRAY_CORE_API check_stack_overflow ( u32 query_value );
+void XRAY_CORE_API check_stack_overflow ( unsigned query_value );
 
 namespace strings {
 namespace detail {
@@ -36,28 +36,28 @@ public:
 
 public:
 			void	error_process			( ) const;
-	inline	u32		size					( ) const;
+	inline	unsigned		size					( ) const;
 	inline	void	concat					( pcstr result ) const;
 
 private:
 	enum {
-		max_concat_result_size				= u32( 512*1024 ),
+		max_concat_result_size				= unsigned( 512*1024 ),
 		max_item_count						= 6,
 	};
 
 private:
-	template < u32 index >
+	template < unsigned index >
 	struct helper {
 		template < typename T >
 		static inline	void	add_string	( tuples& self, T p );
-		static inline	u32		length		( pcstr string );
+		static inline	unsigned		length		( pcstr string );
 		static inline	pcstr	string		( pcstr string );
 	}; // struct helper
 
 private:
 	struct XRAY_CORE_API pair {
 		pcstr		first;
-		u32			second;
+		unsigned			second;
 
 		inline	pair	( ) :
 			first	( 0 ),
@@ -65,7 +65,7 @@ private:
 		{
 		}
 		
-		inline	pair	( pcstr const first, u32 const second ) :
+		inline	pair	( pcstr const first, unsigned const second ) :
 			first	( first ),
 			second	( second )
 		{
@@ -74,7 +74,7 @@ private:
 
 private:
 	pair			m_strings[ max_item_count ];
-	u32 			m_count;
+	unsigned 			m_count;
 };
 
 } // namespace detail

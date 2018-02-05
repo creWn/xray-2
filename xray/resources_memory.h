@@ -26,11 +26,11 @@ class XRAY_CORE_API memory_usage
 {
 public:
 					memory_usage	() : type(0), pool(0), size(0) { ; }
-					memory_usage	(memory_type const * type, u32 size, u32 pool = 0) : type(type), size(size), pool(pool) { ; }
+					memory_usage	(memory_type const * type, unsigned size, unsigned pool = 0) : type(type), size(size), pool(pool) { ; }
 public:
 	memory_type const *	type;
-	u32					pool;
-	u32					size;
+	unsigned					pool;
+	unsigned					size;
 };
 
 } // namespace resources

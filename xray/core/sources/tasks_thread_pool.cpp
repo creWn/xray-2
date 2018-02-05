@@ -28,7 +28,7 @@ void   thread_pool::on_task_thread_exited (thread_tls * const tls)
 
 	m_time_elapsed							=	m_timer.get_elapsed_ms();
 
-	if ( (u32)threading::interlocked_increment(m_num_task_threads_exited) == m_task_thread_tls.size() )
+	if ( (unsigned)threading::interlocked_increment(m_num_task_threads_exited) == m_task_thread_tls.size() )
 		m_all_task_threads_destroyed.set		(true);
 }
 
@@ -44,7 +44,7 @@ void   thread_pool::deactivate_task_thread (thread_tls * const tls)
 }
 
 // can return false in case when some parallel thread resumed this thread faster
-bool   thread_pool::try_activate_task_thread (thread_tls & tls, u32 const use_hardware_thread)
+bool   thread_pool::try_activate_task_thread (thread_tls & tls, unsigned const use_hardware_thread)
 {
 	threading::atomic32_value_type const previous_state				=	threading::interlocked_compare_exchange
 												(tls.state, thread_tls::state_active, thread_tls::state_inactive);
@@ -64,11 +64,11 @@ bool   thread_pool::try_activate_task_thread (thread_tls & tls, u32 const use_ha
 
 bool   thread_pool::current_thread_core_is_oversubscribed () const
 {
-	u32 const hardware_thread				=	threading::current_thread_affinity();
+	unsigned const hardware_thread				=	threading::current_thread_affinity();
 	if ( m_core_thread_count[hardware_thread] <= 1 )
 		return									false;
 
-	u32 const active_thread_count			=	calculate_active_task_thread_count();
+	unsigned const active_thread_count			=	calculate_active_task_thread_count();
 	if ( active_thread_count <= m_min_permanent_working_threads )
 		return									false;
 
@@ -101,8 +101,8 @@ bool   zero_tasks ();
 
 void   thread_pool::on_current_thread_locks ()
 {
-	u32 const hardware_thread				=	threading::current_thread_affinity();
-	R_ASSERT									(hardware_thread != u32(-1), "only threads that called set_current_thread_affinity can call this function:)");
+	unsigned const hardware_thread				=	threading::current_thread_affinity();
+	R_ASSERT									(hardware_thread != unsigned(-1), "only threads that called set_current_thread_affinity can call this function:)");
 	threading::atomic32_value_type const resulting_value				=	threading::interlocked_decrement
 												(m_core_thread_count[hardware_thread]);
 
@@ -134,8 +134,8 @@ void   thread_pool::on_current_thread_locks ()
 
 void   thread_pool::on_current_thread_unlocks ()
 {
-	u32 const hardware_thread				=	threading::current_thread_affinity();
-	R_ASSERT									(hardware_thread != u32(-1), "only threads that called set_current_thread_affinity can call this function:)");
+	unsigned const hardware_thread				=	threading::current_thread_affinity();
+	R_ASSERT									(hardware_thread != unsigned(-1), "only threads that called set_current_thread_affinity can call this function:)");
 	threading::atomic32_value_type const new_core_thread_count		=	threading::interlocked_increment
 												(m_core_thread_count[hardware_thread]);
 
@@ -153,8 +153,8 @@ void   thread_pool::on_current_thread_unlocks ()
 
 void   thread_pool::on_new_task ()
 {
-	u32 core_with_no_threads				=	u32(-1);
-	u32 core_with_minimum_threads_index		=	u32(-1);
+	unsigned core_with_no_threads				=	unsigned(-1);
+	unsigned core_with_minimum_threads_index		=	unsigned(-1);
 	long core_with_minimum_threads_value	=	-1;
 	core_thread_count_container::iterator	begin	=	m_core_thread_count.begin();
 	core_thread_count_container::iterator	end		=	m_core_thread_count.end();
@@ -163,24 +163,24 @@ void   thread_pool::on_new_task ()
 											  ++it )
 	{
 		long const thread_count				=	* it;
-		if ( core_with_minimum_threads_index == u32(-1) || thread_count < core_with_minimum_threads_value )
+		if ( core_with_minimum_threads_index == unsigned(-1) || thread_count < core_with_minimum_threads_value )
 		{
-			core_with_minimum_threads_index		=	u32(it - begin);
+			core_with_minimum_threads_index		=	unsigned(it - begin);
 			core_with_minimum_threads_value		=	*it;
 		}
 
 		if ( !thread_count )
 		{
-			core_with_no_threads			=	u32(it - begin);
+			core_with_no_threads			=	unsigned(it - begin);
 			break;
 		}
 	}
 
 	bool all_permament_threads_active		=	true;
-	if ( core_with_no_threads == u32(-1) ) // optimization
+	if ( core_with_no_threads == unsigned(-1) ) // optimization
 		all_permament_threads_active		=	calculate_active_task_thread_count() >= m_min_permanent_working_threads;
 
- 	if ( core_with_no_threads != u32(-1) || !all_permament_threads_active )
+ 	if ( core_with_no_threads != unsigned(-1) || !all_permament_threads_active )
  	{
 		for ( thread_tls_container::iterator	it	=	m_task_thread_tls.begin();
 												it	!=	m_task_thread_tls.end();

@@ -13,23 +13,23 @@ template <class enum_type>
 class XRAY_CORE_API enum_flags
 {
 public:
-	enum_flags (u32 flags = 0) : m_flags(flags) {}
+	enum_flags (unsigned flags = 0) : m_flags(flags) {}
 
-	enum_flags	operator |=	(u32 flags) 				{ m_flags |= flags; return *this; }
-	enum_flags	operator &=	(u32 flags) 				{ m_flags &= flags; return *this; }
+	enum_flags	operator |=	(unsigned flags) 				{ m_flags |= flags; return *this; }
+	enum_flags	operator &=	(unsigned flags) 				{ m_flags &= flags; return *this; }
 
-	enum_flags	operator |  (u32 flags) 		const 	{ return enum_flags(m_flags | flags); }
+	enum_flags	operator |  (unsigned flags) 		const 	{ return enum_flags(m_flags | flags); }
 	enum_flags	operator |  (enum_type flags) 	const 	{ return enum_flags(m_flags | flags); }
-	enum_flags	operator &  (u32 flags) 		const 	{ return enum_flags(m_flags & flags); }
+	enum_flags	operator &  (unsigned flags) 		const 	{ return enum_flags(m_flags & flags); }
 	enum_flags	operator &  (enum_type flags) 	const 	{ return enum_flags(m_flags & flags); }
 	enum_flags	operator ~	()					const 	{ return enum_flags(~m_flags); }
 
 	operator	bool		()					const	{ return !!m_flags; }
-	operator	u32			()					const 	{ return m_flags; }
+	operator	unsigned			()					const 	{ return m_flags; }
 	operator	enum_type	()					const 	{ return (enum_type)m_flags; }
 
 private:
-	u32			m_flags;
+	unsigned			m_flags;
 };
 
 } // namespace xray

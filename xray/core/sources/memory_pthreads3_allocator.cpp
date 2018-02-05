@@ -106,19 +106,19 @@ void pthreads3_allocator::call_free		( pvoid pointer XRAY_CORE_DEBUG_PARAMETERS_
 
 size_t pthreads3_allocator::total_size		( ) const
 {
-	return							( (u32)g_ptmalloc3_arena.total_size );
+	return							( (unsigned)g_ptmalloc3_arena.total_size );
 }
 
 #include "ptmalloc3/malloc-private.h"
 
 size_t pthreads3_allocator::allocated_size	( ) const
 {
-	u32 const pure_size			= ( (u32)(g_ptmalloc3_arena.total_size - g_ptmalloc3_arena.free_size) );
+	unsigned const pure_size			= ( (unsigned)(g_ptmalloc3_arena.total_size - g_ptmalloc3_arena.free_size) );
 	if ( !pure_size )
 		return					( 0 );
 
-	u32 result					= (u32)pt3mallinfo( ).uordblks;
-	u32 const min_size			= pad_request(sizeof(struct malloc_state)) + TOP_FOOT_SIZE + CHUNK_ALIGN_MASK + 1;
+	unsigned result					= (unsigned)pt3mallinfo( ).uordblks;
+	unsigned const min_size			= pad_request(sizeof(struct malloc_state)) + TOP_FOOT_SIZE + CHUNK_ALIGN_MASK + 1;
 	ASSERT						( result >= min_size );
 	result						-= min_size;
 	return						( result );

@@ -25,7 +25,7 @@ template <class T>
 class type_to_int
 {
 public:
-	static u32		get ()
+	static unsigned		get ()
 	{
 		if ( !s_id )
 		{

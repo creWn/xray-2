@@ -15,7 +15,7 @@
 namespace xray {
 namespace fs   {
 
-fat_folder_node<> *   file_system_impl::create_folder_node (u32 hash, pcstr name, u32 const name_len)
+fat_folder_node<> *   file_system_impl::create_folder_node (unsigned hash, pcstr name, unsigned const name_len)
 {
 	fat_folder_node<> *		new_node = (fat_folder_node<> *)
 							FS_ALLOC(char, sizeof(fat_folder_node<>) + name_len + 2);
@@ -30,18 +30,18 @@ fat_folder_node<> *   file_system_impl::create_folder_node (u32 hash, pcstr name
 	return					new_node;
 }
 
-fat_disk_folder_node<> *  file_system_impl::create_disk_folder_node (u32		hash, 
+fat_disk_folder_node<> *  file_system_impl::create_disk_folder_node (unsigned		hash, 
 																	  pcstr		name, 
-																	  u32 const	name_len,
+																	  unsigned const	name_len,
 																	  pcstr		full_name, 
-																	  u32 const	full_name_len)
+																	  unsigned const	full_name_len)
 {
 	ASSERT						(name_len);
-	u32 const pad_with_byte	=	(name_len == 1);
+	unsigned const pad_with_byte	=	(name_len == 1);
 
-	u32 const name_allocated_size	=	watcher_enabled() ? path_string::fixed_size : (name_len + 1);
-	u32 const node_size		=	sizeof(fat_disk_folder_node<>) + name_allocated_size + pad_with_byte;
-	u32 const disk_path_allocated_size	=	watcher_enabled() ? path_string::fixed_size : (full_name_len + 1);
+	unsigned const name_allocated_size	=	watcher_enabled() ? path_string::fixed_size : (name_len + 1);
+	unsigned const node_size		=	sizeof(fat_disk_folder_node<>) + name_allocated_size + pad_with_byte;
+	unsigned const disk_path_allocated_size	=	watcher_enabled() ? path_string::fixed_size : (full_name_len + 1);
 	fat_disk_folder_node<> *	new_node = (fat_disk_folder_node<> *)
 								FS_ALLOC(char, node_size + disk_path_allocated_size);
 	new	(new_node)				fat_disk_folder_node<>;
@@ -58,21 +58,21 @@ fat_disk_folder_node<> *  file_system_impl::create_disk_folder_node (u32		hash,
 	return					new_node;
 }
 
-fat_disk_file_node<> *   file_system_impl::create_disk_file_node (u32		const					hash, 
+fat_disk_file_node<> *   file_system_impl::create_disk_file_node (unsigned		const					hash, 
  												 				   pcstr	const					name, 
-												 				   u32		const					name_len, 
+												 				   unsigned		const					name_len, 
 												 				   pcstr	const					full_name, 
-												 				   u32		const					full_name_len,
-																   u32 		const					file_size,
+												 				   unsigned		const					full_name_len,
+																   unsigned 		const					file_size,
 																   memory::base_allocator * const	allocator,
 																   bool		const					add_to_hash_table)
 {
 	ASSERT						(name_len);
-	u32 const pad_with_byte	=	(name_len == 1);
+	unsigned const pad_with_byte	=	(name_len == 1);
 
-	u32 const name_allocated_size		=	watcher_enabled() ? path_string::fixed_size : (name_len + 1);
-	u32 const node_size		=	sizeof(fat_disk_file_node<>) + name_allocated_size + pad_with_byte;
-	u32 const disk_path_allocated_size	=	watcher_enabled() ? path_string::fixed_size : (full_name_len + 1);
+	unsigned const name_allocated_size		=	watcher_enabled() ? path_string::fixed_size : (name_len + 1);
+	unsigned const node_size		=	sizeof(fat_disk_file_node<>) + name_allocated_size + pad_with_byte;
+	unsigned const disk_path_allocated_size	=	watcher_enabled() ? path_string::fixed_size : (full_name_len + 1);
 	fat_disk_file_node<> *	new_node =	(fat_disk_file_node<>*) 
 								XRAY_ALLOC_IMPL(*allocator, char, node_size + disk_path_allocated_size);
 
@@ -104,10 +104,10 @@ void   file_system_impl::create_root ()
 	m_root					=	create_folder_node(crc32("", 0), "", 0);
 }
 
-fat_node<> *   file_system_impl::find_node (pcstr const path_str, u32 * const out_hash) const
+fat_node<> *   file_system_impl::find_node (pcstr const path_str, unsigned * const out_hash) const
 {
 	verify_path_is_portable					(path_str);
-	u32	const hash						=	path_crc32(path_str, strings::length(path_str));
+	unsigned	const hash						=	path_crc32(path_str, strings::length(path_str));
 	if ( out_hash )
 		* out_hash						=	hash;
 
@@ -143,8 +143,8 @@ fat_node<> *   file_system_impl::find_node (pcstr const path_str, u32 * const ou
 
 fat_folder_node<>*   file_system_impl::find_or_create_folder (fat_folder_node<> *	parent, 
 															   pcstr				name, 
-															   u32 const			name_len, 
-															   u32 const			hash)
+															   unsigned const			name_len, 
+															   unsigned const			hash)
 {
 	for ( fat_node<> *	cur=parent->get_first_child(); 
 						cur; 
@@ -165,7 +165,7 @@ fat_folder_node<>*   file_system_impl::find_or_create_folder (fat_folder_node<> 
 	return								new_node;
 }
 
-fat_folder_node<> *	 file_system_impl::find_or_create_folder (pcstr const path_str, u32 * out_hash)
+fat_folder_node<> *	 file_system_impl::find_or_create_folder (pcstr const path_str, unsigned * out_hash)
 {
 	fat_node<> * work_node	=	find_node(path_str, out_hash);
 	if ( work_node )

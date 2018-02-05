@@ -23,9 +23,9 @@ void finalize				( )
 {
 }
 
-static inline u32 get_house_keeping_size_impl	( )
+static inline unsigned get_house_keeping_size_impl	( )
 {
-	return					3*sizeof(u32);
+	return					3*sizeof(unsigned);
 }
 
 static bool enabled			( )
@@ -49,26 +49,26 @@ void on_alloc				( pvoid& buffer, size_t& buffer_size, size_t const previous_siz
 #pragma message(XRAY_TODO("add check \"object has been modified after it was freed\" - check 0xfeeefeee"))
 
 	size_t const pure_buffer_size	= buffer_size - get_house_keeping_size_impl();
-	size_t const count_with_magic	= math::align_up(buffer_size,sizeof(u32))/sizeof(u32);
-	size_t const previous_count		= math::align_up(previous_size,sizeof(u32))/sizeof(u32);
-	u32* numbers				= (u32*)buffer;
+	size_t const count_with_magic	= math::align_up(buffer_size,sizeof(unsigned))/sizeof(unsigned);
+	size_t const previous_count		= math::align_up(previous_size,sizeof(unsigned))/sizeof(unsigned);
+	unsigned* numbers				= (unsigned*)buffer;
 
-	numbers[0]					= (u32)pure_buffer_size;
-	numbers[1]					= static_cast<u32>( debug::underrun_guard );
- 	numbers[count_with_magic - 1] = static_cast<u32>( debug::overrun_guard );
+	numbers[0]					= (unsigned)pure_buffer_size;
+	numbers[1]					= static_cast<unsigned>( debug::underrun_guard );
+ 	numbers[count_with_magic - 1] = static_cast<unsigned>( debug::overrun_guard );
  
 	ASSERT						( count_with_magic >= 3 );
 	size_t const count			= count_with_magic - 3;
 
 	if ( count > previous_count ) {
 		size_t const fill_count	= count - previous_count;
-		memory::fill32			( numbers + 2 + previous_count, fill_count*sizeof(u32), static_cast<u32>(debug::uninitialized_memory), fill_count );
+		memory::fill32			( numbers + 2 + previous_count, fill_count*sizeof(unsigned), static_cast<unsigned>(debug::uninitialized_memory), fill_count );
 	}
 
 	if ( count > previous_count ) {
 
-		u32 &previous_last		= numbers[previous_count + 1];
-		switch (previous_size % sizeof(u32)) {
+		unsigned &previous_last		= numbers[previous_count + 1];
+		switch (previous_size % sizeof(unsigned)) {
 			case 0 : break;
 			case 1 : {
 				previous_last	= (previous_last & ~(platform::little_endian() ? 0xffffff00 : 0x00ffffff)) | (platform::little_endian() ? 0xfdcdcd00 : 0x00cdcdfd);
@@ -86,8 +86,8 @@ void on_alloc				( pvoid& buffer, size_t& buffer_size, size_t const previous_siz
 		}
 	}
 
-	u32& last					= numbers[count_with_magic - 2];
-	switch ( buffer_size % sizeof(u32) ) {
+	unsigned& last					= numbers[count_with_magic - 2];
+	switch ( buffer_size % sizeof(unsigned) ) {
 		case 0 : break;
 		case 1 : {
 			last				= platform::little_endian() ? 0xfdfdfdcd : 0xcdfdfdfd;
@@ -104,8 +104,8 @@ void on_alloc				( pvoid& buffer, size_t& buffer_size, size_t const previous_siz
 		default :				NODEFAULT();
 	}
 
-	static u32 const house_keeping_size	= get_house_keeping_size_impl( );
-	(pbyte&)buffer				+= 2*sizeof(u32);
+	static unsigned const house_keeping_size	= get_house_keeping_size_impl( );
+	(pbyte&)buffer				+= 2*sizeof(unsigned);
 	buffer_size					-= house_keeping_size;
 }
 
@@ -114,18 +114,18 @@ void on_free				( pvoid& pointer, bool const can_clear )
 	if ( !enabled() )
 		return;
 
-	(pbyte&)pointer				-= 2*sizeof(u32);
+	(pbyte&)pointer				-= 2*sizeof(unsigned);
 
-	u32* numbers				= (u32*)pointer;
+	unsigned* numbers				= (unsigned*)pointer;
 
 	ASSERT						( numbers[1] == debug::underrun_guard, "memory corruption detected: buffer underrun" );
 
-	size_t const count			= math::align_up( wrapped_buffer_size( numbers[0] ), sizeof(u32)) / sizeof(u32);
-	ASSERT						( wrapped_buffer_size( numbers[0] ) <= sizeof(u32)*count , "internal error, please report" );
+	size_t const count			= math::align_up( wrapped_buffer_size( numbers[0] ), sizeof(unsigned)) / sizeof(unsigned);
+	ASSERT						( wrapped_buffer_size( numbers[0] ) <= sizeof(unsigned)*count , "internal error, please report" );
 	ASSERT						( numbers[count - 1] == debug::overrun_guard, "memory corruption detected: buffer overrun" );
 
-	u32 &last					= numbers[count - 2];
-	switch ( numbers[0] % sizeof(u32) ) {
+	unsigned &last					= numbers[count - 2];
+	switch ( numbers[0] % sizeof(unsigned) ) {
 		case 0 : break;
 		case 1 : {
  			ASSERT				( !platform::little_endian() || (last & 0xffffff00) == 0xfdfdfd00, "memory corruption detected: buffer overrun" );
@@ -149,7 +149,7 @@ void on_free				( pvoid& pointer, bool const can_clear )
 		return;
 
 	size_t const size_with_magic	=	wrapped_buffer_size( numbers[0] );
-	memory::fill32				( numbers, size_with_magic, (u32)debug::freed_memory, size_with_magic / sizeof(u32) );
+	memory::fill32				( numbers, size_with_magic, (unsigned)debug::freed_memory, size_with_magic / sizeof(unsigned) );
 }
 
 size_t get_house_keeping_size	( )
@@ -162,8 +162,8 @@ size_t get_house_keeping_size	( )
 
 size_t	get_buffer_size			( pvoid buffer )
 {
-	(pbyte&)buffer				-= 2*sizeof(u32);
-	return						*(u32*)buffer;
+	(pbyte&)buffer				-= 2*sizeof(unsigned);
+	return						*(unsigned*)buffer;
 }
 
 } // namespace guard

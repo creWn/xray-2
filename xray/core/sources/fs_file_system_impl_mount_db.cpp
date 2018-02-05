@@ -138,7 +138,7 @@ bool   file_system_impl::mount_db_impl (	pcstr	logical_path,
 	new_db.root_node				=	&reinterpret_cast<fat_folder_node<> *>
 										(new_db.flat_buffer+sizeof(header))->m_base;
 	
-	u32	hash						=	crc32(logical_path, strings::length(logical_path));
+	unsigned	hash						=	crc32(logical_path, strings::length(logical_path));
 	fixup_db_node						(new_db.flat_buffer+sizeof(header), new_db.root_node, 
 										hash, reverse_byte_order);
 
@@ -160,10 +160,10 @@ bool   file_system_impl::mount_db_impl (	pcstr	logical_path,
 
 void   file_system_impl::fixup_db_node	(char *			flat_buffer, 
 										 fat_node<> *	work_node, 
-										 u32			hash, 
+										 unsigned			hash, 
 										 bool			reverse_byte_order)
 {
-	u32	const my_hash			=	crc32(work_node->m_name, strings::length(work_node->m_name), hash);
+	unsigned	const my_hash			=	crc32(work_node->m_name, strings::length(work_node->m_name), hash);
 
 	if ( *work_node->m_name && work_node->m_parent )
 		m_hash_set.insert			(my_hash, work_node);
@@ -230,7 +230,7 @@ void   file_system_impl::fixup_db_node	(char *			flat_buffer,
 	}
 }
 
-void   file_system_impl::relink_hidden_nodes_to_parent (fat_node<> const * const work_node, u32 const hash, fat_node<> * const parent)
+void   file_system_impl::relink_hidden_nodes_to_parent (fat_node<> const * const work_node, unsigned const hash, fat_node<> * const parent)
 {
 	fat_node<> * fixing_node	=	* m_hash_set.find(hash);
 
@@ -250,7 +250,7 @@ void   file_system_impl::relink_hidden_nodes_to_parent (fat_node<> const * const
 	}
 }
 
-void   file_system_impl::actualize_node (fat_node<> * work_node, u32 const hash, fat_folder_node<> * parent)
+void   file_system_impl::actualize_node (fat_node<> * work_node, unsigned const hash, fat_folder_node<> * parent)
 {
 	fat_node<> * prev_node					=	parent->find_child(work_node->m_name);
 
@@ -271,7 +271,7 @@ void   file_system_impl::actualize_node (fat_node<> * work_node, u32 const hash,
 				work_folder->unlink_child		(cur_child);
 				cur_child->m_parent			=	work_node;
 
-				u32 const child_hash		=	crc32(cur_child->m_name, strings::length(cur_child->m_name), hash);
+				unsigned const child_hash		=	crc32(cur_child->m_name, strings::length(cur_child->m_name), hash);
 				actualize_node					(cur_child, child_hash, prev_folder);
 				cur_child					=	next_child;
 			}
@@ -284,7 +284,7 @@ void   file_system_impl::actualize_node (fat_node<> * work_node, u32 const hash,
 				prev_folder->unlink_child		(cur_child);
 				work_folder->prepend_child		(cur_child);
 
-				u32 const child_hash		=	crc32(cur_child->m_name, strings::length(cur_child->m_name), hash);
+				unsigned const child_hash		=	crc32(cur_child->m_name, strings::length(cur_child->m_name), hash);
 				relink_hidden_nodes_to_parent	(cur_child, child_hash, work_node);
 
 				cur_child					=	next_child;
@@ -300,7 +300,7 @@ void   file_system_impl::actualize_node (fat_node<> * work_node, u32 const hash,
 
 void   file_system_impl::actualize_db (db_record & db)
 {
-	u32				 						 	hash;
+	unsigned				 						 	hash;
 	fat_folder_node<> * 						mount_root
 											=	find_or_create_folder(db.logical_path.c_str(), & hash);
 
@@ -308,7 +308,7 @@ void   file_system_impl::actualize_db (db_record & db)
 	while ( cur_child )
 	{
 		fat_node<> * next_child				=	cur_child->get_next();
-		u32	child_hash						=	crc32(cur_child->m_name, strings::length(cur_child->m_name), hash);
+		unsigned	child_hash						=	crc32(cur_child->m_name, strings::length(cur_child->m_name), hash);
 		actualize_node							(cur_child, child_hash, mount_root);
 		cur_child							=	next_child;
 	}

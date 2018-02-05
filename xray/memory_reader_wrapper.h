@@ -14,10 +14,10 @@ template < typename implementation >
 class XRAY_CORE_API reader_wrapper {
 public:
 	inline					reader_wrapper	( );
-	inline	void			r				( pvoid result, u32 destination_size, u32 size );
+	inline	void			r				( pvoid result, unsigned destination_size, unsigned size );
 	inline	u64				r_u64			( );
 	inline	s64				r_s64			( );
-	inline	u32				r_u32			( );
+	inline	unsigned				r_unsigned			( );
 	inline	s32				r_s32			( );
 	inline	u16				r_u16			( );
 	inline	s16				r_s16			( );

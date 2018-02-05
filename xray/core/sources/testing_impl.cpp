@@ -42,17 +42,17 @@ struct environment
 	threading::event					test_watcher_thread_must_exit;
 	bool								test_watcher_thread_exited;
 	bool								test_watcher_thread_started;
-	u32									num_suites_total;
+	unsigned									num_suites_total;
 	threading::atomic32_type			num_suites_executed;
-	u32									num_failed_tests;
+	unsigned									num_failed_tests;
 	threading::atomic32_type			current_test_number;
 	pcstr								current_test;
 	pcstr								current_suite;
 	assert_enum							awaited_exception;
 	bool								caught_awaited_exception;
 	threading::atomic32_type			is_testing;
-	u32									exception_index;
-	u32									num_top_callstack_frames_to_skip;
+	unsigned									exception_index;
+	unsigned									num_top_callstack_frames_to_skip;
 
 	environment() 					: 	engine(NULL),
 										test_watcher_thread_started(false),
@@ -74,8 +74,8 @@ static environment						s_environment;
 
 void   test_watcher_thread_proc ()
 {
-	static const u32 max_time_allowed_for_one_test	=	100*1000;
-	static const u32 max_time_allowed_to_start_test	=	600*1000;
+	static const unsigned max_time_allowed_for_one_test	=	100*1000;
+	static const unsigned max_time_allowed_to_start_test	=	600*1000;
 
 	s_environment.test_watcher_thread_started	=	true;
 	while ( s_environment.num_suites_executed != (long)s_environment.num_suites_total )
@@ -120,8 +120,8 @@ void   test_watcher_thread_proc ()
 
 bool   run_tests_command_line ()
 {
-	static u32 s_out_result						=	u32(-1);
-	if ( s_out_result == u32(-1) )
+	static unsigned s_out_result						=	unsigned(-1);
+	if ( s_out_result == unsigned(-1) )
 	{
 		if ( command_line::initialized() )
 			s_out_result						=	g_run_tests || g_run_tests_and_exit;
@@ -167,7 +167,7 @@ bool   is_testing ()
 	return								!!s_environment.is_testing;
 }
 
-u32   tests_failed_so_far ()
+unsigned   tests_failed_so_far ()
 {
 	return								s_environment.num_failed_tests;
 }
@@ -196,7 +196,7 @@ void   on_exception (assert_enum			assert_type,
 
 	fixed_string8192 description_string	=	*description == '\n' ? (description + 1) : description;
 	
-	u32 const description_size		=	description_string.length();
+	unsigned const description_size		=	description_string.length();
 
 	if ( description_size && description_string[description_size-1] != '\n' )
 	{
@@ -233,7 +233,7 @@ void   run_protected_test_helper	(pvoid test)
 	core::debug::call_stack::get_stack_trace (stacktrace, array_size(stacktrace), 62, 0);
 
 	s_environment.num_top_callstack_frames_to_skip	=	0;
-	for ( u32 i=0; stacktrace[i] ; ++i ) ++s_environment.num_top_callstack_frames_to_skip;
+	for ( unsigned i=0; stacktrace[i] ; ++i ) ++s_environment.num_top_callstack_frames_to_skip;
 
 	((test_base*)test)->test			();
 }
@@ -261,8 +261,8 @@ bool   run_tests_impl (test_base* test, pcstr suite_name)
 
 	set_testing							(true);
 
-	u32 num_failed_tests			=	0;
-	u32 num_tests					=	0;
+	unsigned num_failed_tests			=	0;
+	unsigned num_tests					=	0;
 	timing::timer						timer;
 	timer.start							();
 	while ( test )
@@ -303,7 +303,7 @@ bool   run_tests_impl (test_base* test, pcstr suite_name)
 
 	if ( s_environment.num_suites_executed == (long)s_environment.num_suites_total )
 	{
-		u32 new_exit_code			=	s_environment.num_failed_tests;
+		unsigned new_exit_code			=	s_environment.num_failed_tests;
 		if ( s_environment.engine )
 			new_exit_code			+=	s_environment.engine->get_exit_code();
 

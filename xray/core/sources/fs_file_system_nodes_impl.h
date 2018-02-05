@@ -110,21 +110,21 @@ public:
 	fat_node const *	get_first_child			() const { return const_cast<fat_node *>(this)->get_first_child(); }
 
 	pcstr				get_name				() const { return m_name; }
-	u32					get_num_children		() const;
-	u32					get_num_nodes			() const;
-	void				get_num_nodes			(u32 & num_folders, u32 & num_files) const;
-	u32					get_file_size			() const;
-	u32					get_raw_file_size		() const;
-	u32					get_compressed_file_size	() const;
+	unsigned					get_num_children		() const;
+	unsigned					get_num_nodes			() const;
+	void				get_num_nodes			(unsigned & num_folders, unsigned & num_files) const;
+	unsigned					get_file_size			() const;
+	unsigned					get_raw_file_size		() const;
+	unsigned					get_compressed_file_size	() const;
 	file_size_type		get_file_offs			() const;
-	bool				get_hash				(u32 * out_hash) const;
-	void				set_hash				(u32 hash);
+	bool				get_hash				(unsigned * out_hash) const;
+	void				set_hash				(unsigned hash);
 
 	void				get_full_path			(path_string & str) const;
-	u32					get_max_fat_size		(fat_inline_data const & inline_data) const;
+	unsigned					get_max_fat_size		(fat_inline_data const & inline_data) const;
 
 	int					get_flags				() const { return m_flags; }
-	bool				has_flags				(u32 flags) const { return ((u32)m_flags & flags) != 0; }
+	bool				has_flags				(unsigned flags) const { return ((unsigned)m_flags & flags) != 0; }
 
 	bool				is_folder				() const { return has_flags(file_system::is_folder); }
 	bool				is_disk					() const { return has_flags(file_system::is_disk); }
@@ -173,7 +173,7 @@ public:
 
 private:
 	resources::resource_base *			get_associated_unsecure		() const;
-	u32									get_max_fat_size_impl		(fat_inline_data const & inline_data) const;
+	unsigned									get_max_fat_size_impl		(fat_inline_data const & inline_data) const;
 	void								get_associated_ptr_helper	(resources::managed_resource_ptr *	result_managed, 
 																     resources::unmanaged_resource_ptr *	result_unmanaged,
 																     resources::query_result * *			result_query_result);
@@ -292,17 +292,17 @@ public:
 public:
 										fat_db_file_node_base() : m_resource_base(NULL), m_pos(0), m_size(0), m_hash(0) {}
 
-	u32									size			() const { return m_size; }
+	unsigned									size			() const { return m_size; }
 	file_size_type						offs_in_db		() const { return m_pos; }
 	void								reverse_bytes	();
-	void								set_hash		(u32 hash) { m_hash = hash; }
-	u32									hash			() const { return m_hash; }
+	void								set_hash		(unsigned hash) { m_hash = hash; }
+	unsigned									hash			() const { return m_hash; }
 
 public:
 	typename pointer_for_fat<resources::resource_base, pointer_for_fat_size>::type	m_resource_base;
 	file_size_type										m_pos;
-	u32													m_size;
-	u32													m_hash;
+	unsigned													m_size;
+	unsigned													m_hash;
 };
 
 //-----------------------------------------------------------------------------------
@@ -333,7 +333,7 @@ public:
 	fat_node<pointer_for_fat_size> *	cast_node		()		{ return & m_base; }
 
 public:
-	u32									m_uncompressed_size;
+	unsigned									m_uncompressed_size;
 	fat_node<pointer_for_fat_size>		m_base;
 
 }; // class fat_db_compressed_file_node
@@ -351,14 +351,14 @@ public:
 	void								set_inlined_data(const_buffer const & buffer) 
 	{ 
 		m_inlined_data		=	(pcstr)buffer.c_ptr(); 
-		m_inlined_size		=	(u32)buffer.size(); 
+		m_inlined_size		=	(unsigned)buffer.size(); 
 	}
 	const_buffer						get_inlined_data() const;
 	void								reverse_bytes	();
 
 public:
 	typename pointer_for_fat<char const, pointer_for_fat_size>::type	m_inlined_data;
-	u32																	m_inlined_size;
+	unsigned																	m_inlined_size;
 
 }; // class fat_inline_base
 
@@ -395,7 +395,7 @@ public:
 	fat_node<pointer_for_fat_size> *	cast_node		()	{ return & m_base; }
 
 public:
-	u32									m_uncompressed_size;
+	unsigned									m_uncompressed_size;
 	fat_node<pointer_for_fat_size>		m_base;
 
 }; // class fat_db_inline_compressed_file_node
@@ -412,7 +412,7 @@ public:
 	fat_disk_file_node   									() : m_resource_base(NULL), m_disk_path(NULL), m_size(0) {}
 
 	pcstr								disk_path			() const	{ return m_disk_path; }
-	u32									size				() const	{ return (u32)m_size; }
+	unsigned									size				() const	{ return (unsigned)m_size; }
 	fat_node<pointer_for_fat_size> *	cast_node 			()			{ return & m_base; }
 
 public:

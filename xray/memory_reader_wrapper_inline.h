@@ -16,7 +16,7 @@ inline READER_WRAPPER::reader_wrapper							( )
 }
 
 TEMPLATE_SIGNATURE
-inline void READER_WRAPPER::r									( pvoid result, u32 destination_size, u32 const size )
+inline void READER_WRAPPER::r									( pvoid result, unsigned destination_size, unsigned const size )
 {
 	impl( ).r			( result, destination_size, size );
 }
@@ -34,9 +34,9 @@ inline s64 READER_WRAPPER::r_s64								( )
 }
 
 TEMPLATE_SIGNATURE
-inline u32 READER_WRAPPER::r_u32								( )
+inline unsigned READER_WRAPPER::r_unsigned								( )
 {
-	return				( r< u32 >( ) );
+	return				( r< unsigned >( ) );
 }
 
 TEMPLATE_SIGNATURE

@@ -9,7 +9,7 @@
 
 using xray::memory::stream;
 
-void stream::append				( pcvoid const buffer, u32 const buffer_size )
+void stream::append				( pcvoid const buffer, unsigned const buffer_size )
 {
 	if ( !buffer_size )
 		return;

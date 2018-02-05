@@ -63,7 +63,7 @@ public:
 	intrusive_list<fs_task, fs_task_base, & fs_task_base::next>	children;
 	fs_iterator					iterator;
 	memory::base_allocator *	allocator;
-	u32							thread_id;
+	unsigned							thread_id;
 	bool						result;
 
 	fs_task						(type_enum type);

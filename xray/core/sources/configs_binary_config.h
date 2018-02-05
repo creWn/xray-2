@@ -20,12 +20,12 @@ namespace configs {
 
 class binary_config : public xray::configs::binary_config {
 public:
-					binary_config	( pcbyte buffer, u32 buffer_size, xray::memory::base_allocator* allocator );
+					binary_config	( pcbyte buffer, unsigned buffer_size, xray::memory::base_allocator* allocator );
 	virtual		   ~binary_config	( );
 
 private:
 //			bool	load_resource	( resources::queries_result& data );
-			void	load			( pcbyte buffer, u32 buffer_size );
+			void	load			( pcbyte buffer, unsigned buffer_size );
 
 private:
 	xray::memory::base_allocator*			m_allocator;

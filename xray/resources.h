@@ -21,7 +21,7 @@ enum
 	low_priority			=	-3
 };
 
-typedef u32					query_flag_enum;
+typedef unsigned					query_flag_enum;
 enum
 {
 	query_flag_recursive	=	1,
@@ -48,7 +48,7 @@ XRAY_CORE_API	void   	start_query_transaction	( );
 XRAY_CORE_API	void   	end_query_transaction	( );
 
 XRAY_CORE_API	long   	query_resources			( request const 			requests[], 
-												  u32						count, 
+												  unsigned						count, 
 												  query_callback const &	, 
 												  memory::base_allocator *	,
 												  user_data_variant const *	user_data[] = NULL,
@@ -64,7 +64,7 @@ XRAY_CORE_API	long   	query_resource			( pcstr						request_path,
 												  query_result_for_cook *	parent		=	NULL );
 
 XRAY_CORE_API	void   	query_resources_and_wait( request const *			requests, 
-												  u32						count, 
+												  unsigned						count, 
 												  query_callback const &	, 
 												  memory::base_allocator *	,
 												  user_data_variant const *	user_data[] =	NULL,
@@ -80,7 +80,7 @@ XRAY_CORE_API	void   	query_resource_and_wait	( pcstr						request_path,
 												  query_result_for_cook *	parent		=	NULL );
 
 XRAY_CORE_API	long   	query_create_resources	( creation_request const *  requests, 
-											 	  u32						count, 
+											 	  unsigned						count, 
 											 	  query_callback const &	, 
 											 	  memory::base_allocator *	,
 												  user_data_variant const *	user_data[] =	NULL,
@@ -89,7 +89,7 @@ XRAY_CORE_API	long   	query_create_resources	( creation_request const *  request
 
 XRAY_CORE_API	void   	query_create_resources_and_wait
 												( creation_request const *  requests, 
-											 	  u32						count, 
+											 	  unsigned						count, 
 											 	  query_callback const &	, 
 											 	  memory::base_allocator *	,
 												  user_data_variant	const *	user_data[] =	NULL,

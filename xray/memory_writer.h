@@ -21,14 +21,14 @@ public:
 	virtual			~i_writer	( );
 
 	// kernel
-	virtual void	seek	(u32 pos)						= 0;
-	virtual u32		tell	()								= 0;
+	virtual void	seek	(unsigned pos)						= 0;
+	virtual unsigned		tell	()								= 0;
 
-	virtual void	w		(const void* ptr, u32 count)	= 0;
+	virtual void	w		(const void* ptr, unsigned count)	= 0;
 
 	// generalized writing functions
 //	void			w_u64	(u64 d)					{	w(&d,sizeof(u64));	}
-	inline void			w_u32	(u32 d);
+	inline void			w_unsigned	(unsigned d);
 	inline void			w_u16	(u16 d);
 	inline void			w_u8	(u8 d);
 //	void			w_s64	(s64 d)					{	w(&d,sizeof(s64));	}
@@ -36,11 +36,11 @@ public:
 	inline void			w_s16	(s16 d);
 	inline void			w_s8	(s8 d);
 	inline void			w_float	(float d);
-	//void			w_string(const char *p)			{	w(p,(u32)xr_strlen(p));w_u8(13);w_u8(10);	}
+	//void			w_string(const char *p)			{	w(p,(unsigned)xr_strlen(p));w_u8(13);w_u8(10);	}
 	inline void			w_stringZ(const char *p);
 	//void			w_stringZ(const shared_str& p) 	{	w(*p?*p:"",p.size());w_u8(0);		}
 	//void			w_stringZ(shared_str& p)		{	w(*p?*p:"",p.size());w_u8(0);		}
-	//void			w_stringZ(const xr_string& p)	{	w(p.c_str()?p.c_str():"",(u32)p.size());w_u8(0);	}
+	//void			w_stringZ(const xr_string& p)	{	w(p.c_str()?p.c_str():"",(unsigned)p.size());w_u8(0);	}
 	//void			w_fcolor(const Fcolor &v)		{	w(&v,sizeof(Fcolor));	}
 	//void			w_fvector4(const Fvector4 &v)	{	w(&v,sizeof(Fvector4));	}
 	void			w_fvector3(const math::float3 &v);
@@ -50,16 +50,16 @@ public:
 	//void			w_ivector2(const Ivector2 &v)	{	w(&v,sizeof(Ivector2));	}
 
 	// generalized chunking
-	u32				align		();
-	void			open_chunk	(u32 type);
+	unsigned				align		();
+	void			open_chunk	(unsigned type);
 	void			close_chunk	();
-	u32				chunk_size	();					// returns size of currently opened chunk, 0 otherwise
-	void			w_chunk		(u32 type, void* data, u32 size);
+	unsigned				chunk_size	();					// returns size of currently opened chunk, 0 otherwise
+	void			w_chunk		(unsigned type, void* data, unsigned size);
 	virtual bool	valid		()									{return true;}
 	virtual	void	flush		() = 0;
 
 private:
-	vectora<u32>				m_chunk_pos;
+	vectora<unsigned>				m_chunk_pos;
 protected:
 	memory::base_allocator*		m_allocator;
 };
@@ -68,23 +68,23 @@ protected:
 class XRAY_CORE_API writer : public i_writer
 {
 	u8*				data;
-	u32				position;
-	u32				mem_size;
-	u32				file_size;
+	unsigned				position;
+	unsigned				mem_size;
+	unsigned				file_size;
 public:
 	writer			( memory::base_allocator* allocator );
 	bool			external_data;
 	virtual			~writer();
 
 	// kernel
-	virtual void	w			(const void* ptr, u32 count);
+	virtual void	w			(const void* ptr, unsigned count);
 
-	virtual void	seek		(u32 pos)	{position = pos;			}
-	virtual u32		tell		() 			{return position;			}
+	virtual void	seek		(unsigned pos)	{position = pos;			}
+	virtual unsigned		tell		() 			{return position;			}
 
 	// specific
 	inline u8*		pointer		()			{return data;				}
-	inline u32		size		() const 	{return file_size;			}
+	inline unsigned		size		() const 	{return file_size;			}
 	inline void		clear		()			{file_size=0; position=0;	}
 	void			free_		()			;
 	bool			save_to		(pcstr fn);

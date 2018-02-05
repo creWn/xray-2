@@ -16,7 +16,7 @@ namespace resources {
 // managed_resource
 //----------------------------------------------------------
 
-managed_resource::managed_resource (u32	const size, class_id const class_id) 
+managed_resource::managed_resource (unsigned	const size, class_id const class_id) 
 					: resource_base			(resource_base::is_resource_flag),
 					  m_node				(NULL),
 					  m_next_delay_delete	(NULL),
@@ -33,13 +33,13 @@ managed_resource::~managed_resource ()
 	R_ASSERT							(m_node);
 }
 
-void   managed_resource::resize_down (u32 const new_size)				
+void   managed_resource::resize_down (unsigned const new_size)				
 {
 	R_ASSERT								(new_size);
 	R_ASSERT								(new_size <= m_size);
 	m_size								=	new_size;
 
-	u32 const node_new_size				=	sizeof(managed_node) + new_size;
+	unsigned const node_new_size				=	sizeof(managed_node) + new_size;
 
 	memory::g_resources_managed_allocator.resize_down(m_node, node_new_size);
 #ifdef DEBUG
@@ -113,10 +113,10 @@ void   managed_resource::unpin (pcbyte const_pinned_data)
 // 											 (pbyte)pinned_data);
 }
 
-u32   managed_resource::get_buffer_size() const
+unsigned   managed_resource::get_buffer_size() const
 {
 	ASSERT									(m_node);
-	return									(u32)m_node->m_size;
+	return									(unsigned)m_node->m_size;
 }
 
 void   managed_resource::get_full_path (fs::path_string & dest) const

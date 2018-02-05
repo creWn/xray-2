@@ -86,8 +86,8 @@ public:
 			return								mutable_buffer::zero();
 
 		XRAY_UNREFERENCED_PARAMETER				(in_query);
-		u32 const raw_file_size				=	file_exist ? raw_file_data.size() : generate_file_data_size;
-		u32 const resource_size				=	sizeof(test_unmanaged_resource) + raw_file_size;
+		unsigned const raw_file_size				=	file_exist ? raw_file_data.size() : generate_file_data_size;
+		unsigned const resource_size				=	sizeof(test_unmanaged_resource) + raw_file_size;
 		
 		mutable_buffer const out_resource		(m_allocate_in_current_thread ? 
 												 MT_ALLOC(char, resource_size) : 

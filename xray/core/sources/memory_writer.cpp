@@ -26,11 +26,11 @@ i_writer::~i_writer( )
 }
 
 
-void i_writer::open_chunk	(u32 type)
+void i_writer::open_chunk	(unsigned type)
 {
-	w_u32					(type);
+	w_unsigned					(type);
 	m_chunk_pos.push_back	(tell());
-	w_u32					(0);	// the place for 'size'
+	w_unsigned					(0);	// the place for 'size'
 }
 
 void i_writer::close_chunk	()
@@ -39,12 +39,12 @@ void i_writer::close_chunk	()
 
 	int pos			= tell();
 	seek			(m_chunk_pos.back());
-	w_u32			(pos-m_chunk_pos.back()-4);
+	w_unsigned			(pos-m_chunk_pos.back()-4);
 	seek			(pos);
 	m_chunk_pos.pop_back	();
 }
 
-u32 i_writer::chunk_size	()					// returns size of currently opened chunk, 0 otherwise
+unsigned i_writer::chunk_size	()					// returns size of currently opened chunk, 0 otherwise
 {
 	if (m_chunk_pos.empty())	
 		return 0;
@@ -52,7 +52,7 @@ u32 i_writer::chunk_size	()					// returns size of currently opened chunk, 0 oth
 	return tell() - m_chunk_pos.back()-4;
 }
 
-void i_writer::w_chunk(u32 type, void* data, u32 size)
+void i_writer::w_chunk(unsigned type, void* data, unsigned size)
 {
 	open_chunk	(type);
 	w			(data,size);
@@ -82,7 +82,7 @@ void writer::free_()
 		XRAY_FREE_IMPL( m_allocator, data );
 }
 
-void writer::w	(const void* ptr, u32 count)
+void writer::w	(const void* ptr, unsigned count)
 {
 	if (position+count > mem_size) 
 	{

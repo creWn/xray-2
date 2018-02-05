@@ -130,7 +130,7 @@ private:
 			fs::path_string	const virtual_path	=	(pcstr)value["virtual_path"];
 
 			if ( value.value_exists("create_physical_path_if_not_exists") && 
-				 (u32)value["create_physical_path_if_not_exists"] == 1 )
+				 (unsigned)value["create_physical_path_if_not_exists"] == 1 )
 			{
 				fs::make_dir_r						(physical_path.c_str());
 			}
@@ -161,7 +161,7 @@ private:
 	}
 
 	fs_task *						m_mount_composite_task;
-	u32								m_disk_mounts_left_count;
+	unsigned								m_disk_mounts_left_count;
 	bool							m_success;
 	type_enum						m_type;
 	memory::base_allocator *		m_allocator;

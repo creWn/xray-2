@@ -21,9 +21,9 @@ inline u64 xray::timing::timer::get_elapsed_ticks	( ) const
 	return			( get_QPC( ) - m_start_time );
 }
 
-inline u32 xray::timing::timer::get_elapsed_ms		( ) const
+inline unsigned xray::timing::timer::get_elapsed_ms		( ) const
 {
-	return			( u32( get_elapsed_ticks( )*u64( 1000 ) / g_qpc_per_second ) );
+	return			( unsigned( get_elapsed_ticks( )*u64( 1000 ) / g_qpc_per_second ) );
 }
 
 inline float xray::timing::timer::get_elapsed_sec	( ) const

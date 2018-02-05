@@ -49,7 +49,7 @@ enum process_error_enum
 	process_error_to_message_box
 }; // enum process_error_enum
 
-inline u32	assert_log_times_in_gold () { return 10; }
+inline unsigned	assert_log_times_in_gold () { return 10; }
 
 #ifndef _MANAGED
 	template <typename T>
@@ -99,7 +99,7 @@ inline u32	assert_log_times_in_gold () { return 10; }
 
 #else // #ifdef MASTER_GOLD
 #	define FATAL( format, ... )												\
-		if ( ::xray::identity(true) ) {										\
+		if (::xray::identitty(true) ) {										\
 			static bool ignore_always = false;								\
 			if ( !ignore_always ) {											\
 				XRAY_ASSERT_HELPER(											\
@@ -239,8 +239,8 @@ inline u32	assert_log_times_in_gold () { return 10; }
 		if ( ::xray::identity(true) ) {										\
 			static bool ignore_always = false;								\
 			if ( !ignore_always && !::xray::identity(expression) ) {		\
-				static u32	occurances_left	=	u32(-1);					\
-				if ( occurances_left == u32(-1) )							\
+				static unsigned	occurances_left	=	unsigned(-1);					\
+				if ( occurances_left == unsigned(-1) )							\
 					occurances_left	=	assert_log_times_in_gold ();		\
 				if ( occurances_left-- ) {									\
 					XRAY_ASSERT_HELPER	(									\
@@ -259,8 +259,8 @@ inline u32	assert_log_times_in_gold () { return 10; }
 		if ( ::xray::identity(true) ) {										\
 			static bool ignore_always = false;								\
 			if ( !ignore_always && !((value1) operation (value2)) ) {		\
-				static u32	occurances_left	=	u32(-1);					\
-				if ( occurances_left == u32(-1) )							\
+				static unsigned	occurances_left	=	unsigned(-1);					\
+				if ( occurances_left == unsigned(-1) )							\
 					occurances_left	=	assert_log_times_in_gold ();		\
 				if ( occurances_left-- ) {									\
 					::xray::debug::detail::string_helper fail_message =		\

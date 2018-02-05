@@ -60,7 +60,7 @@ public:
 
 	intersection	intersect	( float3 const& position, float3 const& direction, float3& result ) const;
 
-	inline	float3	vertex		( u32 index ) const;
+	inline	float3	vertex		( unsigned index ) const;
 	inline	void	vertices	( float3 ( &result )[ 8 ] ) const;
 
 	inline	bool	valid		( ) const;

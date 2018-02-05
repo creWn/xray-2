@@ -39,8 +39,8 @@ void* virtual_alloc	(virtual_alloc_arena* arena, size_t size)
 
 		ASSERT								( i->size > size );
 
-		u32 const page_size					= 4096;
-		u32 const request_size				= ( ( int( size ) - 1)/page_size + 1 )*page_size;
+		unsigned const page_size					= 4096;
+		unsigned const request_size				= ( ( int( size ) - 1)/page_size + 1 )*page_size;
 
 		ASSERT								( arena->free_size > request_size );
 		arena->free_size					-= request_size;

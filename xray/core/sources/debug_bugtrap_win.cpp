@@ -103,7 +103,7 @@ static void load_library							( )
 	load_function					( s_BT_AddLogFile		, s_bugtrap_handle, "BT_AddLogFile");
 }
 
-static pcstr convert_to_unicode_if_needed			( pcstr const message, WCHAR* const output, u32 const max_count )
+static pcstr convert_to_unicode_if_needed			( pcstr const message, WCHAR* const output, unsigned const max_count )
 {
 	if ( s_bugtrap_usage == xray::core::debug::native_bugtrap )
 		return						message;
@@ -231,7 +231,7 @@ void xray::core::debug::on_error					( pcstr message )
 		bugtrap::initialize			( );
 
 	if ( s_bugtrap_usage == native_bugtrap ) {
-		u32 const count				= strings::length(message) + 1;
+		unsigned const count				= strings::length(message) + 1;
 		WCHAR* unicode_message		= (WCHAR*)ALLOCA( count*sizeof(WCHAR) );
 		s_BT_SetUserMessage			( convert_to_unicode_if_needed(message,unicode_message,count) );
 	}

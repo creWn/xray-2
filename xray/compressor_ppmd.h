@@ -26,13 +26,13 @@ public:
 
 public:
 					ppmd_compressor (memory::base_allocator* allocator, 
-									 u32 sub_allocator_size_mb,
+									 unsigned sub_allocator_size_mb,
 									 model_restoration_enum model_restoration = model_restoration_restart);
 
 	virtual		   ~ppmd_compressor	();
 
-	virtual signalling_bool	compress	(const_buffer src, mutable_buffer dest, u32& out_size);
-	virtual signalling_bool	decompress	(const_buffer src, mutable_buffer dest, u32& out_size);
+	virtual signalling_bool	compress	(const_buffer src, mutable_buffer dest, unsigned& out_size);
+	virtual signalling_bool	decompress	(const_buffer src, mutable_buffer dest, unsigned& out_size);
 
 private:
 	memory::base_allocator*			m_allocator;

@@ -12,8 +12,8 @@ using xray::memory::platform::regions_type;
 
 static sys_memory_t	s_memory_id		= 0;
 static sys_addr_t s_address			= 0;
-static u32 s_arena_size				= 0;
-static u32 s_allocated_arena_size	= 0;
+static unsigned s_arena_size				= 0;
+static unsigned s_allocated_arena_size	= 0;
 static pbyte s_arena_address		= 0;
 
 void xray::memory::platform::set_low_fragmentation_heap		( )
@@ -49,7 +49,7 @@ void xray::memory::platform::calculated_desirable_arena_sizes	(
 	R_ASSERT_CMP					( total_memory, >, os_memory );
 	R_ASSERT_CMP					( total_memory, >, os_memory + arena_sizes );
 
-	u32 const granularity			= 1*Mb;
+	unsigned const granularity			= 1*Mb;
 	float const unmanaged_proportion = 1.f/3.f;
 	u64 const free_size				= total_memory - (os_memory + arena_sizes);
 	desirable_unmanaged_arena_size	= math::align_up( (u64)(free_size*unmanaged_proportion), (u64)granularity );
@@ -60,10 +60,10 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 {
 	sys_memory_info_t memory_info;
 	sys_memory_get_user_memory_size	( &memory_info );
-	s_arena_size					= math::align_down( memory_info.available_user_memory, (u32)1*Mb );
+	s_arena_size					= math::align_down( memory_info.available_user_memory, (unsigned)1*Mb );
 	s_arena_size					-= 2*Mb;
 
-	u32 const available_memory_256mb = math::align_up( memory_info.available_user_memory, (u32)256*Mb );
+	unsigned const available_memory_256mb = math::align_up( memory_info.available_user_memory, (unsigned)256*Mb );
 
 	int error;
 	error							=
@@ -84,10 +84,10 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 	s_arena_address					= *(pbyte*)&s_address;
 
 #ifndef MASTER_GOLD
-	memory::fill32					( s_arena_address, s_arena_size, memory::uninitialized_value<u32>(), s_arena_size/sizeof(u32) );
+	memory::fill32					( s_arena_address, s_arena_size, memory::uninitialized_value<unsigned>(), s_arena_size/sizeof(unsigned) );
 #endif // #ifndef MASTER_GOLD
 
-	u32 current_arena_size			= s_arena_size;
+	unsigned current_arena_size			= s_arena_size;
 	s_allocated_arena_size			= 0;
 
 	regions_type::iterator i 		= arenas.begin( );

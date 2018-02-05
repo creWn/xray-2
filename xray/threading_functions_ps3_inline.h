@@ -14,7 +14,7 @@ namespace threading {
 
 XRAY_THREADING_INLINE atomic32_value_type interlocked_increment					( atomic32_type& value )
 {
-	return				cellAtomicIncr32( (u32*)&value ) + 1;
+	return				cellAtomicIncr32( (unsigned*)&value ) + 1;
 }
 
 XRAY_THREADING_INLINE atomic32_value_type interlocked_decrement					( atomic32_type& value )
@@ -49,7 +49,7 @@ XRAY_THREADING_INLINE atomic32_value_type interlocked_exchange					( atomic32_ty
 
 XRAY_THREADING_INLINE atomic_ptr_value_type interlocked_exchange_pointer		( atomic_ptr_type& target, pvoid const value )
 {
-	atomic32_value_type const result	= cellAtomicStore32( (u32*)&target, *(u32*)&value );
+	atomic32_value_type const result	= cellAtomicStore32( (unsigned*)&target, *(unsigned*)&value );
 	return				*(pvoid*)&result;
 }
 
@@ -65,7 +65,7 @@ XRAY_THREADING_INLINE atomic64_value_type interlocked_compare_exchange			( atomi
 
 XRAY_THREADING_INLINE atomic_ptr_value_type interlocked_compare_exchange_pointer( atomic_ptr_type& target, pvoid const exchange, pvoid const comparand )
 {
-	atomic32_value_type const result	= cellAtomicCompareAndSwap32( (atomic32_value_type*)&target, *(u32 const*)&comparand, *(u32 const*)&exchange );
+	atomic32_value_type const result	= cellAtomicCompareAndSwap32( (atomic32_value_type*)&target, *(unsigned const*)&comparand, *(unsigned const*)&exchange );
 	return				*(atomic_ptr_value_type*)&result;
 }
 

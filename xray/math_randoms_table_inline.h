@@ -4,8 +4,8 @@
 namespace xray {
 namespace math {
 
-template <u32 num_randoms, u32 range, allow_duplicates_bool allow_duplicates>
-randoms_table<num_randoms, range, allow_duplicates>::randoms_table (u32 seed)
+template <unsigned num_randoms, unsigned range, allow_duplicates_bool allow_duplicates>
+randoms_table<num_randoms, range, allow_duplicates>::randoms_table (unsigned seed)
 {
 	random32				random(seed);
 
@@ -14,9 +14,9 @@ randoms_table<num_randoms, range, allow_duplicates>::randoms_table (u32 seed)
 		R_ASSERT			(num_randoms <= 32768, "maximum table length without duplicates is 32768");
 #endif // #ifndef MASTER_GOLD
 	
-	for ( u32 i=0; i<num_randoms; ++i )
+	for ( unsigned i=0; i<num_randoms; ++i )
 	{
-		u32 number		=	0;
+		unsigned number		=	0;
 		while ( xray::identity(true) ) 	
 		{
 			number		=	random.random(range);
@@ -33,10 +33,10 @@ randoms_table<num_randoms, range, allow_duplicates>::randoms_table (u32 seed)
 	m_index				=	0;
 }
 
-template <u32 num_randoms, u32 range, allow_duplicates_bool allow_duplicates>
-u32   randoms_table<num_randoms, range, allow_duplicates>::next_random ()
+template <unsigned num_randoms, unsigned range, allow_duplicates_bool allow_duplicates>
+unsigned   randoms_table<num_randoms, range, allow_duplicates>::next_random ()
 {
-	u32	result			=	m_randoms[m_index];
+	unsigned	result			=	m_randoms[m_index];
 	++m_index;
 	if ( m_index == num_randoms )
 	{
@@ -46,7 +46,7 @@ u32   randoms_table<num_randoms, range, allow_duplicates>::next_random ()
 	return					result;
 }
 
-template <u32 num_randoms, u32 range, allow_duplicates_bool allow_duplicates>
+template <unsigned num_randoms, unsigned range, allow_duplicates_bool allow_duplicates>
 void   randoms_table<num_randoms, range, allow_duplicates>::to_first_random	()
 {
 	m_index				=	0;

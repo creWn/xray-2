@@ -29,7 +29,7 @@ struct task_base
 class task : public task_base, public detail::noncopyable
 {
 public:
-	static u32 const references_held_by_system_count	=	4;
+	static unsigned const references_held_by_system_count	=	4;
 
 	typedef task_function								function;
 

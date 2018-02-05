@@ -14,13 +14,13 @@ template <class Ordinal>
 void			reverse_bytes	(Ordinal& res);
 
 // @post: position in files are changed
-bool			files_equal		(FILE* f1, FILE* f2, u32 size);
+bool			files_equal		(FILE* f1, FILE* f2, unsigned size);
 // @post: position in files are changed
-void			copy_data		(FILE* f_dest, FILE* f_src, u32 size, u32* hash = NULL);
+void			copy_data		(FILE* f_dest, FILE* f_src, unsigned size, unsigned* hash = NULL);
 
 
-u32				path_crc32		(pcstr const data, u32 const size, u32 const start_value = 0);
-u32				crc32			(pcstr const data, u32 const size, u32 const start_value = 0);
+unsigned				path_crc32		(pcstr const data, unsigned const size, unsigned const start_value = 0);
+unsigned				crc32			(pcstr const data, unsigned const size, unsigned const start_value = 0);
 bool			file_exists		(pcstr path);
 
 } // namespace fs

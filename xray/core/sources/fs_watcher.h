@@ -31,7 +31,7 @@ void   					finalize_watcher					();
 void   					watch_physical_directory			(pcstr const physical_path);
 void   					quit_watching_physical_directory	(pcstr const physical_path);
 void					wakeup_watcher_thread				();
-u32						watcher_thread_id					();
+unsigned						watcher_thread_id					();
 
 } // namespace fs
 } // namespace xray

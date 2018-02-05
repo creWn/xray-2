@@ -39,7 +39,7 @@ log_callback get_log_callback	()
 }
 
 int get_tree_verbosity			( path_parts* const path );
-void log_thread_unsafe			( logging::settings const *, pcstr string, u32 string_length, logging::verbosity verbosity );
+void log_thread_unsafe			( logging::settings const *, pcstr string, unsigned string_length, logging::verbosity verbosity );
 
 } // namespace logging
 } // namespace xray
@@ -101,16 +101,16 @@ struct predicate {
 	{
 	}
 
-	inline bool	operator ( )	( u32 const index, pcstr string, u32 const length, bool const is_last ) const
+	inline bool	operator ( )	( unsigned const index, pcstr string, unsigned const length, bool const is_last ) const
 	{
 		// the underline code is the same as above
 		// this is optimization for the debug mode :)
 		// because debug::output works too slow for us
 
-		u32 const	initiator_length	=	xray::strings::length ( m_initiator );
+		unsigned const	initiator_length	=	xray::strings::length ( m_initiator );
 		char const	end_line[]			=	"\r\n";
-		u32 const	end_line_length		=	xray::array_size(end_line) - 1; // counts trailing zero, so need to -1
-		u32 const	final_length		=	initiator_length + length + end_line_length + 1;
+		unsigned const	end_line_length		=	xray::array_size(end_line) - 1; // counts trailing zero, so need to -1
+		unsigned const	final_length		=	initiator_length + length + end_line_length + 1;
 
 		xray::buffer_string	final_string	((pstr)ALLOCA(final_length*sizeof(char)), final_length);
 
@@ -141,7 +141,7 @@ struct predicate {
 	}
 }; // struct predicate
 
-static void fill_initiator		( pstr pointer, u32 const buffer_size, path_parts& path, int const verbosity )
+static void fill_initiator		( pstr pointer, unsigned const buffer_size, path_parts& path, int const verbosity )
 {
 	xray::buffer_string	dest  ( pointer, buffer_size );
 

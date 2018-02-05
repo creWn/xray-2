@@ -17,7 +17,7 @@ namespace configs {
 xray::configs::lua_config*  create_lua_config_inplace	( mutable_buffer const & in_out_buffer, 
 														  pcstr file_name, 
 														  memory::reader& reader );
-pvoid						lua_allocate				( u32 const size );
+pvoid						lua_allocate				( unsigned const size );
 void						lua_deallocate				( pvoid buffer );
 void						destroy_lua_config			( xray::resources::unmanaged_resource* config );
 

@@ -25,7 +25,7 @@ public:
 	intersection		intersect	( float3 const& position, float3 const& direction, float& distance ) const;
 
 private:
-	u32					intersect	( float3 const& position, float3 const& direction, float ( &t )[ 2 ] ) const;
+	unsigned					intersect	( float3 const& position, float3 const& direction, float ( &t )[ 2 ] ) const;
 }; // class cylinder
 
 } // namespace math

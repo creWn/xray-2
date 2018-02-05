@@ -37,7 +37,7 @@ void   device_manager::mark_unmovables_before_defragmentation ()
 	threading::mutex_raii	raii			(m_pre_allocated_mutex);
 
 	query_result * current_query		=	m_pre_allocated.front();
-	u32 queries_left					=	managed_resource_allocator::max_parallel_with_defragmentation_file_operations_allowed 
+	unsigned queries_left					=	managed_resource_allocator::max_parallel_with_defragmentation_file_operations_allowed 
 												/ 
 											g_resources_manager->num_device_managers();
 
@@ -101,8 +101,8 @@ bool   device_manager::process_read_query ()
 	if ( result && current_pos + m_sector_size < file_end )
 	{
 		mutable_buffer const file_data	=	cast_away_const(m_query->pin_compressed_or_raw_file());
-		u32 const offs_in_file			=	u32(current_pos - file_pos);
-		u32 const read_size				=	u32(last_sector_pos - current_pos);
+		unsigned const offs_in_file			=	unsigned(current_pos - file_pos);
+		unsigned const read_size				=	unsigned(last_sector_pos - current_pos);
 		mutable_buffer const dest_data	=	file_data.slice(offs_in_file, read_size);
 		result							=	do_async_operation(dest_data, current_pos, true);
 		if ( result )

@@ -104,7 +104,7 @@ bool   query_result::allocate_compressed_resource_if_needed ()
 	if ( fat_it.is_inlined() )
 		return								false;
 
-	u32 const compressed_size			=	fat_it.get_compressed_file_size();
+	unsigned const compressed_size			=	fat_it.get_compressed_file_size();
 	m_compressed_resource				=	g_resources_manager->allocate_managed_resource(compressed_size);
 	if ( m_compressed_resource )
 		m_compressed_resource->late_set_fat_it	(has_flag(flag_uses_physical_path) ? NULL : m_fat_it);
@@ -122,7 +122,7 @@ bool   query_result::allocate_final_managed_resource_if_needed ()
 	file_system::iterator fat_it		=	wrapper_to_fat_it( m_fat_it );
 	
 	const_buffer	raw_data			=	need_create_resource_if_no_file() ? const_buffer(0, 0) : pin_raw_buffer();
-	u32 const managed_size				=	cook->calculate_resource_size(raw_data, !need_create_resource_if_no_file());
+	unsigned const managed_size				=	cook->calculate_resource_size(raw_data, !need_create_resource_if_no_file());
 	
 	if ( !need_create_resource_if_no_file() )
 		unpin_raw_buffer					(raw_data);
@@ -146,7 +146,7 @@ bool   query_result::allocate_raw_managed_resource_if_needed ()
 
 	R_ASSERT								(!cook_base::find_inplace_unmanaged_cook(m_class_id));
 
-	u32 raw_managed_size				=	0;	
+	unsigned raw_managed_size				=	0;	
 	if ( cook_base::find_managed_cook(m_class_id) || 
 		 cook_base::find_unmanaged_cook(m_class_id) || 
 		 !cook_base::find_cook(m_class_id) )
@@ -243,7 +243,7 @@ bool   query_result::allocate_raw_unmanaged_resource_if_needed ()
 	}
 	else
 	{
-		u32 const raw_file_size			=	get_raw_file_size();
+		unsigned const raw_file_size			=	get_raw_file_size();
 		m_offset_to_file				=	0;
 		m_raw_unmanaged_buffer			=	cook->allocate_resource(*this, raw_file_size, m_offset_to_file, true);
 		R_ASSERT							(m_raw_unmanaged_buffer);
@@ -281,7 +281,7 @@ void   query_result::free_unmanaged_buffer ()
 void   query_result::set_deleter_object (unmanaged_resource * resource)
 {
 	cook_base *	const cook				=	cook_base::find_cook(m_class_id);
-	u32 deallocate_thread_id			=	cook->allocate_thread_id();
+	unsigned deallocate_thread_id			=	cook->allocate_thread_id();
 	
 	if ( deallocate_thread_id == cook_base::use_user_thread_id )
 		deallocate_thread_id			=	m_user_thread_id;
@@ -348,12 +348,12 @@ void   query_result_for_cook::save_generated_resource (const_buffer const & in_d
 	this_ptr->set_flag						(query_result::flag_need_saving_of_generated_resource);
 }
 
-u32   query_result::allocate_thread_id () const
+unsigned   query_result::allocate_thread_id () const
 {
 	cook_base * const cook				=	cook_base::find_cook(m_class_id);
 	R_ASSERT								(cook);
 
-	u32 allocate_thread_id				=	cook->allocate_thread_id();
+	unsigned allocate_thread_id				=	cook->allocate_thread_id();
 	if ( allocate_thread_id == cook_base::use_user_thread_id )
 		allocate_thread_id				=	m_user_thread_id;
 

@@ -11,10 +11,10 @@ namespace xray {
 namespace memory {
 
 template <class T, class ThreadPolicy>
-fixed_size_allocator<T, ThreadPolicy>::fixed_size_allocator (u32 const granularity) 
+fixed_size_allocator<T, ThreadPolicy>::fixed_size_allocator (unsigned const granularity) 
 	: m_arena_id(NULL), m_allocated_count(0)
 {
-	m_granularity					=	math::align_up((u32)sizeof(node), granularity);
+	m_granularity					=	math::align_up((unsigned)sizeof(node), granularity);
 	R_ASSERT_CMP						(m_granularity, >=, sizeof(node));
 	m_free_list.whole				=	0;
 }
@@ -23,11 +23,11 @@ template <class T, class ThreadPolicy>
 inline void   fixed_size_allocator<T, ThreadPolicy>::initialize_impl (pvoid arena, u64 size, pcstr arena_id)
 {
 	m_arena_id						=	arena_id;
-	R_ASSERT							(size <= u32(-1));
+	R_ASSERT							(size <= unsigned(-1));
 	pbyte const aligned_arena		=	(pbyte)math::align_up((size_t)arena, (size_t)XRAY_DEFAULT_ALIGN_SIZE);
-	m_max_count						=	((u32)size - u32(aligned_arena - (pbyte)arena)) / m_granularity;
+	m_max_count						=	((unsigned)size - unsigned(aligned_arena - (pbyte)arena)) / m_granularity;
 
-	for ( u32 i=0; i<m_max_count; ++i )
+	for ( unsigned i=0; i<m_max_count; ++i )
 	{
 		node * const current		=	(node *)(aligned_arena + (i * m_granularity));
 		current->next				=	(i == m_max_count - 1) ? NULL : (node *)((pbyte)current + m_granularity);
@@ -93,7 +93,7 @@ inline void   fixed_size_allocator<T, ThreadPolicy>::call_free (pvoid pointer XR
 template <class T, class ThreadPolicy>
 void   fixed_size_allocator<T, ThreadPolicy>::deallocate (T * data)
 {
-	u32 const data_offset_in_node	=	(u32)&((node *)NULL)->data;
+	unsigned const data_offset_in_node	=	(unsigned)&((node *)NULL)->data;
 	node * freeing_node				=	(node *)((pbyte)data - data_offset_in_node);
 
 	pointer_and_counter 				head;

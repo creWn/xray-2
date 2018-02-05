@@ -15,7 +15,7 @@ namespace fs   {
 
 bool   file_system_impl::mount_disk_file (fat_folder_node<> * const	work_folder, 
 										  pcstr const				physical_path, 
-										  u32 const					hash)
+										  unsigned const					hash)
 {
 	path_info::type_enum const path_type	=	get_path_info(NULL, physical_path);
 	file_size_type file_size = 0;
@@ -25,14 +25,14 @@ bool   file_system_impl::mount_disk_file (fat_folder_node<> * const	work_folder,
 		LOGI_INFO							("file_system", "mount_disk_file '%s' cannot calculate file size", physical_path);
 
 	path_string const file_name				=	file_name_from_path(physical_path);
-	u32 const file_hash						=	crc32(file_name.c_str(), file_name.length(), hash);
+	unsigned const file_hash						=	crc32(file_name.c_str(), file_name.length(), hash);
 
 	fat_node<> * const new_node				=	create_disk_file_node(	 file_hash, 
 																		 file_name.c_str(), 
 																		 file_name.length(), 
 																		 physical_path,
 																		 strings::length(physical_path),
-																		 (u32)file_size )->cast_node();
+																		 (unsigned)file_size )->cast_node();
 	
 	actualize_node								(new_node, file_hash, work_folder);
 	return										true;
@@ -40,7 +40,7 @@ bool   file_system_impl::mount_disk_file (fat_folder_node<> * const	work_folder,
 
 void   file_system_impl::mount_disk_folder (fat_folder_node<> * const	work_folder, 
 											pcstr const					physical_path, 
-											u32 const					hash)
+											unsigned const					hash)
 {
 	_finddata32i64_t						file_desc;
 	path_string								file_spec;
@@ -60,13 +60,13 @@ void   file_system_impl::mount_disk_folder (fat_folder_node<> * const	work_folde
 			continue;
 
 		const bool   found_folder		=	(file_desc.attrib & _A_SUBDIR) != 0;
-		u32 const	saved_size			=	file_spec.length();
+		unsigned const	saved_size			=	file_spec.length();
 		file_spec						+=	file_desc.name;
 
-		u32 const name_length			=	strings::length(file_desc.name);
-		u32 const child_hash			=	crc32(file_desc.name, name_length, hash);
+		unsigned const name_length			=	strings::length(file_desc.name);
+		unsigned const child_hash			=	crc32(file_desc.name, name_length, hash);
 
-		u32 const full_name_length		=	file_spec.length();
+		unsigned const full_name_length		=	file_spec.length();
 		fat_node<> * work_node			=	found_folder ? 
 											create_disk_folder_node (child_hash,
 																	 file_desc.name,
@@ -78,7 +78,7 @@ void   file_system_impl::mount_disk_folder (fat_folder_node<> * const	work_folde
 																	 name_length,
 																	 file_spec.c_str(),
 																	 full_name_length,
-																	 (u32)file_desc.size)->cast_node();
+																	 (unsigned)file_desc.size)->cast_node();
 
 		actualize_node						(work_node, child_hash, work_folder);
 

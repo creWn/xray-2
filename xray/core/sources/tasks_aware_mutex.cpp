@@ -10,13 +10,13 @@
 namespace xray {
 namespace tasks {
 
-u32		spin_count_before_notify_task_system	();
+unsigned		spin_count_before_notify_task_system	();
 void	on_current_thread_locks					();
 void	on_current_thread_unlocks				();
 
 void   smart_mutex::lock ()
 {
-	for ( u32 i=0; i<spin_count_before_notify_task_system(); ++i )
+	for ( unsigned i=0; i<spin_count_before_notify_task_system(); ++i )
 		if ( mutex::try_lock() )
 			return;
 

@@ -15,22 +15,22 @@ inline void	ASSOCIATIVE_CHUNK_READER::construct			( )
 {
 	impl( ).m_last_position	= 0;
 	reader&	reader			= impl( ).reader( );
-	impl( ).m_chunks		= reader.pointer( ) + reader.r_u32( );
-	impl( ).m_chunk_count	= reader.r_u32( );
+	impl( ).m_chunks		= reader.pointer( ) + reader.r_unsigned( );
+	impl( ).m_chunk_count	= reader.r_unsigned( );
 	ASSERT					( impl( ).m_chunks < reader.pointer( ) + reader.elapsed( ) );
 }
 
 TEMPLATE_SIGNATURE
-inline u32 ASSOCIATIVE_CHUNK_READER::chunk_position		( u32 const chunk_id )
+inline unsigned ASSOCIATIVE_CHUNK_READER::chunk_position		( unsigned const chunk_id )
 {
 	reader&	reader			= impl( ).reader( );
 	if ( impl( ).m_last_position && (impl( ).m_last_position < reader.length( )) ) {
 		reader.seek			( impl( ).m_last_position );
-		reader.r_u32		( );
-		u32 const size		= reader.r_u32( ) & 0x3fffffff;
+		reader.r_unsigned		( );
+		unsigned const size		= reader.r_unsigned( ) & 0x3fffffff;
 		reader.advance		( size );
-		u32 result			= reader.tell( );
-		if ( reader.r_u32( ) == chunk_id ) {
+		unsigned result			= reader.tell( );
+		if ( reader.r_unsigned( ) == chunk_id ) {
 			impl( ).m_last_position	= result;
 			return			( result );
 		}
@@ -40,9 +40,9 @@ inline u32 ASSOCIATIVE_CHUNK_READER::chunk_position		( u32 const chunk_id )
 	Pair const* const e		= (( Pair const* )impl( ).m_chunks) + impl( ).m_chunk_count;
 	Pair const* i			= std::find_if( b, e, predicate( chunk_id ) );
 	if ( i == e )
-		return				( u32( -1 ) );
+		return				( unsigned( -1 ) );
 
-	u32 const result		= ( *i ).second;
+	unsigned const result		= ( *i ).second;
 	impl( ).m_last_position	= result;
 	return					( result );
 }

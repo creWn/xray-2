@@ -73,7 +73,7 @@ inline u16 min			( u16 left, u16 right )
 	return		( min_integral( left, right ) );
 }
 
-inline u32 min			( u32 left, u32 right )
+inline unsigned min			( unsigned left, unsigned right )
 {
 	return		( min_integral( left, right ) );
 }
@@ -132,7 +132,7 @@ inline u16 max			( u16 left, u16 right )
 	return		( max_integral( left, right ) );
 }
 
-inline u32 max			( u32 left, u32 right )
+inline unsigned max			( unsigned left, unsigned right )
 {
 	return		( max_integral( left, right ) );
 }
@@ -144,7 +144,7 @@ inline u64 max			( u64 left, u64 right )
 
 inline float abs		( float value )
 {
-	u32			bit_value = (*(u32*)&value) & 0x7fffffff;
+	unsigned			bit_value = (*(unsigned*)&value) & 0x7fffffff;
 	return		( *( float* )&bit_value );
 }
 
@@ -234,10 +234,10 @@ inline float pow		( float base, float power )
 	return		( powf( base, power ) );
 }
 
-inline float pow_impl	( float const base, u32 const power )
+inline float pow_impl	( float const base, unsigned const power )
 {
 	float		result = base;
-	for (u32 i=1; i<power; ++i)
+	for (unsigned i=1; i<power; ++i)
 		result	*= base;
 
 	return		result;
@@ -251,12 +251,12 @@ inline float pow		( float const base, int const power )
 		return	1.f;
 
 	if ( power < 0 )
-		return	pow_impl( 1.f/base, u32(-power) );
+		return	pow_impl( 1.f/base, unsigned(-power) );
 
-	return		pow_impl( base, u32(power) );
+	return		pow_impl( base, unsigned(power) );
 }
 
-inline float pow		( float const base, u32 const power )
+inline float pow		( float const base, unsigned const power )
 {
 	R_ASSERT	( !is_zero(base) );
 
@@ -266,13 +266,13 @@ inline float pow		( float const base, u32 const power )
 	return		pow_impl( base, power );
 }
 
-inline u32 pow			( u32 const base, u32 const power )
+inline unsigned pow			( unsigned const base, unsigned const power )
 {
 	if ( !power )
 		return	1;
 
-	u32 result	= base;
-	for (u32 i=1; i<power; ++i)
+	unsigned result	= base;
+	for (unsigned i=1; i<power; ++i)
 		result	*= base;
 
 	return		result;
@@ -309,7 +309,7 @@ inline int floor		( float const value )
 {
     int value_raw	= *(const int*)(&value);
     int exponent	= ( 127 + 31 ) - ( ( value_raw >> 23 ) & 0xff );
-    int result		= (((u32)(value_raw) << 8 ) | ( 1U << 31 ) ) >> exponent;
+    int result		= (((unsigned)(value_raw) << 8 ) | ( 1U << 31 ) ) >> exponent;
     exponent		+= 31 - 127;
     int imask		= (!(((( (1<<(exponent)))-1)>>8)&value_raw));
     exponent		-= (31 - 127) + 32;
@@ -325,7 +325,7 @@ inline int ceil			( float const value )
 {
     int value_raw	= *( int const* )( &value );
     int exponent	= ( 127 + 31 ) - ( (value_raw >> 23) & 0xff );
-    int result		= (((u32)(value_raw) << 8) | (1U << 31)) >> exponent;
+    int result		= (((unsigned)(value_raw) << 8) | (1U << 31)) >> exponent;
     exponent		+= 31-127;
     int imask		= (!(((( (1 << (exponent))) - 1) >> 8) &value_raw ) );
     exponent		-= (31 - 127) + 32;

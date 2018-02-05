@@ -48,7 +48,7 @@ void   unmanaged_resource::late_set_fat_it (fat_it_wrapper in_it)
 	m_fat_it							=	in_it;	
 }
 
-void   unmanaged_resource::set_deleter_object (cook_base * const cook, u32 deallocation_thread_id)
+void   unmanaged_resource::set_deleter_object (cook_base * const cook, unsigned deallocation_thread_id)
 {
 	bool old_cook_was_present			=	(m_deleter != NULL);
 	if ( m_deleter )
@@ -119,7 +119,7 @@ fixed_string512   unmanaged_resource::log_string () const
 	return									out_result;
 }
 
-void   unmanaged_resource::set_creation_source (creation_source_enum creation_source, pcstr request_path, u32 resource_size)
+void   unmanaged_resource::set_creation_source (creation_source_enum creation_source, pcstr request_path, unsigned resource_size)
 { 
 	R_ASSERT								(m_creation_source == creation_source_unset);
 	m_creation_source					=	creation_source;

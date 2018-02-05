@@ -10,7 +10,7 @@
 namespace xray {
 namespace configs {
 
-binary_config_value const& binary_config_value::operator[]	( u32 const index ) const
+binary_config_value const& binary_config_value::operator[]	( unsigned const index ) const
 {
 	R_ASSERT			(type == t_table_indexed);
 	R_ASSERT			(index < count);
@@ -22,10 +22,10 @@ binary_config_value const& binary_config_value::operator[]	( u32 const index ) c
 binary_config_value const& binary_config_value::operator[]	( int const index ) const
 {
 	R_ASSERT			(index >= 0);
-	return				(*this)[u32(index)];
+	return				(*this)[unsigned(index)];
 }
 
-bool binary_config_value::operator < (u32 compare_crc) const
+bool binary_config_value::operator < (unsigned compare_crc) const
 {
 	return				(crc < compare_crc);
 }
@@ -61,7 +61,7 @@ T binary_config_value::cast_number			() const
 template <typename T>
 T binary_config_value::cast_unsigned_number	() const
 {
-	return				cast_number<T,u64,u32>();
+	return				cast_number<T,u64,unsigned>();
 }
 
 template <typename T>
@@ -73,7 +73,7 @@ T binary_config_value::cast_signed_number		() const
 binary_config_value::operator bool				() const
 {
 	R_ASSERT			(type == t_boolean);
-	return				!!*(u32*)&data;
+	return				!!*(unsigned*)&data;
 }
 
 binary_config_value::operator s8				() const
@@ -101,9 +101,9 @@ binary_config_value::operator s32 () const
 	return				cast_signed_number<s32>();
 }
 
-binary_config_value::operator u32 () const
+binary_config_value::operator unsigned () const
 {
-	return				cast_unsigned_number<u32>();
+	return				cast_unsigned_number<unsigned>();
 }
 
 binary_config_value::operator float () const

@@ -19,7 +19,7 @@
 
 namespace xray {
 
-inline int	vsnprintf	( pstr const destination, u32 const destination_size, u32 const max_count, pcstr const format, va_list const args )
+inline int	vsnprintf	( pstr const destination, unsigned const destination_size, unsigned const max_count, pcstr const format, va_list const args )
 {
 #ifdef _MSC_VER
 	return				_vsnprintf_s( destination, destination_size, max_count, format, args );
@@ -29,12 +29,12 @@ inline int	vsnprintf	( pstr const destination, u32 const destination_size, u32 c
 }
 
 template <int Size>
-inline int	vsnprintf	( char (&destination)[Size], u32 const max_count, pcstr const format, va_list const args )
+inline int	vsnprintf	( char (&destination)[Size], unsigned const max_count, pcstr const format, va_list const args )
 {
 	return				vsnprintf( &destination[0], Size, max_count, format, args );
 }
 
-inline int	vsprintf	( pstr const destination, u32 const destination_size, pcstr const format, va_list const args )
+inline int	vsprintf	( pstr const destination, unsigned const destination_size, pcstr const format, va_list const args )
 {
 #ifdef _MSC_VER
 	return				vsprintf_s( destination, destination_size, format, args );
@@ -43,12 +43,12 @@ inline int	vsprintf	( pstr const destination, u32 const destination_size, pcstr 
 #endif // #ifdef _MSC_VER
 }
 
-inline int	sprintf		( pstr buffer, u32 const buffer_size, pcstr const format, ... );
+inline int	sprintf		( pstr buffer, unsigned const buffer_size, pcstr const format, ... );
 template <int Size>
 inline int	sprintf		( char (&buffer)[Size], pcstr const format, ... );
-inline pstr	strlwr		( pstr source, u32 const count );
-inline pstr	strupr		( pstr source, u32 const count );
-inline s64 fseek64		( FILE* const file, u64 const offset, u32 origin );	
+inline pstr	strlwr		( pstr source, unsigned const count );
+inline pstr	strupr		( pstr source, unsigned const count );
+inline s64 fseek64		( FILE* const file, u64 const offset, unsigned origin );	
 inline int unlink		( pcstr const file_name );
 
 } // namespace xray

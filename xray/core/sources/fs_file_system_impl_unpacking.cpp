@@ -22,7 +22,7 @@ bool   file_system_impl::unpack (pcstr logical_path, pcstr dest_dir_path, db_cal
 	verify_path_is_portable					(logical_path);
 	verify_path_is_portable					(dest_dir_path);
 
-	u32		hash;
+	unsigned		hash;
 	fat_node<> *	unpack_root		=	find_node(logical_path, & hash);
 
 	if ( !unpack_root )
@@ -50,7 +50,7 @@ bool   file_system_impl::equal_db (fat_node<> const * node1, fat_node<> const * 
 
 bool   file_system_impl::unpack_node (save_nodes_environment & env, fat_node<> * cur_node, path_string & dest_dir)
 {
-	u32 const prev_length	=	dest_dir.length();
+	unsigned const prev_length	=	dest_dir.length();
 	dest_dir				+=	"/"; 
 	dest_dir				+=	cur_node->m_name;
 	const bool is_root		=	(cur_node == m_root->cast_node());

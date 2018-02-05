@@ -42,8 +42,8 @@ public:
 private:
 
 #ifndef MASTER_GOLD
-	u32					m_push_thread_id;
-	u32					m_pop_thread_id;
+	unsigned					m_push_thread_id;
+	unsigned					m_pop_thread_id;
 #endif // #ifndef MASTER_GOLD
 
 	threading::mutex	m_mutex;

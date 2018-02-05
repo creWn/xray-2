@@ -29,9 +29,9 @@ public:
 	template < typename input_iterator >
 	inline						vector		( input_iterator const& first, input_iterator const& last );
 	inline	self_type&			operator=	( self_type const& other );
-	inline	reference			operator[]	( u32 index );
-	inline	const_reference		operator[]	( u32 index ) const;
-	inline	u32					size		( ) const;
+	inline	reference			operator[]	( unsigned index );
+	inline	const_reference		operator[]	( unsigned index ) const;
+	inline	unsigned					size		( ) const;
 }; // class vector
 
 #include <xray/vector_inline.h>

@@ -14,15 +14,15 @@ template < typename implementation >
 class associative_chunk_reader {
 public:
 	inline	void	construct		( );
-	inline	u32		chunk_position	( u32 chunk_id );
+	inline	unsigned		chunk_position	( unsigned chunk_id );
 
 private:
-	typedef std::pair<u32, u32>		Pair;
+	typedef std::pair<unsigned, unsigned>		Pair;
 
 	struct predicate {
-		u32	m_chunk_id;
+		unsigned	m_chunk_id;
 
-		inline		predicate		( u32 const chunk_id ) :
+		inline		predicate		( unsigned const chunk_id ) :
 			m_chunk_id	( chunk_id )
 		{
 		}

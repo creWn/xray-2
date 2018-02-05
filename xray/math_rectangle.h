@@ -73,7 +73,7 @@ public:
 
 	inline	bool		similar		( rectangle const& other ) const;
 
-	inline	vector_type	vertex		( u32 index ) const;
+	inline	vector_type	vertex		( unsigned index ) const;
 	inline	void		vertices	( vector_type ( &result )[ 4 ] ) const;
 
 	inline	type		width		( ) const;

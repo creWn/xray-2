@@ -23,7 +23,7 @@ char						s_command_line_keys_buffer			[sizeof(command_line_keys_list)];
 static command_line_keys_list* s_command_line_keys			=	NULL;
 static threading::atomic32_type	s_command_line_keys_creation	=	0;
 static bool					s_command_line_initialized		=	false;
-static u32					s_command_line_keys_count		=	0;
+static unsigned					s_command_line_keys_count		=	0;
 static bool					s_command_line_ready			=	false;
 static core::engine *		s_engine						=	NULL;
 fixed_string4096			g_command_line;
@@ -354,14 +354,14 @@ void   initialize (core::engine * engine, pcstr const command_line, command_line
 		R_ASSERT					(string.length() > 0, "empty command line specified together with contains_application = true");
 		if ( string[0] == '"' )
 		{
-			u32 const index		=	string.find('"', 1);
+			unsigned const index		=	string.find('"', 1);
 			R_ASSERT				(index != string.npos, "command line passed with quote that is not enclosed");
 			string				=	string.substr(index + 1, string.npos);
 		}
 		else
 		{
-			u32 index		=	0;
-			for ( u32 n = string.length(); index < n; ++ index )
+			unsigned index		=	0;
+			for ( unsigned n = string.length(); index < n; ++ index )
 				if ( string[index] == ' ' || string[index] == '\t' )
 					break;
 
@@ -395,8 +395,8 @@ struct command_line_key_adder
 	}
 
 	keys_array *					keys_;
-	u32								longest_short_key_name;
-	u32								longest_full_key_name;
+	unsigned								longest_short_key_name;
+	unsigned								longest_full_key_name;
 };
 
 struct key_compare_predicate
@@ -530,7 +530,7 @@ bool key_is_set				( pcstr key_raw )
 	return					( key_is_set_impl( core::get_command_line(), key_raw ) );
 }
 
-bool key_is_set_impl		( pcstr const command_line, pcstr const key_raw, pstr const buffer, u32 const buffer_size )
+bool key_is_set_impl		( pcstr const command_line, pcstr const key_raw, pstr const buffer, unsigned const buffer_size )
 {	
 	ASSERT					( buffer );
 	ASSERT					( buffer_size );
@@ -569,7 +569,7 @@ bool key_is_set_impl		( pcstr const command_line, pcstr const key_raw, pstr cons
 		pcstr m				= j;
 		for ( ; *m && !is_delimiter( *m, " \t" ); ++m );
 
-		u32 const count		= u32( m - j );
+		unsigned const count		= unsigned( m - j );
 		if ( buffer_size < count + 1 ) {
 			LOGI_WARNING	( "command_line_key", "not enough storage for value of the key \"%s\" specified", key );
 			return			( false );
@@ -583,7 +583,7 @@ bool key_is_set_impl		( pcstr const command_line, pcstr const key_raw, pstr cons
 	return					( false );
 }
 
-bool key_is_set				( pcstr const key_raw, pstr const buffer, u32 const buffer_size )
+bool key_is_set				( pcstr const key_raw, pstr const buffer, unsigned const buffer_size )
 {
 	return					( key_is_set_impl( core::get_command_line(), key_raw, buffer, buffer_size ) );
 }
@@ -593,10 +593,10 @@ bool key_is_set				( pcstr const key_raw, pstr const buffer, u32 const buffer_si
 namespace core {
 namespace debug {
 
-u32	build_station_build_id	( )
+unsigned	build_station_build_id	( )
 {
 	static bool initialized				= false;
-	static u32  build_station_build_id	= u32(-1);
+	static unsigned  build_station_build_id	= unsigned(-1);
 	if ( initialized )
 		return							build_station_build_id;
 

@@ -20,9 +20,9 @@
 namespace xray		{
 namespace resources {
 
-managed_resource_allocator::managed_resource_allocator (u32 const temp_arena_size,
-														u32 const reserved_size,
-														u32 const granularity)
+managed_resource_allocator::managed_resource_allocator (unsigned const temp_arena_size,
+														unsigned const reserved_size,
+														unsigned const granularity)
 							:	resource_allocator(granularity), 
 								m_temp_arena(granularity),
 								m_arena_id(NULL)
@@ -74,14 +74,14 @@ void   managed_resource_allocator::call_free (pvoid pointer XRAY_CORE_DEBUG_PARA
 	NOT_IMPLEMENTED							();
 }
 
-bool   managed_resource_allocator::can_allocate	(u32 const buffer_size) const
+bool   managed_resource_allocator::can_allocate	(unsigned const buffer_size) const
 {
 	return									m_free_size - m_reserved_size >= buffer_size;
 }
 
-managed_resource *   managed_resource_allocator::allocate (u32 const size)
+managed_resource *   managed_resource_allocator::allocate (unsigned const size)
 {
-	u32 const full_size					=	math::align_up(size + (u32)sizeof(managed_node), m_granularity);
+	unsigned const full_size					=	math::align_up(size + (unsigned)sizeof(managed_node), m_granularity);
 
 	ASSERT									(full_size <= m_free_size-m_reserved_size, 
 											 "not enough memory even if we defragmented");
@@ -158,9 +158,9 @@ managed_node *   managed_resource_allocator::allocate_in_node_defrag  (size_t co
 		return									NULL;
 
 	mode_state* mode_states[]				=	{ & m_main_mode, & m_no_temp_mode };
-	u32 const num_iterations				=	m_mode == & m_main_mode ? 1 : 2;
+	unsigned const num_iterations				=	m_mode == & m_main_mode ? 1 : 2;
 
-	for ( u32 i=0; i<num_iterations; ++i )
+	for ( unsigned i=0; i<num_iterations; ++i )
 	{
 		ASSERT									(mode_states[i]->node != node);
 
@@ -198,9 +198,9 @@ managed_node*	managed_resource_allocator::deallocate_defrag (managed_node* node)
 	managed_node* const	result				=	super::deallocate(node);
 
 	mode_state* mode_states[]				=	{ &m_main_mode, &m_no_temp_mode };
-	u32 const num_iterations				=	m_mode == &m_main_mode ? 1 : 2;
+	unsigned const num_iterations				=	m_mode == &m_main_mode ? 1 : 2;
 
-	for ( u32 i=0; i<num_iterations; ++i )
+	for ( unsigned i=0; i<num_iterations; ++i )
 	{
 		managed_node*&	place_node			=	mode_states[i]->place_node;
 		pbyte const	place_pos				=	mode_states[i]->place_pos;
@@ -244,7 +244,7 @@ void    managed_resource_allocator::log_defragmenter_nodes (resource_allocator c
 			cur_node->m_fat_it.get_full_path (full_path);
 
 		fixed_string<1024>	special_type;
-		for ( u32 i=0; i<m_defrag_unmovables->size(); ++i )
+		for ( unsigned i=0; i<m_defrag_unmovables->size(); ++i )
 		{
 			unmovable&	cur_unmovable	=	m_defrag_unmovables->at(i);
 			if ( cur_unmovable.node == cur_node )
@@ -284,7 +284,7 @@ void    managed_resource_allocator::log_defragmenter_nodes (resource_allocator c
 		if ( special_type.length() )
 			special_type.set_length(special_type.length()-1);
 				
-		u32 const offs					=	(u32)((pbyte)cur_node - (pbyte)alloc.m_arena);
+		unsigned const offs					=	(unsigned)((pbyte)cur_node - (pbyte)alloc.m_arena);
 
 		LOGI_INFO("resources:defrag", "offs: %d, size: %d %s [%s]",
 												 offs,
@@ -301,8 +301,8 @@ void   managed_resource_allocator::log_defragmenter_state () const
 	LOGI_INFO("resources:defrag" , "-----------defragmentation log %d-----------", m_log_iteration);
 	LOGI_INFO("resources:defrag" , "mode: %s, main_place_pos: %d, temp_place_pos: %d", 
 											m_mode == &m_main_mode ? "main" : "no_temp",
-											(u32)(m_main_mode.place_pos - m_arena), 
-											(u32)(m_no_temp_mode.place_pos - m_arena));
+											(unsigned)(m_main_mode.place_pos - m_arena), 
+											(unsigned)(m_no_temp_mode.place_pos - m_arena));
 	LOGI_INFO("resources:defrag" , "main_unpinned: %d, temp_unpinned: %d", 
 											 m_num_unpinned_objects, 
 											 m_temp_arena.m_num_unpinned_objects);
@@ -362,7 +362,7 @@ void   managed_resource_allocator::transfer_resource (managed_node* const	dest_n
 {
 	pvoid const dest_data				=	pbyte(dest_node) + sizeof(managed_node);
 	pvoid const src_data				=	pbyte(src_node)	 + sizeof(managed_node);
-	memory::copy							(dest_data, (u32)(dest_node->m_size - sizeof(managed_node)), src_data, (u32)(src_node->m_size - sizeof(managed_node)));
+	memory::copy							(dest_data, (unsigned)(dest_node->m_size - sizeof(managed_node)), src_data, (unsigned)(src_node->m_size - sizeof(managed_node)));
 	m_num_moved_bytes					+=	src_node->m_size;
 
 	dest_node->init							(src_node);
@@ -428,7 +428,7 @@ void   managed_resource_allocator::free_unpinned (arena_t arena_type)
 	ASSERT										(arena_type == main_arena || arena_type == temp_arena);
 
 	resource_allocator&	arena				=	arena_type == main_arena ? *this : m_temp_arena;
-	u32	num_unpinned						=	threading::interlocked_exchange
+	unsigned	num_unpinned						=	threading::interlocked_exchange
 												(arena.m_num_unpinned_objects, 0);
 
 	if ( !num_unpinned )
@@ -513,7 +513,7 @@ void   managed_resource_allocator::add_unpin_looked_node (managed_node* const no
 		arena.notify_unpinned_object			();
 }
 
-managed_node*   managed_resource_allocator::to_next_ignored_unmovable (u32& index)
+managed_node*   managed_resource_allocator::to_next_ignored_unmovable (unsigned& index)
 {
 	buffer_vector<unmovable>&	unmovables	=	*m_defrag_unmovables;
 	if ( index == unmovables.size() )	
@@ -531,21 +531,21 @@ managed_node*   managed_resource_allocator::to_next_ignored_unmovable (u32& inde
 	return										NULL;
 }
 
-u32   managed_resource_allocator::calculate_place_pos_and_free_space (buffer_vector<u32>&	looses,
-																	  u32 const				start_index,
+unsigned   managed_resource_allocator::calculate_place_pos_and_free_space (buffer_vector<unsigned>&	looses,
+																	  unsigned const				start_index,
 																	  pbyte					place_pos,
-																	  u32&					result_index)
+																	  unsigned&					result_index)
 {
 	R_ASSERT									(looses.max_size() >= m_defrag_unmovables->size());
 	buffer_vector<unmovable>&	unmovables	=	*m_defrag_unmovables;
 
 	looses.clear								();
-	for ( u32 i=0; i<start_index; ++i )
+	for ( unsigned i=0; i<start_index; ++i )
 		looses.push_back						(0);
 
-	u32					place_index			=	start_index - 1;
+	unsigned					place_index			=	start_index - 1;
 	to_next_ignored_unmovable					(place_index);
-	u32					cur_index			=	place_index;
+	unsigned					cur_index			=	place_index;
 
 	managed_node*		cur_node			=	unmovables[start_index].node;
 
@@ -563,7 +563,7 @@ u32   managed_resource_allocator::calculate_place_pos_and_free_space (buffer_vec
 		{
 			while ( place_unmovable && place_pos + cur_node->m_size > (pbyte)place_unmovable )
 			{
-				u32 loose					=	(u32)( (pbyte)place_unmovable - place_pos );
+				unsigned loose					=	(unsigned)( (pbyte)place_unmovable - place_pos );
 				looses.push_back				(loose);
 				place_pos					=	(pbyte)place_unmovable + place_unmovable->m_size;
 				
@@ -588,36 +588,36 @@ u32   managed_resource_allocator::calculate_place_pos_and_free_space (buffer_vec
 	pbyte const	largest_free_end			=	result_index < unmovables.size() ? 
 												(pbyte)unmovables[result_index].node : 
 												m_arena + m_arena_size;
-	u32 const largest_free_size				=	(u32)(largest_free_end - place_pos);
+	unsigned const largest_free_size				=	(unsigned)(largest_free_end - place_pos);
 
-	for ( u32 i=result_index; i<unmovables.size(); ++i )
+	for ( unsigned i=result_index; i<unmovables.size(); ++i )
 	{
 		pbyte const	loose_end				=	i+1 < unmovables.size() ?
 												(pbyte)unmovables[i+1].node : m_arena + m_arena_size;
 
 		pbyte const cur_unmovable_end		=	(pbyte)unmovables[i].node + unmovables[i].node->m_size;
 
-		u32 const loose_value				=	(u32)(loose_end - cur_unmovable_end);
+		unsigned const loose_value				=	(unsigned)(loose_end - cur_unmovable_end);
 		looses.push_back						(loose_value);
 	}
 
 	return										largest_free_size;
 }
 
-void   managed_resource_allocator::calculate_unmovables_state (u32		const	start_index,
+void   managed_resource_allocator::calculate_unmovables_state (unsigned		const	start_index,
 															   pbyte	const	place_pos,
-															   u32		const	sufficient_contigous_space)
+															   unsigned		const	sufficient_contigous_space)
 {
 	buffer_vector<unmovable>&	unmovables	=	*m_defrag_unmovables;
 	ASSERT										(start_index < unmovables.size());
 
 	// set all unmovables state to ignored
-	for ( u32 i=0; i<unmovables.size(); ++i )
+	for ( unsigned i=0; i<unmovables.size(); ++i )
 		unmovables[i].state					=	unmovable::ignored;
 
-	buffer_vector<u32>	looses					(ALLOCA(sizeof(u32) * unmovables.size()), unmovables.size());
-	u32 result_index						=	0;
-	u32 const largest_free_size				=	calculate_place_pos_and_free_space	
+	buffer_vector<unsigned>	looses					(ALLOCA(sizeof(unsigned) * unmovables.size()), unmovables.size());
+	unsigned result_index						=	0;
+	unsigned const largest_free_size				=	calculate_place_pos_and_free_space	
 												(looses, start_index, place_pos, result_index);
 	ASSERT										(looses.size() == unmovables.size());
 
@@ -630,8 +630,8 @@ void   managed_resource_allocator::calculate_unmovables_state (u32		const	start_
 
 	// choose some unmovables to wait for, based on looses heuristics
 
-	u32 heuristic_free_size					=	largest_free_size;
-	for ( u32 i=result_index; i>0; --i )
+	unsigned heuristic_free_size					=	largest_free_size;
+	for ( unsigned i=result_index; i>0; --i )
 	{
 		unmovables[i-1].state				=	heuristic_free_size < sufficient_contigous_space ?
 												unmovable::waited : unmovable::ignored;
@@ -639,7 +639,7 @@ void   managed_resource_allocator::calculate_unmovables_state (u32		const	start_
 			heuristic_free_size				+=	looses[i-1];
 	}
 
-	for ( u32 i=result_index; i<unmovables.size(); ++i )
+	for ( unsigned i=result_index; i<unmovables.size(); ++i )
 	{
 		unmovables[i].state					=	heuristic_free_size < sufficient_contigous_space ?
 												unmovable::waited : unmovable::ignored;
@@ -648,7 +648,7 @@ void   managed_resource_allocator::calculate_unmovables_state (u32		const	start_
 	}
 
 	R_ASSERT									(heuristic_free_size >= sufficient_contigous_space);
-	u32 const real_largest_free_size		=	calculate_place_pos_and_free_space
+	unsigned const real_largest_free_size		=	calculate_place_pos_and_free_space
 												(looses, start_index, place_pos, result_index);
 
 	if ( real_largest_free_size < sufficient_contigous_space )
@@ -657,15 +657,15 @@ void   managed_resource_allocator::calculate_unmovables_state (u32		const	start_
 		LOGI_WARNING("resources/defrag",		"Omg! heuristics failed, well, go slow way then: " 
 												"mark all unmovables to waited stait");
 
-		for ( u32 i=0; i<unmovables.size(); ++i )
+		for ( unsigned i=0; i<unmovables.size(); ++i )
 			unmovables[i].state				=	unmovable::waited;
 
-		m_main_mode.unmovable_place_index		=	(u32)unmovables.size();
-		m_no_temp_mode.unmovable_place_index	=	(u32)unmovables.size();
+		m_main_mode.unmovable_place_index		=	(unsigned)unmovables.size();
+		m_no_temp_mode.unmovable_place_index	=	(unsigned)unmovables.size();
 	}
 	else
 	{
-		u32 i;
+		unsigned i;
 		for ( i=start_index; i<unmovables.size(); ++i )
  		{
 			if ( unmovables[i].state == unmovable::ignored )
@@ -700,13 +700,13 @@ void   managed_resource_allocator::set_dependence (managed_node* const depend_no
 	depend_node->m_next_wait_for_free		=	wait_for_free;
 }
 
-size_t   managed_resource_allocator::get_contigous_space_defrag (u32 const	unmovable_index)
+size_t   managed_resource_allocator::get_contigous_space_defrag (unsigned const	unmovable_index)
 {
 	pbyte prev_unmovable_end				=	NULL;
 
 	if ( unmovable_index )
 	{
-		u32		work_index					=	unmovable_index;
+		unsigned		work_index					=	unmovable_index;
 		while ( work_index )
 		{
 			const unmovable& prev_unmovable	=	(*m_defrag_unmovables)[work_index-1];
@@ -720,7 +720,7 @@ size_t   managed_resource_allocator::get_contigous_space_defrag (u32 const	unmov
 		}
 	}
 
-	size_t contigous_free_space				=	(u32)((pbyte)m_mode->node - 
+	size_t contigous_free_space				=	(unsigned)((pbyte)m_mode->node - 
 												(pbyte)math::max(prev_unmovable_end, m_mode->place_pos));
 
 	if ( m_mode->node->m_next && m_mode->node->m_next->is_free() )
@@ -767,7 +767,7 @@ void   managed_resource_allocator::move_next_mode_node ()
 	}
 }
 
-void   managed_resource_allocator::handle_unmovable (u32 const	sufficient_contigous_space, 
+void   managed_resource_allocator::handle_unmovable (unsigned const	sufficient_contigous_space, 
 													 bool&		call_continue_in_main_cycle)
 {
 	XRAY_UNREFERENCED_PARAMETER					(sufficient_contigous_space);
@@ -776,7 +776,7 @@ void   managed_resource_allocator::handle_unmovable (u32 const	sufficient_contig
 	ASSERT										(m_mode->unmovable_index < unmovables.size() &&
 												 m_mode->node == unmovables[m_mode->unmovable_index].node );
 
-	u32 const unmovable_state				=	unmovables[m_mode->unmovable_index].state;
+	unsigned const unmovable_state				=	unmovables[m_mode->unmovable_index].state;
 	ASSERT										(unmovable_state != unmovable::undefined);
 	++m_mode->unmovable_index;
 
@@ -813,7 +813,7 @@ void   managed_resource_allocator::handle_unmovable (u32 const	sufficient_contig
 	call_continue_in_main_cycle				=	false;
 }
 
-void   managed_resource_allocator::calculate_nodes_place_pos_and_unmovable_state (u32 const sufficient_contigous_space)
+void   managed_resource_allocator::calculate_nodes_place_pos_and_unmovable_state (unsigned const sufficient_contigous_space)
 {
 	managed_node* cur_node					=	m_mode->node;
 	pbyte place_pos							=	m_mode->place_pos;
@@ -835,7 +835,7 @@ void   managed_resource_allocator::calculate_nodes_place_pos_and_unmovable_state
 	}
 }
 
-void   managed_resource_allocator::defragment (u32 const sufficient_contigous_space)
+void   managed_resource_allocator::defragment (unsigned const sufficient_contigous_space)
 {
 	threading::mutex_raii						raii(m_defragmentation_mutex);
 	m_defragmenting							=	true;	g_resources_manager->mark_unmovables_before_defragmentation	();
@@ -843,7 +843,7 @@ void   managed_resource_allocator::defragment (u32 const sufficient_contigous_sp
 	m_log_iteration							=	0;
 	ASSERT										(m_free_size - m_reserved_size >= sufficient_contigous_space);
 
-	u32		num_nodes						=	u32(-1);
+	unsigned		num_nodes						=	unsigned(-1);
 	m_defragment_timer.start					();
 
 #if TEST_UNMOVABLES
@@ -853,7 +853,7 @@ void   managed_resource_allocator::defragment (u32 const sufficient_contigous_sp
 	LOGI_INFO("resources:allocator",			"defragmentation %d started, sufficient space: %d", 
 												 m_defrag_iteration, 
 												 sufficient_contigous_space);
-	if ( num_nodes != u32(-1) )
+	if ( num_nodes != unsigned(-1) )
 		LOGI_INFO("resources:allocator",		"defragmentation nodes: %d", num_nodes);
 
 	m_unmovables_mutex.lock						();

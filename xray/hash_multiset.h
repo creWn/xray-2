@@ -62,14 +62,14 @@ public:
     // operations
     //-----------------------------------------------------------------------------------
 	iterator				find					(Value* const value);
-	iterator				find					(u32 hash);
+	iterator				find					(unsigned hash);
 	const_iterator			find					(Value* const value) const {  return const_cast<hash_multiset*>(this)->find(value); }
-	const_iterator			find					(u32 hash) const {  return const_cast<hash_multiset*>(this)->find(hash); }
+	const_iterator			find					(unsigned hash) const {  return const_cast<hash_multiset*>(this)->find(hash); }
 	void					insert					(Value* value);
-	void					insert					(u32 hash, Value * value);
+	void					insert					(unsigned hash, Value * value);
 	Value *					erase					(const iterator & it);
 	void					erase					(Value * value);
-	void					erase					(u32 hash, Value * value);
+	void					erase					(unsigned hash, Value * value);
 	template <class Deleter>
 	void					clear					(Deleter const& deleter);
 	void					clear					();
@@ -77,7 +77,7 @@ public:
 	//-----------------------------------------------------------------------------------
 	// accessors & iterators
 	//-----------------------------------------------------------------------------------
-	u32						size					() const { return m_size; }
+	unsigned						size					() const { return m_size; }
 	bool					empty					() const { return !m_size; }
 
 	iterator				begin					();
@@ -101,7 +101,7 @@ private:
 	key_equal				m_equal_key;
 	hasher					m_hash;
 	value_type*				m_buffer				[SizePolicy::fixed_size];
-	u32						m_size;
+	unsigned						m_size;
 };
 
 } // namespace xray

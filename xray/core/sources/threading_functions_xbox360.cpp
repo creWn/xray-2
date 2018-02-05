@@ -11,12 +11,12 @@
 namespace xray {
 namespace threading {
 
-void set_current_thread_affinity_impl	(u32 const hardware_thread)
+void set_current_thread_affinity_impl	(unsigned const hardware_thread)
 {
 	XSetThreadProcessor				(GetCurrentThread(), hardware_thread);
 }
 
-u32 actual_core_count ( )
+unsigned actual_core_count ( )
 {
 	return							6;
 }

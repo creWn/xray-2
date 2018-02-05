@@ -41,7 +41,7 @@ void   file_system_impl::unmount_disk (pcstr fat_dir, pcstr disk_dir, respect_mo
 
 	verify_path_is_portable				(fat_dir);
 	verify_path_is_portable				(disk_dir);
-	u32		hash;	
+	unsigned		hash;	
 	fat_node<> *	work_node		=	find_node(fat_dir, & hash);
 	if ( !work_node )
 		return;
@@ -62,7 +62,7 @@ void   file_system_impl::unmount_db (pcstr fat_dir, pcstr disk_file)
 	verify_path_is_portable				(disk_file);
 	verify_path_is_portable				(fat_dir);
 
-	u32				hash;
+	unsigned				hash;
 	fat_node<> *	work_node	=	find_node(fat_dir, & hash);
 	if ( !work_node )
 		return;
@@ -85,7 +85,7 @@ void   file_system_impl::unmount_db (pcstr fat_dir, pcstr disk_file)
 
 template <class UnmountPredicate>
 void   file_system_impl::unmount_node (fat_node<> *				work_node, 
-									   u32 const				hash,
+									   unsigned const				hash,
 									   UnmountPredicate const &	unmount_pred)
 {
 	resources::unmanaged_resource_ptr	unmanaged_resource;
@@ -185,7 +185,7 @@ void   file_system_impl::unmount_node (fat_node<> *				work_node,
 		fat_node<> * child			=	recurse_folder->get_first_child();
 		while ( child )
 		{
-			u32 child_hash			=	crc32(child->m_name, strings::length(child->m_name), hash);
+			unsigned child_hash			=	crc32(child->m_name, strings::length(child->m_name), hash);
 			if ( relink_parent )
 				relink_hidden_nodes_to_parent(child, child_hash, relink_parent);
 

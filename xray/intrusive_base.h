@@ -18,12 +18,12 @@ public:
 	template < typename T >
 	inline	void	destroy			( T* object ) const;
 
-	inline	u32		reference_count	( ) const { return m_reference_count; }
+	inline	unsigned		reference_count	( ) const { return m_reference_count; }
 
 private:
 	friend class threading::multi_threading_mutex_policy;
 	friend class threading::single_threading_policy;
-	u32		m_reference_count;
+	unsigned		m_reference_count;
 }; // class intrusive_base
 
 class editor_intrusive_base {
@@ -33,12 +33,12 @@ public:
 	template < typename T >
 	inline	void	destroy			( T* object ) const;
 
-	inline	u32		reference_count	( ) const { return m_reference_count; }
+	inline	unsigned		reference_count	( ) const { return m_reference_count; }
 
 private:
 	friend class threading::multi_threading_mutex_policy;
 	friend class threading::single_threading_policy;
-	u32		m_reference_count;
+	unsigned		m_reference_count;
 }; // class editor_intrusive_base
 
 class intrusive_interlocked_base {
@@ -48,7 +48,7 @@ public:
 	template < typename T >
 	inline	void	destroy			( T* object ) const;
 
-	inline	u32		reference_count	( ) const { return m_reference_count; }
+	inline	unsigned		reference_count	( ) const { return m_reference_count; }
 
 private:
 	friend class threading::single_threading_policy;

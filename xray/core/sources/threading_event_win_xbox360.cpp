@@ -11,7 +11,7 @@
 namespace xray { 
 namespace threading { 
 
-u32 const event::wait_time_infinite	= INFINITE;
+unsigned const event::wait_time_infinite	= INFINITE;
 
 event::event			( bool const initial_state )
 {
@@ -33,7 +33,7 @@ void event::set			( bool const value )
 		ResetEvent		( (HANDLE&)m_event );
 }
 
-event::wait_result_enum event::wait	( u32 const max_wait_time_ms )
+event::wait_result_enum event::wait	( unsigned const max_wait_time_ms )
 {
 	DWORD const result	= WaitForSingleObject( (HANDLE&)m_event, max_wait_time_ms );
 	if ( result == WAIT_OBJECT_0 )

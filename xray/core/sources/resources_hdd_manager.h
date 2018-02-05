@@ -17,7 +17,7 @@ namespace resources {
 class hdd_manager : public device_manager
 {
 public:
-							hdd_manager				(pcstr thread_desc, u32 sector_size) : 
+							hdd_manager				(pcstr thread_desc, unsigned sector_size) : 
 													device_manager(thread_desc, sector_size) {}
 
 	virtual bool			can_handle_query		(pcstr path);

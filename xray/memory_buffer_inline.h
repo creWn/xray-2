@@ -25,14 +25,14 @@ bool   const_buffer::operator == ( const_buffer const& other ) const
 }
 
 inline
-const_buffer   const_buffer::slice (u32 offs, u32 count) const
+const_buffer   const_buffer::slice (unsigned offs, unsigned count) const
 {
 	R_ASSERT					(offs + count <= m_size);
 	return						const_buffer(m_data + offs, count);
 }
 
 inline
-mutable_buffer   mutable_buffer::slice (u32 offs, u32 count) const
+mutable_buffer   mutable_buffer::slice (unsigned offs, unsigned count) const
 {
 	R_ASSERT					(offs + count <= m_size);
 	return						mutable_buffer(m_data + offs, count);
@@ -48,7 +48,7 @@ bool   mutable_buffer::operator == ( mutable_buffer const& other ) const
 }
 
 inline
-void   mutable_buffer::operator += (u32 offs)
+void   mutable_buffer::operator += (unsigned offs)
 {
 	ASSERT						(offs <= m_size);
 	(char*&)m_data			+=	offs;
@@ -56,7 +56,7 @@ void   mutable_buffer::operator += (u32 offs)
 }
 
 inline
-void   const_buffer::operator += (u32 offs)
+void   const_buffer::operator += (unsigned offs)
 {
 	ASSERT						(offs <= m_size);
 	(char const*&)m_data	+=	offs;
@@ -64,7 +64,7 @@ void   const_buffer::operator += (u32 offs)
 }
 
 inline
-mutable_buffer   operator + (mutable_buffer const& buffer, u32 const offs)
+mutable_buffer   operator + (mutable_buffer const& buffer, unsigned const offs)
 {
 	mutable_buffer	result	=	buffer;
 	result					+=	offs;
@@ -72,7 +72,7 @@ mutable_buffer   operator + (mutable_buffer const& buffer, u32 const offs)
 }
 
 inline
-const_buffer   operator + (const_buffer const& buffer, u32 const offs)
+const_buffer   operator + (const_buffer const& buffer, unsigned const offs)
 {
 	const_buffer	result	=	buffer;
 	result					+=	offs;
@@ -82,25 +82,25 @@ const_buffer   operator + (const_buffer const& buffer, u32 const offs)
 namespace memory {
 
 template <class T>
-mutable_buffer	buffer (T* data, u32 size)
+mutable_buffer	buffer (T* data, unsigned size)
 {
 	return						mutable_buffer(data, size);
 }
 
 template <class T>
-const_buffer	buffer (T const* data, u32 size)
+const_buffer	buffer (T const* data, unsigned size)
 {
 	return						const_buffer(data, size);
 }
 
-template <class T, u32 size>
+template <class T, unsigned size>
 mutable_buffer	buffer (T (&array)[size])
 {
 	return						mutable_buffer(array, sizeof(T)*size);
 }
 
 
-template <class T, u32 size>
+template <class T, unsigned size>
 const_buffer	buffer (T const (&array)[size])
 {
 	return						const_buffer(array, sizeof(T)*size);

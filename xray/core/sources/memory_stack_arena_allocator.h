@@ -13,7 +13,7 @@ class XRAY_CORE_API stack_arena_allocator : public base_allocator {
 public:
 
 					stack_arena_allocator	( );
-			void	user_thread_id			( u32 user_thread_id ) const;
+			void	user_thread_id			( unsigned user_thread_id ) const;
 			void	user_current_thread_id	( ) const;
 			pvoid	malloc_impl				( size_t size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION );
 			pvoid	realloc_impl			( pvoid pointer, size_t new_size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION );
@@ -35,13 +35,13 @@ private:
 
 private:
 	inline	bool	initialized				( ) const;
-	inline	u32&	ref_prev_size			( pbyte addr );
+	inline	unsigned&	ref_prev_size			( pbyte addr );
 	inline	u8&		ref_is_free				( pbyte addr );
 	inline	pbyte	align_8					( pbyte addr );
 
 private:
 	pbyte			m_cur_top;
-	mutable u32		m_user_thread_id;
+	mutable unsigned		m_user_thread_id;
 	bool			m_data_owned;
 }; // class stack_arena_allocator
 

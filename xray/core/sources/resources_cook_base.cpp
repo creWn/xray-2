@@ -7,7 +7,7 @@
 namespace xray {
 namespace resources {
 
-static u32	 correct_thread_id (u32 const id) 
+static unsigned	 correct_thread_id (unsigned const id) 
 {
 	return	(id == cook_base::use_current_thread_id) ? threading::current_thread_id() : id;
 }
@@ -15,8 +15,8 @@ static u32	 correct_thread_id (u32 const id)
 cook_base::cook_base  (class_id					resource_class, 
 					   reuse_enum				reuse_type,
 					   enum_flags<flags_enum>	flags,
-					   u32						allocate_thread_it,
-					   u32 						creation_thread_id)
+					   unsigned						allocate_thread_it,
+					   unsigned 						creation_thread_id)
 					   : 
 					   m_class_id				(resource_class),
 					   m_reuse_type				(reuse_type),
@@ -188,12 +188,12 @@ void   cook_base::call_destroy_resource	(managed_resource * resource)
 		NOT_IMPLEMENTED							();
 }
 
-u32   cook_base::cook_users_count () const
+unsigned   cook_base::cook_users_count () const
 { 
 	return										m_cook_users_count.cook_users_count();
 }
 
-u32   cook_base::creation_thread_id ()
+unsigned   cook_base::creation_thread_id ()
 { 
 	if ( m_creation_thread_id == use_cooker_thread_id )
 	{
@@ -209,7 +209,7 @@ u32   cook_base::creation_thread_id ()
 	return										m_creation_thread_id; 
 }
 
-u32	  cook_base::allocate_thread_id ()
+unsigned	  cook_base::allocate_thread_id ()
 {
 	if ( m_allocate_thread_id == use_cooker_thread_id )
 	{
@@ -225,7 +225,7 @@ u32	  cook_base::allocate_thread_id ()
 	return										m_allocate_thread_id;
 }
 
-u32   cook_base::allocate_thread_id (class_id resource_class)
+unsigned   cook_base::allocate_thread_id (class_id resource_class)
 {
 	cook_base * const cook					=	g_resources_manager->find_cook(resource_class);
 	if ( !cook )
@@ -313,7 +313,7 @@ void   cook_base::to_string (buffer_string * out_string)
 		* out_string						+=	"+create_resource_if_no_file";
 }
 
-void   cook_base::register_object_to_delete (unmanaged_resource * resource, u32 deallocation_thread_id)
+void   cook_base::register_object_to_delete (unmanaged_resource * resource, unsigned deallocation_thread_id)
 {
 	resource->set_deleter_object				(this, deallocation_thread_id);
 }

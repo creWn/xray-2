@@ -44,13 +44,13 @@ inline bool xray::shared_string::operator!=					( shared_string const& other ) c
 	return		( m_pointer != other.m_pointer );
 }
 
-inline u32 xray::shared_string::length						( ) const
+inline unsigned xray::shared_string::length						( ) const
 {
 	R_ASSERT	( m_pointer );
 	return		( m_pointer->length() );
 }
 
-inline u32 xray::shared_string::size						( ) const
+inline unsigned xray::shared_string::size						( ) const
 {
 	if ( !m_pointer )
 		return	( 0 );

@@ -15,14 +15,14 @@ enum creation_enum { creation_from_file, creation_from_memory, creation_inplace_
 
 void   fill_with_generated_file_data (mutable_buffer generated_file_data)
 {
-	TEST_CURE_ASSERT_CMP			(generated_file_data.size(), ==, (u32)generate_file_data_size, return);
-	for ( u32 i=0; i<generated_file_data.size(); ++i )
+	TEST_CURE_ASSERT_CMP			(generated_file_data.size(), ==, (unsigned)generate_file_data_size, return);
+	for ( unsigned i=0; i<generated_file_data.size(); ++i )
 		generated_file_data[i]	=	(char)(i + 1);
 }
 
 void   test_generated_file_data (mutable_buffer generated_file_data)
 {
-	TEST_CURE_ASSERT_CMP			(generated_file_data.size(), ==, (u32)generate_file_data_size, return);
+	TEST_CURE_ASSERT_CMP			(generated_file_data.size(), ==, (unsigned)generate_file_data_size, return);
 	mutable_buffer					etalon(ALLOCA(generate_file_data_size), generate_file_data_size);
 	fill_with_generated_file_data	(etalon);
 	TEST_CURE_ASSERT				(memory::equal(etalon, generated_file_data), return);
@@ -33,7 +33,7 @@ class test_managed_resource
 public:
 	test_managed_resource (pcstr path, mutable_buffer file_data, creation_enum creation) : m_path(path), m_file_data(file_data), m_creation(creation)
 	{
-		for ( u32 i=0; i<array_size(m_class_data); ++i )
+		for ( unsigned i=0; i<array_size(m_class_data); ++i )
 			m_class_data[i]	=	(u8)i;
 	}
 
@@ -47,15 +47,15 @@ public:
 
 		if ( m_creation == creation_from_memory || m_creation == creation_inplace_from_memory )
 		{
-			TEST_CURE_ASSERT_CMP			(m_file_data.size(), ==, (u32)creation_data_size, return);
-			for ( u32 i=0; i<creation_data_size; ++i )
+			TEST_CURE_ASSERT_CMP			(m_file_data.size(), ==, (unsigned)creation_data_size, return);
+			for ( unsigned i=0; i<creation_data_size; ++i )
 				TEST_CURE_ASSERT_CMP		(m_file_data[i], ==, (i % 2) ? '0' : '1', return);
 			return;
 		}
 
 		if ( m_creation == creation_inplace_from_file )
 		{
-			for ( u32 i=0; i<m_file_data.size(); ++i )
+			for ( unsigned i=0; i<m_file_data.size(); ++i )
 				TEST_CURE_ASSERT_CMP		(m_file_data[i], ==, 'i', return);
 			return;
 		}
@@ -63,7 +63,7 @@ public:
 		fs::path_string						file_name;
 		fs::file_name_with_no_extension_from_path	(& file_name, m_path.c_str());
 
-		bool const generated_if_no_file	=	file_name.find("this_file_dont_exist") != u32(-1);
+		bool const generated_if_no_file	=	file_name.find("this_file_dont_exist") != unsigned(-1);
 
 		if ( generated_if_no_file )
 		{
@@ -71,19 +71,19 @@ public:
 			return;
 		}
 
-		u32 const separator_pos			=	(u32)file_name.find('-');
-		if ( separator_pos == u32(-1) )
+		unsigned const separator_pos			=	(unsigned)file_name.find('-');
+		if ( separator_pos == unsigned(-1) )
 			return;
 
 		fs::path_string						data_string, count_string;
 		file_name.substr					(0, separator_pos, & data_string);
-		file_name.substr					(separator_pos + 1, u32(-1), & count_string);
-		u32 count;
+		file_name.substr					(separator_pos + 1, unsigned(-1), & count_string);
+		unsigned count;
 		strings::convert_string_to_number	(count_string.c_str(), & count);
 				
 		TEST_CURE_ASSERT_CMP				(count, ==, m_file_data.size(), return);
 
-		for ( u32 i=0; i<count; ++i )
+		for ( unsigned i=0; i<count; ++i )
 			TEST_CURE_ASSERT_CMP			(m_file_data[i], ==, data_string[0], break);
 	}
 

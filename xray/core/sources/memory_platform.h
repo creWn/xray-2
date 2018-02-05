@@ -31,7 +31,7 @@ bool	try_allocate_arenas_as_a_single_block	(
 			regions_type& arenas,
 			regions_type& resource_arenas,
 			u64 const start_address,
-			u32 const additional_flags,
+			unsigned const additional_flags,
 			bool assert_on_failure = true
 		);
 void	free_region								( pvoid buffer, u64 buffer_size );

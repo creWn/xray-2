@@ -118,8 +118,8 @@ public:
 	}
 
 	virtual	mutable_buffer	 allocate_resource				(query_result_for_cook &	in_query, 
-															 u32						file_size, 
-															 u32 &						out_offset_to_file, 
+															 unsigned						file_size, 
+															 unsigned &						out_offset_to_file, 
 															 bool						file_exist)
 	{
 		R_ASSERT								(file_size || !file_exist);
@@ -128,8 +128,8 @@ public:
 			return								mutable_buffer::zero();
 
 		XRAY_UNREFERENCED_PARAMETER				(in_query);
-		u32 const raw_file_size				=	file_exist ? file_size : generate_file_data_size;
-		u32 const resource_size				=	sizeof(test_unmanaged_resource) + raw_file_size;
+		unsigned const raw_file_size				=	file_exist ? file_size : generate_file_data_size;
+		unsigned const resource_size				=	sizeof(test_unmanaged_resource) + raw_file_size;
 		out_offset_to_file					=	sizeof(test_unmanaged_resource);
 		
 		mutable_buffer const out_resource		(m_allocate_in_current_thread ? 

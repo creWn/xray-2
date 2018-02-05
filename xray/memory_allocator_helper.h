@@ -32,7 +32,7 @@ template <typename T>
 struct new_array_helper
 {
 	template <typename A>
-	static T*	 call				( A& alloc, u32 count XRAY_CORE_DEBUG_PARAMETERS_DECLARATION );
+	static T*	 call				( A& alloc, unsigned count XRAY_CORE_DEBUG_PARAMETERS_DECLARATION );
 
 }; // struct new_array_helper<T>
 

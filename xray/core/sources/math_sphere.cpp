@@ -15,7 +15,7 @@ using xray::math::sphere;
 using xray::math::float3;
 using xray::math::intersection;
 
-intersection sphere::intersect_ray	( float3 const& position, float3 const& direction, type range, u32& count, type (&results)[2] ) const
+intersection sphere::intersect_ray	( float3 const& position, float3 const& direction, type range, unsigned& count, type (&results)[2] ) const
 {
 	ASSERT				( math::similar( direction.magnitude(), 1.f ) );
 	float3 const		center2position = position - center;

@@ -9,7 +9,7 @@
 
 namespace xray {
 
-inline int	sprintf		( pstr buffer, u32 const buffer_size, pcstr const format, ... )
+inline int	sprintf		( pstr buffer, unsigned const buffer_size, pcstr const format, ... )
 {
 	va_list				mark;
 	va_start			( mark, format );
@@ -24,7 +24,7 @@ inline int	sprintf		( char (&buffer)[Size], pcstr const format, ... )
 	return				vsprintf( &buffer[0], Size, format, mark );
 }
 
-inline pstr	strlwr		( pstr source, u32 const count )
+inline pstr	strlwr		( pstr source, unsigned const count )
 {
 #ifdef _MSC_VER
 	errno_t const error	= _strlwr_s( source, count );
@@ -36,7 +36,7 @@ inline pstr	strlwr		( pstr source, u32 const count )
 	return				source;
 }
 
-inline pstr	strupr		( pstr source, u32 const count )
+inline pstr	strupr		( pstr source, unsigned const count )
 {
 #ifdef _MSC_VER
 	errno_t const error	= _strupr_s( source, count );
@@ -48,7 +48,7 @@ inline pstr	strupr		( pstr source, u32 const count )
 	return				source;
 }
 
-inline s64 fseek64		( FILE* const file, u64 const offset, u32 origin )
+inline s64 fseek64		( FILE* const file, u64 const offset, unsigned origin )
 {
 #ifdef _MSC_VER
 	return				_lseeki64( _fileno(file), offset, origin );

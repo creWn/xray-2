@@ -205,7 +205,7 @@ inline bool	RECTANGLE::similar							( rectangle const& other ) const
 }
 
 TEMPLATE_SIGNATURE
-inline vector_type RECTANGLE::vertex					( u32 index ) const
+inline vector_type RECTANGLE::vertex					( unsigned index ) const
 {
 	ASSERT		( index < 4 );
 

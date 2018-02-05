@@ -31,7 +31,7 @@ public:
 
 private:
 	struct hash_function {
-		inline u32	operator( )	( profile const& object ) const
+		inline unsigned	operator( )	( profile const& object ) const
 		{
 			return		( object.checksum_no_check( ) );
 		}

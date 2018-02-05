@@ -26,13 +26,13 @@ mutex::~mutex		()
 
 void mutex::lock	()
 {
-//	debug::printf				(temp, "lock   0x%x[%d]\r\n", *(u32*)&m_mutex, GetCurrentThreadId());
+//	debug::printf				(temp, "lock   0x%x[%d]\r\n", *(unsigned*)&m_mutex, GetCurrentThreadId());
 	EnterCriticalSection		( &( CRITICAL_SECTION& )m_mutex );
 }
 
 void mutex::unlock	()
 {
-//	debug::printf				(temp, "unlock 0x%x[%d]\r\n", *(u32*)&m_mutex, GetCurrentThreadId());
+//	debug::printf				(temp, "unlock 0x%x[%d]\r\n", *(unsigned*)&m_mutex, GetCurrentThreadId());
 	LeaveCriticalSection		( &( CRITICAL_SECTION& )m_mutex );
 }
 

@@ -60,7 +60,7 @@ pvoid crt_allocator::realloc_impl	( pvoid pointer, size_t const new_size XRAY_CO
 		return						( 0 );
 	}
 
-//	u32 const previous_size			= pointer ? buffer_size( pointer ) : 0;
+//	unsigned const previous_size			= pointer ? buffer_size( pointer ) : 0;
 //	if ( pointer )
 //		on_free						( pointer, false );
 

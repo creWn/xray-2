@@ -42,7 +42,7 @@ path_string   make_query_logging_string (query_result* query)
 // class device_manager
 //----------------------------------------------------------
 
-device_manager::device_manager (pcstr thread_desc, u32 const sector_size) 
+device_manager::device_manager (pcstr thread_desc, unsigned const sector_size) 
 								:	m_doing_async_write(false), m_sector_size(sector_size),
 									m_async_file_operation_thread_must_exit(false), 
 									m_async_file_operation_thread_exited(false),
@@ -58,7 +58,7 @@ device_manager::device_manager (pcstr thread_desc, u32 const sector_size)
 
 	if ( !threading::g_debug_single_thread )
 	{
-		u32 const thread_id				=	threading::spawn(boost::bind(&device_manager::async_file_operation_thread, this), 
+		unsigned const thread_id				=	threading::spawn(boost::bind(&device_manager::async_file_operation_thread, this), 
 															 thread_desc, 
 															 thread_desc,
 															 0,
@@ -121,7 +121,7 @@ bool   device_manager::pre_allocate (query_result* const query)
 	
 	if ( query->is_load_type() )
 	{
-		u32 const raw_buffer_size		=	query->raw_buffer_size();
+		unsigned const raw_buffer_size		=	query->raw_buffer_size();
 		on_pre_allocated_size_change		(raw_buffer_size, query);
 	}
 

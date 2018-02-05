@@ -16,10 +16,10 @@ namespace geometry_utils{
 
 namespace obb {
 
-	extern XRAY_CORE_API const u32	vertex_count;
+	extern XRAY_CORE_API const unsigned	vertex_count;
 	extern XRAY_CORE_API const float	vertices[];
 
-	extern XRAY_CORE_API const u32	pair_count;
+	extern XRAY_CORE_API const unsigned	pair_count;
 	extern XRAY_CORE_API const u16	pairs[];
 
 } // namespace obb
@@ -29,10 +29,10 @@ namespace obb {
 ////////////////////////////////////////////////////////////////////////////
 namespace rectangle {
 
-	extern XRAY_CORE_API const u32	vertex_count;
+	extern XRAY_CORE_API const unsigned	vertex_count;
 	extern XRAY_CORE_API const float	vertices[];
 
-	extern XRAY_CORE_API const u32	pair_count;
+	extern XRAY_CORE_API const unsigned	pair_count;
 	extern XRAY_CORE_API const u16	pairs[];
 
 } // namespace Rectangle
@@ -41,10 +41,10 @@ namespace rectangle {
 // Ellipsoid
 ////////////////////////////////////////////////////////////////////////////
 namespace ellipsoid {
-	extern XRAY_CORE_API const u32	vertex_count;
+	extern XRAY_CORE_API const unsigned	vertex_count;
 	extern XRAY_CORE_API const float	vertices[ ];
 
-	extern XRAY_CORE_API const u32	pair_count;
+	extern XRAY_CORE_API const unsigned	pair_count;
 	extern XRAY_CORE_API const u16	pairs[];
 } // namespace ellipsoid
 
@@ -52,10 +52,10 @@ namespace ellipsoid {
 // Cone
 ////////////////////////////////////////////////////////////////////////////
 namespace cone {
-	extern XRAY_CORE_API const u32	vertex_count;
+	extern XRAY_CORE_API const unsigned	vertex_count;
 	extern XRAY_CORE_API const float	vertices[];
 
-	extern XRAY_CORE_API const u32	pair_count;
+	extern XRAY_CORE_API const unsigned	pair_count;
 	extern XRAY_CORE_API const u16	pairs[];
 } // namespace cone
 
@@ -64,10 +64,10 @@ namespace cone {
 // Ellipse 
 ////////////////////////////////////////////////////////////////////////////
 namespace ellipse {
-	extern XRAY_CORE_API const u32	vertex_count;
+	extern XRAY_CORE_API const unsigned	vertex_count;
 	extern XRAY_CORE_API const float	vertices[];
 
-	extern XRAY_CORE_API const u32	pair_count;
+	extern XRAY_CORE_API const unsigned	pair_count;
 	extern XRAY_CORE_API const u16	pairs[];
 } // namespace ellipse
 
@@ -75,11 +75,11 @@ namespace ellipse {
 // Cube solid
 ////////////////////////////////////////////////////////////////////////////
 namespace cube_solid {
-	extern XRAY_CORE_API const u32 vertex_count;
+	extern XRAY_CORE_API const unsigned vertex_count;
 	extern XRAY_CORE_API const float vertices[];
 
-	extern XRAY_CORE_API const u32 face_count; 
-	extern XRAY_CORE_API const u32 index_count; 
+	extern XRAY_CORE_API const unsigned face_count; 
+	extern XRAY_CORE_API const unsigned index_count; 
 	extern XRAY_CORE_API const u16 faces[];
 } //namespace cube_solid 
 
@@ -89,11 +89,11 @@ namespace cube_solid {
 ////////////////////////////////////////////////////////////////////////////
 namespace rectangle_solid {
 
-	extern XRAY_CORE_API const u32 vertex_count;
+	extern XRAY_CORE_API const unsigned vertex_count;
 	extern XRAY_CORE_API const float vertices[];
 
-	extern XRAY_CORE_API const u32 face_count;
-	extern XRAY_CORE_API const u32 index_count; 
+	extern XRAY_CORE_API const unsigned face_count;
+	extern XRAY_CORE_API const unsigned index_count; 
 	extern XRAY_CORE_API const u16 faces[];
 
 } // namespace Rectangle
@@ -102,11 +102,11 @@ namespace rectangle_solid {
 // Cone solid
 ////////////////////////////////////////////////////////////////////////////
 namespace cone_solid {
-	extern XRAY_CORE_API const u32 vertex_count;
+	extern XRAY_CORE_API const unsigned vertex_count;
 	extern XRAY_CORE_API const float vertices[];
 
-	extern XRAY_CORE_API const u32 face_count; 
-	extern XRAY_CORE_API const u32 index_count; 
+	extern XRAY_CORE_API const unsigned face_count; 
+	extern XRAY_CORE_API const unsigned index_count; 
 	extern XRAY_CORE_API const u16 faces[];
 } // namespace cone_solid
 
@@ -115,11 +115,11 @@ namespace cone_solid {
 // Cylinder
 ////////////////////////////////////////////////////////////////////////////
 namespace cylinder_solid {
-	extern XRAY_CORE_API const u32 vertex_count;
+	extern XRAY_CORE_API const unsigned vertex_count;
 	extern XRAY_CORE_API const float vertices[];
 
-	extern XRAY_CORE_API const u32 face_count; 
-	extern XRAY_CORE_API const u32 index_count; 
+	extern XRAY_CORE_API const unsigned face_count; 
+	extern XRAY_CORE_API const unsigned index_count; 
 	extern XRAY_CORE_API const u16 faces[];
 } //namespace cylinder_solid 
 
@@ -127,11 +127,11 @@ namespace cylinder_solid {
 // Ellipsoid solid
 ////////////////////////////////////////////////////////////////////////////
 namespace ellipsoid_solid {
-	extern XRAY_CORE_API const u32 vertex_count;
+	extern XRAY_CORE_API const unsigned vertex_count;
 	extern XRAY_CORE_API const float vertices[];
 
-	extern XRAY_CORE_API const u32 face_count; 
-	extern XRAY_CORE_API const u32 index_count; 
+	extern XRAY_CORE_API const unsigned face_count; 
+	extern XRAY_CORE_API const unsigned index_count; 
 	extern XRAY_CORE_API const u16 faces[];
 } //namespace ellipsoid_solid 
 

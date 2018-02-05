@@ -16,15 +16,15 @@ public:
 	inline			color	( color const& other );
 	inline			color	( float4 const& other );
 	inline			color	( type r, type g, type b, type a = 1.f );
-	inline			color	( u32 r, u32 g, u32 b, u32 a = 0xff );
-	inline			color	( u32 argb );
-	inline u32		get_d3dcolor( ) const;
+	inline			color	( unsigned r, unsigned g, unsigned b, unsigned a = 0xff );
+	inline			color	( unsigned argb );
+	inline unsigned		get_d3dcolor( ) const;
 private:
 	typedef float4	super;
 }; // class color
 
-inline u32 color_argb		( u8 alpha, u8 red, u8 green, u8 blue );
-inline u32 color_xrgb		( u8 red, u8 green, u8 blue );
+inline unsigned color_argb		( u8 alpha, u8 red, u8 green, u8 blue );
+inline unsigned color_xrgb		( u8 red, u8 green, u8 blue );
 
 } // namespace math
 } // namespace xray

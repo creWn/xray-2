@@ -164,7 +164,7 @@ void   resource_base::unlink_child_resource (child_resource_ptr_base * child)
 	memory::g_resources_links_allocator.deallocate	(erase_predicate.erased_link_);
 }
 
-u32   resource_base::get_reference_count () const
+unsigned   resource_base::get_reference_count () const
 {
 	return	((resource_base *)(this))->cast_base_of_intrusive_base()->reference_count();
 }

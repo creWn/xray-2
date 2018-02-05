@@ -28,7 +28,7 @@ bool xray::os::is_clipboard_empty				( )
 		return					false;
 
 	pcstr const data			= static_cast<pcstr>( GlobalLock(handle) );
-	u32 const string_length		= strings::length(data);
+	unsigned const string_length		= strings::length(data);
 
 	return						( !string_length );
 }
@@ -38,7 +38,7 @@ void xray::os::copy_to_clipboard				( pcstr buffer )
 	if ( !OpenClipboard(0) )
 		return;
 
-	u32 const handle_size = ( strings::length(buffer) + 1 ) * sizeof(char);
+	unsigned const handle_size = ( strings::length(buffer) + 1 ) * sizeof(char);
 	HGLOBAL const handle = GlobalAlloc( GHND, handle_size );
 	if ( !handle )
 	{
@@ -64,11 +64,11 @@ pstr xray::os::paste_from_clipboard				( xray::memory::base_allocator& allocator
 		return					0;
 
 	pcstr const data			= static_cast<pcstr>( GlobalLock(handle) );
-	u32 const string_length		= strings::length(data);
+	unsigned const string_length		= strings::length(data);
 	if ( !string_length )
 		return					0;
 
-	u32 const buffer_size		= string_length + 1;
+	unsigned const buffer_size		= string_length + 1;
 	pstr const result			= (pstr)XRAY_MALLOC_IMPL( allocator, buffer_size*sizeof(char), "buffer for pasting from clipboard");
 	strings::copy				( result, buffer_size, data );
 	result[buffer_size-1]		= 0;
@@ -90,9 +90,9 @@ void xray::os::update_clipboard					( pcstr const string )
 	}
 
 	LPSTR const memory			= static_cast<pstr>( GlobalLock(handle) );
-	u32 const memory_length		= strings::length(memory);
-	u32 const string_length		= strings::length(string);
-	u32 const buffer_size		= (memory_length + string_length + 1) * sizeof(char);
+	unsigned const memory_length		= strings::length(memory);
+	unsigned const string_length		= strings::length(string);
+	unsigned const buffer_size		= (memory_length + string_length + 1) * sizeof(char);
 	LPSTR const buffer			= (LPSTR)ALLOCA( buffer_size );
 	strings::copy				( buffer, buffer_size, memory );
 	GlobalUnlock				( handle );

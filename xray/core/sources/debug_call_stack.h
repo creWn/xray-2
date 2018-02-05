@@ -16,13 +16,13 @@ namespace call_stack {
 
 typedef ::fastdelegate::FastDelegate<
 			bool (
-				u32,	// call stack id ( 0 means the calling function )
-				u32,	// num_call_stack_lines
+				unsigned,	// call stack id ( 0 means the calling function )
+				unsigned,	// num_call_stack_lines
 				pcstr,	// module
 				pcstr,	// file
 				int,	// line number
 				pcstr,	// function,
-				u32		// address
+				unsigned		// address
 			)
 		>		Callback;
 
@@ -32,9 +32,9 @@ void	iterate	( _EXCEPTION_POINTERS*	pointers,  // can be NULL
 				  bool					invert_order = false);
 
 void	get_stack_trace (void*	stacktrace[], 
-						 u32	stacktrace_max, 
-						 u32	num_to_capture, 
-						 u32*	out_hash);
+						 unsigned	stacktrace_max, 
+						 unsigned	num_to_capture, 
+						 unsigned*	out_hash);
 
 void	finalize_symbols( );
 

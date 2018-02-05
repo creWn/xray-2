@@ -16,7 +16,7 @@ class XRAY_CORE_API buffer_string
 {
 public:
 	typedef	char									value_type;
-	typedef	u32										size_type;
+	typedef	unsigned										size_type;
 	typedef	char *									pointer;
 	typedef	ptrdiff_t								difference_type;
 	typedef	buffer_string							self_type;
@@ -94,8 +94,8 @@ public:
 	//-----------------------------------------------------------------------------------
 	inline value_type&			operator []		(size_type i); // when placing NULL, call set_size
 	inline value_type			operator []		(size_type i) const;
-	inline u32					length			() const;
-	inline u32					max_length		() const;
+	inline unsigned					length			() const;
+	inline unsigned					max_length		() const;
 	inline bool					empty			() const;
 	inline value_type*			c_str			();
 	inline value_type const*	c_str			() const;

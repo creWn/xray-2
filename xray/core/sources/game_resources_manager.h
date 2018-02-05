@@ -48,8 +48,8 @@ private:
 	struct memory_type_and_pool
 	{
 		memory_type const *	type;
-		u32					pool;
-		memory_type_and_pool	(memory_type const * type, u32 pool) : type(type), pool(pool) {}
+		unsigned					pool;
+		memory_type_and_pool	(memory_type const * type, unsigned pool) : type(type), pool(pool) {}
 	};
 
 	struct memory_type_and_pool_compare
@@ -62,7 +62,7 @@ private:
 	struct resources_info
 	{
 		resource_tree_type *	tree;
-		u32						async_free;
+		unsigned						async_free;
 		resources_info	() :	tree(NULL), async_free(0) { }
 		out_of_memory_queue *	queue;
 	};

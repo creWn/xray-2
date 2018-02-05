@@ -24,7 +24,7 @@ namespace testing {
 
 XRAY_CORE_API void  initialize				( core::engine * engine );
 XRAY_CORE_API void  finalize				( );
-XRAY_CORE_API u32   tests_failed_so_far		( );
+XRAY_CORE_API unsigned   tests_failed_so_far		( );
 XRAY_CORE_API bool	run_tests_command_line	( );
 
 class XRAY_CORE_API test_base

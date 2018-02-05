@@ -23,14 +23,14 @@ public:
 public:
 		managed_cook			(class_id	resource_class,
 								 reuse_enum	reuse_type,
-								 u32 		creation_thread_id	=	use_cooker_thread_id);
+								 unsigned 		creation_thread_id	=	use_cooker_thread_id);
 	
 		virtual create_resource_if_no_file_delegate_type	get_create_resource_if_no_file_delegate	() { return NULL; }
 
 		virtual	void	translate_request_path	(pcstr request, fs::path_string & new_request) const { new_request = request; }
 
 		// raw_file_data can be NULL, when no file is found
-		virtual	u32		calculate_resource_size	(const_buffer in_raw_file_data, bool file_exist) = 0;
+		virtual	unsigned		calculate_resource_size	(const_buffer in_raw_file_data, bool file_exist) = 0;
 
 		virtual void	create_resource			(resources::query_result_for_cook &	in_out_query, 
 												 const_buffer						raw_file_data,
@@ -46,23 +46,23 @@ class XRAY_CORE_API inplace_managed_cook : public cook_base
 public:
 		typedef fastdelegate::FastDelegate< void	(resources::query_result_for_cook &	in_out_query, 
 													 resources::managed_resource_ptr 			out_resource,
-													 u32 &								out_final_resource_size) >
+													 unsigned &								out_final_resource_size) >
 													 create_resource_if_no_file_delegate_type;
 public:
 		inplace_managed_cook	(class_id	resource_class,
 								 reuse_enum	reuse_type,
-								 u32 		creation_thread_id	=	use_cooker_thread_id);
+								 unsigned 		creation_thread_id	=	use_cooker_thread_id);
 
 		virtual create_resource_if_no_file_delegate_type	get_create_resource_if_no_file_delegate	() { return NULL; }
 
 		virtual	void	translate_request_path	(pcstr request, fs::path_string & new_request) const { new_request = request; }
 
-		virtual	u32		calculate_resource_size	(u32 file_size, u32 & out_offset_to_file, bool file_exist) { R_ASSERT_U(file_exist); out_offset_to_file = 0; return file_size; }
+		virtual	unsigned		calculate_resource_size	(unsigned file_size, unsigned & out_offset_to_file, bool file_exist) { R_ASSERT_U(file_exist); out_offset_to_file = 0; return file_size; }
 
 		virtual void	create_resource			(resources::query_result_for_cook &	in_out_query,
 												 resources::managed_resource_ptr	in_out_resource,
-												 u32								raw_file_size,
-												 u32 &								out_final_resource_size) = 0;
+												 unsigned								raw_file_size,
+												 unsigned &								out_final_resource_size) = 0;
 
 		virtual	void	destroy_resource		(resources::managed_resource *				dying_resource) = 0;
 
@@ -75,8 +75,8 @@ class XRAY_CORE_API unmanaged_cook : public cook_base
 public:
 	unmanaged_cook	(class_id	resource_class,
 					 reuse_enum	reuse_type,
-					 u32 		creation_thread_id	=	use_cooker_thread_id,
-					 u32 		allocate_thread_id	=	use_current_thread_id);
+					 unsigned 		creation_thread_id	=	use_cooker_thread_id,
+					 unsigned 		allocate_thread_id	=	use_current_thread_id);
 
 	virtual	void					translate_request_path	(pcstr request, fs::path_string & new_request) const { new_request = request; }
 
@@ -111,8 +111,8 @@ public:
 public:
 	inplace_unmanaged_cook	(class_id	resource_class,
 							 reuse_enum	reuse_type,
-					 		 u32 		creation_thread_id	=	use_cooker_thread_id,
-					 		 u32 		allocate_thread_id	=	use_current_thread_id);
+					 		 unsigned 		creation_thread_id	=	use_cooker_thread_id,
+					 		 unsigned 		allocate_thread_id	=	use_current_thread_id);
 
 	virtual create_resource_if_no_file_delegate_type	get_create_resource_if_no_file_delegate				() { return NULL; }
 
@@ -122,8 +122,8 @@ public:
 	virtual	void			translate_request_path	(pcstr request, fs::path_string & new_request) const { new_request = request; }
 	
 	virtual	mutable_buffer	allocate_resource		(resources::query_result_for_cook &	in_query, 
-													 u32								file_size, 
-													 u32 &								out_offset_to_file, 
+													 unsigned								file_size, 
+													 unsigned &								out_offset_to_file, 
 													 bool								file_exist) = 0;
 	virtual void			deallocate_resource		(pvoid buffer) = 0;
 
@@ -137,7 +137,7 @@ public:
 class XRAY_CORE_API translate_query_cook : public cook_base
 {
 public:
-							translate_query_cook	(class_id resource_class, reuse_enum reuse_type, u32 translate_query_thread);
+							translate_query_cook	(class_id resource_class, reuse_enum reuse_type, unsigned translate_query_thread);
 
 	virtual	void			translate_request_path	(pcstr request, fs::path_string & new_request) const { new_request = request; }
 	virtual	void			translate_query			(resources::query_result &	parent) = 0;

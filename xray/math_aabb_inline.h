@@ -200,7 +200,7 @@ inline bool	aabb::similar		( aabb const& other ) const
 	return		( min.similar( other.min ) && max.similar( other.max ) );
 }
 
-inline float3 aabb::vertex		( u32 index ) const
+inline float3 aabb::vertex		( unsigned index ) const
 {
 	ASSERT		( index < 8 );
 

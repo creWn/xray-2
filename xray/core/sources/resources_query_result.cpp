@@ -57,7 +57,7 @@ query_result_for_cook *   query_result_for_cook::get_parent_query () const
 query_result::query_result (u16						const flags,
 							queries_result*			const parent,
 							memory::base_allocator* const allocator,
-							u32						const user_thread_id)
+							unsigned						const user_thread_id)
 	:	query_result_for_cook				(parent),
 		resource_base						(resource_base::is_query_result_flag),
 		m_flags								(flags),
@@ -155,10 +155,10 @@ bool   query_result::append_data_if_needed (const_buffer data, file_size_type da
 		dest_end					=	data_end;
 
 	mutable_buffer file_data		=	cast_away_const(pin_compressed_or_raw_file());
-	u32 const dest_offs				=	u32(dest_start - file_start);
-	u32 const dest_size				=	u32(dest_end - dest_start);
-	u32 const src_offs				=	u32(src_start - data_start);
-	u32 const src_size				=	u32(src_end - src_start);
+	unsigned const dest_offs				=	unsigned(dest_start - file_start);
+	unsigned const dest_size				=	unsigned(dest_end - dest_start);
+	unsigned const src_offs				=	unsigned(src_start - data_start);
+	unsigned const src_size				=	unsigned(src_end - src_start);
 
 	R_ASSERT							(dest_offs == m_loaded_bytes);
 	R_ASSERT							(dest_size == src_size);
@@ -224,10 +224,10 @@ bool   query_result::check_file_crc ()
 	
 	const_buffer const pinned_file	=	pin_compressed_or_raw_file();
 
-	u32 const	raw_file_size		=	fat_it.get_raw_file_size();
-	u32 const	raw_file_hash		=	fs::crc32((pcstr)pinned_file.c_ptr(), raw_file_size);
+	unsigned const	raw_file_size		=	fat_it.get_raw_file_size();
+	unsigned const	raw_file_hash		=	fs::crc32((pcstr)pinned_file.c_ptr(), raw_file_size);
 
-	u32			hash_in_fat			=	0;
+	unsigned			hash_in_fat			=	0;
 	bool const  got_hash			=	fat_it.get_hash(& hash_in_fat);
 	ASSERT_U							(got_hash);
 
@@ -402,7 +402,7 @@ query_result::consider_with_name_registry_result_enum   query_result::consider_w
 	{
 		R_ASSERT							(entry->associated);
 		query_result * active_query		=	NULL;
-		u32 resource_class_id			=	0;
+		unsigned resource_class_id			=	0;
 		if ( (active_query = entry->associated->cast_query_result()) != 0 )
 		{
 			if ( only_get_associated_resource )
@@ -443,7 +443,7 @@ query_result::consider_with_name_registry_result_enum   query_result::consider_w
 
 		if ( has_flag(flag_reused_resource) )
 		{
-			R_ASSERT						((u32)m_class_id == resource_class_id, 
+			R_ASSERT						((unsigned)m_class_id == resource_class_id, 
 											 "Omg! Associated resource '%s' is of a different class: '%d'",
 											 name, resource_class_id);
 		}
@@ -646,7 +646,7 @@ void   query_result::associate_created_resource_with_fat_or_name_registry ()
 		name_registry_entry * new_entry			=	NULL;
 		if ( m_error_type == error_type_unset )
 		{
-			u32 const name_registry_entry_size	=	sizeof(name_registry_entry) + strings::length(m_request_path) + 1;
+			unsigned const name_registry_entry_size	=	sizeof(name_registry_entry) + strings::length(m_request_path) + 1;
 			mutable_buffer allocation				(RES_ALLOC(char, name_registry_entry_size), name_registry_entry_size);
 			new_entry						=	new (allocation.c_ptr()) name_registry_entry;
 			allocation						+=	sizeof(name_registry_entry);
@@ -690,8 +690,8 @@ void   query_result_for_cook::set_error_type (error_type_enum error_type, bool c
 
 void   query_result_for_cook::set_unmanaged_resource (unmanaged_resource_ptr	ptr, 
 													  memory_type const &		memory_type, 
-													  u32						resource_size, 
-													  u32						pool_id)
+													  unsigned						resource_size, 
+													  unsigned						pool_id)
 {
 	m_unmanaged_resource			=	ptr;
 	if ( ptr )
@@ -775,10 +775,10 @@ void   query_result::unpin_compressed_or_raw_file (const_buffer const & pinned_f
 		unpin_raw_file					(pinned_file);
 }
 
-u32   query_result::raw_buffer_size ()
+unsigned   query_result::raw_buffer_size ()
 {
 	const_buffer const raw_buffer	=	pin_raw_buffer();
-	u32 const out_size				=	raw_buffer.size();
+	unsigned const out_size				=	raw_buffer.size();
 	unpin_raw_buffer					(raw_buffer);
 	return								out_size;
 }
@@ -801,14 +801,14 @@ bool   query_result::need_create_resource_if_no_file ()
 	return								fat_it.is_end() && !creation_data_from_user() && !has_flag(flag_refers_to_raw_file);
 }
 
-u32   query_result::compressed_or_raw_file_size () const
+unsigned   query_result::compressed_or_raw_file_size () const
 {
 	fat_iterator fat_it				=	wrapper_to_fat_it(m_fat_it);
 	R_ASSERT							(!fat_it.is_end()); 
 	return								fat_it.get_raw_file_size();
 }
 
-u32	  query_result_for_cook::get_raw_file_size () const
+unsigned	  query_result_for_cook::get_raw_file_size () const
 {
 	fat_iterator fat_it				=	wrapper_to_fat_it(m_fat_it);
 	R_ASSERT							(!fat_it.is_end() || creation_data_from_user());
@@ -826,13 +826,13 @@ fat_it_wrapper   query_result::get_fat_it_zero_if_physical_path_it () const
 	return								m_fat_it;	
 }
 
-void   query_result::set_loaded_bytes (u32 byte_count)
+void   query_result::set_loaded_bytes (unsigned byte_count)
 {
 	m_loaded_bytes					=	byte_count;
 	R_ASSERT							(m_loaded_bytes <= compressed_or_raw_file_size());
 }
 
-void   query_result::add_loaded_bytes (u32 byte_count)
+void   query_result::add_loaded_bytes (unsigned byte_count)
 {
 	m_loaded_bytes					+=	byte_count;
 	R_ASSERT							(m_loaded_bytes <= compressed_or_raw_file_size());
@@ -849,12 +849,12 @@ void   query_result_for_cook::set_zero_unmanaged_resource ()
 	this_ptr->set_flag						(query_result::flag_zero_unmanaged_resource_was_set);
 }
 
-void   query_result::set_flag (u32 flag) 
+void   query_result::set_flag (unsigned flag) 
 { 
 	threading::interlocked_or				(m_flags, flag); 
 }
 
-void   query_result::unset_flag (u32 flag) 
+void   query_result::unset_flag (unsigned flag) 
 { 
 	threading::interlocked_and				(m_flags, ~flag); 
 }

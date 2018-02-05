@@ -3,12 +3,10 @@
 //	Author		: Dmitriy Iassenev
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef MEMORY_DEBUG_PARAMETERS_H_INCLUDED
-#define MEMORY_DEBUG_PARAMETERS_H_INCLUDED
+#pragma once
 
 #ifdef DEBUG
-#	define XRAY_CORE_DEBUG_PARAMETERS_DECLARATION_NO_COMA		pcstr const function, pcstr const file, u32 const line
+#	define XRAY_CORE_DEBUG_PARAMETERS_DECLARATION_NO_COMA		pcstr const function, pcstr const file, unsigned const line
 #	define XRAY_CORE_DEBUG_PARAMETERS_UNREFERENCED_GUARD		XRAY_UNREFERENCED_PARAMETER(function); \
 																XRAY_UNREFERENCED_PARAMETER(file); \
 																XRAY_UNREFERENCED_PARAMETER(line);
@@ -29,5 +27,3 @@
 #	define XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION
 #	define XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_PARAMETER		""
 #endif // #ifdef DEBUG
-
-#endif // #ifndef MEMORY_DEBUG_PARAMETERS_H_INCLUDED

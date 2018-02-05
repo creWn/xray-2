@@ -19,7 +19,7 @@ public:
 public:
 						event	(bool initial_state = false) : threading::event(initial_state) {}
 	void				set		(bool value) { threading::event::set(value); }
-	wait_result_enum	wait	(u32 max_wait_time_ms);
+	wait_result_enum	wait	(unsigned max_wait_time_ms);
 };
 
 } // namespace tasks

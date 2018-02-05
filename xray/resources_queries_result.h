@@ -3,10 +3,8 @@
 //	Author		: Sergey Chechin
 //	Copyright (C) GSC Game World - 2010
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef XRAY_RESOURCES_QUERIES_RESULT_H_INCLUDED
-#define XRAY_RESOURCES_QUERIES_RESULT_H_INCLUDED
-
+#pragma once
+#include <xray/type_extensions.h>
 #include <xray/resources_query_result.h>
 
 namespace xray {
@@ -15,7 +13,7 @@ namespace resources {
 class XRAY_CORE_API queries_result
 {
 public:
-	u32						size						() const;
+	unsigned				size						() const;
 	bool					empty						() const;
 
 	memory::base_allocator *	get_user_allocator		() const { return m_allocator; }
@@ -33,10 +31,10 @@ public:
 private:
 	typedef		query_result::push_to_ready_queries_bool	push_to_ready_queries_bool;
 
-							queries_result				(u32						num_queries, 
+							queries_result				(unsigned						num_queries, 
 														 query_callback				callback,
 														 memory::base_allocator*	allocator,
-														 u32						user_thread_id,
+														 unsigned						user_thread_id,
 														 query_result_for_cook*		parent);
 							~queries_result				();
 
@@ -44,8 +42,8 @@ private:
 	void    				on_query_end				(bool result, push_to_ready_queries_bool);
 	void					call_user_callback			();
 	void					set_result					(bool result) { m_result = result; }
-	query_result &			at							(u32 const index)		{ R_ASSERT(index < m_size); return m_queries[index]; }
-	query_result const &	at							(u32 const index) const { R_ASSERT(index < m_size); return m_queries[index]; }
+	query_result &			at							(unsigned const index)		{ R_ASSERT(index < m_size); return m_queries[index]; }
+	query_result const &	at							(unsigned const index) const { R_ASSERT(index < m_size); return m_queries[index]; }
 	void					translate_request_paths		();
 	void					translate_query_if_needed	();
 
@@ -55,8 +53,8 @@ private:
 	queries_result *		m_next_ready;
 	memory::base_allocator*	m_allocator;
 	long					m_unique_id;
-	u32						m_size;
-	u32						m_thread_id;
+	unsigned						m_size;
+	unsigned						m_thread_id;
 	bool					m_result;
 
 #if defined(_MSC_VER)
@@ -76,5 +74,3 @@ private:
 
 } // namespace resources
 } // namespace xray
-
-#endif // #ifndef XRAY_RESOURCES_QUERIES_RESULT_H_INCLUDED

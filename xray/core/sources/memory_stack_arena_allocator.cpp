@@ -7,7 +7,7 @@
 
 using xray::memory::stack_arena_allocator;
 
-static const u32 s_block_header_size		= sizeof( u32 ) + sizeof( char );
+static const unsigned s_block_header_size		= sizeof( unsigned ) + sizeof( char );
 
 stack_arena_allocator::stack_arena_allocator	( ) :
 	m_cur_top					( 0 ),
@@ -28,7 +28,7 @@ void stack_arena_allocator::finalize_impl	( )
 {
 }
 
-void stack_arena_allocator::user_thread_id	( u32 user_thread_id ) const
+void stack_arena_allocator::user_thread_id	( unsigned user_thread_id ) const
 {
 	threading::interlocked_exchange	( (threading::atomic32_value_type&)m_user_thread_id, user_thread_id );
 }
@@ -43,7 +43,7 @@ inline bool	stack_arena_allocator::initialized	( ) const
 	if ( !super::initialized( ) )
 		return					( false );
 
-	u32 const current_thread_id	= xray::threading::current_thread_id ( );
+	unsigned const current_thread_id	= xray::threading::current_thread_id ( );
 	XRAY_UNREFERENCED_PARAMETER	( current_thread_id );
 	R_ASSERT					( current_thread_id == m_user_thread_id );
 	return						( true );
@@ -62,12 +62,12 @@ pvoid stack_arena_allocator::malloc_impl	( size_t const raw_size XRAY_CORE_DEBUG
 	ref_is_free( m_cur_top )	= false;
 
 	ref_is_free( next_top )		= true;
-	ref_prev_size( next_top )	= ( u32 )( next_top - m_cur_top );
+	ref_prev_size( next_top )	= ( unsigned )( next_top - m_cur_top );
 
 	pbyte const result			= m_cur_top;
 	m_cur_top					= next_top;
 
-//	printf						( "allocating %d block %d\n", size, u32( res ) );
+//	printf						( "allocating %d block %d\n", size, unsigned( res ) );
 
 	return						on_malloc( result, raw_size, 0, XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_PARAMETER );
 }
@@ -89,7 +89,7 @@ void stack_arena_allocator::free_impl		( pvoid block XRAY_CORE_DEBUG_PARAMETERS_
 	XRAY_CORE_DEBUG_PARAMETERS_UNREFERENCED_GUARD;
 
 	ASSERT						( initialized ( ) );
-//	printf						( "dealloc of block %d\n", ( u32 )block );
+//	printf						( "dealloc of block %d\n", ( unsigned )block );
 
 	on_free						( block );
 
@@ -98,7 +98,7 @@ void stack_arena_allocator::free_impl		( pvoid block XRAY_CORE_DEBUG_PARAMETERS_
 	u8* is_free_ptr				=	&ref_is_free( real_block );
 	u8  is_free					=	*is_free_ptr;
 
-	u32 prev_size				=	ref_prev_size( m_cur_top );
+	unsigned prev_size				=	ref_prev_size( m_cur_top );
 
 	ASSERT						( !is_free );
 	if ( is_free )
@@ -132,9 +132,9 @@ void stack_arena_allocator::call_free		( pvoid pointer XRAY_CORE_DEBUG_PARAMETER
 	free_impl						( pointer XRAY_CORE_DEBUG_PARAMETERS );
 }
 
-inline u32& stack_arena_allocator::ref_prev_size( pbyte const addr )
+inline unsigned& stack_arena_allocator::ref_prev_size( pbyte const addr )
 {
-	return						( *( u32* )( addr - 4 ) );
+	return						( *( unsigned* )( addr - 4 ) );
 }
 
 inline u8& stack_arena_allocator::ref_is_free	( pbyte const addr )

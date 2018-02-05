@@ -66,7 +66,7 @@ public:
 						lua_config_value		( ::luabind::object const& object, ::luabind::object const& table_object, pcstr field_id );
 						~lua_config_value		( );
 
-	void				save					( strings::stream& stream, pstr indent, u32 indent_size, u32 indent_level ) const;
+	void				save					( strings::stream& stream, pstr indent, unsigned indent_size, unsigned indent_level ) const;
 	void				save					( pcstr file_path );
 	void				clear					( );
 
@@ -88,18 +88,18 @@ public:
 	const_iterator		end						( ) const;
 
 	bool				empty					( ) const;
-	u32					size					( ) const;
+	unsigned					size					( ) const;
 
-	lua_config_value const operator[ ]			( u32 index ) const;
+	lua_config_value const operator[ ]			( unsigned index ) const;
 	lua_config_value const operator[ ]			( int index ) const;
 	lua_config_value const operator[ ]			( pcstr field_id ) const;
 
-	lua_config_value	operator[ ]				( u32 index );
+	lua_config_value	operator[ ]				( unsigned index );
 	lua_config_value	operator[ ]				( int index );
 	lua_config_value	operator[ ]				( pcstr field_id );
 
 private:
-	lua_config_value	operator_brackets_impl	( u32 index ) const;
+	lua_config_value	operator_brackets_impl	( unsigned index ) const;
 	lua_config_value	operator_brackets_impl	( int index ) const;
 	lua_config_value	operator_brackets_impl	( pcstr field_id ) const;
 
@@ -110,7 +110,7 @@ public:
 						operator s16			( ) const;
 						operator u16			( ) const;
 						operator s32			( ) const;
-						operator u32			( ) const;
+						operator unsigned			( ) const;
 						operator float			( ) const;
 						operator pcstr			( ) const;
 						operator math::float2	( ) const;
@@ -121,7 +121,7 @@ public:
 	lua_config_value	operator =				( pcstr value );
 	lua_config_value	operator =				( bool value );
 	lua_config_value	operator =				( int value );
-	lua_config_value	operator =				( u32 value );
+	lua_config_value	operator =				( unsigned value );
 	lua_config_value	operator =				( float value );
 	lua_config_value	operator =				( math::float2 const& value );
 	lua_config_value	operator =				( math::float3 const& value );

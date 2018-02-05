@@ -85,14 +85,14 @@ private:
 	query_result *				cast_query_result				();
 	base_of_intrusive_base *	cast_base_of_intrusive_base		();
 	void						set_memory_usage				(class memory_usage const & usage) { m_memory_usage_self = usage; }
-	u32							get_reference_count				() const;
+	unsigned							get_reference_count				() const;
 
 protected:
 	class memory_usage			m_memory_usage_self;
 	name_registry_entry *		m_name_registry_entry;
 	resource_base *				m_next_for_query_finished_callback;
 	
-	u32							m_recalculate_memory_usage_last_frame;
+	unsigned							m_recalculate_memory_usage_last_frame;
 	creation_source_enum		m_creation_source;
 
 	void						link_parent_resource	(resource_base *			parent);
@@ -103,7 +103,7 @@ protected:
 private:
 	resource_link_list			m_children_resources;
 	resource_link_list			m_parents_resources;
-	u32							m_flag;
+	unsigned							m_flag;
 
  	template < ::xray::fs::pointer_for_fat_size_enum pointer_for_fat_size>
 	friend	class				::xray::fs::fat_node;

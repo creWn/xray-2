@@ -54,14 +54,14 @@ mutex::~mutex		()
 
 void mutex::lock	()
 {
-//	printf						("lock   0x%x %x\r\n", *(u32*)&m_mutex, current_thread_id());
+//	printf						("lock   0x%x %x\r\n", *(unsigned*)&m_mutex, current_thread_id());
 	int const error				= sys_lwmutex_lock( (mutex_type*)&m_mutex, 0 );
 	R_ASSERT_CMP				( error, ==, CELL_OK );
 }
 
 void mutex::unlock	()
 {
-//	printf						("unlock 0x%x %x\r\n", *(u32*)&m_mutex, current_thread_id());
+//	printf						("unlock 0x%x %x\r\n", *(unsigned*)&m_mutex, current_thread_id());
 	int const error				= sys_lwmutex_unlock( (mutex_type*)&m_mutex );
 	R_ASSERT_CMP				( error, ==, CELL_OK );
 }
@@ -116,14 +116,14 @@ mutex::~mutex		()
 
 void mutex::lock	()
 {
-//	printf						("lock   0x%x %x\r\n", *(u32*)&m_mutex, current_thread_id());
+//	printf						("lock   0x%x %x\r\n", *(unsigned*)&m_mutex, current_thread_id());
 	int const error				= sys_mutex_lock( *(mutex_type*)&m_mutex, 0 );
 	R_ASSERT_CMP				( error, ==, CELL_OK );
 }
 
 void mutex::unlock	()
 {
-//	printf						("unlock 0x%x %x\r\n", *(u32*)&m_mutex, current_thread_id());
+//	printf						("unlock 0x%x %x\r\n", *(unsigned*)&m_mutex, current_thread_id());
 	int const error				= sys_mutex_unlock( *(mutex_type*)&m_mutex );
 	R_ASSERT_CMP				( error, ==, CELL_OK );
 }

@@ -31,7 +31,7 @@ using xray::threading::mutex;
 static node*		s_initiator_tree		= 0;
 static rules_stack*	s_rules_stack			= 0;
 static log_file*	s_log_file				= 0;
-static u32			s_ready_for_use_tls_key	= xray::threading::tls_get_invalid_key( );
+static unsigned			s_ready_for_use_tls_key	= xray::threading::tls_get_invalid_key( );
 
 static xray::uninitialized_reference<mutex>	s_log_mutex;
 
@@ -64,7 +64,7 @@ static bool get_ready_for_use					( )
 		return					false;
 
 	pvoid const value			= xray::threading::tls_get_value( s_ready_for_use_tls_key );
-	return						!!*xray::pointer_cast< u32 const* >( &value );
+	return						!!*xray::pointer_cast< unsigned const* >( &value );
 }
 
 static void set_ready_for_use					( bool const value )
@@ -72,7 +72,7 @@ static void set_ready_for_use					( bool const value )
 	if ( !xray::threading::tls_is_valid_key( s_ready_for_use_tls_key ) )
 		return;
 
-	u32 const new_value			= value ? 1 : 0;
+	unsigned const new_value			= value ? 1 : 0;
 	xray::threading::tls_set_value( s_ready_for_use_tls_key, *xray::pointer_cast< pvoid const* >(&new_value) );
 	R_ASSERT					( get_ready_for_use( ) == value );
 }
@@ -170,7 +170,7 @@ void xray::logging::finalize				( )
 xray::logging::verbosity xray::logging::string_to_verbosity ( pcstr in_verbosity )
 {
 	logging::verbosity	verbosities[]	= {	silent, error, warning,	info, debug, trace };
-	for ( u32 i=0; i<array_size(verbosities); ++i )
+	for ( unsigned i=0; i<array_size(verbosities); ++i )
 		if ( strings::equal(verbosity_to_string(verbosities[i]), in_verbosity) )
 			return						verbosities[i];
 	
@@ -267,7 +267,7 @@ bool use_console_for_logging ( )
 	return						s_use_console_for_logging;
 }
 
-void log_thread_unsafe							( logging::settings const * settings, pcstr message, u32 const string_length, logging::verbosity verbosity )
+void log_thread_unsafe							( logging::settings const * settings, pcstr message, unsigned const string_length, logging::verbosity verbosity )
 {
 	check_not_ready_for_use		( );
 	

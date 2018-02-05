@@ -50,7 +50,7 @@ public:
 
 	long						query_resources_impl				(request const  			requests[], 
 																	 creation_request const  	requests_create[],
-										 							 u32 const					requests_count,
+										 							 unsigned const					requests_count,
 										 							 query_callback const &		callback,
 										 							 memory::base_allocator *	allocator,
 																	 user_data_variant const * const	user_data[],
@@ -99,10 +99,10 @@ public:
 	void						add_fs_task							(fs_task *			mount_task);
 
 	void						resources_thread_proc				();
-	u32							resources_thread_id					() const { return m_resources_thread_id; }
+	unsigned							resources_thread_id					() const { return m_resources_thread_id; }
 
-	typedef	associative_vector<u32, thread_local_data *, vector>	thread_local_data_container;
-	thread_local_data *			get_thread_local_data				(u32			thread_id, 
+	typedef	associative_vector<unsigned, thread_local_data *, vector>	thread_local_data_container;
+	thread_local_data *			get_thread_local_data				(unsigned			thread_id, 
 																	 bool			create_if_not_exist);
 
 	void						finalize_thread_usage				(bool 			call_from_main_thread);
@@ -118,12 +118,12 @@ public:
 	void						inc_num_current_fs_ops				()			{ threading::interlocked_increment(m_num_current_fs_ops); }
 	void						dec_num_current_fs_ops				()			{ threading::interlocked_decrement(m_num_current_fs_ops); }
 	long						has_no_pending_mount_ops			() const	{ return !m_count_of_pending_mount_operations && !m_count_of_pending_helper_query_for_mount; }
-	u32							num_device_managers					() const	{ return m_device_managers.size(); }
+	unsigned							num_device_managers					() const	{ return m_device_managers.size(); }
 
 	void						start_cooks_registration			();
 	void						finish_cooks_registration			();
 
-	u32							cooker_thread_id					() const	{ return m_cooker_thread_id; }
+	unsigned							cooker_thread_id					() const	{ return m_cooker_thread_id; }
 
 	core::configs::lua_config_cook &	get_lua_config_cook			();
 	core::configs::binary_config_cook &	get_binary_config_cook		();
@@ -136,8 +136,8 @@ public:
 	out_of_memory_callback		get_out_of_memory_callback			() const { return m_out_of_memory_functionality.get_out_of_memory_callback_impl(); }
 	void						push_out_of_memory_query			(query_result * query) { m_out_of_memory_functionality.push_out_of_memory_query_impl(query); }
 
-	pvoid						allocate_unmanaged_memory			(u32 size, pcstr type_name);
-	managed_resource *			allocate_managed_resource			(u32 size);
+	pvoid						allocate_unmanaged_memory			(unsigned size, pcstr type_name);
+	managed_resource *			allocate_managed_resource			(unsigned size);
 	void						free_managed_resource				(managed_resource * );
 
 private:
@@ -199,8 +199,8 @@ private:
 	//----------------------------------------------------------
 	threading::atomic32_type	m_pending_queries_count;
 
-	void						on_added_queries					(u32 num_queries);
-	void						on_dispatched_queries				(u32 num_queries);
+	void						on_added_queries					(unsigned num_queries);
+	void						on_dispatched_queries				(unsigned num_queries);
 
 	//----------------------------------------------------------
 	// save_generated_resource
@@ -341,16 +341,16 @@ private:
 	
 	threading::mutex												m_thread_local_data_mutex;
 	thread_local_data_container										m_thread_local_data;
-	u32																m_tls_key_thread_local_data;
+	unsigned																m_tls_key_thread_local_data;
 
 	bool															m_resources_thread_exit;
 	bool															m_resources_thread_exited;
-	u32																m_resources_thread_id;				
+	unsigned																m_resources_thread_id;				
 	threading::event												m_resources_wakeup_event;
 
 	bool															m_cooker_thread_exit;
 	bool															m_cooker_thread_exited;
-	u32																m_cooker_thread_id;
+	unsigned																m_cooker_thread_id;
 	threading::event												m_cooker_wakeup_event;
 
 	typedef	fixed_vector<cook_base *, 512>							cooks_registry;

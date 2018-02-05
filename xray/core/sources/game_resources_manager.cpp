@@ -111,7 +111,7 @@ out_of_memory_treatment_enum   game_resources_manager::out_of_memory_callback (m
 
 
 
-// 	u32 freed_currently				=	0;
+// 	unsigned freed_currently				=	0;
 // 	resource_base * it				=	list.front();
 // 	while ( it )
 // 	{

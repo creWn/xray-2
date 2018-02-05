@@ -22,7 +22,7 @@ public:
 	long					reference_count			()	const	{ return m_reference_count; }
 
 	template				<class Resource>
-	signalling_bool			try_unregister_from_fat_or_from_name_registry	(Resource * const object, u32 zero_reference_count = 0) const;
+	signalling_bool			try_unregister_from_fat_or_from_name_registry	(Resource * const object, unsigned zero_reference_count = 0) const;
 
 	bool					pinned_by_game_resource_manager	() const { return m_flags & flag_pinned_by_game_resource_manager; }
 

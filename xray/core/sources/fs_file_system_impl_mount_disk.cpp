@@ -23,7 +23,7 @@ void   file_system_impl::mount_disk (pcstr const logical_path, pcstr const physi
 	verify_path_is_portable					(logical_path);
 	verify_path_is_portable					(physical_path);
 
-	u32					hash;
+	unsigned					hash;
 	fat_folder_node<> *	folder			=	find_or_create_folder(logical_path, & hash);
 
 	if ( get_path_info(NULL, physical_path) == path_info::type_file )

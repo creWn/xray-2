@@ -25,9 +25,9 @@ enum			execute_while_wait_for_children_enum	{	execute_while_wait_for_children_fa
 
 enum			do_logging_bool							{	do_logging_false, do_logging_true	};
 
-XRAY_CORE_API	void   			initialize				(u32 max_task_threads, 
-										 				 u32 max_non_task_threads,
-										 				 u32 min_permanent_working_threads,
+XRAY_CORE_API	void   			initialize				(unsigned max_task_threads, 
+										 				 unsigned max_non_task_threads,
+										 				 unsigned min_permanent_working_threads,
 										 				 execute_while_wait_for_children_enum,
 														 do_logging_bool);
 
@@ -49,7 +49,7 @@ XRAY_CORE_API	void			resume_all_task_threads	();
 
 XRAY_CORE_API	bool			zero_tasks				(); // remove this func from interface
 XRAY_CORE_API	void			check_all_free			(); // remove this func from interface
-XRAY_CORE_API	void			collect_garbage			(u32 * out_tasks_freed_count = NULL); // remove this func from interface
+XRAY_CORE_API	void			collect_garbage			(unsigned * out_tasks_freed_count = NULL); // remove this func from interface
 
 XRAY_CORE_API	void			set_logging				(do_logging_bool do_logging);
 

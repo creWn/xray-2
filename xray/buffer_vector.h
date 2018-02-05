@@ -28,7 +28,7 @@ public:
 	typedef std::reverse_iterator< iterator >		reverse_iterator;
 
 	typedef ptrdiff_t								difference_type;
-	typedef u32										size_type;
+	typedef unsigned										size_type;
 	typedef T										value_type;
 
 private:

@@ -20,7 +20,7 @@ bool   file_system_impl::save_db (	FILE *						const	fat_file,
 						  			FILE *						const 	db_file,
 									pcstr						const	logical_path, 
 									bool						const	no_duplicates,
-									u32							const	fat_alignment,
+									unsigned							const	fat_alignment,
 									memory::base_allocator *	const	alloc,
 									compressor *				const 	compressor,
 									float						const	compress_smallest_rate,
@@ -31,21 +31,21 @@ bool   file_system_impl::save_db (	FILE *						const	fat_file,
 	threading::mutex_raii		raii	(m_mount_mutex);
 	verify_path_is_portable				(logical_path);
 
-	u32				hash;
+	unsigned				hash;
 	fat_node<> *	save_root		=	find_node(logical_path, & hash);
 	if ( !save_root )
 		return							false;
 
 	bool const		fat_in_db		=	(db_file == fat_file);
 
-	u32 const num_nodes				=	save_root->get_num_nodes();
-	u32	const max_buffer_size		=	save_root->get_max_fat_size(inline_data);
+	unsigned const num_nodes				=	save_root->get_num_nodes();
+	unsigned	const max_buffer_size		=	save_root->get_max_fat_size(inline_data);
 
-	u32	const db_file_origin		=	ftell(db_file);
+	unsigned	const db_file_origin		=	ftell(db_file);
 
 	if ( fat_in_db )
 	{
-		u32 const buffer_size_aligned	=	math::align_up (max_buffer_size + (u32)sizeof(db_header), fat_alignment);
+		unsigned const buffer_size_aligned	=	math::align_up (max_buffer_size + (unsigned)sizeof(db_header), fat_alignment);
 		fseek							(db_file, buffer_size_aligned , SEEK_CUR);
 	}
 
@@ -86,7 +86,7 @@ bool   file_system_impl::save_db (	FILE *						const	fat_file,
 	file_size_type const real_buffer_size	=	env.cur_offs;
 	db_header	header;
 	header.num_nodes				=	num_nodes;
-	header.buffer_size				=	(u32)real_buffer_size;
+	header.buffer_size				=	(unsigned)real_buffer_size;
 	
 	if ( file_system::is_big_endian_format(db_format) )
 	{
@@ -115,12 +115,12 @@ void   file_system_impl::save_node_file (save_nodes_environment &	env,
 										  file_size_type &			out_pos,
 										  bool &					is_compressed,
 										  mutable_buffer *			out_inlined_data,
-										  u32 &						compressed_size,
-										  u32 &						out_file_hash)
+										  unsigned &						compressed_size,
+										  unsigned &						out_file_hash)
 {
-	out_pos									=	u32(-1);
+	out_pos									=	unsigned(-1);
 	is_compressed							=	false;
-	compressed_size							=	u32(-1);
+	compressed_size							=	unsigned(-1);
 
 	path_string		original_node_path;
 	get_disk_path								(original_node, original_node_path);
@@ -129,7 +129,7 @@ void   file_system_impl::save_node_file (save_nodes_environment &	env,
 	XRAY_UNREFERENCED_PARAMETER					(result);
 	R_ASSERT									(result);
 
-	u32	const file_size						=	original_node->get_raw_file_size();
+	unsigned	const file_size						=	original_node->get_raw_file_size();
 
 	if ( env.helper_nodes )
 	{
@@ -182,7 +182,7 @@ void   file_system_impl::save_node_file (save_nodes_environment &	env,
 	{
 		R_ASSERT								(env.alloc);
 		pstr src_data						=	(pstr)XRAY_ALLOC_IMPL(*env.alloc, char, file_size);
-		u32 const dest_size					=	128 + (2 * file_size);
+		unsigned const dest_size					=	128 + (2 * file_size);
 		pstr dest_data						=	(pstr)XRAY_ALLOC_IMPL(*env.alloc, char, dest_size);
 
 		mutable_buffer const src_buffer		=	memory::buffer(src_data, file_size);
@@ -258,14 +258,14 @@ template <pointer_for_fat_size_enum target_pointer_size>
 struct save_nodes_helper
 {
 	template <class T>
-	static u32 get_node_offs ()
+	static unsigned get_node_offs ()
 	{
-		u32 const offset			=	u32((pbyte)& ((T *)NULL)->m_base - (pbyte)((T *)NULL));
+		unsigned const offset			=	unsigned((pbyte)& ((T *)NULL)->m_base - (pbyte)((T *)NULL));
 		return							offset;
 
 	}
 
-	static u32 get_node_offs (fat_node<target_pointer_size> * const node, bool do_reverse_bytes)
+	static unsigned get_node_offs (fat_node<target_pointer_size> * const node, bool do_reverse_bytes)
 	{
 		u16 node_flags				=	(u16)node->get_flags();
 		COMPILE_ASSERT					(sizeof(node->m_flags) == sizeof(node_flags), change_node_flags_to_have_correct_size);
@@ -299,13 +299,13 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 {
 	bool const		do_reverse_bytes	=	file_system::is_big_endian_format(env.db_format);
 
-	u32 const		name_len_with_zero	=	strings::length(cur->m_name) + 1;
+	unsigned const		name_len_with_zero	=	strings::length(cur->m_name) + 1;
 
-	u32 const		max_node_class_size	=	math::max<u32>(	sizeof(fat_folder_node<target_pointer_size>), 
+	unsigned const		max_node_class_size	=	math::max<unsigned>(	sizeof(fat_folder_node<target_pointer_size>), 
 														sizeof(fat_db_compressed_file_node<target_pointer_size>),
 														sizeof(fat_db_file_node<target_pointer_size>)	);
 
-	u32				max_node_size	=	 max_node_class_size + name_len_with_zero + 16;
+	unsigned				max_node_size	=	 max_node_class_size + name_len_with_zero + 16;
 
 	char*				node_data	=	(char*)ALLOCA(max_node_size);
 	memory::zero						(node_data, max_node_size);
@@ -321,8 +321,8 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 	mutable_buffer	inlined_data;
 	bool			is_inlined		=	false;
 
-	u32		file_hash				=	0;
-	u32		node_size				=	0;
+	unsigned		file_hash				=	0;
+	unsigned		node_size				=	0;
 	if ( cur->is_folder() )
 	{
 		new ( temp_folder )				fat_folder_node<target_pointer_size>;
@@ -332,7 +332,7 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 	else
 	{
 		file_size_type					pos_in_db;
-		u32								compressed_size;
+		unsigned								compressed_size;
 		save_node_file					(env, cur, pos_in_db, is_compressed, & inlined_data, compressed_size, file_hash);
 		is_inlined					=	!!inlined_data.size();
 
@@ -378,7 +378,7 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 		}
 	}
 
-	u32 node_alignment				=	8;
+	unsigned node_alignment				=	8;
 	if ( env.db_format != file_system::db_target_platform_pc )
 	{
 		if ( !is_inlined )
@@ -386,8 +386,8 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 	}
 
 	node_size						+=	name_len_with_zero;
-	u32 padded_size					=	math::align_up(node_size, node_alignment);
-	u32 const padded_size_with_inlined	=	is_inlined ? math::align_up(padded_size + inlined_data.size(), node_alignment) : padded_size;
+	unsigned padded_size					=	math::align_up(node_size, node_alignment);
+	unsigned const padded_size_with_inlined	=	is_inlined ? math::align_up(padded_size + inlined_data.size(), node_alignment) : padded_size;
 
 	temp->m_flags					=	cur->m_flags;
 	strings::copy						(temp->m_name, name_len_with_zero, cur->m_name);
@@ -418,7 +418,7 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 	env.cur_offs					+=	padded_size_with_inlined;
 		
 	fat_node<> *	child			=	cur->get_first_child();
-	file_size_type	first_child_offs	=	u32(-1);
+	file_size_type	first_child_offs	=	unsigned(-1);
 	file_size_type	child_prev_offs		=	NULL;
 	fat_node<target_pointer_size> *	prev_fat_child	=	NULL;
 	while ( child )
@@ -427,7 +427,7 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 		fat_node<target_pointer_size> * const saved_fat_child	=	save_nodes<target_pointer_size>(env, child, child_prev_offs, new_parent_offs);
 
 		child_prev_offs				=	saved_cur_offs + save_nodes_helper<target_pointer_size>::get_node_offs(saved_fat_child, do_reverse_bytes);
-		if ( first_child_offs == u32(-1) )
+		if ( first_child_offs == unsigned(-1) )
 			first_child_offs		=	child_prev_offs;
 
 		if ( prev_fat_child )
@@ -449,7 +449,7 @@ fat_node<target_pointer_size> *   file_system_impl::save_nodes  (save_nodes_envi
 	if ( cur->is_folder() )
 		temp_folder->m_first_child	=	(fat_node<target_pointer_size> *)(size_t)first_child_offs;
 
-	u32 const non_reversed_flags	=	temp->get_flags(); // must be before reverse_bytes
+	unsigned const non_reversed_flags	=	temp->get_flags(); // must be before reverse_bytes
 	if ( do_reverse_bytes )
 		temp->reverse_bytes_for_real_class	();
 

@@ -24,7 +24,7 @@ public:
 };
 
 namespace detail {
-struct name_registry_hash	{ u32 operator () (name_registry_entry & entry) const; };
+struct name_registry_hash	{ unsigned operator () (name_registry_entry & entry) const; };
 struct name_registry_equal	{ bool operator () (name_registry_entry const & left, name_registry_entry const & right) const; };
 } // namespace detail
 

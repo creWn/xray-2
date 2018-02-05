@@ -99,12 +99,12 @@ void xray::memory::preinitialize			( )
 	g_fs_allocator.do_register					(		 3*Mb  ,	"filesystem"			);
 
 #if !XRAY_PLATFORM_WINDOWS || defined(MASTER_GOLD)
-	u32 const mt_arena_initial_size				= 2*Mb;
+	unsigned const mt_arena_initial_size				= 2*Mb;
 #else // #if !XRAY_PLATFOPRM_WINDOWS || defined(MASTER_GOLD)
 	// for compressing textures only!
-	u32 const mt_arena_initial_size				= 16*Mb;
+	unsigned const mt_arena_initial_size				= 16*Mb;
 #endif // #if !XRAY_PLATFOPRM_WINDOWS || defined(MASTER_GOLD)
-	u32 mt_memory_amount						= mt_arena_initial_size;
+	unsigned mt_memory_amount						= mt_arena_initial_size;
 	if ( testing::run_tests_command_line () )
 		mt_memory_amount						+= 5*Mb;
 
@@ -124,7 +124,7 @@ void xray::memory::allocate_region		( )
 {
 	s_arena_size				= 0;
 
-	u32 const count				= s_allocators->size() + 2;
+	unsigned const count				= s_allocators->size() + 2;
 	platform::regions_type		regions( ALLOCA(count*sizeof(platform::region)), count );
 
 	allocators_type::iterator i			= s_allocators->begin( );
@@ -310,21 +310,21 @@ void xray::memory::zero					( pvoid destination, size_t size_in_bytes )
 	memset						( destination, 0, size_in_bytes );
 }
 
-void xray::memory::fill32					( mutable_buffer const & destination, u32 const value, u32 const count )
+void xray::memory::fill32					( mutable_buffer const & destination, unsigned const value, unsigned const count )
 {
 	xray::memory::fill32		( destination.c_ptr(), destination.size(), value, count );
 }
 
-void xray::memory::fill32				( pvoid const destination, size_t const destination_size_in_bytes, u32 const value, size_t const count )
+void xray::memory::fill32				( pvoid const destination, size_t const destination_size_in_bytes, unsigned const value, size_t const count )
 {
 	XRAY_UNREFERENCED_PARAMETER	( destination_size_in_bytes );
-	R_ASSERT					( destination_size_in_bytes >= count*sizeof(u32) );
+	R_ASSERT					( destination_size_in_bytes >= count*sizeof(unsigned) );
 
 	for ( int* i = (int*)destination, *e = i + count; i != e; ++i )
 		*i						= value;
 }
 
-void xray::memory::fill8					( mutable_buffer const & destination, u8 const value, u32 const count )
+void xray::memory::fill8					( mutable_buffer const & destination, u8 const value, unsigned const count )
 {
 	xray::memory::fill8			( destination.c_ptr(), destination.size(), value, count );
 }
@@ -358,6 +358,6 @@ void xray::memory::iterate_allocators		( allocator_predicate_type const& predica
 {
 	allocators_type::const_iterator	i = s_allocators->begin( );
 	allocators_type::const_iterator	e = s_allocators->end( );
-	for ( u32 j = 0; i != e; ++i, ++j )
+	for ( unsigned j = 0; i != e; ++i, ++j )
 		predicate				( *(*i).allocator, j, (*i).arena_address, (*i).arena_size, (*i).arena_id );
 }

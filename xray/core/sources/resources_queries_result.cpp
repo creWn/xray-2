@@ -15,10 +15,10 @@ namespace resources {
 // queries_result
 //----------------------------------------------------------
 
-queries_result::queries_result (u32 const						num_queries, 
+queries_result::queries_result (unsigned const						num_queries, 
 								query_callback const			callback, 
 								memory::base_allocator* const	allocator,
-								u32	const						user_thread_id,
+								unsigned	const						user_thread_id,
 								query_result_for_cook* const	parent) 
 								:	m_size(num_queries), 
 									m_callback(callback), 
@@ -28,7 +28,7 @@ queries_result::queries_result (u32 const						num_queries,
 									m_next_ready(NULL),
 									m_parent_query(parent)
 {
-	for ( u32 i=0; i<num_queries; ++i )
+	for ( unsigned i=0; i<num_queries; ++i )
 	{
 		new ( &m_queries[i] ) query_result(query_result::flag_load, this, allocator, user_thread_id);
 	}
@@ -39,7 +39,7 @@ queries_result::queries_result (u32 const						num_queries,
 
 queries_result::~queries_result () 
 {
-	for ( u32 i=0; i<m_size; ++i )
+	for ( unsigned i=0; i<m_size; ++i )
 	{
 //#pragma message(XRAY_TODO("remove this after debugging"))
 //		LOGI_INFO				("urgent", "on removing query: %s", m_queries[i].get_requested_path());
@@ -50,7 +50,7 @@ queries_result::~queries_result ()
 	g_resources_manager->on_dispatched_queries(m_size);
 }
 
-u32   queries_result::size () const
+unsigned   queries_result::size () const
 { 
 	return m_size;			
 }
@@ -90,7 +90,7 @@ void   queries_result::on_child_query_end (query_result * const					child,
 	XRAY_UNREFERENCED_PARAMETERS(child, result);
 	bool		res			=	true;
 
-	for ( u32 i=0; i<size(); ++i )
+	for ( unsigned i=0; i<size(); ++i )
 	{
 		query_result const & cur	=	at(i);
 		if ( !cur.is_finished() )
@@ -117,7 +117,7 @@ void   queries_result::call_user_callback ()
 
 void   queries_result::translate_request_paths ()
 {
-	for ( u32 i=0; i<size(); ++i )
+	for ( unsigned i=0; i<size(); ++i )
 	{
 		query_result & query		=	at(i);
 		if ( query.creation_data_from_user() )
@@ -129,7 +129,7 @@ void   queries_result::translate_request_paths ()
 
 void   queries_result::translate_query_if_needed ()
 {
-	for ( u32 i=0; i<size(); ++i )
+	for ( unsigned i=0; i<size(); ++i )
 	{
 		query_result & query			=	at(i);		
 		query.translate_query_if_needed		();

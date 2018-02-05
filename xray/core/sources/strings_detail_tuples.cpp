@@ -10,14 +10,14 @@ using xray::strings::detail::tuples;
 
 
 
-static void process										( u32 const index, u32 const count, pcstr *strings )
+static void process										( unsigned const index, unsigned const count, pcstr *strings )
 {
 	XRAY_UNREFERENCED_PARAMETER		( index );
-	u32 const max_string_size		= 1024;
+	unsigned const max_string_size		= 1024;
 	pstr const temp					= (pstr)ALLOCA((count*(max_string_size + 4) + 1)*sizeof(**strings));
 	pstr k							= temp;
 	*k++							= '[';
-	for ( u32 i = 0; i < count; ++i ) {
+	for ( unsigned i = 0; i < count; ++i ) {
 		for ( pcstr j = strings[i], e = j + max_string_size; *j && j < e; ++k, ++j )
 			*k	= *j;
 
@@ -40,12 +40,12 @@ void tuples::error_process								( ) const
 {
 	pcstr							strings[6];
 
-	u32 part_size					= 0;
-	u32 overrun_string_index		= u32(-1);
-	for ( u32 i=0; i < m_count; ++i ) {
+	unsigned part_size					= 0;
+	unsigned overrun_string_index		= unsigned(-1);
+	for ( unsigned i=0; i < m_count; ++i ) {
 		strings[i]					= m_strings[i].first;
 
-		if ( overrun_string_index != (u32)-1 )
+		if ( overrun_string_index != (unsigned)-1 )
 			continue;
 
 		part_size					+= m_strings[i].second;
@@ -53,7 +53,7 @@ void tuples::error_process								( ) const
 			overrun_string_index	= i;
 	}
 	
-	ASSERT							( overrun_string_index != u32(-1) );
+	ASSERT							( overrun_string_index != unsigned(-1) );
 
 	process							( overrun_string_index, m_count, strings );
 }

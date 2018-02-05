@@ -34,7 +34,7 @@ namespace detail
 	{
 		fat_node<> *		original_node;
 		file_size_type		pos;
-		u32					compressed_size;
+		unsigned					compressed_size;
 		bool				is_compressed;
 	};
 
@@ -176,7 +176,7 @@ public:
 													 FILE*		 						db_file,
 													 pcstr		 						logical_path, 
 													 bool		 						no_duplicates,
-													 u32		 						fat_alignment,
+													 unsigned		 						fat_alignment,
 													 memory::base_allocator*			alloc,
 													 compressor* 						compressor,
 													 float		 						compress_smallest_rate,
@@ -186,7 +186,7 @@ public:
 
 	void				clear						();
 	fat_node<> *		get_root					() const { return m_root->cast_node(); }
-	fat_node<> *		find_node					(pcstr path, u32 * out_hash) const;
+	fat_node<> *		find_node					(pcstr path, unsigned * out_hash) const;
 	void				get_disk_path				(fat_node<> const *	work_node, 
 													 path_string &		out_path, 
 													 bool				replicate = true) const;
@@ -204,7 +204,7 @@ public:
 	bool				convert_physical_to_logical_path	(buffer_string * out_logical_path, pcstr physical_path, bool assert_on_fail = true);
 	bool				update_file_size_in_fat		(pcstr in_logical_path, pcstr in_physical_path);
 	void				rename_disk_node			(pcstr in_logical_path, pcstr in_renamed_old_path, pcstr in_renamed_new_path);
-	void				rename_disk_node			(pcstr in_logical_path, pcstr in_renamed_old_path, pcstr in_renamed_new_path, u32 in_full_name_of_parent_hash);
+	void				rename_disk_node			(pcstr in_logical_path, pcstr in_renamed_old_path, pcstr in_renamed_new_path, unsigned in_full_name_of_parent_hash);
 
 	void				erase_disk_node				(pcstr physical_path);
 
@@ -218,12 +218,12 @@ private:
 	void				add_folder_watchers			();
 	void				remove_folder_watchers		();
 
-	void				relink_hidden_nodes_to_parent (fat_node<> const * work_node, u32 hash, fat_node<> * parent);
+	void				relink_hidden_nodes_to_parent (fat_node<> const * work_node, unsigned hash, fat_node<> * parent);
 
 	void				replicate_path				(pcstr path2replicate, path_string& out_path) const;
 
 	void				fixup_db_node				(pstr flat_buffer, fat_node<> * work_node, 
-													 u32 hash, bool reverse_byte_order);
+													 unsigned hash, bool reverse_byte_order);
 
 	void				create_root					();
 
@@ -235,9 +235,9 @@ private:
 						detail::helper_node *		helper_nodes;
 						FILE *						db_file;
 						file_size_type			    dest_buffer_size;
-					    u32							cur_offs;
-						u32							node_index;
-						u32							num_nodes;
+					    unsigned							cur_offs;
+						unsigned							node_index;
+						unsigned							num_nodes;
 						file_system::db_target_platform_enum	db_format;
 						memory::base_allocator *	alloc;
 						compressor *				compressor;
@@ -250,8 +250,8 @@ private:
 	private:
 						char						endian_string[14];
 	public:
-						u32							num_nodes;
-						u32							buffer_size;
+						unsigned							num_nodes;
+						unsigned							buffer_size;
 						db_header () : num_nodes(0), buffer_size(0) { memory::zero(endian_string); }
 
 						void set_big_endian		();
@@ -273,8 +273,8 @@ private:
 													 file_size_type &			out_pos,
 													 bool &						is_compressed,
 													 mutable_buffer *			out_inlined_data,
-													 u32 &						compressed_size,
-													 u32 &						out_file_hash);
+													 unsigned &						compressed_size,
+													 unsigned &						out_file_hash);
 
 	void				free_node					(fat_node<> *, bool free_children);
 	bool				mount_db_impl				(pcstr	logical_path,
@@ -287,41 +287,41 @@ private:
 
 	void				mount_disk_folder			(fat_folder_node<> *	work_folder, 
 													 pcstr					physical_path, 
-													 u32					hash);
+													 unsigned					hash);
 
 	bool				mount_disk_file				(fat_folder_node<> *	work_folder, 
 													 pcstr					physical_path, 
-													 u32					hash);
+													 unsigned					hash);
 
 	template <class UnmountPredicate>
 	void				unmount_node				(fat_node<> *		work_node,
-													 u32				hash, 
+													 unsigned				hash, 
 													 const 
 													 UnmountPredicate&	unmount_pred);
 
 	fat_folder_node<> *	find_or_create_folder		(fat_folder_node<> *	parent, 
 													 pcstr					name, 
-													 u32					name_len, 
-													 u32					hash);
+													 unsigned					name_len, 
+													 unsigned					hash);
 
-	fat_folder_node<> *	find_or_create_folder		(pcstr path, u32 * out_hash);
+	fat_folder_node<> *	find_or_create_folder		(pcstr path, unsigned * out_hash);
 
-	fat_folder_node<> *	create_folder_node			(u32				hash, 
+	fat_folder_node<> *	create_folder_node			(unsigned				hash, 
 													 pcstr				name, 
-													 u32 const			name_len);
+													 unsigned const			name_len);
 
-	fat_disk_folder_node<> *   create_disk_folder_node (u32				hash, 
+	fat_disk_folder_node<> *   create_disk_folder_node (unsigned				hash, 
 														pcstr			name, 
-														u32 const		name_len,
+														unsigned const		name_len,
 														pcstr			full_name, 
-														u32 const		full_name_len);
+														unsigned const		full_name_len);
 
-	fat_disk_file_node<> *	create_disk_file_node	(u32						hash, 
+	fat_disk_file_node<> *	create_disk_file_node	(unsigned						hash, 
 													 pcstr						name, 
-													 u32						name_len, 
+													 unsigned						name_len, 
 													 pcstr						full_name,
-													 u32						full_name_len,
-													 u32						file_size,
+													 unsigned						full_name_len,
+													 unsigned						file_size,
 													 memory::base_allocator *	alloc = & memory::g_fs_allocator,
 													 bool						add_to_hash_table = true);
 
@@ -383,7 +383,7 @@ private:
 	db_record const *	get_db						(fat_node<> const * work_node) const { return const_cast<file_system_impl *>(this)->get_db(work_node); }
 
 	void				actualize_db				(db_record & db);
-	void				actualize_node				(fat_node<> * work_node, u32 hash, fat_folder_node<> * parent);
+	void				actualize_node				(fat_node<> * work_node, unsigned hash, fat_folder_node<> * parent);
 
 	struct find_db_by_path
 	{

@@ -14,7 +14,7 @@ typedef	signed		short		s16;
 typedef	unsigned	short		u16;
 
 typedef	signed		int			s32;
-typedef	unsigned	int			u32;
+using u32 = unsigned int;
 
 #if defined(_MSC_VER)
 	typedef	signed		__int64	s64;
@@ -38,7 +38,7 @@ typedef	unsigned	int			u32;
 		typedef u16				uint16_t;
 		typedef s16				int16_t;
 
-		typedef u32				uint32_t;
+		typedef unsigned				uint32_t;
 		typedef s32				int32_t;
 
 		typedef u64				uint64_t;

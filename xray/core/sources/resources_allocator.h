@@ -34,7 +34,7 @@ public:
 private:
 	struct manager_info
 	{
-		u32				data_size;
+		unsigned				data_size;
 		bool			need_cook;
 	};
 	manager_info		m_manager_info;
@@ -52,7 +52,7 @@ private:
 	managed_node *		m_next_pinned;			
 	managed_node *		m_next_wait_for_free;
 	threading::atomic32_type	m_is_unmovable;
-	u32					m_defrag_iteration;
+	unsigned					m_defrag_iteration;
 	size_t				m_size;
 
 	threading::atomic32_type	m_pin_count;
@@ -67,7 +67,7 @@ private:
 class resource_allocator
 {
 public:
-						resource_allocator	(u32 granularity);
+						resource_allocator	(unsigned granularity);
 
 	void				initialize			(pvoid arena, size_t size);
 
@@ -83,7 +83,7 @@ public:
 	size_t				total_size			() const { return m_arena_size; }
 	size_t				get_free_size		() const { return m_free_size; }
 
-	u32					get_granularity		() const { return m_granularity; }
+	unsigned					get_granularity		() const { return m_granularity; }
 
 	void				log_nodes			(bool log_only_allocated) const;
 	void				check_consistency	() const;
@@ -112,7 +112,7 @@ protected:
 	bool				m_know_largest_free_block;
 	managed_node *		m_largest_free_block;		// valid if m_know_largest_free_block is true
 
-	u32					m_granularity;
+	unsigned					m_granularity;
 	size_t				m_free_size;
 	pbyte				m_arena;
 	size_t				m_arena_size;

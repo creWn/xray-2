@@ -18,7 +18,7 @@ void   verify_path_is_portable (pcstr path_str)
 	ASSERT						( !strchr(path_str, '\\') );
 
 #ifndef MASTER_GOLD
-	u32 const path_length	=	strings::length(path_str);
+	unsigned const path_length	=	strings::length(path_str);
 	R_ASSERT					( !path_length || path_str[path_length-1] != '/', 
 								  "path should not end with '/' ('%s')", path_str );
 #endif // #ifdef DEBUG
@@ -74,7 +74,7 @@ bool   make_dir_r (pcstr dir_path, bool create_last)
 	cur_path.append					(dir_path, disk_letter_end);
 	if ( absolute_path )
 		cur_path				+=	'/';
-	u32 const drive_part_length	=	absolute_path ? (u32(disk_letter_end - dir_path) + 1) : 0; // with '/'
+	unsigned const drive_part_length	=	absolute_path ? (unsigned(disk_letter_end - dir_path) + 1) : 0; // with '/'
 
 	path_iterator	it				(dir_path + drive_part_length, // skip '/' if absolute path
 									 int(strings::length(dir_path) - drive_part_length));

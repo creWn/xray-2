@@ -59,7 +59,7 @@ managed_node*   managed_node::find_prev_free () const
 // resource_allocator
 //----------------------------------------------------
 
-resource_allocator::resource_allocator (u32 const granularity)
+resource_allocator::resource_allocator (unsigned const granularity)
 {
 	ASSERT									(granularity >= sizeof(managed_node));
 	m_granularity						=	granularity;
@@ -211,7 +211,7 @@ managed_node*   resource_allocator::allocate_in_node (size_t const			full_size,
 managed_node*   resource_allocator::allocate (size_t const			requested_size, 
 											  managed_node* const	start_free_node)
 {
-	size_t const full_size				=	math::align_up(requested_size + (u32)sizeof(managed_node), 
+	size_t const full_size				=	math::align_up(requested_size + (unsigned)sizeof(managed_node), 
 																			(size_t)m_granularity);
 	// warning: cant do early return based on m_free_size < size_with_header
 	// cause we need to calculate m_largest_free_block
@@ -495,7 +495,7 @@ void    resource_allocator::log_nodes (bool const log_only_allocated) const
 			node_name					=	cur_node->m_resource->log_string();
 		}
 
-		//u32 const	block_offs			=	(u32)((pbyte)cur_node - m_arena);
+		//unsigned const	block_offs			=	(unsigned)((pbyte)cur_node - m_arena);
 				
 		LOGI_INFO							("resources:allocator", node_name.c_str());
 		cur_node						=	cur_node->m_next;

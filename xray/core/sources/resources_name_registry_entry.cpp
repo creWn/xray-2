@@ -13,7 +13,7 @@ namespace resources {
 
 namespace detail {
 
-u32   name_registry_hash::operator () (name_registry_entry & entry) const
+unsigned   name_registry_hash::operator () (name_registry_entry & entry) const
 {
 	return	xray::fs::crc32(entry.name, strings::length(entry.name));
 }

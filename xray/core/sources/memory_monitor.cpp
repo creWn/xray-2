@@ -22,7 +22,7 @@ using threading::mutex;
 
 // constants
 static bool						s_initialized = false;
-static u32 const				s_buffer_size = 512*1024;
+static unsigned const				s_buffer_size = 512*1024;
 static char						s_buffer[ s_buffer_size ];
 static FILE*					s_file = 0;
 static pcstr					s_output_extension = ".bin";
@@ -36,12 +36,12 @@ union _allocation_size {
 #pragma warning(push)
 #pragma warning(disable:4201)
 	struct {
-		u32	allocation			: 1;
-		u32 size				: 31;
+		unsigned	allocation			: 1;
+		unsigned size				: 31;
 	};
 #pragma warning(pop)
 #endif // #if defined(_MSC_VER)
-	u32		allocation_size;
+	unsigned		allocation_size;
 };
 
 static inline bool enabled		( )

@@ -15,7 +15,7 @@ namespace configs {
 
 class binary_config;
 
-void			parse_string_data	( memory::reader F, memory::base_allocator* allocator, pbyte* dest, u32& dest_size );
+void			parse_string_data	( memory::reader F, memory::base_allocator* allocator, pbyte* dest, unsigned& dest_size );
 binary_config*	create_from_ltx_text( pcstr text, memory::base_allocator* allocator, pcstr file_name );
 
 } // namespace configs

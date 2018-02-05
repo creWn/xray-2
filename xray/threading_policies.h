@@ -18,13 +18,13 @@ namespace xray {
 
 		public:
 			template <typename T>
-			static	inline	u32	intrusive_ptr_increment(T& object)
+			static	inline	unsigned	intrusive_ptr_increment(T& object)
 			{
 				return	increment(object.m_reference_count);
 			}
 
 			template <typename T>
-			static	inline	u32	intrusive_ptr_decrement(T& object)
+			static	inline	unsigned	intrusive_ptr_decrement(T& object)
 			{
 				return	decrement(object.m_reference_count);
 			}
@@ -72,13 +72,13 @@ namespace xray {
 		{
 		public:
 			template <typename T>
-			static	inline	u32	intrusive_ptr_increment(T& object)
+			static	inline	unsigned	intrusive_ptr_increment(T& object)
 			{
 				return	increment(object.m_reference_count);
 			}
 
 			template <typename T>
-			static	inline	u32	intrusive_ptr_decrement(T& object)
+			static	inline	unsigned	intrusive_ptr_decrement(T& object)
 			{
 				return	decrement(object.m_reference_count);
 			}
@@ -181,7 +181,7 @@ namespace xray {
 			}
 
 		private:
-			u32					m_lock;
+			unsigned					m_lock;
 			atomic32_type		m_thread_id;
 
 		}; // class multi_threading_mutex_policy

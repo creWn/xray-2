@@ -12,24 +12,24 @@ inline xray::threading::atomic32_type const& xray::strings::shared::profile::ref
 	return				( m_reference_count );
 }
 
-inline const u32 &xray::strings::shared::profile::checksum			( ) const
+inline const unsigned &xray::strings::shared::profile::checksum			( ) const
 {
 	ASSERT				( m_checksum == create_checksum ( value(), value() + m_length ), "shared string is corrupted" );
 	return				( m_checksum );
 }
 
-inline const u32 &xray::strings::shared::profile::checksum_no_check	( ) const
+inline const unsigned &xray::strings::shared::profile::checksum_no_check	( ) const
 {
 	return				(m_checksum);
 }
 
-inline u32 const& xray::strings::shared::profile::length			( ) const
+inline unsigned const& xray::strings::shared::profile::length			( ) const
 {
 	ASSERT				( strings::length( value( ) ) == m_length, "shared string is corrupted" );
 	return				( m_length );
 }
 
-inline u32 const& xray::strings::shared::profile::length_no_check	( ) const
+inline unsigned const& xray::strings::shared::profile::length_no_check	( ) const
 {
 	return				( m_length );
 }

@@ -16,14 +16,14 @@ public:
 						~stream			( );
 		void __cdecl	append			( pcstr format, ... );
 		pcbyte			get_buffer		( ) const;
-		u32				get_buffer_size	( ) const;
+		unsigned				get_buffer_size	( ) const;
 		void			clear			( );
 
 private:
 	memory::base_allocator*					m_allocator;
 	pbyte									m_buffer;
-	u32										m_buffer_size;
-	u32										m_allocated_size;
+	unsigned										m_buffer_size;
+	unsigned										m_allocated_size;
 }; // class strings_stream
 
 } // namespace strings

@@ -70,7 +70,7 @@ void   folder_watcher::try_receive_changes ()
 
 	if ( !overlapped_successfull )
 	{
-		u32 const last_error				=	GetLastError();
+		unsigned const last_error				=	GetLastError();
 		if ( last_error == ERROR_IO_INCOMPLETE )
 			return;
 
@@ -121,7 +121,7 @@ bool   get_file_name_from_file_notify_information (FILE_NOTIFY_INFORMATION * con
 
 void   folder_watcher::receive_changes ()
 {
-//	u32 start_file_changes_size	= m_file_changes.size();
+//	unsigned start_file_changes_size	= m_file_changes.size();
 	FILE_NOTIFY_INFORMATION * current		=	(FILE_NOTIFY_INFORMATION *)m_next_buffer;
 
 	file_change_info	info;

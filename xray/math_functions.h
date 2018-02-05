@@ -57,8 +57,8 @@ inline float			exp				( float power );
 
 inline float			pow				( float base, float power );
 inline float			pow				( float base, int power );
-inline float			pow				( float base, u32 power );
-inline u32				pow				( u32 base, u32 power );
+inline float			pow				( float base, unsigned power );
+inline unsigned				pow				( unsigned base, unsigned power );
 
 inline char				sign			( float value );
 

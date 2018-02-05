@@ -36,13 +36,13 @@ struct helper {
 	xray::logging::verbosity m_verbosity;
 
 
-	u32						m_num_first_to_ignore;
-	u32						m_num_last_to_ignore;
+	unsigned						m_num_first_to_ignore;
+	unsigned						m_num_last_to_ignore;
 
 	helper		(	pcstr const						initiator, 
 					xray::logging::verbosity const	verbosity, 
-					u32								num_first_to_ignore,
-					u32								num_last_to_ignore) :
+					unsigned								num_first_to_ignore,
+					unsigned								num_last_to_ignore) :
 		m_verbosity				( verbosity ),
 		m_num_first_to_ignore	( num_first_to_ignore ),
 		m_num_last_to_ignore	( num_last_to_ignore )
@@ -52,13 +52,13 @@ struct helper {
 	}
 
 	bool	predicate	(
-			u32 	call_stack_id,
-			u32 	num_call_stack_lines,
+			unsigned 	call_stack_id,
+			unsigned 	num_call_stack_lines,
 			pcstr 	module_name,
 			pcstr 	file_name,
 			int		line_number,
 			pcstr	function,
-			u32		address
+			unsigned		address
 		)
 	{
 		if ( call_stack_id < m_num_first_to_ignore )
@@ -89,8 +89,8 @@ bool xray::core::debug::platform::error_after_dialog	( )
 
 void xray::debug::dump_call_stack				( pcstr						initiator,
 												  logging::verbosity const	verbosity, 
-												  u32						num_first_to_ignore, 
-												  u32						num_last_to_ignore,
+												  unsigned						num_first_to_ignore, 
+												  unsigned						num_last_to_ignore,
 												  _EXCEPTION_POINTERS*		pointers,
 												  void*						callstack[])
 {
@@ -99,15 +99,15 @@ void xray::debug::dump_call_stack				( pcstr						initiator,
 }
 
 struct error_helper {
-	u32		m_ignore_level_count;
+	unsigned		m_ignore_level_count;
 	pstr	m_start_buffer;
 	pstr	m_buffer;
-	u32		m_buffer_size;
+	unsigned		m_buffer_size;
 
 							error_helper	(
-			u32 const ignore_level_count,
+			unsigned const ignore_level_count,
 			pstr const buffer,
-			u32 const buffer_size
+			unsigned const buffer_size
 		) :
 		m_ignore_level_count	( ignore_level_count ),
 		m_start_buffer			( buffer ),
@@ -117,13 +117,13 @@ struct error_helper {
 	}
 
 					bool	predicate	(
-			u32		call_stack_id,
-			u32		num_call_stack_lines,
+			unsigned		call_stack_id,
+			unsigned		num_call_stack_lines,
 			pcstr	module_name,
 			pcstr	file_name,
 			int		line_number,
 			pcstr	function,
-			u32		address
+			unsigned		address
 		)
 	{
 		XRAY_UNREFERENCED_PARAMETER	( num_call_stack_lines );
@@ -160,7 +160,7 @@ struct error_helper {
 	}
 }; // struct helper
 
-void xray::core::debug::platform::on_error	( bool* do_debug_break, char* const message, u32 const message_size, bool* ignore_always, _EXCEPTION_POINTERS* const exception_information, error_type_enum error_type )
+void xray::core::debug::platform::on_error	( bool* do_debug_break, char* const message, unsigned const message_size, bool* ignore_always, _EXCEPTION_POINTERS* const exception_information, error_type_enum error_type )
 {
 	XRAY_UNREFERENCED_PARAMETERS	( exception_information, ignore_always, message_size );
 
@@ -173,7 +173,7 @@ void xray::core::debug::platform::on_error	( bool* do_debug_break, char* const m
 #if USE_OWN_ERROR_MESSAGE_WINDOW
 	pstr buffer						= message + xray::strings::length( message );
 	
-	error_helper					helper (error_type == error_type_assert ? 3 : 0, buffer, u32 ( sizeof( message ) - ( buffer - message ) ) );
+	error_helper					helper (error_type == error_type_assert ? 3 : 0, buffer, unsigned ( sizeof( message ) - ( buffer - message ) ) );
 	xray::core::debug::call_stack::iterate	( exception_information, NULL, xray::core::debug::call_stack::Callback( &helper, &error_helper::predicate), false );
 
 	buffer							= message + xray::strings::length( message );
@@ -235,7 +235,7 @@ void xray::core::debug::platform::on_error	( bool* do_debug_break, char* const m
 #endif // #if USE_OWN_ERROR_MESSAGE_WINDOW
 }
 
-void xray::core::debug::platform::on_error_message_box	( bool* do_debug_break, char* const message, u32 const message_size, bool* ignore_always, _EXCEPTION_POINTERS* const exception_information, error_type_enum error_type )
+void xray::core::debug::platform::on_error_message_box	( bool* do_debug_break, char* const message, unsigned const message_size, bool* ignore_always, _EXCEPTION_POINTERS* const exception_information, error_type_enum error_type )
 {
 	XRAY_UNREFERENCED_PARAMETERS	( exception_information, ignore_always, error_type );
 

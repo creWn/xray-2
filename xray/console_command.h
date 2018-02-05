@@ -66,14 +66,14 @@ class XRAY_CORE_API cc_string :public console_command
 {
 	typedef console_command		super;
 public:
-						cc_string				(pcstr name, pstr value, u32 size);
+						cc_string				(pcstr name, pstr value, unsigned size);
 	virtual void		execute					(pcstr args);
 	virtual void		status					(status_str& dest) const;
 	virtual void		info					(info_str& dest) const;
 	virtual void		syntax					(syntax_str& dest) const;
 protected:
 	pstr				m_value;
-	u32					m_size;
+	unsigned					m_size;
 };// cc_string
 
 class XRAY_CORE_API cc_bool :public console_command
@@ -115,16 +115,16 @@ public:
 	virtual void		syntax					(syntax_str& dest) const;
 };//cc_float 
 
-class XRAY_CORE_API cc_u32 :public cc_value<u32>
+class XRAY_CORE_API cc_unsigned :public cc_value<unsigned>
 {
-	typedef cc_value<u32>		super;
+	typedef cc_value<unsigned>		super;
 public:
-						cc_u32					(pcstr name, u32& value, u32 const min, u32 const max);
+						cc_unsigned					(pcstr name, unsigned& value, unsigned const min, unsigned const max);
 	virtual void		execute					(pcstr args);
 	virtual void		status					(status_str& dest) const;
 	virtual void		info					(info_str& dest) const;
 	virtual void		syntax					(syntax_str& dest) const;
-};//cc_u32
+};//cc_unsigned
 
 class XRAY_CORE_API cc_float2 :public cc_value<math::float2>{
 	typedef cc_value<math::float2>	super;

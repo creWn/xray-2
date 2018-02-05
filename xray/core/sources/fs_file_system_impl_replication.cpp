@@ -90,7 +90,7 @@ void   file_system_impl::commit_replication (fat_node<> * work_node)
 
 	db_record * db				=	work_node->is_db() ? get_db(work_node) : NULL;
 
-	COMPILE_ASSERT					(sizeof(long) == sizeof(u32),
+	COMPILE_ASSERT					(sizeof(long) == sizeof(unsigned),
 									 use_32_bit_version_of_interlocked_or_on_this_platform);
 	if ( db )
 	{
@@ -107,7 +107,7 @@ void   file_system_impl::commit_replication (fat_node<> * work_node)
 		// 
 		threading::interlocked_or	((threading::atomic32_type&)work_node->ref_flags_as_32bit(), file_system::is_replicated << detail::bits_to_flags_byte());
 
-		u32 const flags_offs	=	(u32)((char *)&work_node->m_flags - (char *)db->flat_buffer);
+		unsigned const flags_offs	=	(unsigned)((char *)&work_node->m_flags - (char *)db->flat_buffer);
 		fseek						(f_out, flags_offs, SEEK_SET);
 		fwrite						(& work_node->m_flags, 1, sizeof(work_node->m_flags), f_out);
 		fclose						(f_out);

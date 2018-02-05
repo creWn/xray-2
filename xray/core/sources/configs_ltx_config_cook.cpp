@@ -42,7 +42,7 @@ void   ltx_config_cook::create_resource (resources::query_result_for_cook &	in_o
 	xray::memory::reader reader		((u8 const*)raw_file_data.c_ptr(), raw_file_data.size());
 
 	pbyte	binary_buff				= NULL;
-	u32		binary_buff_size		= 0;
+	unsigned		binary_buff_size		= 0;
 
 	parse_string_data				(reader, & memory::g_mt_allocator, & binary_buff, binary_buff_size);
 

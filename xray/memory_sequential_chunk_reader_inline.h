@@ -17,21 +17,21 @@ inline void SEQUENTIAL_CHUNK_READER::construct		( )
 }
 
 TEMPLATE_SIGNATURE
-inline u32 SEQUENTIAL_CHUNK_READER::chunk_position	( u32 const chunk_id )
+inline unsigned SEQUENTIAL_CHUNK_READER::chunk_position	( unsigned const chunk_id )
 {
 	reader&	reader			= impl( ).reader( );
 	if ( impl( ).m_last_position && (impl( ).m_last_position < reader.length( ) ) ) {
 		reader.seek			( impl( ).m_last_position );
-		u32 const id		= reader.r_u32();
+		unsigned const id		= reader.r_unsigned();
 		if ( id == chunk_id )
 			return			( impl( ).m_last_position );
 	}
 	
 	reader.rewind			( );
 	while ( !reader.eof( ) ) {
-		u32 const result	= reader.tell( );
-		u32 const id		= reader.r_u32( );
-		u32 const size		= reader.r_u32( ) & 0x3fffffff;
+		unsigned const result	= reader.tell( );
+		unsigned const id		= reader.r_unsigned( );
+		unsigned const size		= reader.r_unsigned( ) & 0x3fffffff;
 		if ( id != chunk_id ) {
 			reader.advance	( size );
 			continue;
@@ -41,7 +41,7 @@ inline u32 SEQUENTIAL_CHUNK_READER::chunk_position	( u32 const chunk_id )
 		return				( result );
 	}
 
-	return					( u32( -1 ) );
+	return					( unsigned( -1 ) );
 }
 
 TEMPLATE_SIGNATURE

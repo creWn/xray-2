@@ -23,7 +23,7 @@ namespace fs   {
 
 uninitialized_reference<file_system>	g_fat;
 
-void   set_allocator_thread_id (u32 thread_id)
+void   set_allocator_thread_id (unsigned thread_id)
 {
 #if !XRAY_USE_CRT_MEMORY_ALLOCATOR
 	memory::g_fs_allocator.user_thread_id	(thread_id);
@@ -69,9 +69,9 @@ bool   fat_inline_data::find_by_extension (item * * out_item, pcstr extension)
 	return								false;
 }
 
-u32   fat_inline_data::total_size_for_extensions_with_limited_size () const
+unsigned   fat_inline_data::total_size_for_extensions_with_limited_size () const
 {
-	u32 total_size					=	0;
+	unsigned total_size					=	0;
 	for ( container::const_iterator	it	=	m_items->begin(), 
 								end_it	=	m_items->end();
 									it	!=	end_it;
@@ -90,7 +90,7 @@ void   fat_inline_data::push_back (item const & item)
 	m_highest_compression_rate			=	math::max(m_highest_compression_rate, item.compression_rate); 
 }
 
-bool   fat_inline_data::try_fit_for_inlining (pcstr file_name, u32 const file_size, u32 const compressed_size)
+bool   fat_inline_data::try_fit_for_inlining (pcstr file_name, unsigned const file_size, unsigned const compressed_size)
 {
 	typedef item	item_type;
 	item * item;
@@ -106,7 +106,7 @@ bool   fat_inline_data::try_fit_for_inlining (pcstr file_name, u32 const file_si
 		if ( item->max_size == item_type::no_limit )
 			return						true;
 
-		u32 const size				=	compressed_size ? compressed_size : file_size;
+		unsigned const size				=	compressed_size ? compressed_size : file_size;
 		if ( item->max_size >= size )
 		{
 			item->max_size			-=	size;
@@ -158,7 +158,7 @@ void   file_system::unmount_db (pcstr logical_path, pcstr fat_file_path)
 bool   file_system::save_db (pcstr							fat_file_path, 
 							 pcstr							db_file_path, 
 							 bool							no_duplicates, 
-							 u32							fat_alignment,
+							 unsigned							fat_alignment,
 							 memory::base_allocator *		alloc,
 							 compressor *					compressor,
 							 float							compress_smallest_rate,
@@ -234,7 +234,7 @@ void   file_system::clear ()
 
 file_system::iterator   file_system::find (pcstr path)
 {
-	u32				hash;
+	unsigned				hash;
 	iterator		resources;
 
 	resources.m_cur					=	m_impl->find_node(path, & hash);
@@ -313,7 +313,7 @@ file_system::iterator   file_system::create_temp_disk_it (memory::base_allocator
 
 	iterator	result;
 	fat_disk_file_node<> * file_node	=	m_impl->create_disk_file_node
-								(0, name, strings::length(name), disk_path, strings::length(disk_path), (u32)file_size, alloc, false);
+								(0, name, strings::length(name), disk_path, strings::length(disk_path), (unsigned)file_size, alloc, false);
 
 	result.m_cur			=	file_node->cast_node();
 	return						result;
@@ -450,14 +450,14 @@ int   file_system::iterator::get_flags () const
 	return								m_cur ? m_cur->get_flags() : NULL;
 }
 
-void   file_system::iterator::set_flags (const u32 flags)
+void   file_system::iterator::set_flags (const unsigned flags)
 {
 	ASSERT								(m_cur);
 	if ( m_cur )
 		m_cur->m_flags				=	(char)flags;
 }
 
-bool   file_system::iterator::get_hash (u32 * out_hash) const
+bool   file_system::iterator::get_hash (unsigned * out_hash) const
 {
 	ASSERT								(m_cur);
 	return								m_cur->get_hash(out_hash);
@@ -469,31 +469,31 @@ file_size_type   file_system::iterator::get_file_offs () const
 	return								m_cur && !m_cur->is_folder() ? m_cur->get_file_offs() : NULL;
 }
 
-u32   file_system::iterator::get_raw_file_size () const
+unsigned   file_system::iterator::get_raw_file_size () const
 {
 	ASSERT								(m_cur);
 	return								(m_cur && !m_cur->is_folder()) ? m_cur->get_raw_file_size() : NULL;
 } 
 
-u32   file_system::iterator::get_compressed_file_size () const
+unsigned   file_system::iterator::get_compressed_file_size () const
 {
 	ASSERT								(m_cur);
 	return								(m_cur && !m_cur->is_folder()) ? m_cur->get_compressed_file_size() : NULL;
 } 
 
-u32   file_system::iterator::get_file_size () const
+unsigned   file_system::iterator::get_file_size () const
 {
 	ASSERT								(m_cur);
 	return								(m_cur && !m_cur->is_folder()) ? m_cur->get_file_size() : NULL;
 }
 
-u32   file_system::iterator::get_num_children () const
+unsigned   file_system::iterator::get_num_children () const
 {
 	ASSERT								(m_cur);
 	return								m_cur ? m_cur->get_num_children() : 0;
 }
 
-u32   file_system::iterator::get_num_nodes () const
+unsigned   file_system::iterator::get_num_nodes () const
 {
 	ASSERT								(m_cur);
 	return								m_cur ? m_cur->get_num_nodes() : 0;

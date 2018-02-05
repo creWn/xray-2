@@ -8,18 +8,18 @@ namespace math {
 
 enum allow_duplicates_bool { allow_duplicates_false, allow_duplicates_true };
 
-template <u32 num_randoms, u32 range = u32(-1), allow_duplicates_bool allow_duplicates = allow_duplicates_true>
+template <unsigned num_randoms, unsigned range = unsigned(-1), allow_duplicates_bool allow_duplicates = allow_duplicates_true>
 class randoms_table
 {
 public:
 			// generated numbers [0..range-1]
-			randoms_table			(u32 seed = 0);
-	u32		next_random				();
+			randoms_table			(unsigned seed = 0);
+	unsigned		next_random				();
 	void	to_first_random			();
 
 private:
-	u32								m_index;
-	fixed_vector<u32, num_randoms>	m_randoms;
+	unsigned								m_index;
+	fixed_vector<unsigned, num_randoms>	m_randoms;
 };
 
 } // namespace math

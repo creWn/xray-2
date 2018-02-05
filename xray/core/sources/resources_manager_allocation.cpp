@@ -128,7 +128,7 @@ void   resources_manager::allocate_resource_functionality::prepare_raw_resource_
 		return;
 	}
 	
-	u32 const allocate_thread_id					=	query->allocate_thread_id();
+	unsigned const allocate_thread_id					=	query->allocate_thread_id();
 	if ( allocate_thread_id == threading::current_thread_id() )
 	{
 		bool const allocated						=	query->allocate_raw_unmanaged_resource_if_needed	();
@@ -218,7 +218,7 @@ void   resources_manager::allocate_resource_functionality::send_to_allocate_fina
 	}
 	else if ( unmanaged_cook * const cook = cook_base::find_unmanaged_cook(class_id) )
 	{
-		u32 const allocate_thread_id		=	query->allocate_thread_id();
+		unsigned const allocate_thread_id		=	query->allocate_thread_id();
 		if ( allocate_thread_id == threading::current_thread_id() )
 		{
 			bool const allocated			=	query->allocate_final_unmanaged_resource_if_needed();
@@ -328,12 +328,12 @@ void   resources_manager::dispatch_allocated_raw_resources ()
 	}
 }
 
-pvoid   resources_manager::allocate_unmanaged_memory (u32 size, pcstr type_name)
+pvoid   resources_manager::allocate_unmanaged_memory (unsigned size, pcstr type_name)
 {
 	return										XRAY_MALLOC_IMPL(memory::g_resources_unmanaged_allocator, size, type_name);
 }
 
-managed_resource *   resources_manager::allocate_managed_resource (u32 size)
+managed_resource *   resources_manager::allocate_managed_resource (unsigned size)
 {
 	return										memory::g_resources_managed_allocator.allocate(size);
 }

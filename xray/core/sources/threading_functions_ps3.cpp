@@ -13,14 +13,14 @@
 namespace xray {
 namespace threading {
 
-u32 current_thread_id			( )
+unsigned current_thread_id			( )
 {
 	sys_ppu_thread_t			result;
 	sys_ppu_thread_get_id		( &result );
 	return						result;
 }
 
-void yield						( u32 milliseconds )
+void yield						( unsigned milliseconds )
 {
 	if ( milliseconds ) {
 		// receives time in microseconds
@@ -77,7 +77,7 @@ static void thread_entry_protected	( uint64_t argument )
 
 thread_id_type spawn_internal				(
 		thread_entry_params& argument,
-		u32 const stack_size
+		unsigned const stack_size
 	)
 {
 	sys_ppu_thread_t	thread_id;
@@ -112,12 +112,12 @@ thread_id_type spawn_internal				(
 	return				thread_id;
 }
 
-u32 actual_core_count ( )
+unsigned actual_core_count ( )
 {
 	return							1;
 }
 
-void set_current_thread_affinity_impl	(u32 const hardware_thread)
+void set_current_thread_affinity_impl	(unsigned const hardware_thread)
 {
 	XRAY_UNREFERENCED_PARAMETER	( hardware_thread );
 }

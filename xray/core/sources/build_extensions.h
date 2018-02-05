@@ -11,7 +11,7 @@ namespace xray {
 namespace build {
 					void	preinitialize				( pcstr const build_date );
 					void	initialize					( core::engine * );
-	XRAY_CORE_API	u32		calculate_build_id			( pcstr current_date );
+	XRAY_CORE_API	unsigned		calculate_build_id			( pcstr current_date );
 					bool	print_build_id_command_line ( );
 	XRAY_CORE_API	pcstr	build_date					( );
 } // namespace build

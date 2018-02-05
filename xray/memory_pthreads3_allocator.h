@@ -34,7 +34,7 @@ private:
 }; // class pthreads3_allocator
 
 #else // #if !XRAY_USE_CRT_MEMORY_ALLOCATOR
-
+#include "memory_crt_allocator.h"	
 typedef crt_allocator pthreads3_allocator;
 
 #endif // #if !XRAY_USE_CRT_MEMORY_ALLOCATOR

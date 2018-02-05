@@ -3,7 +3,7 @@
 
 namespace compression { namespace ppmd  { 
 
-inline stream::stream			(const void *buffer, const u32 &buffer_size)
+inline stream::stream			(const void *buffer, const unsigned &buffer_size)
 {
 	m_buffer_size	= buffer_size;
 	m_buffer		= (u8*)buffer;
@@ -36,11 +36,11 @@ inline u8 *stream::buffer		() const
 	return			(m_buffer);
 }
 
-inline u32 stream::tell			() const
+inline unsigned stream::tell			() const
 {
 	ASSERT			(m_pointer >= m_buffer);
 	ASSERT			(m_pointer <= (m_buffer + m_buffer_size), "0x%08x <= 0x%08x + %d", m_pointer, m_buffer, m_buffer_size);
-	return			(u32(m_pointer - m_buffer));
+	return			(unsigned(m_pointer - m_buffer));
 }
 
 } // namespace ppmd

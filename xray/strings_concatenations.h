@@ -12,7 +12,7 @@
 namespace xray {
 namespace strings {
 
-inline pstr append	( pstr const result, u32 const size, pcstr source )
+inline pstr append	( pstr const result, unsigned const size, pcstr source )
 {
 #ifdef _MSC_VER
 	errno_t const error	= strcat_s( result, size, source );
@@ -31,7 +31,7 @@ inline pstr append	( char (&result)[Size], pcstr source )
 }
 
 template < typename T0 >
-inline pstr join	( pstr const result, u32 const size, T0 const& str0 )
+inline pstr join	( pstr const result, unsigned const size, T0 const& str0 )
 {
 	detail::tuples	tuples( str0 );
 	XRAY_UNREFERENCED_PARAMETER	( size );
@@ -47,7 +47,7 @@ inline pstr join	( char (&result)[Size], T0 const& str0 )
 }
 
 template < typename T0, typename T1 >
-inline pstr join	( pstr const result, u32 const size, T0 const& str0, T1 const& str1 )
+inline pstr join	( pstr const result, unsigned const size, T0 const& str0, T1 const& str1 )
 {
 	detail::tuples	tuples( str0, str1 );
 	XRAY_UNREFERENCED_PARAMETER	( size );
@@ -63,7 +63,7 @@ inline pstr join	( char (&result)[Size], T0 const& str0, T1 const& str1 )
 }
 
 template < typename T0, typename T1, typename T2 >
-inline pstr join	( pstr const result, u32 const size, T0 const& str0, T1 const& str1, T2 const& str2 )
+inline pstr join	( pstr const result, unsigned const size, T0 const& str0, T1 const& str1, T2 const& str2 )
 {
 	detail::tuples	tuples( str0, str1, str2 );
 	XRAY_UNREFERENCED_PARAMETER	( size );
@@ -79,7 +79,7 @@ inline pstr join	( char (&result)[Size], T0 const& str0, T1 const& str1, T2 cons
 }
 
 template < typename T0, typename T1, typename T2, typename T3 >
-inline pstr join	( pstr const result, u32 const size, T0 const& str0, T1 const& str1, T2 const& str2, T3 const& str3 )
+inline pstr join	( pstr const result, unsigned const size, T0 const& str0, T1 const& str1, T2 const& str2, T3 const& str3 )
 {
 	detail::tuples	tuples( str0, str1, str2, str3 );
 	XRAY_UNREFERENCED_PARAMETER	( size );
@@ -95,7 +95,7 @@ inline pstr join	( char (&result)[Size], T0 const& str0, T1 const& str1, T2 cons
 }
 
 template < typename T0, typename T1, typename T2, typename T3, typename T4 >
-inline pstr join	( pstr const result, u32 const size, T0 const& str0, T1 const& str1, T2 const& str2, T3 const& str3, T4 const& str4 )
+inline pstr join	( pstr const result, unsigned const size, T0 const& str0, T1 const& str1, T2 const& str2, T3 const& str3, T4 const& str4 )
 {
 	detail::tuples	tuples( str0, str1, str2, str3, str4 );
 	XRAY_UNREFERENCED_PARAMETER	( size );
@@ -111,7 +111,7 @@ inline pstr join	( char (&result)[Size], T0 const& str0, T1 const& str1, T2 cons
 }
 
 template < typename T0, typename T1, typename T2, typename T3, typename T4, typename T5 >
-inline pstr join	( pstr const result, u32 const size, T0 const& str0, T1 const& str1, T2 const& str2, T3 const& str3, T4 const& str4, T5 const& str5 )
+inline pstr join	( pstr const result, unsigned const size, T0 const& str0, T1 const& str1, T2 const& str2, T3 const& str3, T4 const& str4, T5 const& str5 )
 {
 	detail::tuples	tuples( str0, str1, str2, str3, str4, str5 );
 	XRAY_UNREFERENCED_PARAMETER	( size );
@@ -138,7 +138,7 @@ inline pstr join	( char (&result)[Size], T0 const& str0, T1 const& str1, T2 cons
 
 #define STR_DUPLICATEA(dest, source) \
 	if ( xray::identity(true) ) { \
-		u32 const buffer_size						= (xray::strings::length( source ) + 1)*sizeof(char); \
+		unsigned const buffer_size						= (xray::strings::length( source ) + 1)*sizeof(char); \
 		( dest )									= ( pstr )ALLOCA( buffer_size ); \
 		memory::copy								( dest, buffer_size, source, buffer_size ); \
 	} else (void)0

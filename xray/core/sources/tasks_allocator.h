@@ -33,7 +33,7 @@ private:
 	};
 
 	enum {
-		max_task_count	=	u32(950000),
+		max_task_count	=	unsigned(950000),
 		granularity		=	alignment<XRAY_TASK_ALLOCATOR_GRANULARITY>::value,
 	};
 
@@ -49,7 +49,7 @@ private:
 #if !XRAY_PLATFORM_WINDOWS_64
 		struct {
 			task *		pointer;
-			u32			counter;
+			unsigned			counter;
 		};
 #else // #if XRAY_PLATFORM_WINDOWS_64
 		task *			pointer;
@@ -67,7 +67,7 @@ private:
 		threading::atomic64_type	whole;
 		struct {
 			task *		pointer;
-			u32			counter;
+			unsigned			counter;
 		};
 	};
 #endif // #if defined(_MSC_VER)

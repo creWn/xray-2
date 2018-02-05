@@ -49,9 +49,9 @@ inline typename VECTORA::self_type& VECTORA::operator=	( self_type const& other 
 }
 
 TEMPLATE_SIGNATURE
-inline u32 VECTORA::size								( ) const
+inline unsigned VECTORA::size								( ) const
 {
-	return					( ( u32 ) super::size( ) );
+	return					( ( unsigned ) super::size( ) );
 }
 
 #undef VECTORA

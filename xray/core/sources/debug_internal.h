@@ -29,7 +29,7 @@ namespace detail {
 		);
 } // namespace detail
 
-XRAY_CORE_API u32	build_station_build_id	( );
+XRAY_CORE_API unsigned	build_station_build_id	( );
 
 } // namespace debug
 } // namespace core

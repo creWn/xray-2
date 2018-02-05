@@ -47,7 +47,7 @@ fixed_string<Size>::fixed_string (value_type const src) : buffer_string(m_buffer
 template <int Size>
 fixed_string<Size>::fixed_string (value_type const* src, size_type const& count) : buffer_string(m_buffer, Size)
 {
-	strings::copy_n					(m_buffer, Size, src, (u32)count);
+	strings::copy_n					(m_buffer, Size, src, (unsigned)count);
 }
 
 template <int Size>

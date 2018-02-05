@@ -18,7 +18,7 @@ public:
 	inline			timer				();
 	inline	void	start				();
 	inline	u64		get_elapsed_ticks	() const;
-	inline	u32		get_elapsed_ms		() const;
+	inline	unsigned		get_elapsed_ms		() const;
 	inline	float	get_elapsed_sec		() const;
 }; // class timer
 

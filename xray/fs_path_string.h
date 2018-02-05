@@ -6,7 +6,7 @@
 namespace xray	{
 namespace fs	{
 
-static	u32	const max_path_length			= sizeof(string_path) / sizeof(char);
+static	unsigned	const max_path_length			= sizeof(string_path) / sizeof(char);
 typedef	fixed_string< max_path_length >		path_string;
 
 template class XRAY_CORE_API fixed_string< max_path_length >;

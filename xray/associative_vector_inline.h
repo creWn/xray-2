@@ -114,7 +114,7 @@ inline typename ASSOCIATIVE_VECTOR::size_type ASSOCIATIVE_VECTOR::max_size					(
 }
 
 TEMPLATE_SIGNATURE
-inline u32 ASSOCIATIVE_VECTOR::size															() const
+inline unsigned ASSOCIATIVE_VECTOR::size															() const
 {
 	return				(super::size());
 }

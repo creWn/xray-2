@@ -105,7 +105,7 @@ bool   file_system_impl::update_file_size_in_fat (pcstr in_logical_path, pcstr i
 	verify_path_is_portable					(in_logical_path);
 	threading::mutex_raii	raii			(m_mount_mutex);
 
-	u32 node_on_path_hash				=	0;
+	unsigned node_on_path_hash				=	0;
 	fat_node<> * const node_on_path		=	find_node(in_logical_path, & node_on_path_hash);
 	if ( !node_on_path )
 		return								false;
@@ -135,10 +135,10 @@ bool   file_system_impl::update_file_size_in_fat (pcstr in_logical_path, pcstr i
 			return							false;
 		}
 		
-		file_size_type const old_file_size	=	threading::interlocked_exchange(disk_file_node->m_size, (u32)new_file_size);
+		file_size_type const old_file_size	=	threading::interlocked_exchange(disk_file_node->m_size, (unsigned)new_file_size);
 
 		if ( old_file_size != new_file_size)
-			LOGI_INFO						("file_system", "update_file_size_in_fat '%s' updated file size to (%d)", in_physical_path, u32(new_file_size));
+			LOGI_INFO						("file_system", "update_file_size_in_fat '%s' updated file size to (%d)", in_physical_path, unsigned(new_file_size));
 		break;
 	}
 
@@ -155,7 +155,7 @@ bool   file_system_impl::mount_disk_node (pcstr in_logical_path, fat_node<> * * 
 
 	bool already_mounted				=	false;
 
-	u32	hash =	0;
+	unsigned	hash =	0;
 	fat_node<> * const node				=	find_node(in_logical_path, & hash);
 	if ( node && node->cast_disk_file() )
 	{
@@ -189,7 +189,7 @@ bool   file_system_impl::mount_disk_node (pcstr in_logical_path, fat_node<> * * 
 	if ( already_mounted )
 	{
 		fat_disk_file_node<> * const disk_file_node	=	node->cast_disk_file();
-		file_size_type const old_file_size	=	threading::interlocked_exchange	(disk_file_node->m_size, (u32)file_size);
+		file_size_type const old_file_size	=	threading::interlocked_exchange	(disk_file_node->m_size, (unsigned)file_size);
 		if ( old_file_size != file_size )
 			LOGI_INFO						("file_system", "mount_disk_node '%s' already mounted, only updating size to (%d)", in_logical_path, file_size);
 		return								true;
@@ -199,7 +199,7 @@ bool   file_system_impl::mount_disk_node (pcstr in_logical_path, fat_node<> * * 
 
 	path_string folder_path;
 	path_string file_name;
-	u32 const slash_pos					=	logical_path.rfind('/');
+	unsigned const slash_pos					=	logical_path.rfind('/');
 	if ( slash_pos != logical_path.npos )
 	{
 		logical_path.substr					(slash_pos + 1, logical_path.npos, & file_name);
@@ -208,10 +208,10 @@ bool   file_system_impl::mount_disk_node (pcstr in_logical_path, fat_node<> * * 
 	else
 		file_name						=	logical_path;
 
-	u32				  folder_hash;
+	unsigned				  folder_hash;
 	fat_folder_node<> * folder_node		=	find_or_create_folder(folder_path.c_str(), & folder_hash);
 
-	u32 const		  file_hash			=	crc32(file_name.c_str(), file_name.length(), folder_hash);
+	unsigned const		  file_hash			=	crc32(file_name.c_str(), file_name.length(), folder_hash);
 
 
 	fat_node<> * const new_node				=	(path_type == path_info::type_folder) ? 
@@ -225,7 +225,7 @@ bool   file_system_impl::mount_disk_node (pcstr in_logical_path, fat_node<> * * 
 																	 file_name.length(), 
 																	 physical_path.c_str(),
 																	 physical_path.length(),
-																	 (u32)file_size )->cast_node();
+																	 (unsigned)file_size )->cast_node();
 	
 	actualize_node							(new_node, file_hash, folder_node);
 	if ( out_result_node )
@@ -241,9 +241,9 @@ void   file_system_impl::rename_disk_node (pcstr const in_logical_path, pcstr co
 	rename_disk_node						(in_logical_path, in_renamed_old_path, in_renamed_new_path, 0);
 }
 
-void   file_system_impl::rename_disk_node (pcstr const in_logical_path, pcstr const in_renamed_old_path, pcstr const in_renamed_new_path, u32 const in_full_name_of_parent_hash)
+void   file_system_impl::rename_disk_node (pcstr const in_logical_path, pcstr const in_renamed_old_path, pcstr const in_renamed_new_path, unsigned const in_full_name_of_parent_hash)
 {
-	u32 node_on_path_hash				=	0;
+	unsigned node_on_path_hash				=	0;
 	fat_node<> * const node_on_path		=	find_node(in_logical_path, & node_on_path_hash);
 	if ( !node_on_path )
 		return;
@@ -272,7 +272,7 @@ void   file_system_impl::rename_disk_node (pcstr const in_logical_path, pcstr co
 		if ( disk_path_of_it_node_string.find(in_renamed_old_path) != 0 )
 			continue;
 
-		u32 full_new_name_hash			=	0;
+		unsigned full_new_name_hash			=	0;
 
 		pcstr new_name					=	NULL;
 
@@ -300,7 +300,7 @@ void   file_system_impl::rename_disk_node (pcstr const in_logical_path, pcstr co
 		{
 			path_string child_logical_path	=	in_logical_path;
 			child_logical_path			+=	'/';
-			u32 const child_logical_path_saved_size	=	child_logical_path.length();
+			unsigned const child_logical_path_saved_size	=	child_logical_path.length();
 
 			fat_node<> * it_child		=	it_node->get_first_child();
 			while ( it_child )

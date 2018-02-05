@@ -112,7 +112,7 @@ public:
 	inline	const_equal_range_result	equal_range			(key_type const& key) const;
 	inline	size_type					count				(key_type const& key) const;
 	inline	size_type					max_size			() const;
-	inline	u32							size				() const;
+	inline	unsigned							size				() const;
 	inline	bool						empty				() const;
 	inline	key_compare					key_comp			() const;
 	inline	value_compare				value_comp			() const;

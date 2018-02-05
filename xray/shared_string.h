@@ -29,8 +29,8 @@ public:
 	inline	bool		operator<							( shared_string const& string ) const;
 	inline	bool		operator==							( shared_string const& string ) const;
 	inline	bool		operator!=							( shared_string const& string ) const;
-	inline	u32			length								( ) const;
-	inline	u32			size								( ) const;
+	inline	unsigned			length								( ) const;
+	inline	unsigned			size								( ) const;
 
 public:
 	typedef pcstr ( shared_string::*unspecified_bool_type )	( ) const;

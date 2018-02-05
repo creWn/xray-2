@@ -17,14 +17,14 @@ random32 rnd;
 
 inline float n_pi_d2_random()
 {
-	//const u32 range = u32(-1)/2;
-	const u32 range = 100;
+	//const unsigned range = unsigned(-1)/2;
+	const unsigned range = 100;
 	return math::pi_d2 * ( float( rnd.random( range ) ) - float(  range/2 )  );
 }
 
 inline float pi_d2_random()
 {
-	const u32 range = u32(-1)/2;
+	const unsigned range = unsigned(-1)/2;
 	
 	return math::pi_d2 * float( rnd.random( range ) ) / float( range );
 }
@@ -37,8 +37,8 @@ inline float random_angle()
 
 inline bool is_identity( const float4x4 &m, float epsilon )
 {
-	for( u32 i = 0; i < 4; ++i )
-		for( u32 j = 0; j < 4; ++j )
+	for( unsigned i = 0; i < 4; ++i )
+		for( unsigned j = 0; j < 4; ++j )
 			if(  
 				( i != j && !math::similar( math::abs( m.elements[i][j] ), 0.f, epsilon ) )||
 				( i == j && !math::similar( math::abs( m.elements[i][j] ), 1.f, epsilon ) )
@@ -360,13 +360,13 @@ static void all_tests( )
 
 struct math_tests
 {
-	static const u32	iterations_number = 100;//10000000
+	static const unsigned	iterations_number = 100;//10000000
 
 	void test (core_test_suite const * const)
 	{
-		rnd.seed( (u32)(timing::get_clocks() & u32(-1)) );
+		rnd.seed( (unsigned)(timing::get_clocks() & unsigned(-1)) );
 		
-		for( u32 i = 0; i< iterations_number ; ++ i)
+		for( unsigned i = 0; i< iterations_number ; ++ i)
 			all_tests( );
 		
 	}

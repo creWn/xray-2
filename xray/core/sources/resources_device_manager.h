@@ -17,7 +17,7 @@ namespace resources {
 class device_manager
 {
 public:
-							device_manager				(pcstr thread_desc, u32 sector_size);
+							device_manager				(pcstr thread_desc, unsigned sector_size);
 	virtual					~device_manager				();
 
 	virtual bool			can_handle_query			(pcstr	path)	=	0;
@@ -50,9 +50,9 @@ private:
 	// note:
 	// when amount of data for device thread is less then m_min_wanted_pre_allocated_size
 	// resource manager thread preallocates more data
-	u32						m_min_wanted_pre_allocated_size;
+	unsigned						m_min_wanted_pre_allocated_size;
 
-	typedef	associative_vector< u32, u32, vector >	thread_id_to_num_queries;
+	typedef	associative_vector< unsigned, unsigned, vector >	thread_id_to_num_queries;
 	thread_id_to_num_queries						m_thread_id_to_num_queries;
 
 	typedef	intrusive_list<query_result, query_result, &query_result::m_next_in_device_manager, threading::single_threading_policy>	queries_list;
@@ -61,8 +61,8 @@ private:
  	query_result *			m_query;
 	bool					m_ready;
 	void *					m_file_handle;
-	int						m_overlapped[(3*sizeof(pvoid) + max<2*sizeof(u32),sizeof(pvoid)>::value)/sizeof(int) ];		// 4*5 == 20 == sizeof(OVERLAPPED)
-	u32						m_min_bytes_to_operate;
+	int						m_overlapped[(3*sizeof(pvoid) + max<2*sizeof(unsigned),sizeof(pvoid)>::value)/sizeof(int) ];		// 4*5 == 20 == sizeof(OVERLAPPED)
+	unsigned						m_min_bytes_to_operate;
 
 	queries_list			m_finished;
 
@@ -73,8 +73,8 @@ private:
 
 	bool					m_need_fill_pre_allocated;
 	bool					m_doing_async_write;	
-	u32						m_sector_size;
-	u32						get_sector_size					() { return m_sector_size; }
+	unsigned						m_sector_size;
+	unsigned						get_sector_size					() { return m_sector_size; }
 
 	enum					{ max_sector_size	=	4096 };
 	char					m_sector_data_first[max_sector_size];

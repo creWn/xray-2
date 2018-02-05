@@ -31,7 +31,7 @@ namespace xray {
 		typedef pvoid							atomic_ptr_value_type;
 		typedef void*				 volatile	atomic_ptr_type;
 #elif XRAY_PLATFORM_PS3 // #if XRAY_PLATFORM_WINDOWS | XRAY_PLATFORM_XBOX_360
-		typedef u32								atomic32_value_type;
+		typedef unsigned								atomic32_value_type;
 		typedef atomic32_value_type				atomic32_type;
 		typedef u64								atomic64_value_type;
 		typedef atomic64_value_type				atomic64_type;
@@ -63,7 +63,7 @@ namespace xray {
 		}; // enum tasks_awareness
 
 #if XRAY_PLATFORM_WINDOWS | XRAY_PLATFORM_XBOX_360
-		typedef u32				thread_id_type;
+		typedef unsigned				thread_id_type;
 #elif XRAY_PLATFORM_PS3 // #if XRAY_PLATFORM_WINDOWS | XRAY_PLATFORM_XBOX_360
 		typedef u64				thread_id_type;
 #else // #elif XRAY_PLATFORM_PS3
@@ -74,21 +74,21 @@ namespace xray {
 			thread_function_type const& function_to_call,
 			pcstr thread_name_for_debugger,
 			pcstr thread_name_for_logging,
-			u32 stack_size,
-			u32 hardware_thread,
+			unsigned stack_size,
+			unsigned hardware_thread,
 			tasks_awareness tasks_awareness = tasks_aware,
 			pvoid * out_handle = NULL
 		);
 
-		XRAY_CORE_API	void	yield(u32 milliseconds = 0);
+		XRAY_CORE_API	void	yield(unsigned milliseconds = 0);
 		XRAY_CORE_API	void	set_thread_name(pcstr debugger_name, pcstr logging_name);
 		XRAY_CORE_API	pcstr	current_thread_logging_name();
-		XRAY_CORE_API	u32		core_count();
+		XRAY_CORE_API	unsigned		core_count();
 
-		XRAY_CORE_API	u32		current_thread_id();
+		XRAY_CORE_API	unsigned		current_thread_id();
 
-		XRAY_CORE_API	void	set_current_thread_affinity(u32 const hardware_thread);
-		XRAY_CORE_API	u32		current_thread_affinity();
+		XRAY_CORE_API	void	set_current_thread_affinity(unsigned const hardware_thread);
+		XRAY_CORE_API	unsigned		current_thread_affinity();
 
 		XRAY_CORE_API	extern	command_line::key	g_debug_single_thread;
 
@@ -108,7 +108,7 @@ namespace xray {
 
 		// Thread Local Storage functions
 #if defined(_MSC_VER)
-		typedef u32				tls_key_id_type;
+		typedef unsigned				tls_key_id_type;
 #elif defined(__GNUC__) // #if defined(_MSC_VER)
 		typedef _Tlskey_t		tls_key_id_type;
 #else // #elif defined(__GNUC__)

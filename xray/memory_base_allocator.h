@@ -3,10 +3,7 @@
 //	Author		: Dmitriy Iassenev
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef XRAY_MEMORY_BASE_ALLOCATOR_H_INCLUDED
-#define XRAY_MEMORY_BASE_ALLOCATOR_H_INCLUDED
-
+#pragma once
 #include <xray/detail_noncopyable.h>
 #include <xray/memory_debug_parameters.h>
 
@@ -19,7 +16,8 @@
 namespace xray {
 namespace memory {
 
-class XRAY_CORE_API base_allocator : private xray::detail::noncopyable {
+class XRAY_CORE_API base_allocator : private detail::noncopyable 
+{
 public:
 					base_allocator		( );
 	virtual			~base_allocator		( ) { }
@@ -44,18 +42,6 @@ protected:
 
 protected:
 			void	copy				( base_allocator const& allocator );
-#if XRAY_USE_MEMORY_TOOLS
-			pvoid	on_malloc			( pvoid buffer, size_t buffer_size, size_t previous_size, pcstr description ) const;
-			void	on_free				( pvoid& buffer, bool clear_with_magic = true ) const;
-			size_t	needed_size			( size_t const size ) const;
-			size_t	buffer_size			( pvoid buffer ) const;
-#else // #if XRAY_USE_MEMORY_TOOLS
-	inline	pvoid	on_malloc			( pvoid buffer, size_t buffer_size, size_t previous_size, pcstr description ) const { XRAY_UNREFERENCED_PARAMETER(buffer_size); XRAY_UNREFERENCED_PARAMETER(previous_size); XRAY_UNREFERENCED_PARAMETER(description); return buffer; }
-	inline	void	on_free				( pvoid buffer, bool can_clear = true ) const { XRAY_UNREFERENCED_PARAMETER(can_clear); XRAY_UNREFERENCED_PARAMETER(buffer); }
-	inline	size_t	needed_size			( size_t const size) const { ASSERT( size ); return size; }
-	inline	size_t	buffer_size			( pvoid buffer ) const { XRAY_UNREFERENCED_PARAMETER(buffer); return 0; }
-#endif // #if XRAY_USE_MEMORY_TOOLS
-
 protected:
 			void	call_initialize_impl( base_allocator& allocator, pvoid arena, u64 size, pcstr arena_id );
 			void	call_finalize_impl	( base_allocator& allocator );
@@ -72,13 +58,24 @@ protected:
 	pvoid	m_arena_start;
 	pvoid	m_arena_end;
 	pcstr	m_arena_id;
+
+#if XRAY_USE_MEMORY_TOOLS
+	pvoid	on_malloc(pvoid buffer, size_t buffer_size, size_t previous_size, pcstr description);
+	void	on_free(pvoid& buffer, bool clear_with_magic = true);
+	size_t	needed_size(size_t const size);
+	size_t	buffer_size(pvoid buffer);
+#else // #if XRAY_USE_MEMORY_TOOLS
+	inline	pvoid	on_malloc(pvoid buffer, size_t buffer_size, size_t previous_size, pcstr description) const { XRAY_UNREFERENCED_PARAMETER(buffer_size); XRAY_UNREFERENCED_PARAMETER(previous_size); XRAY_UNREFERENCED_PARAMETER(description); return buffer; }
+	inline	void	on_free(pvoid buffer, bool can_clear = true) const { XRAY_UNREFERENCED_PARAMETER(can_clear); XRAY_UNREFERENCED_PARAMETER(buffer); }
+	inline	size_t	needed_size(size_t const size) const { ASSERT(size); return size; }
+	inline	size_t	buffer_size(pvoid buffer) const { XRAY_UNREFERENCED_PARAMETER(buffer); return 0; }
+#endif // #if XRAY_USE_MEMORY_TOOLS
+
 }; // class doug_lea_allocator
 
 namespace monitor {
-extern u32 const housekeeping_size;
+extern unsigned const housekeeping_size;
 } // namespace monitor
 
 } // namespace memory
 } // namespace xray
-
-#endif // #ifndef XRAY_MEMORY_BASE_ALLOCATOR_H_INCLUDED

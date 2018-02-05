@@ -29,8 +29,8 @@ struct path_info
 {
 	enum type_enum					{ type_nothing, type_file, type_folder };
 	type_enum						type;
-	u32								file_size;
-	u32								file_last_modify_time;
+	unsigned								file_size;
+	unsigned								file_last_modify_time;
 
 	path_info						() : type(type_nothing), file_size(0) {}
 };

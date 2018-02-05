@@ -15,19 +15,19 @@ namespace xray {
 static threading::atomic32_type	s_threads_started	=	0;
 static threading::atomic32_type	s_threads_exited	=	0;
 
-u32 const	array_count		=	128*1024;
+unsigned const	array_count		=	128*1024;
 threading::atomic32_type	s_value			=	0; 
-u32 		s_array1			[array_count];
-u32 		s_array2			[array_count];
+unsigned 		s_array1			[array_count];
+unsigned 		s_array2			[array_count];
 
 void thread_main	( pvoid array_raw )
 {
 	while ( !s_threads_started )
 		threading::yield( 0 );
 
-	u32* const array = (u32*)(array_raw);
-	u32* i			= array;
-	u32* const e	= array + array_count;
+	unsigned* const array = (unsigned*)(array_raw);
+	unsigned* i			= array;
+	unsigned* const e	= array + array_count;
 	for ( ; i != e; ++i ) {
 		*i			= threading::interlocked_exchange_add( s_value, 1 );
 	}
@@ -49,10 +49,10 @@ DEFINE_TEST(threading_test, core_test_suite)
 		threading::yield( 100 );
 	}
 
-	u32* i			= s_array1;
-	u32* j			= s_array2;
-	u32* const ie	= s_array1 + array_count;
-	u32* const je	= s_array2 + array_count;
+	unsigned* i			= s_array1;
+	unsigned* j			= s_array2;
+	unsigned* const ie	= s_array1 + array_count;
+	unsigned* const je	= s_array2 + array_count;
 	for ( ; (i != ie) && (j != je); ) {
 		if ( *i < *j ) {
 			++i;

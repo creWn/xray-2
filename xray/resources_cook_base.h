@@ -24,11 +24,11 @@ class translate_query_cook;
 class XRAY_CORE_API cook_base
 {
 public:
-	static u32  const					thread_id_unset					=	(u32)-1;
-	static u32	const 					use_cooker_thread_id			=	(u32)-2;
-	static u32	const 					use_current_thread_id			=	(u32)-3;
-	static u32	const 					use_resource_manager_thread_id	=	(u32)-4;
-	static u32	const 					use_user_thread_id				=	(u32)-5;
+	static unsigned  const					thread_id_unset					=	(unsigned)-1;
+	static unsigned	const 					use_cooker_thread_id			=	(unsigned)-2;
+	static unsigned	const 					use_current_thread_id			=	(unsigned)-3;
+	static unsigned	const 					use_resource_manager_thread_id	=	(unsigned)-4;
+	static unsigned	const 					use_user_thread_id				=	(unsigned)-5;
 
 	enum reuse_enum					{	reuse_false, reuse_true, reuse_raw	};
 
@@ -49,8 +49,8 @@ public:
 			cook_base					(class_id					resource_class, 
 										 reuse_enum					reuse_type,
 										 enum_flags<flags_enum>		flags,
-										 u32						allocate_thread_it,
-										 u32 						creation_thread_id);
+										 unsigned						allocate_thread_it,
+										 unsigned 						creation_thread_id);
 
 	virtual	void						translate_request_path		(pcstr request, fs::path_string & new_request) const { new_request = request; }
 
@@ -88,7 +88,7 @@ public:
 			reuse_enum					reuse_type					() const;
 	static	reuse_enum					reuse_type					(class_id resource_class);
 
-			u32							cook_users_count			() const;
+			unsigned							cook_users_count			() const;
 
 	virtual bool						allow_sync_load_from_inline	() const { return true; }
 	static  bool						allow_sync_load_from_inline	(class_id resource_class);
@@ -97,11 +97,11 @@ public:
 	virtual void						deallocate_resource			(pvoid buffer) = 0;
 
 			void						to_string					(buffer_string * out_string);
-			u32							allocate_thread_id			();
-	static	u32							allocate_thread_id			(class_id resource_class);
-			u32							creation_thread_id			();
+			unsigned							allocate_thread_id			();
+	static	unsigned							allocate_thread_id			(class_id resource_class);
+			unsigned							creation_thread_id			();
 
-			void						register_object_to_delete	(unmanaged_resource * resource, u32 deallocation_thread_id);
+			void						register_object_to_delete	(unmanaged_resource * resource, unsigned deallocation_thread_id);
 
 	virtual								~cook_base					() {}
 
@@ -122,7 +122,7 @@ private:
 	public:
 										cook_users_count_functionality	() : m_count(0) {}
 										~cook_users_count_functionality	()			{ R_ASSERT(!m_count); }
-		u32								cook_users_count				() const	{ return m_count; }
+		unsigned								cook_users_count				() const	{ return m_count; }
 		void							change_cook_users_count			(int change);
 	private:
 		threading::atomic32_type		m_count;
@@ -133,8 +133,8 @@ private:
 
 	class_id							m_class_id;
 	reuse_enum							m_reuse_type;
-	u32									m_creation_thread_id;
-	u32									m_allocate_thread_id;
+	unsigned									m_creation_thread_id;
+	unsigned									m_allocate_thread_id;
 	enum_flags<flags_enum>				m_flags;
 
 	cook_base *							m_next;

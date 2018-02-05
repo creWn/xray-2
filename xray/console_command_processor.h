@@ -16,7 +16,7 @@ XRAY_CORE_API void	execute		(pcstr str);
 XRAY_CORE_API void	show_help	(pcstr str);
 XRAY_CORE_API void	save		(pcstr fn);
 XRAY_CORE_API void	load		(memory::reader& F);
-XRAY_CORE_API u32	get_similar	(pcstr starts_from, console_command** dst, u32 dst_size);
+XRAY_CORE_API unsigned	get_similar	(pcstr starts_from, console_command** dst, unsigned dst_size);
 XRAY_CORE_API console_command*	find(pcstr name);
 
 } // namespace console_commands

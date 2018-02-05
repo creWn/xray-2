@@ -45,7 +45,7 @@ public:
 	inline	bool				value_exists		( pcstr field_id ) const							{ return m_root.value_exists(field_id); }
 
 	inline	bool				empty				( ) const											{ return m_root.empty(); }
-	inline	u32					size				( ) const											{ return m_root.size(); }
+	inline	unsigned					size				( ) const											{ return m_root.size(); }
 
 	typedef lua_config_iterator						iterator;
 	typedef iterator								const_iterator;
@@ -56,11 +56,11 @@ public:
 	inline	const_iterator		begin				( ) const											{ return m_root.begin(); }
 	inline	const_iterator		end					( ) const											{ return m_root.end(); }
 
-	inline	lua_config_value const	operator[ ]		( u32 index ) const									{ return m_root[index]; }
+	inline	lua_config_value const	operator[ ]		( unsigned index ) const									{ return m_root[index]; }
 	inline	lua_config_value const	operator[ ]		( int index ) const									{ return m_root[index]; }
 	inline	lua_config_value const	operator[ ]		( pcstr field_id ) const							{ return m_root[field_id]; }
 
-	inline	lua_config_value	operator[ ]			( u32 index )										{ return m_root[index]; }
+	inline	lua_config_value	operator[ ]			( unsigned index )										{ return m_root[index]; }
 	inline	lua_config_value	operator[ ]			( int index )										{ return m_root[index]; }
 	inline	lua_config_value	operator[ ]			( pcstr field_id )									{ return m_root[field_id]; }
 

@@ -15,7 +15,7 @@ namespace memory {
 template <typename T>
 inline T	uninitialized_value						( )
 {
-	return horrible_cast<u32,T>( ::xray::platform::little_endian() ? 0xfdfdcdcd : 0xcdcdfdfd ).second;
+	return horrible_cast<unsigned,T>( ::xray::platform::little_endian() ? 0xfdfdcdcd : 0xcdcdfdfd ).second;
 }
 
 } // namespace memory

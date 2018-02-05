@@ -10,7 +10,7 @@
 namespace xray {
 namespace tasks {
 
-void   yield	(u32 const ms);
+void   yield	(unsigned const ms);
 
 } // namespace tasks
 } // namespace xray

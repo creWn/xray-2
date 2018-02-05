@@ -24,14 +24,14 @@ public:
 							unmanaged_resource		();
 	virtual				   ~unmanaged_resource 		();
 
-	void					set_creation_source		(creation_source_enum creation_source, pcstr request_path, u32 resource_size);
+	void					set_creation_source		(creation_source_enum creation_source, pcstr request_path, unsigned resource_size);
 	managed_resource_ptr	raw_resource_ptr		() const { return m_raw_resource_ptr; }
 
-	void					set_deleter_object		(cook_base * cook, u32 deallocation_thread_id);
+	void					set_deleter_object		(cook_base * cook, unsigned deallocation_thread_id);
 	bool					has_deleter_object		() const { return !!m_deleter; }
 
-	u32						deallocate_thread_id	() const { R_ASSERT(m_deallocation_thread_id); return m_deallocation_thread_id; }
-	u32						get_size				() const { return m_size; }
+	unsigned						deallocate_thread_id	() const { R_ASSERT(m_deallocation_thread_id); return m_deallocation_thread_id; }
+	unsigned						get_size				() const { return m_size; }
 
 private:
 	unmanaged_resource *	get_next_delay_delete	() const { return m_next_delay_delete; }
@@ -43,7 +43,7 @@ private:
 	void					set_as_inlined_in_fat	();
 	bool					is_inlined_in_fat		() const { return m_inlined_in_fat; }
 	void					unset_as_inlined_in_fat	();
-	void					set_size				(u32 size) { m_size = size; }
+	void					set_size				(unsigned size) { m_size = size; }
 	fat_it_wrapper			get_fat_it				() const { return m_fat_it; }
 
 private:
@@ -56,8 +56,8 @@ private:
 	unmanaged_resource *	m_prev_in_global_list;
 	unmanaged_resource *	m_next_in_global_delay_delete_list;
 	unmanaged_resource *	m_prev_in_global_delay_delete_list;
-	u32						m_deallocation_thread_id;
-	u32						m_size;
+	unsigned						m_deallocation_thread_id;
+	unsigned						m_size;
 #ifndef MASTER_GOLD
 	fs::path_string			m_request_path;
 #endif

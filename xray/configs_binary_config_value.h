@@ -14,7 +14,7 @@ class XRAY_CORE_API binary_config_value {
 public:
 	pcstr					id;
 	pcvoid					data;				// value if type<t_embedded_types, pointer to value, or pointer to first child if table
-	u32						crc;				// crc of the name
+	unsigned						crc;				// crc of the name
 	u16						type;
 	u16						count;				// children count if table, value mem_usage otherwise
 
@@ -25,21 +25,21 @@ public:
 							binary_config_value	();
 
 			void			dump				(pcstr prefix) const;
-			void			fix_up				(u32 offset);
+			void			fix_up				(unsigned offset);
 
 			bool			value_exists		(pcstr key) const;
 
 	inline	bool			empty				() const;
-	inline	u32				size				() const { return u32(begin() - end()); }
+	inline	unsigned				size				() const { return unsigned(begin() - end()); }
 
 	inline	const_iterator	begin				() const;
 	inline	const_iterator	end					() const;
 
-	inline binary_config_value const& operator[](u32 const index) const;
+	inline binary_config_value const& operator[](unsigned const index) const;
 	inline binary_config_value const& operator[](int const index) const;
 		   binary_config_value const& operator[](pcstr key) const;
 
-	inline	bool			operator <			(u32 crc) const;
+	inline	bool			operator <			(unsigned crc) const;
 
 //assignments
 	inline	operator		bool				() const;
@@ -48,7 +48,7 @@ public:
 	inline	operator		s16					() const;
 	inline	operator		u16					() const;
 	inline	operator		s32					() const;
-	inline	operator		u32					() const;
+	inline	operator		unsigned					() const;
 	inline	operator		float				() const;
 	inline	operator		math::float2 const&	() const;
 	inline	operator		math::float3 const&	() const;

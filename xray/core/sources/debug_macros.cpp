@@ -6,7 +6,7 @@ namespace xray {
 namespace debug {
 namespace detail {
 
-u32	  string_helper::size () const
+unsigned	  string_helper::size () const
 {
 	return					strings::length(m_buffer);
 }

@@ -23,7 +23,7 @@ enum cook_type_enum {	cook_type_managed,
 
 struct test_configuration_type
 {
-	test_configuration_type (u32 num_iterations) : iterations_todo(num_iterations)
+	test_configuration_type (unsigned num_iterations) : iterations_todo(num_iterations)
 	{
 		iterations_todo						=	1;
 		cook_type							=	cook_type_managed;
@@ -113,7 +113,7 @@ struct test_configuration_type
 			cook_type							=	(cook_type_enum)0;
 		else
 		{
-			u32 const cook_type_int				=	(u32)cook_type + 1;
+			unsigned const cook_type_int				=	(unsigned)cook_type + 1;
 			cook_type							=	(cook_type_enum)cook_type_int;
 			return									true;
 		}
@@ -135,7 +135,7 @@ struct test_configuration_type
 	bool										do_query_create_resource;
 	bool										inplace_in_creation_or_inline_data;
 //private:
-	u32											iterations_todo;
+	unsigned											iterations_todo;
 };
 
 } // namespace resources

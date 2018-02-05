@@ -55,7 +55,7 @@ void   base_of_intrusive_base::unpin_reference_count_for_game_resource_manager (
 }
 
 template <class Resource>
-signalling_bool   base_of_intrusive_base::try_unregister_from_fat_or_from_name_registry (Resource * const object, u32 zero_reference_count) const
+signalling_bool   base_of_intrusive_base::try_unregister_from_fat_or_from_name_registry (Resource * const object, unsigned zero_reference_count) const
 {
 	fat_iterator	fat_it				=	wrapper_to_fat_it(object->m_fat_it);
 	if ( !object->reference_count() )
@@ -128,7 +128,7 @@ void   unmanaged_intrusive_base::destroy (unmanaged_resource * const resource) c
 	if ( !try_unregister_from_fat_or_from_name_registry	(resource) )
 		return; // resource was reclaimed just when we were about to delete it
 
-	u32 const deallocate_thread_id		=	resource->deallocate_thread_id();
+	unsigned const deallocate_thread_id		=	resource->deallocate_thread_id();
 	if ( deallocate_thread_id == threading::current_thread_id() )
 		g_resources_manager->delete_unmanaged_resource				(resource); // sync deletion
 	else

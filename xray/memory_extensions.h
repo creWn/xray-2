@@ -54,7 +54,7 @@ extern XRAY_CORE_API pthreads_allocator_type	g_mt_allocator;
 namespace xray {
 
 enum {
-	Kb	= u32(1024),
+	Kb	= unsigned(1024),
 	Mb	= 1024*Kb,
 };
 
@@ -76,7 +76,7 @@ typedef pthreads3_allocator							pthreads_allocator_type;
 
 extern XRAY_CORE_API pthreads_allocator_type		g_mt_allocator;
 
-typedef fastdelegate::FastDelegate<void ( base_allocator const&, u32, pvoid, u64, pcstr )>	allocator_predicate_type;
+typedef fastdelegate::FastDelegate<void ( base_allocator const&, unsigned, pvoid, u64, pcstr )>	allocator_predicate_type;
 XRAY_CORE_API	void iterate_allocators				( allocator_predicate_type const& predicate );
 XRAY_CORE_API	void register_allocator				( base_allocator& allocator, u64 arena_size, pcstr description );
 
@@ -90,9 +90,9 @@ XRAY_CORE_API	void zero							( pvoid destination, size_t destination_size );
 				template <class T, size_t count>
 				void zero							( T (& destination)[count] ) { zero(destination, count * sizeof(T)); }
 
-XRAY_CORE_API	void fill32							( mutable_buffer const & destination, u32 value, u32 count );
-XRAY_CORE_API	void fill32							( pvoid destination, size_t destination_size_in_bytes, u32 value, size_t count );
-XRAY_CORE_API	void fill8							( mutable_buffer const & destination, u8  value, u32 count );
+XRAY_CORE_API	void fill32							( mutable_buffer const & destination, unsigned value, unsigned count );
+XRAY_CORE_API	void fill32							( pvoid destination, size_t destination_size_in_bytes, unsigned value, size_t count );
+XRAY_CORE_API	void fill8							( mutable_buffer const & destination, u8  value, unsigned count );
 XRAY_CORE_API	void fill8							( pvoid destination, size_t destination_size_in_bytes, u8  value, size_t count );
 
 XRAY_CORE_API	int  compare						( const_buffer const & buffer1, const_buffer const & buffer2 );

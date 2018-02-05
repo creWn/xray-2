@@ -262,7 +262,7 @@ typename HASH_MULTISET::iterator
 {
 	typename ThreadingPolicy::mutex_raii raii(m_threading_policy);
 
-	u32 const index			=	u32( m_hash( *value ) ) % SizePolicy::fixed_size;
+	unsigned const index			=	unsigned( m_hash( *value ) ) % SizePolicy::fixed_size;
 	Value * candidate		=	m_buffer[ index ];
 	while ( candidate )
 	{
@@ -284,11 +284,11 @@ typename HASH_MULTISET::iterator
 
 TEMPLATE_SIGNATURE 
 typename HASH_MULTISET::iterator  
-		 HASH_MULTISET::find (const u32 hash)
+		 HASH_MULTISET::find (const unsigned hash)
 {
 	typename ThreadingPolicy::mutex_raii raii(m_threading_policy);
 
-	u32 const index		=	hash % SizePolicy::fixed_size;
+	unsigned const index		=	hash % SizePolicy::fixed_size;
 	Value * candidate	=	m_buffer[ index ];
 	if ( candidate )
 	{
@@ -309,10 +309,10 @@ void   HASH_MULTISET::insert (Value* const value)
 }
 
 TEMPLATE_SIGNATURE 
-void	HASH_MULTISET::insert (u32 hash, Value* const value)
+void	HASH_MULTISET::insert (unsigned hash, Value* const value)
 {
 	typename ThreadingPolicy::mutex_raii raii(m_threading_policy);
-	u32 const index			=	hash % SizePolicy::fixed_size;
+	unsigned const index			=	hash % SizePolicy::fixed_size;
 	Value** element			=	&m_buffer[ index ];
 	value->set_next_hash_node	( *element );
 	*element					=	value;
@@ -335,7 +335,7 @@ void   HASH_MULTISET::clear ( Deleter const& deleter )
 {
 	typename ThreadingPolicy::mutex_raii raii(m_threading_policy);
 
-	for (				u32 i	=	0;
+	for (				unsigned i	=	0;
 							i	<	SizePolicy::fixed_size; 
 						  ++i )
 	{
@@ -367,13 +367,13 @@ void   HASH_MULTISET::erase (Value * value)
 }
 
 TEMPLATE_SIGNATURE
-void   HASH_MULTISET::erase (const u32 hash, Value* value)
+void   HASH_MULTISET::erase (const unsigned hash, Value* value)
 {
 	typename ThreadingPolicy::mutex_raii raii(m_threading_policy);
 
 	ASSERT(value);
 
-	u32			index				=	hash % SizePolicy::fixed_size;
+	unsigned			index				=	hash % SizePolicy::fixed_size;
 	Value*		cur_node			=	m_buffer[index];
 
 	if ( cur_node == value )

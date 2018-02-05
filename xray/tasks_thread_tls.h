@@ -43,9 +43,9 @@ public:
 	thread_pool *				pool;
 	task *						current_task;
 	task_type *					last_task_type;
-	u32							thread_index;
-	u32							thread_id;
-	u32							hardware_thread;
+	unsigned							thread_index;
+	unsigned							thread_id;
+	unsigned							hardware_thread;
 	type_enum					thread_type;
 	threading::atomic32_type	in_grab_next_task;
 };

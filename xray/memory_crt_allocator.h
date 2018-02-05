@@ -3,17 +3,15 @@
 //	Author		: Dmitriy Iassenev
 //	Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
-
-#ifndef MEMORY_DEFAULT_ALLOCATOR_H_INCLUDED
-#define MEMORY_DEFAULT_ALLOCATOR_H_INCLUDED
-
+#pragma once
 #include <xray/memory_base_allocator.h>
 #include <xray/memory_debug_parameters.h>
 
 namespace xray {
 namespace memory {
 
-class XRAY_CORE_API crt_allocator : public base_allocator {
+class XRAY_CORE_API crt_allocator : public base_allocator
+{
 public:
 					crt_allocator		( );
 			pvoid	malloc_impl			( size_t size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION );
@@ -46,10 +44,8 @@ private:
 	realloc_ptr_type	m_realloc_ptr;
 }; // class crt_allocator
 
-typedef memory::crt_allocator				crt_allocator_type;
+using crt_allocator_type = crt_allocator;
 extern XRAY_CORE_API crt_allocator_type*	g_crt_allocator;
 
 } // namespace memory
 } // namespace xray
-
-#endif // #ifndef MEMORY_DEFAULT_ALLOCATOR_H_INCLUDED

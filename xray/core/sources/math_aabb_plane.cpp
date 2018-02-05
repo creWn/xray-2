@@ -11,13 +11,13 @@ using xray::math::aabb_plane;
 using xray::math::intersection;
 using xray::math::aabb;
 
-static u32 const min_x	= 0;
-static u32 const min_y	= 1;
-static u32 const min_z	= 2;
-static u32 const max_x	= 3;
-static u32 const max_y	= 4;
-static u32 const max_z	= 5;
-static u32 const aabb_lut[8][6]	= {
+static unsigned const min_x	= 0;
+static unsigned const min_y	= 1;
+static unsigned const min_z	= 2;
+static unsigned const max_x	= 3;
+static unsigned const max_y	= 4;
+static unsigned const max_z	= 5;
+static unsigned const aabb_lut[8][6]	= {
 	{ max_x, max_y, max_z, min_x, min_y, min_z}, 
 	{ max_x, max_y, min_z, min_x, min_y, max_z}, 
 	{ max_x, min_y, max_z, min_x, max_y, min_z}, 
@@ -32,16 +32,16 @@ void aabb_plane::normalize		( )
 {
 	plane.vector		*= 1.f / plane.normal.magnitude( );
 	
-	u32					x = (*(u32*)&plane.normal.x >> 31) << 2;
-	u32					y = (*(u32*)&plane.normal.y >> 31) << 1;
-	u32					z = (*(u32*)&plane.normal.z >> 31);
+	unsigned					x = (*(unsigned*)&plane.normal.x >> 31) << 2;
+	unsigned					y = (*(unsigned*)&plane.normal.y >> 31) << 1;
+	unsigned					z = (*(unsigned*)&plane.normal.z >> 31);
 
 	m_lut_id			= x | y | z;
 }
 
 intersection aabb_plane::test	( aabb const& aabb ) const
 {
-	typedef u32			lut_ids_type[6];
+	typedef unsigned			lut_ids_type[6];
 	lut_ids_type const&	ids = aabb_lut[m_lut_id];
 
 	typedef float		values_type[6];

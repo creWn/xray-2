@@ -35,10 +35,10 @@ public:
 
 	managed_resource *	res;
 	pcbyte		pin_ptr;
-	u32			unpin_time;
+	unsigned			unpin_time;
 };
 
-static u32 const	max_simultaneous_pins	=	50;
+static unsigned const	max_simultaneous_pins	=	50;
 fixed_vector<tester_pinned_resource, max_simultaneous_pins>	s_pinned;
 
 static threading::mutex*						s_mutex;
@@ -48,9 +48,9 @@ static long s_helper_process_state			=	helper_process_dead;
 
 void   managed_resource_allocator::test_speed ()
 {
-	u32 const test_arena_size				=	128*1024*1024;
-	u32 const test_temp_arena_size			=	16*1024*1024;
-	u32 const test_reserved_size			=	8*1024*1024;
+	unsigned const test_arena_size				=	128*1024*1024;
+	unsigned const test_temp_arena_size			=	16*1024*1024;
+	unsigned const test_reserved_size			=	8*1024*1024;
 
 	LOGI_INFO("resources:test", "arena size: %d, max allocation size: %d", 
 												 test_arena_size, 
@@ -61,7 +61,7 @@ void   managed_resource_allocator::test_speed ()
 	R_ASSERT									(get_free_size() == m_arena_size);
 	size_t const saved_arena_size			=	m_arena_size;
 	size_t const saved_temp_arena_size		=	m_temp_arena.m_arena_size;
- 	u32 const saved_reserved_size			=	m_reserved_size;
+ 	unsigned const saved_reserved_size			=	m_reserved_size;
 	m_arena_size							=	test_arena_size;
 	m_free_size								=	m_arena_size;
 	m_reserved_size							=	test_reserved_size;
@@ -71,9 +71,9 @@ void   managed_resource_allocator::test_speed ()
 	m_temp_arena.get_first_node()->m_size	=	m_temp_arena.m_free_size;
 
 	size_t const		max_allocation_size	=	m_temp_arena.total_size();
-	u32 const		granularity				=	get_granularity();
+	unsigned const		granularity				=	get_granularity();
 
-	u32 const		dl_arena_size			=	test_arena_size * 3;
+	unsigned const		dl_arena_size			=	test_arena_size * 3;
 	pbyte 			dl_arena				=	(pbyte)RES_ALLOC(char, dl_arena_size);
 
 	memory::doug_lea_allocator					dl_alloc;
@@ -82,14 +82,14 @@ void   managed_resource_allocator::test_speed ()
 	math::randoms_table<10000>					randoms;
 
 	pbyte			dl_max_addr				=	NULL;
-	u32				dl_max_grow				=	0;
+	unsigned				dl_max_grow				=	0;
 
-	for ( u32 test=0; test<2; ++test )
+	for ( unsigned test=0; test<2; ++test )
 	{
 		u64	iteration_index					=	0;
 		randoms.to_first_random					();
 		s_resources.clear						();
-		u32	num_allocations					=	0;
+		unsigned	num_allocations					=	0;
 
 		size_t free_size						=	total_size();
 
@@ -103,10 +103,10 @@ void   managed_resource_allocator::test_speed ()
 				break;
 			}
 
-			u32	allocation_size				=	( ((randoms.next_random() * 1024) % max_allocation_size) 
+			unsigned	allocation_size				=	( ((randoms.next_random() * 1024) % max_allocation_size) 
 												 / granularity + 1) * granularity;
 
-			u32 const min_block_size		=	4096;
+			unsigned const min_block_size		=	4096;
 			if ( allocation_size < min_block_size )
 			{
 				allocation_size				=	min_block_size;
@@ -116,7 +116,7 @@ void   managed_resource_allocator::test_speed ()
 
 			while ( do_deallocate || free_size - m_reserved_size < allocation_size )
 			{
-				u32 const index				=	randoms.next_random() % (u32)s_resources.size();
+				unsigned const index				=	randoms.next_random() % (unsigned)s_resources.size();
 				managed_resource* 	res		=	s_resources[index];
 
 				free_size					+=	res->m_node->m_size;
@@ -161,7 +161,7 @@ void   managed_resource_allocator::test_speed ()
 					if ( (pbyte)node + allocation_size > dl_max_addr )
 					{
 						dl_max_addr			=	(pbyte)node + allocation_size;
-						dl_max_grow			=	(u32)(dl_max_addr - dl_arena);
+						dl_max_grow			=	(unsigned)(dl_max_addr - dl_arena);
 					}
 
 					new (node)					managed_node(managed_node::allocated_node, allocation_size);
@@ -170,7 +170,7 @@ void   managed_resource_allocator::test_speed ()
 					if ( (pbyte)res > dl_max_addr )
 					{
 						dl_max_addr			=	(pbyte)res;
-						dl_max_grow			=	(u32)(dl_max_addr - dl_arena);
+						dl_max_grow			=	(unsigned)(dl_max_addr - dl_arena);
 					}
 
 					fat_iterator it;
@@ -190,22 +190,22 @@ void   managed_resource_allocator::test_speed ()
 
 		LOGI_INFO("resources:test", "%s %d iterations ms: %d", 
 												 !test ? "managed resource allocator" : "dlmalloc allocator",
-												 (u32)iteration_index, 
+												 (unsigned)iteration_index, 
 												 timer.get_elapsed_ms());
 
 		if ( test == 0 )
 		{
 			LOGI_INFO("resources:test", "%d defragmentations moved %d kbytes", 
 												 m_defrag_iteration,
-												 (u32)(m_whole_moved_bytes/1024));
-			for ( u32 i=0; i<s_resources.size(); ++i )
+												 (unsigned)(m_whole_moved_bytes/1024));
+			for ( unsigned i=0; i<s_resources.size(); ++i )
 			{
 				deallocate						(s_resources[i]);
 			}
 		}
 		else
 		{
-			for ( u32 i=0; i<s_resources.size(); ++i )
+			for ( unsigned i=0; i<s_resources.size(); ++i )
 			{
 				managed_resource *	res		=	s_resources[i];
 				managed_node *	node		=	res->m_node;
@@ -215,7 +215,7 @@ void   managed_resource_allocator::test_speed ()
 				XRAY_FREE_IMPL					(dl_alloc, node);
 			}
 
-			LOGI_INFO("resources:test", "dl grow size: %d", (u32)dl_max_grow);
+			LOGI_INFO("resources:test", "dl grow size: %d", (unsigned)dl_max_grow);
 		}
 
 	} // for 
@@ -236,7 +236,7 @@ void   managed_resource_allocator::test_speed ()
 
 void   managed_resource_allocator::log_test_resources () const
 {
-	for ( u32 i=0; i<s_resources.size(); ++i )
+	for ( unsigned i=0; i<s_resources.size(); ++i )
 	{
 		managed_resource *	res				=	s_resources[i];
 		LOGI_INFO("resources:test",			"resource: %d %s", 
@@ -247,16 +247,16 @@ void   managed_resource_allocator::log_test_resources () const
 
 void   managed_resource_allocator::test ()
 {
-	u32 const test_arena_size				=	1024*1024;
-	u32 const test_temp_arena_size			=	256*1024;
-	u32 const test_reserved_size			=	0;
+	unsigned const test_arena_size				=	1024*1024;
+	unsigned const test_temp_arena_size			=	256*1024;
+	unsigned const test_reserved_size			=	0;
 
 	R_ASSERT									(m_arena_size >= test_arena_size &&
 												 m_temp_arena.m_arena_size >= test_temp_arena_size);
 	R_ASSERT									(m_free_size == m_arena_size);
 	size_t const saved_arena_size			=	m_arena_size;
 	size_t const saved_temp_arena_size		=	m_temp_arena.m_arena_size;
-	u32 const saved_reserved_size			=	m_reserved_size;
+	unsigned const saved_reserved_size			=	m_reserved_size;
 	m_arena_size							=	test_arena_size;
 	m_free_size								=	m_arena_size;
 	m_reserved_size							=	test_reserved_size;
@@ -266,15 +266,15 @@ void   managed_resource_allocator::test ()
 	m_temp_arena.get_first_node()->m_size	=	m_temp_arena.m_free_size;
 
 	size_t const max_allocation_size		=	m_temp_arena.total_size();
-	u32 const granularity					=	get_granularity();
+	unsigned const granularity					=	get_granularity();
 
-	u32	iteration_index						=	0;
+	unsigned	iteration_index						=	0;
 	s_resources.clear							();
 
 	while ( xray::identity(true) )
 	{
 		s_mutex->lock							();
-		u32 const num_pinned				=	(u32)s_pinned.size();
+		unsigned const num_pinned				=	(unsigned)s_pinned.size();
 		s_mutex->unlock							();
 
 		if ( !(iteration_index % 10) )
@@ -288,11 +288,11 @@ void   managed_resource_allocator::test ()
 			break;
 		}
 
-		u32	allocation_size					=	( ((rand() * 1024) % max_allocation_size) / granularity + 1) 
+		unsigned	allocation_size					=	( ((rand() * 1024) % max_allocation_size) / granularity + 1) 
 													* 
 												granularity;
 
-		u32 const min_block_size			=	64;
+		unsigned const min_block_size			=	64;
 		if ( allocation_size < min_block_size )
 		{
 			allocation_size					=	min_block_size;
@@ -302,7 +302,7 @@ void   managed_resource_allocator::test ()
 
 		while ( do_deallocate || m_free_size - m_reserved_size < allocation_size )
 		{
-			u32 const index					=	rand() % (u32)s_resources.size();
+			unsigned const index					=	rand() % (unsigned)s_resources.size();
 			remove_test_resource				(index);
 		
 			if ( do_deallocate )
@@ -320,7 +320,7 @@ void   managed_resource_allocator::test ()
 			s_mutex->unlock();
 		}
 
-		for ( u32 i=0; i<s_resources.size(); ++i )
+		for ( unsigned i=0; i<s_resources.size(); ++i )
 		{
 #ifndef MASTER_GOLD
 			managed_resource *	res			=	s_resources[i];
@@ -335,9 +335,9 @@ void   managed_resource_allocator::test ()
 
 	LOGI_INFO("resources:test", "%d defragmentations moved %d bytes", 
 											 m_defrag_iteration-1,
-											 (u32)m_whole_moved_bytes);
+											 (unsigned)m_whole_moved_bytes);
 
-	for ( u32 i=0; i<s_resources.size(); ++i )
+	for ( unsigned i=0; i<s_resources.size(); ++i )
 		deallocate								(s_resources[i]);
 
 	R_ASSERT									(m_free_size == m_arena_size);
@@ -358,14 +358,14 @@ void   managed_resource_allocator::test ()
 #undef NOCTLMGR
 #include <xray/os_include.h>
 
-void   managed_resource_allocator::remove_test_resource (u32 const index)
+void   managed_resource_allocator::remove_test_resource (unsigned const index)
 {
 	threading::mutex_raii						raii(*s_mutex);
 	managed_resource*	res					=	s_resources[index];
 	R_ASSERT									(res);
 	s_resources.erase							(s_resources.begin() + index);
 
-	for ( u32 i=0; i<s_pinned.size(); ++i )
+	for ( unsigned i=0; i<s_pinned.size(); ++i )
 	{
 		if ( s_pinned[i].res == res )
 		{
@@ -380,8 +380,8 @@ void   managed_resource_allocator::remove_test_resource (u32 const index)
 
 static DWORD __stdcall	helper_thread_proc (pvoid)
 {
-	u32 const max_simultaneous_pins			=	10;
-	u32 const max_pin_time					=	10;
+	unsigned const max_simultaneous_pins			=	10;
+	unsigned const max_pin_time					=	10;
 #if XRAY_PLATFORM_WINDOWS
 	PostQuitMessage								(0);
 #endif // #if XRAY_PLATFORM_WINDOWS
@@ -394,9 +394,9 @@ static DWORD __stdcall	helper_thread_proc (pvoid)
 	while ( s_helper_process_state == helper_process_alive )
 	{
 		threading::mutex_raii					raii(*s_mutex);
-		u32 const cur_time					=	timer.get_elapsed_ms();
+		unsigned const cur_time					=	timer.get_elapsed_ms();
 
-		for ( u32 i=0; i<s_pinned.size(); ++i )
+		for ( unsigned i=0; i<s_pinned.size(); ++i )
 		{
 			if ( cur_time >= s_pinned[i].unpin_time )
 			{
@@ -469,17 +469,17 @@ void   managed_resource_allocator::test_defragment ()
 struct unmovable_test_node
 {
 	managed_node*			node;
-	u32						index;
-	u32						unlock_time;
+	unsigned						index;
+	unsigned						unlock_time;
 };
 
-static u32 const			max_test_unmovables_nodes	=	7;
+static unsigned const			max_test_unmovables_nodes	=	7;
 typedef fixed_vector<unmovable_test_node, max_test_unmovables_nodes> unmovable_test_container;
 unmovable_test_container	s_unmovables_test_nodes;
 
-void   managed_resource_allocator::test_unmovable_init (u32 const start_ms)
+void   managed_resource_allocator::test_unmovable_init (unsigned const start_ms)
 {
-	u32 num_nodes							=	0;
+	unsigned num_nodes							=	0;
 	for ( managed_node*			cur_node	=	get_first_node(); 
 												cur_node; 
 								cur_node	=	cur_node->m_next )
@@ -492,24 +492,24 @@ void   managed_resource_allocator::test_unmovable_init (u32 const start_ms)
 		++num_nodes;
 	}
 
-	u32 const max_unmove_test_time			=	1000;
-	u32 const num_test_unmovables			=	math::min(num_nodes, rand() % max_test_unmovables_nodes);
+	unsigned const max_unmove_test_time			=	1000;
+	unsigned const num_test_unmovables			=	math::min(num_nodes, rand() % max_test_unmovables_nodes);
 
 	LOGI_INFO("resources:test",					"testing with %d unmovables", num_test_unmovables);
 
-	for ( u32 i=0; i<num_test_unmovables; ++i )
+	for ( unsigned i=0; i<num_test_unmovables; ++i )
 	{
 		unmovable_test_node	test_node;
 		test_node.unlock_time				=	start_ms + (rand() % max_unmove_test_time);
 
-		u32 index							=	rand() % num_nodes;
+		unsigned index							=	rand() % num_nodes;
 
- 		for ( u32 j=0; j<i; ++j )
+ 		for ( unsigned j=0; j<i; ++j )
  		{
  			if ( s_unmovables_test_nodes[j].index == index )
 			{
 				index						=	(index + 1) % num_nodes;
-				j							=	u32(-1);
+				j							=	unsigned(-1);
 				continue;
 			}
  		}
@@ -519,7 +519,7 @@ void   managed_resource_allocator::test_unmovable_init (u32 const start_ms)
 		s_unmovables_test_nodes.push_back		(test_node);		
 	}
 
-	u32 index								=	0;
+	unsigned index								=	0;
 	for ( managed_node*			cur_node	=	get_first_node(); 
 												cur_node; 
 								cur_node	=	cur_node->m_next ) 
@@ -529,7 +529,7 @@ void   managed_resource_allocator::test_unmovable_init (u32 const start_ms)
 			continue;
 		}
 
-		for ( u32 i=0; i<s_unmovables_test_nodes.size(); ++i )
+		for ( unsigned i=0; i<s_unmovables_test_nodes.size(); ++i )
 		{
 			if ( s_unmovables_test_nodes[i].index == index )
 			{
@@ -545,9 +545,9 @@ void   managed_resource_allocator::test_unmovable_init (u32 const start_ms)
 	}
 }
 
-void   managed_resource_allocator::test_unmovable_unlock_expired (u32 const cur_ms)
+void   managed_resource_allocator::test_unmovable_unlock_expired (unsigned const cur_ms)
 {
-	for ( u32 i=0; i<s_unmovables_test_nodes.size(); ++i )
+	for ( unsigned i=0; i<s_unmovables_test_nodes.size(); ++i )
 	{
 		if ( cur_ms > s_unmovables_test_nodes[i].unlock_time )
 		{
@@ -563,7 +563,7 @@ void   managed_resource_allocator::test_unmovable_unlock_expired (u32 const cur_
 
 void   managed_resource_allocator::test_unmovables_list_valid () const
 {
-	for ( u32 i=0; i<s_unmovables_test_nodes.size(); ++i )
+	for ( unsigned i=0; i<s_unmovables_test_nodes.size(); ++i )
 	{
 		R_ASSERT								(s_unmovables_test_nodes[i].node->m_is_unmovable);
 	}
@@ -612,7 +612,7 @@ void   managed_resource_allocator::test_unmovables_list_valid () const
 // 	s_resources.erase							( s_resources.begin()+3 );
 // 	s_resources.erase							( s_resources.begin()+0 );
 // 
-//  	for ( u32 i=0; i<s_resources.size(); ++i )
+//  	for ( unsigned i=0; i<s_resources.size(); ++i )
 //  	{
 //  		resource*	res						=	s_resources[i];
 //  		pbyte data							=	const_cast<pbyte>( res->pin() );
@@ -625,7 +625,7 @@ void   managed_resource_allocator::test_unmovables_list_valid () const
 // 
 // 	allocate									(110-overhead, 0, NULL); 
 // 
-// 	for ( u32 i=0; i<s_resources.size(); ++i )
+// 	for ( unsigned i=0; i<s_resources.size(); ++i )
 // 	{
 // 		resource*	res						=	s_resources[i];
 // 		pbyte data							=	const_cast<pbyte>( res->pin() );
@@ -639,7 +639,7 @@ void   managed_resource_allocator::test_unmovables_list_valid () const
 // class log_table
 // {
 // public:
-// 	log_table(pstr data, u32 size) : m_data(data), m_size(size) {}
+// 	log_table(pstr data, unsigned size) : m_data(data), m_size(size) {}
 // 	
 // 	void	add_cell	(pcstr format, ...)
 // 	{
@@ -652,7 +652,7 @@ void   managed_resource_allocator::test_unmovables_list_valid () const
 // 	}
 // 
 // private:
-// 	u32				m_size;
+// 	unsigned				m_size;
 // 	pstr			m_data;
 // 	pstr			m_cur;
 // };

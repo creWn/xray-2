@@ -82,7 +82,7 @@ public:
 	template < typename input_iterator >
 	inline				vectora		( allocator_type const& allocator, input_iterator const& first, input_iterator const& last );
 	inline	self_type&	operator=	( self_type const& other );
-	inline	u32			size		( ) const;
+	inline	unsigned			size		( ) const;
 
 private:
 	inline				vectora		( );

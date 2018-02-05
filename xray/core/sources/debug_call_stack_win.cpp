@@ -18,8 +18,8 @@
 #define	_stprintf_s					sprintf_s
 #define	_tcslen						strlen
 
-static u32 const s_max_stack		= 512;
-static u32 const s_buffer_size		= 8192;
+static unsigned const s_max_stack		= 512;
+static unsigned const s_buffer_size		= 8192;
 
 static bool		s_initialized		= false;
 static bool		s_use_dbghelp		= false;
@@ -137,7 +137,7 @@ static void PCSTR2LPTSTR( PCSTR lpszIn, LPTSTR lpszOut, rsize_t outSize )
 	} 
 #else
    // This is trivial :)
-	xray::strings::copy( lpszOut, (u32)outSize, lpszIn );
+	xray::strings::copy( lpszOut, (unsigned)outSize, lpszIn );
 #endif
 }
 
@@ -165,7 +165,7 @@ static BOOL GetModuleNameFromAddress( DWORD64 address, LPTSTR lpszModule, rsize_
 	}
 	else
 	   // Not found :(
-		_tcscpy_s( lpszModule, (u32)lpszModuleSize, _T("?") );
+		_tcscpy_s( lpszModule, (unsigned)lpszModuleSize, _T("?") );
 	
 	return ret;
 }
@@ -188,7 +188,7 @@ static BOOL GetFunctionInfoFromAddresses( DWORD64 fnAddress, DWORD64 stackAddres
 	pSym->MaxNameLength = dwSymSize - sizeof(IMAGEHLP_SYMBOL);
 
    // Set the default to unknown
-	_tcscpy_s( lpszSymbol, (u32)lpszSymbolSize, _T("?") );
+	_tcscpy_s( lpszSymbol, (unsigned)lpszSymbolSize, _T("?") );
 
 	// Get symbol info for IP
 	if ( s_SymGetSymFromAddr64( get_current_process(), fnAddress, &dwDisp, pSym ) )
@@ -285,8 +285,8 @@ static BOOL GetSourceInfoFromAddress( DWORD64 address, LPTSTR lpszModuleInfo, rs
 //	TCHAR           lpszFileName[s_buffer_size] = _T("");
 //	TCHAR           lpModuleInfo[s_buffer_size] = _T("");
 
-	_tcscpy_s		( lpszSourceInfo, (u32)lpszSourceInfoSize, _T("?") );
-	_tcscpy_s		( lpszModuleInfo, (u32)lpszModuleInfoSize, _T("?") );
+	_tcscpy_s		( lpszSourceInfo, (unsigned)lpszSourceInfoSize, _T("?") );
+	_tcscpy_s		( lpszModuleInfo, (unsigned)lpszModuleInfoSize, _T("?") );
 	line			= -1;
 	address_out		= 0x00000000;
 
@@ -298,7 +298,7 @@ static BOOL GetSourceInfoFromAddress( DWORD64 address, LPTSTR lpszModuleInfo, rs
 	   // Got it. Let's use "sourcefile(linenumber)" format
 		PCSTR2LPTSTR( lineInfo.FileName, lpszSourceInfo, lpszSourceInfoSize );
 		line	= lineInfo.LineNumber;
-		address_out	= (u32)(lineInfo.Address & u32(-1));
+		address_out	= (unsigned)(lineInfo.Address & unsigned(-1));
 
 		if ( s_GetModuleBaseName ) {
 			HMODULE module_handle =	(HMODULE)s_SymGetModuleBase64 ( get_current_process( ) , lineInfo.Address );
@@ -333,7 +333,7 @@ static BOOL GetSourceInfoFromAddress( DWORD64 address, LPTSTR lpszModuleInfo, rs
 		else
 		  	GetModuleNameFromAddress( address, lpszModuleInfo, lpszModuleInfoSize );
 
-		address_out	= (u32)address;
+		address_out	= (unsigned)address;
 		ret = FALSE;
 	}
 	
@@ -449,7 +449,7 @@ static void GetStackTrace(HANDLE hThread, /**DWORD64 ranOffsets[][2],/**/ _EXCEP
 	DWORD64 fnAddresses[256];
 	DWORD64 stackAddresses[256];
 
-	u32 call_stack_num_lines	=	0;
+	unsigned call_stack_num_lines	=	0;
 
 	for( ULONG index = 0; index<256; ++index ) 
 	{
@@ -511,13 +511,13 @@ static void GetStackTrace(HANDLE hThread, /**DWORD64 ranOffsets[][2],/**/ _EXCEP
 		ResumeThread( hThread );
 }
 
-static void WriteStackTrace ( DWORD64 ranOffsets[][2], u32 num_call_stack_lines, xray::core::debug::call_stack::Callback const& callback, bool invert_order )
+static void WriteStackTrace ( DWORD64 ranOffsets[][2], unsigned num_call_stack_lines, xray::core::debug::call_stack::Callback const& callback, bool invert_order )
 {
 	TCHAR module_name[256] = _T("?");
 	TCHAR file_name[2*260] = _T("?");
 	TCHAR function[s_buffer_size] = _T("?");
 
-	u32 lines_count	=	0;
+	unsigned lines_count	=	0;
 	while ( lines_count < s_max_stack && ranOffsets[lines_count][0] != 0 && ranOffsets[lines_count][1] != 0 )
 		++lines_count;
 
@@ -554,7 +554,7 @@ static void InitSymbolPath( PSTR lpszSymbolPath, rsize_t symPathSize, PCSTR lpsz
 
    // Creating the default path
    // ".;%_NT_SYMBOL_PATH%;%_NT_ALTERNATE_SYMBOL_PATH%;%SYSTEMROOT%;%SYSTEMROOT%\System32;"
-	xray::strings::copy( lpszSymbolPath, (u32)symPathSize, "." );
+	xray::strings::copy( lpszSymbolPath, (unsigned)symPathSize, "." );
 
 	// environment variable _NT_SYMBOL_PATH
 	if ( GetEnvironmentVariableA( "_NT_SYMBOL_PATH", lpszPath, s_buffer_size ) )
@@ -682,11 +682,11 @@ void xray::core::debug::call_stack::iterate	( _EXCEPTION_POINTERS*	pointers,  //
 	if ( !pointers && s_pfnCaptureStackBackTrace ) 
 	{
 		DWORD64		stack		[s_max_stack][2];
-		u32			num_call_stack_lines	=	0;
+		unsigned			num_call_stack_lines	=	0;
 
 		if ( callstack )
 		{
-			for ( u32 i=0; i<s_max_stack; ++i )
+			for ( unsigned i=0; i<s_max_stack; ++i )
 			{
 				stack[i][0]	=	(DWORD64)callstack[i];
 				stack[i][1]	=	(DWORD64)callstack[i];
@@ -702,7 +702,7 @@ void xray::core::debug::call_stack::iterate	( _EXCEPTION_POINTERS*	pointers,  //
 		{
 			GetStackTraceFast	(GetCurrentThread(), stack);
 			num_call_stack_lines	=	0;
-			for ( u32 i=0; i<s_max_stack && (stack[i][0] || stack[i][1]); ++i ) 
+			for ( unsigned i=0; i<s_max_stack && (stack[i][0] || stack[i][1]); ++i ) 
 			{
 				++num_call_stack_lines;
 			}
@@ -724,7 +724,7 @@ void xray::core::debug::call_stack::finalize_symbols( )
 	s_SymCleanup				( get_current_process() );
 }
 
-void xray::core::debug::call_stack::get_stack_trace (void* stacktrace[], u32 const stacktrace_max, u32 const num_to_capture, u32* out_hash)
+void xray::core::debug::call_stack::get_stack_trace (void* stacktrace[], unsigned const stacktrace_max, unsigned const num_to_capture, unsigned* out_hash)
 {
 	initialize							();
 	XRAY_UNREFERENCED_PARAMETER			(stacktrace_max);
@@ -740,10 +740,10 @@ void xray::core::debug::call_stack::get_stack_trace (void* stacktrace[], u32 con
 	}
 
 	ULONG hash_ulong;
-	u32 const captured_once			=	s_pfnCaptureStackBackTrace(0, num_to_capture, stacktrace, &hash_ulong);
+	unsigned const captured_once			=	s_pfnCaptureStackBackTrace(0, num_to_capture, stacktrace, &hash_ulong);
 	stacktrace[captured_once]		=	0;
 	if ( out_hash )
 	{
-		*out_hash					=	(u32)hash_ulong;
+		*out_hash					=	(unsigned)hash_ulong;
 	}
 }

@@ -25,7 +25,7 @@ inline pcbyte xray::strings::stream::get_buffer		( ) const
 	return			m_buffer;
 }
 
-inline u32 xray::strings::stream::get_buffer_size	( ) const
+inline unsigned xray::strings::stream::get_buffer_size	( ) const
 {
 	return			m_buffer_size;
 }

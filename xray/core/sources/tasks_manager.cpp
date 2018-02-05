@@ -42,12 +42,12 @@ public:
 
 	void				deallocate_task						(task * const task) { m_task_allocator.deallocate(task); }
 
-	void				collect_garbage						(u32 * out_tasks_freed_count = NULL);
+	void				collect_garbage						(unsigned * out_tasks_freed_count = NULL);
 
 private:
 	struct collector
 	{
-		collector (u32 * const tasks_freed_count) : m_tasks_freed_count(tasks_freed_count) { ; }
+		collector (unsigned * const tasks_freed_count) : m_tasks_freed_count(tasks_freed_count) { ; }
 		void operator () (task_type * const task_type)
 		{
 			while ( !task_type->m_tasks.empty() )
@@ -68,7 +68,7 @@ private:
 			}
 		}
 	
-		u32 *	m_tasks_freed_count;
+		unsigned *	m_tasks_freed_count;
 	};
 
 private:
@@ -89,7 +89,7 @@ private:
 
 	task_allocator						m_task_allocator;
 	XRAY_MAX_CACHE_LINE_PAD;
-	u32									m_current_thread_task_tls_key;
+	unsigned									m_current_thread_task_tls_key;
 
 //	threading::atomic32_type			m_grabbing_next_task_threads_count;
 	threading::atomic32_type			m_collecting_garbage;
@@ -128,7 +128,7 @@ task *   task_manager::get_current_user_thread_root_task ()
 task_type_list_container *		get_task_type_list							();
 void							wait_while_all_threads_end_grab_next_task	();
 
-void   task_manager::collect_garbage (u32 * const out_tasks_freed_count)
+void   task_manager::collect_garbage (unsigned * const out_tasks_freed_count)
 {
 	XRAY_UNREFERENCED_PARAMETER					( out_tasks_freed_count );
 	threading::mutex_raii	raii				(m_mutex_collect_garbage);
@@ -298,7 +298,7 @@ void   deallocate_task (task * const task)
 	s_task_manager.deallocate_task				(task);
 }
 
-void   collect_garbage (u32 * const out_tasks_freed_count)
+void   collect_garbage (unsigned * const out_tasks_freed_count)
 {
 	s_task_manager.collect_garbage				(out_tasks_freed_count);
 }

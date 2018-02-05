@@ -48,9 +48,9 @@ void   wakeup_watcher_thread ()
 { 
 }
 
-u32   watcher_thread_id	() 
+unsigned   watcher_thread_id	() 
 {
-	return									(u32)-1;
+	return									(unsigned)-1;
 }
 
 } // namespace fs

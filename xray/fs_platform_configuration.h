@@ -12,7 +12,7 @@ namespace xray {
 #if XRAY_PLATFORM_WINDOWS
 typedef		u64			file_size_type;
 #else // #if XRAY_PLATFORM_WINDOWS
-typedef		u32			file_size_type;
+typedef		unsigned			file_size_type;
 #endif // #if XRAY_PLATFORM_WINDOWS
 
 namespace fs {
@@ -29,7 +29,7 @@ enum pointer_for_fat_size_enum {	pointer_for_fat_32bit,
 template <pointer_for_fat_size_enum pointer_for_fat_size>
 struct platform_to_file_size_type
 {
-	typedef		u32					file_size_type;
+	typedef		unsigned					file_size_type;
 };
 
 template <>

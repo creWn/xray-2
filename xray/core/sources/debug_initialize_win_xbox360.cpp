@@ -195,7 +195,7 @@ static void enable_fpe				( )
 {
 	_clearfp						( );
 
-	u32								flags;
+	unsigned								flags;
 	errno_t							error;
 	error							= _controlfp_s( &flags, 0, 0 );
 	R_ASSERT						( !error );
@@ -210,7 +210,7 @@ static void disable_fpe				( )
 {
 	_clearfp						( );
 
-	u32								flags;
+	unsigned								flags;
 	errno_t							error;
 	error							= _controlfp_s( &flags, 0, 0 );
 	R_ASSERT						( !error );

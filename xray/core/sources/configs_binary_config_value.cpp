@@ -21,7 +21,7 @@ binary_config_value::binary_config_value						( ) :
 static pcstr str_types[] = 
 {
 	"empty",
-	"u32",
+	"unsigned",
 	"float",
 	"table_named",
 	"table_indexed",
@@ -64,7 +64,7 @@ binary_config_value const& binary_config_value::operator[]	( pcstr key ) const
 
 	boost::crc_32_type			processor;
 	processor.process_block		(key, key + strings::length(key));
-	u32 const crc				= processor.checksum();
+	unsigned const crc				= processor.checksum();
 
 #if 1
 	const_iterator const result	= std::lower_bound(it, it_e, crc);
@@ -87,7 +87,7 @@ bool binary_config_value::value_exists					( pcstr key ) const
 
 	boost::crc_32_type			processor;
 	processor.process_block		(key, key + strings::length(key));
-	u32 const crc				= processor.checksum();
+	unsigned const crc				= processor.checksum();
 
 	const_iterator const result	= std::lower_bound(it, it_e, crc);
 	if ( result == it_e)
@@ -99,7 +99,7 @@ bool binary_config_value::value_exists					( pcstr key ) const
 	return						true;
 }
 
-void binary_config_value::fix_up						( u32 const offset )
+void binary_config_value::fix_up						( unsigned const offset )
 {
 	if ( id )
 		id						+= offset;
@@ -121,7 +121,7 @@ void binary_config_value::fix_up						( u32 const offset )
 		case t_table_named : {
 			(pcbyte&)(data)		+= offset;
 
-			for ( u32 i=0, n=count; i < n; ++i )
+			for ( unsigned i=0, n=count; i < n; ++i )
 				((binary_config_value*)data + i)->fix_up( offset );
 
 			break;

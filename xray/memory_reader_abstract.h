@@ -12,7 +12,7 @@ namespace memory {
 
 class XRAY_CORE_API reader_abstract {
 public:
-	virtual	void	r	( pvoid& buffer, u32 size ) = 0;
+	virtual	void	r	( pvoid& buffer, unsigned size ) = 0;
 }; // class reader_abstract
 
 } // namespace memory

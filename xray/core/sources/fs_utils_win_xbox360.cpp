@@ -18,7 +18,7 @@ namespace fs {
 
 #ifdef DEBUG
 static 
-fixed_string512   file_open_flags_to_string (u32 const file_open_flags)
+fixed_string512   file_open_flags_to_string (unsigned const file_open_flags)
 {
 	fixed_string512					out_string;
 	if ( file_open_flags & _O_RDWR )

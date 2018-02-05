@@ -14,19 +14,19 @@ class stream {
 public:
 	inline	explicit		stream			( memory::base_allocator* allocator );
 	inline					~stream			( );
-			void			append			( pcvoid buffer, u32 buffer_size );
-	inline	void			append			( u32 value );
+			void			append			( pcvoid buffer, unsigned buffer_size );
+	inline	void			append			( unsigned value );
 	inline	void			append			( int value );
 	inline	void			append			( pcstr value );
 	inline	pbyte			get_buffer		( ) const;
-	inline	u32				get_buffer_size	( ) const;
+	inline	unsigned				get_buffer_size	( ) const;
 	inline	void			clear			( );
 
 private:
 	memory::base_allocator*	m_allocator;
 	pbyte					m_buffer;
-	u32						m_buffer_size;
-	u32						m_allocated_size;
+	unsigned						m_buffer_size;
+	unsigned						m_allocated_size;
 }; // class stream
 
 } // namespace memory

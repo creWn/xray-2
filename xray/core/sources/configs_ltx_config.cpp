@@ -60,9 +60,9 @@ static bool parse_item_value(memory::base_allocator* allocator, binary_config_va
 	{
 	case t_boolean:
 	{
-		u32* val			= (u32*)&itm.data;
-		*val				= u32(0);
-		itm.count			= sizeof(u32);
+		unsigned* val			= (unsigned*)&itm.data;
+		*val				= unsigned(0);
+		itm.count			= sizeof(unsigned);
 		break;
 	}
 	case t_string:
@@ -100,9 +100,9 @@ static bool parse_item_value(memory::base_allocator* allocator, binary_config_va
 	}
 	case t_integer:
 	{
-		u32* val			= (u32*)&itm.data;
-		*val				= u32(atoi(value));
-		itm.count			= sizeof(u32);
+		unsigned* val			= (unsigned*)&itm.data;
+		*val				= unsigned(atoi(value));
+		itm.count			= sizeof(unsigned);
 		break;
 	}
 	default:
@@ -116,7 +116,7 @@ static void parse_item_name(memory::base_allocator* allocator, binary_config_val
 {
 	if(id)
 	{
-		u32 str_len				= strings::length(id)+1;
+		unsigned str_len				= strings::length(id)+1;
 		itm.id					= XRAY_ALLOC_IMPL( *allocator, char, str_len);
 		memory::copy			( const_cast<pstr>(itm.id), str_len*sizeof(char), id, str_len);
 		boost::crc_32_type		processor;
@@ -131,9 +131,9 @@ static void parse_item_name(memory::base_allocator* allocator, binary_config_val
 
 static bool is_line_term (char a) {	return (a==13)||(a==10); };
 
-static u32	advance_term_string(memory::reader& F)
+static unsigned	advance_term_string(memory::reader& F)
 {
-	u32 sz		= 0;
+	unsigned sz		= 0;
 	while (!F.eof()) 
 	{
 		F.advance(1);				//Pos++;
@@ -151,7 +151,7 @@ static u32	advance_term_string(memory::reader& F)
 static void r_string(memory::reader& F, string4096& dest)
 {
 	char *src 	= (char *) F.pointer();
-	u32 sz 		= advance_term_string(F);
+	unsigned sz 		= advance_term_string(F);
 	xray::strings::copy_n(dest, sizeof(dest), src, sz);
 }
 
@@ -278,7 +278,7 @@ static void optimize(memory::base_allocator* allocator,values_type& load_data, b
 
 	load_data.clear						();
 	load_data.push_back					(root);
-	*(u32*)&root->data				= 1; //first child
+	*(unsigned*)&root->data				= 1; //first child
 
 	vectora<table_item>::iterator tit	= tables.begin();
 	vectora<table_item>::iterator tit_e	= tables.end();
@@ -293,7 +293,7 @@ static void optimize(memory::base_allocator* allocator,values_type& load_data, b
 	for( ;tit!=tit_e; ++tit)
 	{
 		table_item& table		= *tit;
-		u32* val				= (u32*)&table.p_table->data;
+		unsigned* val				= (unsigned*)&table.p_table->data;
 		*val					= load_data.size();// index of first child
 		load_data.insert		(load_data.end(), table.data.begin(), table.data.end());
 	}
@@ -301,9 +301,9 @@ static void optimize(memory::base_allocator* allocator,values_type& load_data, b
 	it			= load_data.begin();
 	it_e		= load_data.end();
 }
-static u32 calc_mem_usage(values_type const& data)
+static unsigned calc_mem_usage(values_type const& data)
 {
-	u32 result			= 0;
+	unsigned result			= 0;
 	values_type::const_iterator it		= data.begin();
 	values_type::const_iterator it_e		= data.end();
 
@@ -320,43 +320,43 @@ static u32 calc_mem_usage(values_type const& data)
 	return result;
 }
 
-static void save_bin(memory::base_allocator* allocator, pbyte* dest, u32& dest_size, values_type const& data, binary_config_value* root)
+static void save_bin(memory::base_allocator* allocator, pbyte* dest, unsigned& dest_size, values_type const& data, binary_config_value* root)
 {
 	XRAY_UNREFERENCED_PARAMETER	(root);
-	u32 data_mem_size		= calc_mem_usage(data);
+	unsigned data_mem_size		= calc_mem_usage(data);
 	pbyte plain_data_begin	= (pbyte)XRAY_MALLOC_IMPL(*allocator,data_mem_size, "ltx_plain_data");
 	pbyte data_ptr			= plain_data_begin;
 
 	values_type::const_iterator it		= data.begin();
 	values_type::const_iterator it_e	= data.end();
-	u32 count				= data.size();
+	unsigned count				= data.size();
 
-	u32 const fat_mem_size	= count*sizeof(binary_config_value);
-	u32 out_ptr_size		= fat_mem_size+data_mem_size+2*sizeof(u32);
+	unsigned const fat_mem_size	= count*sizeof(binary_config_value);
+	unsigned out_ptr_size		= fat_mem_size+data_mem_size+2*sizeof(unsigned);
 	*dest					= (pbyte)XRAY_MALLOC_IMPL(*allocator,out_ptr_size, "ltx_plain_data");
 	pbyte out_ptr			= *dest;
-	memory::copy			(out_ptr, out_ptr_size, &count, sizeof(u32)*1);
-	out_ptr					+= sizeof(u32)*1;
-	out_ptr_size			-= sizeof(u32)*1;
+	memory::copy			(out_ptr, out_ptr_size, &count, sizeof(unsigned)*1);
+	out_ptr					+= sizeof(unsigned)*1;
+	out_ptr_size			-= sizeof(unsigned)*1;
 
-	memory::copy			(out_ptr, out_ptr_size,&data_mem_size, sizeof(u32)*1);
-	out_ptr					+= sizeof(u32)*1;
-	out_ptr_size			-= sizeof(u32)*1;
+	memory::copy			(out_ptr, out_ptr_size,&data_mem_size, sizeof(unsigned)*1);
+	out_ptr					+= sizeof(unsigned)*1;
+	out_ptr_size			-= sizeof(unsigned)*1;
 
-	u32 data_size			= data_mem_size;
+	unsigned data_size			= data_mem_size;
 	binary_config_value					stored;
 	for(; it!=it_e; ++it)
 	{
 		binary_config_value* itm				= *it;
 		stored					= *itm; //store pointers
 
-		u32 sz_write			= 0;
+		unsigned sz_write			= 0;
 		if(itm->id)
 		{
-			u32 sz_write			= strings::length(itm->id)+1;
+			unsigned sz_write			= strings::length(itm->id)+1;
 			memory::copy			(data_ptr, data_size, (pvoid)itm->id, sz_write);
-			u32* v					= (u32*)&(itm->id);
-			*v						= u32(data_ptr-plain_data_begin); //offset
+			unsigned* v					= (unsigned*)&(itm->id);
+			*v						= unsigned(data_ptr-plain_data_begin); //offset
 			data_ptr				+= sz_write;
 			data_size				-= sz_write;
 		}
@@ -365,8 +365,8 @@ static void save_bin(memory::base_allocator* allocator, pbyte* dest, u32& dest_s
 		{
 			sz_write			= itm->count;
 			memory::copy		(data_ptr, data_size, itm->data, sz_write);
-			u32* v				= (u32*)&(itm->data);
-			*v					= u32(data_ptr-plain_data_begin); //offset
+			unsigned* v				= (unsigned*)&(itm->data);
+			*v					= unsigned(data_ptr-plain_data_begin); //offset
 			data_ptr			+=sz_write;
 			data_size			-= sz_write;
 		}
@@ -377,7 +377,7 @@ static void save_bin(memory::base_allocator* allocator, pbyte* dest, u32& dest_s
 		*itm					= stored; //restore pointers
 	}
 
-	u32 sz_written				= u32(data_ptr-plain_data_begin);
+	unsigned sz_written				= unsigned(data_ptr-plain_data_begin);
 	XRAY_UNREFERENCED_PARAMETER	( sz_written );
 	R_ASSERT					(sz_written==data_mem_size);
 
@@ -385,11 +385,11 @@ static void save_bin(memory::base_allocator* allocator, pbyte* dest, u32& dest_s
 	out_ptr						+= data_mem_size;
 //	out_ptr_size				-= data_mem_size;
 	
-	dest_size					= u32(out_ptr-data_ptr);
+	dest_size					= unsigned(out_ptr-data_ptr);
 	XRAY_FREE_IMPL				(*allocator,plain_data_begin);
 }
 
-void xray::core::configs::parse_string_data(memory::reader F, memory::base_allocator* allocator, pbyte* dest, u32& dest_size)
+void xray::core::configs::parse_string_data(memory::reader F, memory::base_allocator* allocator, pbyte* dest, unsigned& dest_size)
 {
 	values_type				load_data(*allocator);
 	binary_config_value* root				= XRAY_NEW_IMPL( *allocator, binary_config_value)();
@@ -531,7 +531,7 @@ xray::core::configs::binary_config* xray::core::configs::create_from_ltx_text(pc
 {
 	xray::memory::reader R		((u8 const*)text, xray::strings::length(text));
 	pbyte						binary_buff = NULL;
-	u32							binary_buff_size = 0;
+	unsigned							binary_buff_size = 0;
 
 	xray::core::configs::parse_string_data(R, allocator, &binary_buff, binary_buff_size);
 

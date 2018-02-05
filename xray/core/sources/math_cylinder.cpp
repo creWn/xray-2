@@ -10,7 +10,7 @@ using xray::math::cylinder;
 using xray::math::float3;
 using xray::math::intersection;
 
-u32 cylinder::intersect						( float3 const& position, float3 const& direction, float ( &t )[ 2 ] ) const
+unsigned cylinder::intersect						( float3 const& position, float3 const& direction, float ( &t )[ 2 ] ) const
 {
     float const epsilon	= 1e-12f;
 
@@ -156,13 +156,13 @@ u32 cylinder::intersect						( float3 const& position, float3 const& direction, 
 intersection	cylinder::intersect	( float3 const& position, float3 const& direction, float& distance ) const
 {
 	float			t[2];
-    u32 const count	= intersect ( position, direction, t );
+    unsigned const count	= intersect ( position, direction, t );
 	if ( !count )
 		return		( intersection_none );
 
 	intersection	inside = intersection_outside;
 	bool result		= false;
-	for ( u32 i = 0; i < count; ++i ) {
+	for ( unsigned i = 0; i < count; ++i ) {
 		if ( t[i] < 0.f ) {
 			if ( count == 2 )
 				inside	= intersection_inside;

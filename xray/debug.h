@@ -29,11 +29,11 @@ enum process_error_enum;
 
 namespace debug {
 
-XRAY_CORE_API	void __cdecl	on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, u32 line, pcstr format, ... );
-XRAY_CORE_API	void			on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, u32 line );
+XRAY_CORE_API	void __cdecl	on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, unsigned line, pcstr format, ... );
+XRAY_CORE_API	void			on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, unsigned line );
 
-XRAY_CORE_API	void __cdecl	on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, u32 line, pcstr format, ... );
-XRAY_CORE_API	void			on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, u32 line );
+XRAY_CORE_API	void __cdecl	on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, unsigned line, pcstr format, ... );
+XRAY_CORE_API	void			on_error			( bool* do_debug_break, process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, unsigned line );
 
 XRAY_CORE_API	void __cdecl	terminate			( pcstr format, ... );
 
@@ -44,8 +44,8 @@ XRAY_CORE_API	void			change_bugtrap_usage( core::debug::error_mode, core::debug:
 
 XRAY_CORE_API	void			dump_call_stack		( pcstr						initiator, 
 													  logging::verbosity const	verbosity, 
-													  u32 						num_first_to_ignore, 
-													  u32 						num_last_to_ignore, 
+													  unsigned 						num_first_to_ignore, 
+													  unsigned 						num_last_to_ignore, 
 													  _EXCEPTION_POINTERS*		pointers, 
 													  void*						callstack[] = 0);
 

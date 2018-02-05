@@ -28,8 +28,8 @@ struct allocation_info : public hash_multiset_intrusive_base<allocation_info>
 	void*				stacktrace[64];
 	pcstr				description;
 	allocation_info*	next_hash_node;
-	u32					full_hash;
-	u32					alive_allocations;
+	unsigned					full_hash;
+	unsigned					alive_allocations;
 };
 
 struct housekeeping
@@ -102,10 +102,10 @@ void   leak_detector::on_allocate (pvoid& pointer, pcstr const description)
 	}
 
 	allocation_info info;
-	u32				stacktrace_hash;
+	unsigned				stacktrace_hash;
 	core::debug::call_stack::get_stack_trace (info.stacktrace, array_size(info.stacktrace), 62, &stacktrace_hash);
 
-	u32 const desc_hash		=	description ? fs::crc32(description, strings::length(description)) : 0;
+	unsigned const desc_hash		=	description ? fs::crc32(description, strings::length(description)) : 0;
 	info.full_hash			=	stacktrace_hash ^ desc_hash;
 	info.description		=	description;
 	info.alive_allocations	=	0;
@@ -170,13 +170,13 @@ struct leak_logger
 			fclose								(m_file);
 	}
 
-	bool	predicate	(	u32		call_stack_id,
-							u32		num_call_stack_lines,
+	bool	predicate	(	unsigned		call_stack_id,
+							unsigned		num_call_stack_lines,
 							pcstr	module_name,
 							pcstr	file_name,
 							int		line_number,
 							pcstr	function,
-							u32		address		)
+							unsigned		address		)
 	{
 		XRAY_UNREFERENCED_PARAMETER	( num_call_stack_lines );
 
@@ -213,7 +213,7 @@ void   leak_detector::dump_leaks ()
 
 	m_mutex.lock	();
 
-	u32 leak_index	=	1;
+	unsigned leak_index	=	1;
 
 	leak_logger		 helper;
 	bool header_printed	=	false;

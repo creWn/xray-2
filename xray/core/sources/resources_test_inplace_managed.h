@@ -26,7 +26,7 @@ public:
 
 	void	create_resource_if_no_file (query_result_for_cook &	in_out_query, 
 		 								managed_resource_ptr 	out_resource,
-										u32 &					out_final_resource_size)
+										unsigned &					out_final_resource_size)
 	{
 		if ( generate_if_no_file_test() == generate_if_no_file_test_requery )
 		{
@@ -72,7 +72,7 @@ public:
 		return							create_resource_if_no_file_delegate_type(this, & test_inplace_managed_cook::create_resource_if_no_file);
 	}
 
-	virtual	u32		calculate_resource_size		(u32 file_size, u32 & out_offset_to_file, bool file_exist) 
+	virtual	unsigned		calculate_resource_size		(unsigned file_size, unsigned & out_offset_to_file, bool file_exist) 
 	{ 
 		R_ASSERT								(file_size || !file_exist);
 
@@ -86,8 +86,8 @@ public:
 
 	result_enum			create_resource_impl	(query_result_for_cook &	in_out_query,
 												 managed_resource_ptr		in_out_resource,
-												 u32						raw_file_size,
-												 u32 &						out_final_resource_size)
+												 unsigned						raw_file_size,
+												 unsigned &						out_final_resource_size)
 	{
 		pinned_ptr_mutable<test_managed_resource> managed_typed_ptr	=	pin_for_write<test_managed_resource>(in_out_resource);
 
@@ -106,8 +106,8 @@ public:
 
 	virtual void		create_resource		(query_result_for_cook &	in_out_query,
 											 managed_resource_ptr		in_out_resource,
-											 u32						raw_file_size,
-											 u32 &						out_final_resource_size)
+											 unsigned						raw_file_size,
+											 unsigned &						out_final_resource_size)
 	{
 		result_enum const out_result	=	create_resource_impl(in_out_query, in_out_resource, raw_file_size, out_final_resource_size);
 		in_out_query.finish_query			(out_result);

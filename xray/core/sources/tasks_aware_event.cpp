@@ -10,16 +10,16 @@
 namespace xray {
 namespace tasks {
 
-u32		spin_count_before_notify_task_system	();
+unsigned		spin_count_before_notify_task_system	();
 void	on_current_thread_locks					();
 void	on_current_thread_unlocks				();
 
-event::wait_result_enum   event::wait (u32 const max_wait_time_ms)
+event::wait_result_enum   event::wait (unsigned const max_wait_time_ms)
 {
 	if ( !max_wait_time_ms )
 		return									threading::event::wait(max_wait_time_ms);
 
-	for ( u32 i=0; i<tasks::spin_count_before_notify_task_system(); ++i )
+	for ( unsigned i=0; i<tasks::spin_count_before_notify_task_system(); ++i )
 		if ( event::wait(0) == threading::event::wait_result_signaled )
 			return								threading::event::wait_result_signaled;
 

@@ -54,7 +54,7 @@ resources_manager::resources_manager ()
 	m_count_of_pending_helper_query_for_mount	=	0;
 	m_last_unique_id_for_queries			=	0;
 
-	for ( u32 i=0; i<last_resource_class; ++i )
+	for ( unsigned i=0; i<last_resource_class; ++i )
 		m_cooks_registry.push_back			(NULL);
 
 	if ( !threading::g_debug_single_thread )
@@ -189,7 +189,7 @@ void   resources_manager::dispatch_delete_delayed_unmanaged_resources ()
 		R_ASSERT_U							(cook);
 		R_ASSERT							(dying_resource->get_deleter_object() == cook);
 
-		u32 const deallocate_thread_id	=	dying_resource->deallocate_thread_id();
+		unsigned const deallocate_thread_id	=	dying_resource->deallocate_thread_id();
 		if ( deallocate_thread_id == threading::current_thread_id() )
 		{
 			m_delayed_delete_unmanaged_resources.pop_front();

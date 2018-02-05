@@ -25,7 +25,7 @@ namespace monitor {
 		void	on_alloc				( pvoid& pointer, size_t& size, size_t previous_size, pcstr description );
 		void	on_free					( pvoid& pointer, bool can_clear = true );
 
-inline	u32		get_house_keeping_size	( ) { return 0; }
+inline	unsigned		get_house_keeping_size	( ) { return 0; }
 
 } // namespace monitor
 } // namespace memory

@@ -19,7 +19,7 @@ public:
 	plane				plane;
 
 private:
-	u32					m_lut_id;
+	unsigned					m_lut_id;
 }; // struct aabb_plane
 
 } // namespace math

@@ -102,7 +102,7 @@ nextBlock:
         return( retval );
 }
 
-static u32	mem_usage		(HANDLE heap_handle, u32* pBlocksUsed, u32* pBlocksFree)
+static unsigned	mem_usage		(HANDLE heap_handle, unsigned* pBlocksUsed, unsigned* pBlocksFree)
 {
 	if ( !xray::debug::is_debugger_present( ) )
 		return		( 0 );
@@ -111,8 +111,8 @@ static u32	mem_usage		(HANDLE heap_handle, u32* pBlocksUsed, u32* pBlocksFree)
 	int				heapstatus;
 	hinfo._pentry	= NULL;
 	size_t	total	= 0;
-	u32	blocks_free	= 0;
-	u32	blocks_used	= 0;
+	unsigned	blocks_free	= 0;
+	unsigned	blocks_used	= 0;
 	while( ( heapstatus = heap_walk( heap_handle, &hinfo ) ) == _HEAPOK )
 	{ 
 		if (hinfo._useflag == _USEDENTRY)	{
@@ -122,8 +122,8 @@ static u32	mem_usage		(HANDLE heap_handle, u32* pBlocksUsed, u32* pBlocksFree)
 			blocks_free	+= 1;
 		}
 	}
-	if (pBlocksFree)	*pBlocksFree= 1024*(u32)blocks_free;
-	if (pBlocksUsed)	*pBlocksUsed= 1024*(u32)blocks_used;
+	if (pBlocksFree)	*pBlocksFree= 1024*(unsigned)blocks_free;
+	if (pBlocksUsed)	*pBlocksUsed= 1024*(unsigned)blocks_used;
 
 	switch( heapstatus )
 	{
@@ -142,7 +142,7 @@ static u32	mem_usage		(HANDLE heap_handle, u32* pBlocksUsed, u32* pBlocksFree)
 		LOG_WARNING		( "bad node in heap" );
 		return			0;
 	}
-	return (u32) total;
+	return (unsigned) total;
 }
 
 crt_allocator::crt_allocator		( ) :
@@ -186,7 +186,7 @@ size_t process_allocator::total_size	( ) const
 	if ( !memory::try_lock_process_heap	( ) )
 		return					( 0 );
 
-	u32 const result			= mem_usage( GetProcessHeap() , 0, 0 );
+	unsigned const result			= mem_usage( GetProcessHeap() , 0, 0 );
 	memory::unlock_process_heap	( );
 	return						( result );
 }
@@ -196,7 +196,7 @@ size_t process_allocator::allocated_size( ) const
 	if ( !memory::try_lock_process_heap	( ) )
 		return					( 0 );
 
-	u32 const result			= mem_usage( GetProcessHeap() , 0, 0 );
+	unsigned const result			= mem_usage( GetProcessHeap() , 0, 0 );
 	memory::unlock_process_heap	( );
 	return						( result );
 }

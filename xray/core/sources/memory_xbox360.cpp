@@ -11,20 +11,20 @@
 using xray::Kb;
 using xray::Mb;
 
-static u32 s_size_16mb					= 0;
-static u32 s_allocated_size_16mb		= 0;
+static unsigned s_size_16mb					= 0;
+static unsigned s_allocated_size_16mb		= 0;
 static pvoid s_address_16mb				= 0;
 
-static u32 s_size_64kb					= 0;
-static u32 s_allocated_size_64kb		= 0;
+static unsigned s_size_64kb					= 0;
+static unsigned s_allocated_size_64kb		= 0;
 static pvoid s_address_64kb				= 0;
 
-static u32 s_size_4kb					= 0;
-static u32 s_allocated_size_4kb			= 0;
+static unsigned s_size_4kb					= 0;
+static unsigned s_allocated_size_4kb			= 0;
 static pvoid s_address_4kb				= 0;
 
 static u64 const resources_arena_granularity	= 64*Kb;
-static u32 const memory_must_be_left			= 9*Mb + 256*Kb + 128*Kb + 64*Kb + 8*Kb + 4*Kb;
+static unsigned const memory_must_be_left			= 9*Mb + 256*Kb + 128*Kb + 64*Kb + 8*Kb + 4*Kb;
 
 void xray::memory::platform::set_low_fragmentation_heap			( )
 {
@@ -61,7 +61,7 @@ static bool check							(
 		u64 const buffer_size,
 		pvoid const arena,
 		u64 const arena_size,
-		u32& allocated_arena_size
+		unsigned& allocated_arena_size
 	)
 {
 	if ( !allocated_arena_size ) {
@@ -73,7 +73,7 @@ static bool check							(
 		return						false;
 
 	R_ASSERT_CMP					( allocated_arena_size, >=, buffer_size );
-	allocated_arena_size			-= (u32)buffer_size;
+	allocated_arena_size			-= (unsigned)buffer_size;
 
 	if ( !allocated_arena_size )
 		XPhysicalFree				( buffer );
@@ -94,11 +94,11 @@ void xray::memory::platform::free_region	( pvoid const buffer, u64 const buffer_
 }
 
 static void allocate_memory	(
-		u32 min_value,
-		u32 max_value,
-		u32 const page_size,
-		u32 const flags,
-		u32& result_size,
+		unsigned min_value,
+		unsigned max_value,
+		unsigned const page_size,
+		unsigned const flags,
+		unsigned& result_size,
 		pvoid& result_address
 	)
 {
@@ -115,7 +115,7 @@ static void allocate_memory	(
 	}
 
 	for ( ; (min_value + 1) < max_value; ) {
-		u32 const average			= (min_value + max_value)/2;
+		unsigned const average			= (min_value + max_value)/2;
 		pvoid const buffer			= XPhysicalAlloc( average*page_size, MAXULONG_PTR, 0, PAGE_READWRITE | flags );
 		if ( !buffer ) {
 			max_value				= average;
@@ -191,18 +191,18 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 	R_ASSERT					( !arenas.empty() );
 
 	// allocate maximum memory
-	u32 const max_available_memory	= 512*Mb - 32*Mb;
+	unsigned const max_available_memory	= 512*Mb - 32*Mb;
 
-	u32 const page_size_16mb	= 16*Mb;
+	unsigned const page_size_16mb	= 16*Mb;
 	allocate_memory				( 0,	max_available_memory/page_size_16mb,							page_size_16mb,	MEM_16MB_PAGES,		s_size_16mb,	s_address_16mb );
 
-	u32 const page_size_64kb	= 64*Kb;
+	unsigned const page_size_64kb	= 64*Kb;
 	allocate_memory				( 0,	(max_available_memory - s_size_16mb)/page_size_64kb,				page_size_64kb,	MEM_LARGE_PAGES,	s_size_64kb,	s_address_64kb );
 
-	u32 const page_size_4kb		= 4*Kb;
+	unsigned const page_size_4kb		= 4*Kb;
 	allocate_memory				( 0,	(max_available_memory - s_size_16mb - s_size_64kb)/page_size_4kb,	page_size_4kb,	0,					s_size_4kb,	s_address_4kb );
 
-	u32 os_memory				= memory_must_be_left;
+	unsigned os_memory				= memory_must_be_left;
 	if ( s_size_4kb >= os_memory )
 		s_size_4kb				-= os_memory;
 	else {
@@ -220,7 +220,7 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 		}
 	}
 	
-	u32 const regions_count		= (s_size_16mb ? 1 : 0) + (s_size_64kb ? 1 : 0) + (s_size_4kb ? 1 : 0);
+	unsigned const regions_count		= (s_size_16mb ? 1 : 0) + (s_size_64kb ? 1 : 0) + (s_size_4kb ? 1 : 0);
 
 	using xray::memory::platform::regions_type;
 	using xray::memory::platform::region;
@@ -276,7 +276,7 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 
 			(*i).address			= (*j).address;
 			(pbyte&)((*j).address )	+= (*i).size;
-			*(u32*)(*j).data		+= (u32)(*i).size;
+			*(unsigned*)(*j).data		+= (unsigned)(*i).size;
 			(*j).size				-= (*i).size;
 
 			if ( j != regions.begin() ) {
@@ -312,7 +312,7 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 
 		for ( ; ; ) {
 			if ( (*i).size >= resource_arenas_size ) {
-				*(u32*)(*i).data	+= (u32)(minimum.size + maximum.size);
+				*(unsigned*)(*i).data	+= (unsigned)(minimum.size + maximum.size);
 				(*i).size			-= minimum.size + maximum.size;
 				minimum.address		= (*i).address;
 				maximum.address		= (pbyte)(*i).address + minimum.size;
@@ -322,7 +322,7 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 			regions_type::reverse_iterator j = i + 1;
 			float const share		= (float)minimum.size / (float)(maximum.size + minimum.size);
 			if ( (regions.size() == 1) || ((*i).size*share >= (*j).size) ) {
-				*(u32*)(*i).data	+= (u32)(*i).size;
+				*(unsigned*)(*i).data	+= (unsigned)(*i).size;
 				minimum.size		= xray::math::align_down( (u64)((*i).size*share), (u64)resources_arena_granularity );
 				maximum.size		= (*i).size - minimum.size;
 				minimum.address		= (*i).address;
@@ -332,9 +332,9 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 			}
 
 			if ( ((*i).size >= maximum.size) && ((*j).size >= minimum.size) ) {
-				*(u32*)(*j).data	+= (u32)minimum.size;
+				*(unsigned*)(*j).data	+= (unsigned)minimum.size;
 				minimum.address		= (*j).address;
-				*(u32*)(*i).data	+= (u32)maximum.size;
+				*(unsigned*)(*i).data	+= (unsigned)maximum.size;
 				maximum.address		= (*i).address;
 				(*j).size			-= minimum.size;
 				(*i).size			-= maximum.size;
@@ -346,11 +346,11 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 			if ( test_size > (*i).size ) {
 				minimum.size		= xray::math::align_up( (u64)((*i).size*proportion), (u64)resources_arena_granularity );
 				minimum.address		= (*j).address;
-				*(u32*)(*j).data	+= (u32)minimum.size;
+				*(unsigned*)(*j).data	+= (unsigned)minimum.size;
 
 				maximum.size		= (*i).size;
 				maximum.address		= (*i).address;
-				*(u32*)(*i).data	+= (u32)(*i).size;
+				*(unsigned*)(*i).data	+= (unsigned)(*i).size;
 
 				(*j).size			-= minimum.size;
 				(*i).size			-= maximum.size;
@@ -359,11 +359,11 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 
 			minimum.size			= (*j).size;
 			minimum.address			= (*j).address;
-			*(u32*)(*j).data		+= (u32)(*j).size;
+			*(unsigned*)(*j).data		+= (unsigned)(*j).size;
 
 			maximum.size			= test_size;
 			maximum.address			= (*i).address;
-			*(u32*)(*i).data		+= (u32)test_size;
+			*(unsigned*)(*i).data		+= (unsigned)test_size;
 
 			(*j).size				-= minimum.size;
 			(*i).size				-= maximum.size;
@@ -387,7 +387,7 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 			if ( s_size_16mb ) {
 				s_address_16mb		= XPhysicalAlloc( s_size_16mb, MAXULONG_PTR, 0, PAGE_READWRITE | MEM_16MB_PAGES );	
 #ifndef MASTER_GOLD
-				memory::fill32		( s_address_16mb, s_size_16mb, memory::uninitialized_value<u32>(), s_size_16mb/sizeof(u32) );
+				memory::fill32		( s_address_16mb, s_size_16mb, memory::uninitialized_value<unsigned>(), s_size_16mb/sizeof(unsigned) );
 #endif // #ifndef MASTER_GOLD
 			}
 		}
@@ -397,7 +397,7 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 			if ( s_size_64kb ) {
 				s_address_64kb		= XPhysicalAlloc( s_size_64kb, MAXULONG_PTR, 0, PAGE_READWRITE | MEM_LARGE_PAGES );	
 #ifndef MASTER_GOLD
-				memory::fill32		( s_address_64kb, s_size_64kb, memory::uninitialized_value<u32>(), s_size_64kb/sizeof(u32) );
+				memory::fill32		( s_address_64kb, s_size_64kb, memory::uninitialized_value<unsigned>(), s_size_64kb/sizeof(unsigned) );
 #endif // #ifndef MASTER_GOLD
 			}
 		}
@@ -407,7 +407,7 @@ void xray::memory::platform::allocate_arenas					( regions_type& arenas, regions
 			if ( s_size_4kb ) {
 				s_address_4kb			= XPhysicalAlloc( s_size_4kb, MAXULONG_PTR, 0, PAGE_READWRITE );	
 #ifndef MASTER_GOLD
-				memory::fill32		( s_address_4kb, s_size_4kb, memory::uninitialized_value<u32>(), s_size_4kb/sizeof(u32) );
+				memory::fill32		( s_address_4kb, s_size_4kb, memory::uninitialized_value<unsigned>(), s_size_4kb/sizeof(unsigned) );
 #endif // #ifndef MASTER_GOLD
 			}
 		}

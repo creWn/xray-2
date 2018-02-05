@@ -18,7 +18,7 @@ void xray::core::debug::call_stack::iterate	( _EXCEPTION_POINTERS* pointers,  //
 	XRAY_UNREFERENCED_PARAMETER		( callback );
 }
 
-void xray::core::debug::call_stack::get_stack_trace ( void* stack_trace[], u32 const stack_trace_max, u32 const num_to_capture, u32* out_hash )
+void xray::core::debug::call_stack::get_stack_trace ( void* stack_trace[], unsigned const stack_trace_max, unsigned const num_to_capture, unsigned* out_hash )
 {
 #pragma message( XRAY_TODO("PS3: iterate call stack") )
 	XRAY_UNREFERENCED_PARAMETERS( stack_trace, stack_trace_max, num_to_capture, out_hash );

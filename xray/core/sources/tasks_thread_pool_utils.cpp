@@ -19,11 +19,11 @@ command_line::key static		s_spin_count	("spin_count",
 												 "task system", 
 												 "number of trylocks before task system is notified about long lock");
 
-u32 static const				default_spin_count	=	5;
+unsigned static const				default_spin_count	=	5;
 
-u32  spin_count_before_notify_task_system ()
+unsigned  spin_count_before_notify_task_system ()
 {
-	static u32	s_out_spin_count			=	s_spin_count.is_set_as_number(& s_out_spin_count) ? s_out_spin_count : default_spin_count;
+	static unsigned	s_out_spin_count			=	s_spin_count.is_set_as_number(& s_out_spin_count) ? s_out_spin_count : default_spin_count;
 	return										s_out_spin_count;
 }
 
@@ -32,14 +32,14 @@ u32  spin_count_before_notify_task_system ()
 //-----------------------------------------------------------------------------------
 
 
-thread_pool::thread_pool(u32 const								max_task_threads, 
-						 u32 const								max_user_threads,
-						 u32 const								min_permanent_working_threads,
+thread_pool::thread_pool(unsigned const								max_task_threads, 
+						 unsigned const								max_user_threads,
+						 unsigned const								min_permanent_working_threads,
 						 execute_while_wait_for_children_enum	execute_while_wait_for_children,
 						 do_logging_bool						do_logging) :
 								m_min_permanent_working_threads(min_permanent_working_threads),
 								m_execute_while_wait_for_children(execute_while_wait_for_children),
-								m_time_elapsed(u32(-1)), 
+								m_time_elapsed(unsigned(-1)), 
 								m_initialized(false), 
 								m_thread_tls_key(0),
 								m_user_thread_index(0),
@@ -58,7 +58,7 @@ thread_pool::thread_pool(u32 const								max_task_threads,
 	m_thread_tls_key						=	threading::tls_create_key();
 	m_threads_can_start_work.set				(false);
 
-	for ( u32 i=0; i<threading::core_count(); ++i )
+	for ( unsigned i=0; i<threading::core_count(); ++i )
 		m_core_thread_count.push_back			(0);
 
 	m_task_thread_tls.resize					(max_task_threads);
@@ -66,7 +66,7 @@ thread_pool::thread_pool(u32 const								max_task_threads,
 
 	m_num_task_threads_started					=	0;
 
-	for ( u32 i=0; i<max_task_threads; ++i )
+	for ( unsigned i=0; i<max_task_threads; ++i )
 	{
 		fixed_string512							thread_name_for_debugger;
 		thread_name_for_debugger.assignf		("task #%d", i + 1);
@@ -93,7 +93,7 @@ thread_pool::thread_pool(u32 const								max_task_threads,
 
 	m_timer.start								();
 
-	for ( u32 i=0; i<max_task_threads; ++i )
+	for ( unsigned i=0; i<max_task_threads; ++i )
 	{
 		tasks::thread_tls & tls				=	m_task_thread_tls[i];
 		tls.event_start_thread_work.set			(true);
@@ -108,7 +108,7 @@ void   thread_proc_impl (thread_tls * const tls);
 thread_pool::~thread_pool ()
 {
 	threading::interlocked_exchange				(m_destroying, true);
-	for ( u32 i=0; i<m_task_thread_tls.size(); ++i )
+	for ( unsigned i=0; i<m_task_thread_tls.size(); ++i )
 		try_activate_task_thread				(m_task_thread_tls[i], i % threading::core_count());
 
 	m_all_task_threads_destroyed.wait			(threading::event::wait_time_infinite);
@@ -129,12 +129,12 @@ void   thread_pool::log_columns_header ()
 	if ( !m_do_logging )
 		return;
 
-	u32 const screen_width					=	80;
-	u32 const num_columns					=	(u32)m_task_thread_tls.size() + 1;
-	u32 const column_width					=	screen_width / num_columns;
+	unsigned const screen_width					=	80;
+	unsigned const num_columns					=	(unsigned)m_task_thread_tls.size() + 1;
+	unsigned const column_width					=	screen_width / num_columns;
 
 	fixed_string512								output;
-	for ( u32 column=0; column<num_columns; ++column )
+	for ( unsigned column=0; column<num_columns; ++column )
 	{
 		fixed_string512	column_output;
 		if ( column == 0 )
@@ -142,8 +142,8 @@ void   thread_pool::log_columns_header ()
 		else
 			column_output.appendf				("task %d", column-1);
 
-		u32 const initial_chars				=	column_output.length();
-		for ( u32 i=initial_chars; i<column_width; ++i )
+		unsigned const initial_chars				=	column_output.length();
+		for ( unsigned i=initial_chars; i<column_width; ++i )
 			column_output					+=	' ';
 		output								+=	column_output;
 	}
@@ -157,13 +157,13 @@ void   thread_pool::log (thread_tls * const tls, pcstr format, ...)
 	if ( !m_do_logging )
 		return;
 
-	u32 const screen_width					=	80;
-	u32 const num_columns					=	(u32)m_task_thread_tls.size() + 1;
-	u32 const column_width					=	screen_width / num_columns;
+	unsigned const screen_width					=	80;
+	unsigned const num_columns					=	(unsigned)m_task_thread_tls.size() + 1;
+	unsigned const column_width					=	screen_width / num_columns;
 	
 	fixed_string512	output;
-	u32 const column						=	tls && tls->is_task_thread() ? (tls->thread_index+1)  : 0;
-	for ( u32 i=0; i<column*column_width; ++i )
+	unsigned const column						=	tls && tls->is_task_thread() ? (tls->thread_index+1)  : 0;
+	for ( unsigned i=0; i<column*column_width; ++i )
 		output								+=	' ';
 
 	va_list										argptr;
@@ -175,7 +175,7 @@ void   thread_pool::log (thread_tls * const tls, pcstr format, ...)
 												 "%s", output.c_str());
 }
 
-u32   thread_pool::calculate_active_task_thread_count () const
+unsigned   thread_pool::calculate_active_task_thread_count () const
 {
 	return										m_active_task_thread_count;
 }
@@ -189,8 +189,8 @@ thread_tls *   thread_pool::get_thread_tls ()
 
 void   thread_pool::register_current_thread_as_core_user ()
 {
-	u32 const hardware_thread				=	threading::current_thread_affinity();
-	R_ASSERT									(hardware_thread != u32(-1), "only threads that called set_current_thread_affinity can call this function:)");
+	unsigned const hardware_thread				=	threading::current_thread_affinity();
+	R_ASSERT									(hardware_thread != unsigned(-1), "only threads that called set_current_thread_affinity can call this function:)");
 	threading::interlocked_increment			(m_core_thread_count[hardware_thread]);
 
 	R_ASSERT									(!threading::tls_get_value(m_thread_tls_key));
@@ -312,9 +312,9 @@ void   register_current_thread_as_core_user	()
 	s_thread_pool->register_current_thread_as_core_user	();
 }
 
-void   initialize (u32 const max_task_threads, 
-				   u32 const max_user_threads, 
-				   u32 const min_permanent_working_threads,
+void   initialize (unsigned const max_task_threads, 
+				   unsigned const max_user_threads, 
+				   unsigned const min_permanent_working_threads,
 				   execute_while_wait_for_children_enum execute_while_wait_for_children,
 				   do_logging_bool do_logging)
 {

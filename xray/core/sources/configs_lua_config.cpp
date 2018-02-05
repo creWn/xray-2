@@ -60,9 +60,9 @@ static void* allocate(luabind::memory_allocation_function_parameter, void const*
 	}
 
 	if (!current_buffer)
-		return XRAY_MALLOC_IMPL(xray::core::configs::g_lua_allocator, (u32)needed_size, "lua");
+		return XRAY_MALLOC_IMPL(xray::core::configs::g_lua_allocator, (unsigned)needed_size, "lua");
 
-	return XRAY_REALLOC_IMPL(xray::core::configs::g_lua_allocator, buffer, (u32)needed_size, "lua");
+	return XRAY_REALLOC_IMPL(xray::core::configs::g_lua_allocator, buffer, (unsigned)needed_size, "lua");
 }
 
 static int lua_error_callback(lua_State *state)
@@ -337,7 +337,7 @@ xray::configs::lua_config*   create_lua_config_inplace	( mutable_buffer const & 
 	return							new_config_inplace( in_out_buffer, file_name );
 }
 
-pvoid lua_allocate							( u32 const size )
+pvoid lua_allocate							( unsigned const size )
 {
 	lua_mutex_guard					mutex_guard;
 	xray::core::configs::g_lua_allocator.user_current_thread_id	( );
@@ -369,7 +369,7 @@ static xray::configs::lua_config_value get_value	(
 		xray::configs::lua_config_value& result,
 		xray::configs::binary_config_value::const_iterator const i,
 		xray::configs::binary_config_value const& value,
-		u32 const index
+		unsigned const index
 	)
 {
 	if ( value.type == xray::configs::t_table_indexed )
@@ -385,7 +385,7 @@ static void construct				( xray::configs::lua_config_value result, xray::configs
 
 	binary_config_value::const_iterator	i = value.begin();
 	binary_config_value::const_iterator	e = value.end();
-	for (u32 j=0; i != e; ++i, ++j ) {
+	for (unsigned j=0; i != e; ++i, ++j ) {
 		switch ( (*i).type ) {
 			case t_boolean : {
 				get_value( result, i, value, j)	= (bool)*i;
@@ -471,11 +471,11 @@ static void construct				( xray::configs::lua_config_value const& value, binary_
 	item.count						= xray::memory::uninitialized_value<u16>();
 	switch ( item.type ) {
 		case t_boolean : {
-			*(u32*)&item.data		= bool(value) ? 1 : 0;
+			*(unsigned*)&item.data		= bool(value) ? 1 : 0;
 			break;
 		}
 		case t_integer : {
-			*(u32*)&item.data		= value;
+			*(unsigned*)&item.data		= value;
 			break;
 		}
 		case t_float : {
@@ -595,7 +595,7 @@ static void construct				( binary_config_value& value, xray::memory::stream& fat
 		pcstr const id				= value.id;
 
 		if ( id ) {
-			value.id				= xray::horrible_cast< u32, pcstr >( data.get_buffer_size() ).second;
+			value.id				= xray::horrible_cast< unsigned, pcstr >( data.get_buffer_size() ).second;
 			data.append				( id );
 		}
 	}
@@ -608,30 +608,30 @@ static void construct				( binary_config_value& value, xray::memory::stream& fat
 			break;
 		}
 		case t_string : {
-			u32 const buffer_size	= data.get_buffer_size();
+			unsigned const buffer_size	= data.get_buffer_size();
 			data.append				( static_cast<pcstr>(value.data) );
-			value.data				= xray::horrible_cast< u32, pcvoid >( buffer_size ).second;
+			value.data				= xray::horrible_cast< unsigned, pcvoid >( buffer_size ).second;
 			fat.append				( &value, sizeof(value) );
 			break;
 		}
 		case t_float2 : {
-			u32 const buffer_size	= data.get_buffer_size();
+			unsigned const buffer_size	= data.get_buffer_size();
 			data.append				( value.data, sizeof(xray::math::float2) );
-			value.data				= xray::horrible_cast< u32, pcvoid >( buffer_size ).second;
+			value.data				= xray::horrible_cast< unsigned, pcvoid >( buffer_size ).second;
 			fat.append				( &value, sizeof(value) );
 			break;
 		}
 		case t_float3 : {
-			u32 const buffer_size	= data.get_buffer_size();
+			unsigned const buffer_size	= data.get_buffer_size();
 			data.append				( value.data, sizeof(xray::math::float3) );
-			value.data				= xray::horrible_cast< u32, pcvoid >( buffer_size ).second;
+			value.data				= xray::horrible_cast< unsigned, pcvoid >( buffer_size ).second;
 			fat.append				( &value, sizeof(value) );
 			break;
 		}
 		case t_float4 : {
-			u32 const buffer_size	= data.get_buffer_size();
+			unsigned const buffer_size	= data.get_buffer_size();
 			data.append				( value.data, sizeof(xray::math::float4) );
-			value.data				= xray::horrible_cast< u32, pcvoid >( buffer_size ).second;
+			value.data				= xray::horrible_cast< unsigned, pcvoid >( buffer_size ).second;
 			fat.append				( &value, sizeof(value) );
 			break;
 		}
@@ -645,11 +645,11 @@ static void construct				( binary_config_value& value, xray::memory::stream& fat
 			}
 
 			binary_config_value* value = xray::pointer_cast<binary_config_value*>(fat.get_buffer() + offset);
-			value->data				= xray::horrible_cast< u32, pcvoid >( fat.get_buffer_size() ).second;
+			value->data				= xray::horrible_cast< unsigned, pcvoid >( fat.get_buffer_size() ).second;
 			R_ASSERT				( items->size() < 65536 );
 			value->count			= (u16)items->size();
 
-			u32 const new_offset	= fat.get_buffer_size( );
+			unsigned const new_offset	= fat.get_buffer_size( );
 
 			items_type::iterator i	= items->begin( );
 			items_type::iterator const	e = items->end( );
@@ -657,7 +657,7 @@ static void construct				( binary_config_value& value, xray::memory::stream& fat
 				construct			( *i, fat, data, -1 );
 
 			i						= items->begin( );
-			for (u32 j = 0; i != e; ++i, ++j ) {
+			for (unsigned j = 0; i != e; ++i, ++j ) {
 				if ( ((*i).type == t_table_named) || ((*i).type == t_table_indexed) )
 					construct		( *i, fat, data, new_offset + j*sizeof(binary_config_value) );
 			}
@@ -669,17 +669,17 @@ static void construct				( binary_config_value& value, xray::memory::stream& fat
 }
 
 template < typename T >
-static void convert					( T& value, u32 const offset )
+static void convert					( T& value, unsigned const offset )
 {
 	if ( !value )
 		return;
 
-	value							= xray::horrible_cast< u32, T >( xray::horrible_cast<T, u32>(value).second + offset ).second;
+	value							= xray::horrible_cast< unsigned, T >( xray::horrible_cast<T, unsigned>(value).second + offset ).second;
 }
 
 #include "configs_binary_config.h"
 
-static void fill_info_for_fix_up		( binary_config_value& value, pbyte const buffer, u32 const value_offset, u32 const offset )
+static void fill_info_for_fix_up		( binary_config_value& value, pbyte const buffer, unsigned const value_offset, unsigned const offset )
 {
 	lua_mutex_guard					mutex_guard;
 	xray::core::configs::g_lua_allocator.user_current_thread_id	( );
@@ -710,8 +710,8 @@ static void fill_info_for_fix_up		( binary_config_value& value, pbyte const buff
 
 			items_type::iterator i	= items->begin( );
 			items_type::iterator const	e = items->end( );
-			for (u32 j=0; i != e; ++i, ++j )
-				fill_info_for_fix_up( *i, buffer, xray::horrible_cast<pcvoid,u32>(serialized->data).second + j*sizeof(binary_config_value), offset );
+			for (unsigned j=0; i != e; ++i, ++j )
+				fill_info_for_fix_up( *i, buffer, xray::horrible_cast<pcvoid,unsigned>(serialized->data).second + j*sizeof(binary_config_value), offset );
 
 			XRAY_DELETE_IMPL		( xray::core::configs::g_lua_allocator, items );
 			break;
@@ -733,13 +733,13 @@ void xray::configs::create_binary_config_buffer	( lua_config_value value, xray::
 	optimize						( root );
 
 	xray::memory::stream			data( &core::configs::g_lua_allocator );
-	data.append						( u32(0) );
+	data.append						( unsigned(0) );
 
 	construct						( root, fat, data, -1 );
 	construct						( root, fat, data, 0 );
 
-	u32 const offset				= fat.get_buffer_size() - 4;
-	fat.append						( data.get_buffer() + sizeof(u32), data.get_buffer_size() - sizeof(u32) );
+	unsigned const offset				= fat.get_buffer_size() - 4;
+	fat.append						( data.get_buffer() + sizeof(unsigned), data.get_buffer_size() - sizeof(unsigned) );
 
 	fill_info_for_fix_up			( root, fat.get_buffer(), 0, offset );
 }
@@ -999,9 +999,9 @@ void lua_config_value::finalize			( )
 	(*m_object).~object				( );
 }
 
-static void process_string			( xray::strings::stream& stream, pcstr const value, u32 const length )
+static void process_string			( xray::strings::stream& stream, pcstr const value, unsigned const length )
 {
-	u32 const buffer_size			= (length+1)*sizeof(char);
+	unsigned const buffer_size			= (length+1)*sizeof(char);
 	pstr const temp					= (pstr)ALLOCA( 3*buffer_size - 2 );	// for characters below 32: /31
 
 	pcbyte							i = xray::pointer_cast<pcbyte>(value);
@@ -1059,7 +1059,7 @@ static inline bool lua_typenumber(lua_State* L, int idx)	{ return (lua_type(L, i
 
 struct lua_key_values_crc {
 	pcstr first;
-	u32 second;
+	unsigned second;
 }; // struct lua_key_values_crc
 static lua_key_values_crc	lua_key_values[] = {
 	{ "do", 0 },
@@ -1132,7 +1132,7 @@ static bool is_valid_identifier			( pcstr const string)
 
 	boost::crc_32_type				processor;
 	processor.process_block			( string, e );
-	u32 const crc					= processor.checksum();
+	unsigned const crc					= processor.checksum();
 	{
 		lua_key_values_crc* i		= lua_key_values;
 		lua_key_values_crc* const e	= lua_key_values + xray::array_size(lua_key_values);
@@ -1261,9 +1261,9 @@ static void save						(
 		lua_State* const state,
 		xray::strings::stream& stream,
 		pstr const indent,
-		u32 const indent_size,
+		unsigned const indent_size,
 		pcstr indenter,
-		u32 const indent_level,
+		unsigned const indent_level,
 		pcstr identifier
 	)
 {
@@ -1318,13 +1318,13 @@ static void save						(
 		case t_table_named			: {
 			lua_stack_guard			stack_guard(false);
 			pstr const temp			= (pstr)ALLOCA(indent_size*sizeof(char));
-			strings::copy			( temp, ( (u32)indent_size )*sizeof(char), indent );
+			strings::copy			( temp, ( (unsigned)indent_size )*sizeof(char), indent );
 
 			bool super_table_only	= true;
 			bool use_inheritance	= false;
-			u32 super_tables_count	= 0;
-			u32 total_count			= 0;
-			u32 count				= 0;
+			unsigned super_tables_count	= 0;
+			unsigned total_count			= 0;
+			unsigned count				= 0;
 			lua_pushnil				( state );
 			for ( int i=0; lua_next( state, -2 ); ++i, ++total_count ) {
 				++count;
@@ -1499,7 +1499,7 @@ static bool is_table				( luabind::object const& object )
 	return							luabind::type(object) == LUA_TTABLE;
 }
 
-void lua_config_value::save					( xray::strings::stream& stream, pstr indent, u32 indent_size, u32 indent_level ) const
+void lua_config_value::save					( xray::strings::stream& stream, pstr indent, unsigned indent_size, unsigned indent_level ) const
 {
 	lua_mutex_guard					mutex_guard;
 
@@ -1525,7 +1525,7 @@ struct table_exist_predicate {
 		m_state						= state;
 	}
 
-	inline bool	operator()				( int index, pcstr string, u32 length, bool last ) const
+	inline bool	operator()				( int index, pcstr string, unsigned length, bool last ) const
 	{
 		XRAY_UNREFERENCED_PARAMETERS( index, last, length );
 
@@ -1554,7 +1554,7 @@ struct table_object_predicate {
 		m_state						= state;
 	}
 
-	inline bool operator()						(const int &index, pcstr string, const u32 &length, const bool &last) const
+	inline bool operator()						(const int &index, pcstr string, const unsigned &length, const bool &last) const
 	{
 		XRAY_UNREFERENCED_PARAMETERS( &index, length, last );
 
@@ -1606,7 +1606,7 @@ bool lua_config_value::empty				( ) const
 	return							( begin() == end() );
 }
 
-u32 lua_config_value::size					( ) const
+unsigned lua_config_value::size					( ) const
 {
 	lua_mutex_guard					mutex_guard;
 
@@ -1615,7 +1615,7 @@ u32 lua_config_value::size					( ) const
 	if ( !is_table(*m_object) )
 		return						0;
 
-	u32	count						= 0;
+	unsigned	count						= 0;
 	lua_config_iterator i			= begin();
 	lua_config_iterator const e		= end();
 	for ( ; i != e; ++i )
@@ -1624,7 +1624,7 @@ u32 lua_config_value::size					( ) const
 	return							( count );
 }
 
-lua_config_value lua_config_value::operator_brackets_impl	( u32 index ) const
+lua_config_value lua_config_value::operator_brackets_impl	( unsigned index ) const
 {
 	++index;
 
@@ -1656,7 +1656,7 @@ lua_config_value lua_config_value::operator_brackets_impl	( int index ) const
 {
 	lua_mutex_guard					mutex_guard;
 	R_ASSERT						( index >= 0 );
-	return							(*this)[(u32)index];
+	return							(*this)[(unsigned)index];
 }
 
 lua_config_value lua_config_value::operator_brackets_impl	( pcstr field_id ) const
@@ -1677,7 +1677,7 @@ lua_config_value lua_config_value::operator_brackets_impl	( pcstr field_id ) con
 	return							lua_config_value( luabind::object(), *m_table_object, new_field_id );
 }
 
-lua_config_value lua_config_value::operator[ ]	( u32 index )
+lua_config_value lua_config_value::operator[ ]	( unsigned index )
 {
 	return	operator_brackets_impl( index );
 }
@@ -1692,7 +1692,7 @@ lua_config_value lua_config_value::operator[ ]	( pcstr field_id )
 	return	operator_brackets_impl( field_id );
 }
 
-lua_config_value const lua_config_value::operator[ ]	( u32 index ) const
+lua_config_value const lua_config_value::operator[ ]	( unsigned index ) const
 {
 	return	operator_brackets_impl( index );
 }
@@ -1761,11 +1761,11 @@ lua_config_value::operator s32				( ) const
 	return							cast_number<s32>( *m_object );
 }
 
-lua_config_value::operator u32				( ) const
+lua_config_value::operator unsigned				( ) const
 {
 	fix_up							( );
 
-	return							cast_number<u32>( *m_object );
+	return							cast_number<unsigned>( *m_object );
 }
 
 lua_config_value::operator float			( ) const
@@ -1829,7 +1829,7 @@ void lua_config_value::fix_up_impl				( ) const
 	ASSERT							( m_table_object->is_valid() );
 	ASSERT							( is_table(*m_table_object) );
 
-	u32 const field_buffer_size		= (strings::length(m_field_id) + 1)*sizeof(char);
+	unsigned const field_buffer_size		= (strings::length(m_field_id) + 1)*sizeof(char);
 	pstr temp						= 0;
 	STR_DUPLICATEA					( temp, m_field_id );
 	pstr							i = temp;
@@ -1884,7 +1884,7 @@ void lua_config_value::fix_up_impl				( ) const
 		}
 
 		ASSERT						( j >= i );
-		strings::copy				( m_field_id, u32(j - i) + 1, i );
+		strings::copy				( m_field_id, unsigned(j - i) + 1, i );
 		current						= *m_object;
 
 		i							= j + 1;
@@ -1927,7 +1927,7 @@ static inline bool equal					( luabind::object const& object, int const value )
 	return							result;
 }
 
-//static inline bool equal					( luabind::object const& object, u32 const value )
+//static inline bool equal					( luabind::object const& object, unsigned const value )
 //{
 //	lua_mutex_guard					mutex_guard;
 //	lua_stack_guard					guard(false);
@@ -2161,7 +2161,7 @@ lua_config_value lua_config_value::operator =	( int value )
 	return							assign( value );
 }
 
-lua_config_value lua_config_value::operator =	( u32 value )
+lua_config_value lua_config_value::operator =	( unsigned value )
 {
 	return							assign( (int)value );
 }
@@ -2286,7 +2286,7 @@ void lua_config_value::add_super_table		( lua_config_value const& super_table )
 		return;
 	}
 
-	u32 count						= 1;
+	unsigned count						= 1;
 	luabind::iterator				i(super_tables);
 	luabind::iterator const			e;
 	for ( ; i != e; ++i, ++count ) {
@@ -2370,7 +2370,7 @@ void lua_config_value::add_super_table		( pcstr const file_table, pcstr const su
 		return;
 	}
 
-	u32 count						= 1;
+	unsigned count						= 1;
 	luabind::iterator				i(super_tables);
 	luabind::iterator const			e;
 	for ( ; i != e; ++i, ++count ) {
@@ -2418,8 +2418,8 @@ void lua_config_value::remove_super_table	( lua_config_value const& super_table 
 	if ( luabind::type(super_tables) != LUA_TTABLE )
 		return;
 
-	u32 real_count					= 0;
-	u32 count						= 1;
+	unsigned real_count					= 0;
+	unsigned count						= 1;
 	lua_newtable					( state );
 	luabind::iterator				i(super_tables);
 	luabind::iterator const			e;
@@ -2481,7 +2481,7 @@ void lua_config_value::remove_super_table	( pcstr const file_table, pcstr const 
 	pstr temp						= 0;
 	STR_JOINA						( temp, "modules['", file_table, "'].", super_table );
 
-	u32 count						= 1;
+	unsigned count						= 1;
 	lua_newtable					( state );
 	luabind::iterator				i(super_tables);
 	luabind::iterator const			e;

@@ -13,7 +13,7 @@
 
 bool   file_system_impl::mount_disk_file (fat_folder_node<> * const	work_folder, 
 										  pcstr const				physical_path, 
-										  u32 const					hash)
+										  unsigned const					hash)
 {
 	XRAY_UNREFERENCED_PARAMATERS(work_folder, physical_path, hash);
 	NOT_IMPLEMENTED(return false);
@@ -21,25 +21,25 @@ bool   file_system_impl::mount_disk_file (fat_folder_node<> * const	work_folder,
 void xray::fs::file_system_impl::mount_disk_folder (
 		fat_folder_node<> * const	work_folder,
 		pcstr const					physical_path,
-		u32 const					hash
+		unsigned const					hash
 	)
 {
 	DIR* const directory			= opendir( physical_path.c_str() );
 	R_ASSERT						( directory );
 
-	u32 const physical_path_length	= strings::length( physical_path.c_str() );
+	unsigned const physical_path_length	= strings::length( physical_path.c_str() );
 	
 	while ( dirent* const entry = readdir( directory ) ) {
 		if ( entry->d_name[0] == '.' )
 			continue;
 
 		bool const found_folder		= ( entry->d_type == DT_DIR );
-		u32 const name_length		= strings::length( entry->d_name );
-		u32 const child_hash		= crc32( entry->d_name, name_length, hash );
+		unsigned const name_length		= strings::length( entry->d_name );
+		unsigned const child_hash		= crc32( entry->d_name, name_length, hash );
 
 		pstr full_name;
 		STR_JOINA					( full_name, physical_path.c_str(), "/", entry->d_name );
-		u32 const full_name_length	= strings::length( full_name );
+		unsigned const full_name_length	= strings::length( full_name );
 
 		file_size_type file_size	= 0;
 		if ( !found_folder ) {

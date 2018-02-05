@@ -48,23 +48,23 @@ inline typename VECTOR::self_type& VECTOR::operator=			( self_type const& other 
 }
 
 TEMPLATE_SIGNATURE
-inline typename VECTOR::reference	VECTOR::operator[]			( u32 index )
+inline typename VECTOR::reference	VECTOR::operator[]			( unsigned index )
 {
 	R_ASSERT				( index < size(), "index is out of range: %d, size %d", index, size() );
 	return					super::operator[] ( index );
 }
 
 TEMPLATE_SIGNATURE
-inline typename VECTOR::const_reference VECTOR::operator[]		( u32 index ) const
+inline typename VECTOR::const_reference VECTOR::operator[]		( unsigned index ) const
 {
 	R_ASSERT				( index < size(), "index is out of range: %d, size %d", index, size() );
 	return					super::operator[] ( index );
 }
 
 TEMPLATE_SIGNATURE
-inline u32 VECTOR::size											( ) const
+inline unsigned VECTOR::size											( ) const
 {
-	return					( ( u32 ) super::size( ) );
+	return					( ( unsigned ) super::size( ) );
 }
 
 #undef VECTOR

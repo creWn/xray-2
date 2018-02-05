@@ -61,7 +61,7 @@ void xray::debug::log_call_stack		( pcstr header )
 	dump_call_stack					( "debug", logging::info, 1, 0, 0 );
 }
 
-static void on_error					( xray::process_error_enum process_error, bool* do_debug_break, pstr const message, u32 const message_size, bool* ignore_always )
+static void on_error					( xray::process_error_enum process_error, bool* do_debug_break, pstr const message, unsigned const message_size, bool* ignore_always )
 {
 	xray::logging::flush				( );
 
@@ -86,7 +86,7 @@ static void output						( xray::buffer_string & message, pcstr const format, ...
 	va_list					mark;
 	va_start				( mark, format );
 
-	u32 const old_length	=	message.length();
+	unsigned const old_length	=	message.length();
 	message.appendf_va_list	(format, mark);
 
 	if ( !xray::testing::is_testing() ) {
@@ -97,7 +97,7 @@ static void output						( xray::buffer_string & message, pcstr const format, ...
 	message					+= "\r\n";
 }
 
-static void process						( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, xray::assert_enum assert_type, pcstr reason, pcstr expression, pcstr description, pcstr file, pcstr function, u32 line )
+static void process						( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, xray::assert_enum assert_type, pcstr reason, pcstr expression, pcstr description, pcstr file, pcstr function, unsigned line )
 {
 	if ( s_mutex.initialized() )
 		s_mutex->lock		( );
@@ -135,7 +135,7 @@ static void process						( bool* do_debug_break, xray::process_error_enum proces
 		s_mutex->unlock		( );
 }
 
-void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, xray::assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, u32 line, pcstr format, ... )
+void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, xray::assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, unsigned line, pcstr format, ... )
 {
 	va_list					mark;
 	va_start				( mark, format );
@@ -146,12 +146,12 @@ void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum pro
 	process					( do_debug_break, process_error, ignore_always, assert_type, reason, expression, description, file, function, line );
 }
 
-void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, xray::assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, u32 line )
+void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, xray::assert_enum assert_type, pcstr reason, pcstr expression, pcstr file, pcstr function, unsigned line )
 {
 	process					( do_debug_break, process_error, ignore_always, assert_type, reason, expression, 0, file, function, line );
 }
 
-void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, u32 line, pcstr format, ... )
+void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, unsigned line, pcstr format, ... )
 {
 	va_list					mark;
 	va_start				( mark, format );
@@ -170,7 +170,7 @@ void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum pro
 	core::debug::platform::free_format_message	( reason );
 }
 
-void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, u32 line )
+void xray::debug::on_error		( bool* do_debug_break, xray::process_error_enum process_error, bool* ignore_always, int error_code, pcstr expression, pcstr file, pcstr function, unsigned line )
 {
 	pstr const reason		= core::debug::platform::fill_format_message ( error_code );
 	process					( do_debug_break, process_error, ignore_always, xray::assert_untyped, reason, expression, 0, file, function, line );

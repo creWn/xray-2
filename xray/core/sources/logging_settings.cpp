@@ -10,7 +10,7 @@
 
 using xray::logging::settings;
 
-settings::settings	(pcstr initiator_prefix, u32 flags) : flags((flags_enum)flags)
+settings::settings	(pcstr initiator_prefix, unsigned flags) : flags((flags_enum)flags)
 {
 	if ( initiator_prefix && *initiator_prefix )
 	{

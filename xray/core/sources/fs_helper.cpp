@@ -15,21 +15,21 @@ namespace xray {
 namespace fs {
 
 // @post: position in files are changed
-bool   files_equal (FILE* f1, FILE* f2, u32 size)
+bool   files_equal (FILE* f1, FILE* f2, unsigned size)
 {
 	fseek							(f1, 0, SEEK_SET);
 	fseek							(f2, 0, SEEK_SET);
-	u32 const	chunk_size		=	128*1024;
+	unsigned const	chunk_size		=	128*1024;
 	char		file1_chunk			[chunk_size];
 	char		file2_chunk			[chunk_size];
-	u32			size_left		=	size;
+	unsigned			size_left		=	size;
 
 	while ( size_left != 0 )
 	{
-		u32 const work_size		=	size_left < chunk_size ? size_left : chunk_size;
-		u32 const bytes_read1	=	(u32)fread(file1_chunk, 1, work_size, f1);
+		unsigned const work_size		=	size_left < chunk_size ? size_left : chunk_size;
+		unsigned const bytes_read1	=	(unsigned)fread(file1_chunk, 1, work_size, f1);
 		R_ASSERT_U					(bytes_read1 == work_size);
-		u32 const bytes_read2	=	(u32)fread(file2_chunk, 1, work_size, f2);
+		unsigned const bytes_read2	=	(unsigned)fread(file2_chunk, 1, work_size, f2);
 		R_ASSERT_U					(bytes_read2 == work_size);
 		
 		if ( memcmp(file1_chunk, file2_chunk, work_size) )
@@ -44,11 +44,11 @@ bool   files_equal (FILE* f1, FILE* f2, u32 size)
 }
 
 // @post: position in files are changed
-void   copy_data (FILE* f_dest, FILE* f_src, u32 size, u32* hash)
+void   copy_data (FILE* f_dest, FILE* f_src, unsigned size, unsigned* hash)
 {
-	u32 const	chunk_size		=	128*1024;
+	unsigned const	chunk_size		=	128*1024;
 	char		file_chunk			[chunk_size];
-	u32			size_left		=	size;
+	unsigned			size_left		=	size;
 
 	if ( hash )
 	{
@@ -57,14 +57,14 @@ void   copy_data (FILE* f_dest, FILE* f_src, u32 size, u32* hash)
 
 	while ( size_left != 0 )
 	{
-		u32 const work_size		=	size_left < chunk_size ? size_left : chunk_size;
-		u32 const bytes_read	=	(u32)fread(file_chunk, 1, work_size, f_src);
+		unsigned const work_size		=	size_left < chunk_size ? size_left : chunk_size;
+		unsigned const bytes_read	=	(unsigned)fread(file_chunk, 1, work_size, f_src);
 		if ( hash )
 		{
 			*hash				=	crc32(file_chunk, bytes_read, *hash);
 		}
 		R_ASSERT					(bytes_read == work_size);
-		u32 const bytes_written	=	(u32)fwrite(file_chunk, 1, work_size, f_dest);
+		unsigned const bytes_written	=	(unsigned)fwrite(file_chunk, 1, work_size, f_dest);
 		XRAY_UNREFERENCED_PARAMETER	( bytes_written );
 		R_ASSERT					(bytes_written == work_size);
 		size_left				-=	work_size;
@@ -73,14 +73,14 @@ void   copy_data (FILE* f_dest, FILE* f_src, u32 size, u32* hash)
 
 typedef	boost::crc_optimal<32, 0x04C11DB7, 0, 0, true, false>	crc_processor;
 
-u32   crc32 (pcstr const data, u32 const size, u32 const start_value)
+unsigned   crc32 (pcstr const data, unsigned const size, unsigned const start_value)
 {
 	crc_processor	processor	(start_value);
 	processor.process_bytes		(data, size);
-	return processor.checksum() & u32(-1);
+	return processor.checksum() & unsigned(-1);
 }
 
-u32   path_crc32 (pcstr const data, u32 const size, u32 const start_value)
+unsigned   path_crc32 (pcstr const data, unsigned const size, unsigned const start_value)
 {
 	crc_processor	processor	(start_value);
 

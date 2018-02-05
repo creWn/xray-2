@@ -16,7 +16,7 @@ public:
 								 flags_log_to_console		=	2, };
 	flags_enum		flags;
 
-	explicit		settings			( pcstr initiator_prefix, u32 flags = 0 );
+	explicit		settings			( pcstr initiator_prefix, unsigned flags = 0 );
 	inline	pcstr	get_initiator_prefix() const { return m_initiator_prefix; }
 
 private:

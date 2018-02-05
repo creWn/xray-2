@@ -39,7 +39,7 @@ private:
 	char	XRAY_DEFAULT_ALIGN			m_helper_storage[sizeof(pvoid)];
 	char	XRAY_DEFAULT_ALIGN			m_storage[MaxSize];
 	detail::abstract_type_helper *		m_helper;
-	u32									m_type_id;
+	unsigned									m_type_id;
 };
 
 #pragma warning(default:4324)

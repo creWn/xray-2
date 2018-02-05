@@ -28,7 +28,7 @@ public:
 
 	threading::mutex &	mutex_folder_watcher	() { return m_mutex_folder_watcher; }
 	void	wakeup_watcher_thread				() { m_event_folder_recieved_changes.set(1); }
-	u32		watcher_thread_id					() const { return m_watcher_thread_id; }
+	unsigned		watcher_thread_id					() const { return m_watcher_thread_id; }
 
 			~watcher							();
 
@@ -46,7 +46,7 @@ private:
 	threading::event							m_event_folder_recieved_changes;
 	threading::atomic32_type					m_destroying;
 	threading::atomic32_type					m_thread_proc_ended;
-	u32											m_watcher_thread_id;
+	unsigned											m_watcher_thread_id;
 };
 
 watcher::watcher (file_change_callback callback) : 
@@ -224,7 +224,7 @@ void   wakeup_watcher_thread ()
 	s_watcher->wakeup_watcher_thread		();
 }
 
-u32   watcher_thread_id	() 
+unsigned   watcher_thread_id	() 
 {
 	return									s_watcher->watcher_thread_id(); 
 }

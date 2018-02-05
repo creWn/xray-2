@@ -14,7 +14,7 @@ struct thread_entry_params {
 	thread_function_type		function_to_call;
 	volatile pcstr				thread_name_for_logging;
 	volatile pcstr				thread_name_for_debugger;
-	u32							hardware_thread;
+	unsigned							hardware_thread;
 	threading::tasks_awareness	tasks_awareness;
 	bool						processed;
 };

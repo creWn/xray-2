@@ -14,7 +14,7 @@ template < typename implementation >
 class sequential_chunk_reader {
 public:
 	inline	void	construct		( );
-	inline	u32		chunk_position	( u32 chunk_id );
+	inline	unsigned		chunk_position	( unsigned chunk_id );
 
 private:
 	inline	implementation&	impl	( );

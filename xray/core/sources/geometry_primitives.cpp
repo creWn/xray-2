@@ -19,7 +19,7 @@ namespace geometry_utils{
 
 namespace obb {
 
-	const u32	vertex_count = 8;
+	const unsigned	vertex_count = 8;
 	const float	vertices[ vertex_count * 3 ] =
 	{
 		-1.f,-1.f,-1.f,
@@ -32,7 +32,7 @@ namespace obb {
 		+1.f,-1.f,+1.f
 	};
 
-	const u32	pair_count = 12;
+	const unsigned	pair_count = 12;
 	const u16	pairs[ pair_count * 2 ] =
 	{
 		0,1,  1,2,  2,3,  3,0,  4,5,  5,6,  6,7,  7,4,  1,5,  2,6,  3,7,  0,4
@@ -45,7 +45,7 @@ namespace obb {
 ////////////////////////////////////////////////////////////////////////////
 namespace rectangle {
 
-	const u32	vertex_count = 4;
+	const unsigned	vertex_count = 4;
 	const float	vertices[ vertex_count * 3 ] =
 	{
 		-1.f, 0.f, -1.f,
@@ -54,7 +54,7 @@ namespace rectangle {
 		+1.f, 0.f, -1.f,
 	};
 
-	const u32	pair_count = 4;
+	const unsigned	pair_count = 4;
 	const u16	pairs[ pair_count * 2 ] =
 	{
 		0,1,  1,2,  2,3,  3,0
@@ -66,7 +66,7 @@ namespace rectangle {
 // Ellipsoid
 ////////////////////////////////////////////////////////////////////////////
 namespace ellipsoid {
-	const u32	vertex_count = 114;
+	const unsigned	vertex_count = 114;
 	const float	vertices[ vertex_count * 3 ] =
 	{
 		0.0000f,0.0000f,1.0000f,	0.0000f,0.3827f,0.9239f,	-0.1464f,0.3536f,0.9239f,
@@ -109,7 +109,7 @@ namespace ellipsoid {
 		0.2706f,0.2706f,-0.9239f,	0.1464f,0.3536f,-0.9239f,	0.0000f,0.0000f,-1.0000f
 	};
 
-	const u32	pair_count = 336;
+	const unsigned	pair_count = 336;
 	const u16	pairs[ pair_count * 2 ] =
 	{
 		0,   1,   0,   2,   0,   3,   0,   4,   0,   5,   0,   6,   0,   7,   0,   8,   0,   9,   0,  10,
@@ -153,7 +153,7 @@ namespace ellipsoid {
 // Cone
 ////////////////////////////////////////////////////////////////////////////
 namespace cone {
-	const u32	vertex_count = 17;
+	const unsigned	vertex_count = 17;
 	const float	vertices[ vertex_count * 3 ] =
 	{
 		0.000000f,  1.000000f,   0.000000f,
@@ -175,7 +175,7 @@ namespace cone {
 		0.923880f, -1.000000f,  -0.382683f
 	};
 
-	const u32	pair_count = 32;
+	const unsigned	pair_count = 32;
 	const u16	pairs[ pair_count * 2 ] =
 	{
 		0,  1,
@@ -218,7 +218,7 @@ namespace cone {
 // Ellipse 
 ////////////////////////////////////////////////////////////////////////////
 namespace ellipse {
-	const u32	vertex_count = 64;
+	const unsigned	vertex_count = 64;
 	const float	vertices[ vertex_count * 3 ] =
 	{
 		1.000000f,	0.000000f,	0.000000f,
@@ -287,7 +287,7 @@ namespace ellipse {
 		0.995185f,	0.000000f,	-0.098017f
 	};
 
-	const u32	pair_count = 64;
+	const unsigned	pair_count = 64;
 	const u16	pairs[ pair_count * 2 ] =
 	{
 		0, 1, 
@@ -361,7 +361,7 @@ namespace ellipse {
 // Cube solid
 ////////////////////////////////////////////////////////////////////////////
 namespace cube_solid {
-	const u32 vertex_count = 8;
+	const unsigned vertex_count = 8;
 	const float vertices[vertex_count*3] = 
 	{
 		-1.000000f,	 1.000000f,	-1.000000f,
@@ -374,8 +374,8 @@ namespace cube_solid {
 		1.000000f,	-1.000000f,	 1.000000f
 	};
 
-	const u32 face_count = 12; 
-	const u32 index_count = face_count*3; 
+	const unsigned face_count = 12; 
+	const unsigned index_count = face_count*3; 
 	const u16 faces[index_count] = {
 		0,		1,		2,
 		3,		1,		0,
@@ -398,7 +398,7 @@ namespace cube_solid {
 ////////////////////////////////////////////////////////////////////////////
 namespace rectangle_solid {
 
-	const u32 vertex_count = 4;
+	const unsigned vertex_count = 4;
 	const float vertices[vertex_count*3] = 
 	{
 		-1.000000f,	0.000000f, 	-1.000000f,
@@ -407,8 +407,8 @@ namespace rectangle_solid {
 		1.000000f,	0.000000f,	-1.000000f
 	};
 
-	const u32 face_count = 2;
-	const u32 index_count = face_count*3; 
+	const unsigned face_count = 2;
+	const unsigned index_count = face_count*3; 
 	const u16 faces[index_count] = {
 		0,		1,		2,
 		3,		0,		2
@@ -420,7 +420,7 @@ namespace rectangle_solid {
 // Cone solid
 ////////////////////////////////////////////////////////////////////////////
 namespace cone_solid {
-	const u32 vertex_count = 17;
+	const unsigned vertex_count = 17;
 	const float vertices[vertex_count*3] = {
 		1.414214f,	-1.000000f,	 1.414212f,
 		2.000000f,	-1.000000f,	-0.000000f,
@@ -441,8 +441,8 @@ namespace cone_solid {
 		0.000000f,	 1.000000f,	-0.000000f
 	};
 
-	const u32 face_count = 30; 
-	const u32 index_count = face_count*3; 
+	const unsigned face_count = 30; 
+	const unsigned index_count = face_count*3; 
 	const u16 faces[index_count] = {
 		0,		1,		2,	
 		0,		3,		1,
@@ -482,7 +482,7 @@ namespace cone_solid {
 // Cylinder
 ////////////////////////////////////////////////////////////////////////////
 namespace cylinder_solid {
-	const u32 vertex_count = 34;
+	const unsigned vertex_count = 34;
 	const float vertices[vertex_count*3] = {
 		1.847760f,	 1.000000f,	 0.765366f,
 		1.414214f,	-1.000000f,	 1.414213f,
@@ -520,8 +520,8 @@ namespace cylinder_solid {
 		0.000000f,	 1.000000f,	 0.000000f
 	};
 
-	const u32 face_count = 64; 
-	const u32 index_count = face_count*3; 
+	const unsigned face_count = 64; 
+	const unsigned index_count = face_count*3; 
 	const u16 faces[index_count] = {
 		0,		1,		2,
 		3,		1,		0,
@@ -594,7 +594,7 @@ namespace cylinder_solid {
 // Ellipsoid solid
 ////////////////////////////////////////////////////////////////////////////
 namespace ellipsoid_solid {
-	const u32 vertex_count = 92;
+	const unsigned vertex_count = 92;
 	const float vertices[vertex_count*3] = {
 		0.0000f,    1.0000f,     0.0000f ,
 		0.8944f,    0.4472f,     0.0000f ,
@@ -690,8 +690,8 @@ namespace ellipsoid_solid {
 		0.5927f,    -0.8054f,    0.0000f  
 	};
 
-	const u32 face_count = 180; 
-	const u32 index_count = face_count*3; 
+	const unsigned face_count = 180; 
+	const unsigned index_count = face_count*3; 
 	const u16 faces[index_count] = {
 		14,    12,    0,
 		72,   13,   12,

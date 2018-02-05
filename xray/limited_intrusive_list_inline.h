@@ -13,8 +13,8 @@
 TEMPLATE_SIGNATURE
 inline LIMITED_INTRUSIVE_LIST::limited_intrusive_list	( ) :
 #ifndef MASTER_GOLD
-	m_push_thread_id( u32(-1) ),
-	m_pop_thread_id	( u32(-1) ),
+	m_push_thread_id( unsigned(-1) ),
+	m_pop_thread_id	( unsigned(-1) ),
 #endif // #ifndef MASTER_GOLD
 	m_first				( 0 ),
 	m_last				( 0 )

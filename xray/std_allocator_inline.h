@@ -49,9 +49,9 @@ TEMPLATE_SIGNATURE
 typename STD_ALLOCATOR::pointer STD_ALLOCATOR::allocate			( size_type const n, void* p ) const
 {
 #ifdef DEBUG
-	return						( (pointer)( USER_ALLOCATOR ).realloc_impl( p, (u32)std::max( (u32)n, (u32)size_t(1) )*sizeof(T), typeid(T).name(), __FUNCTION__, __FILE__, __LINE__ ) );
+	return						( (pointer)( USER_ALLOCATOR ).realloc_impl( p, (unsigned)std::max( (unsigned)n, (unsigned)size_t(1) )*sizeof(T), typeid(T).name(), __FUNCTION__, __FILE__, __LINE__ ) );
 #else // #ifdef DEBUG
-	return						( (pointer)( USER_ALLOCATOR ).realloc_impl( p, (u32)std::max( (u32)n, (u32)size_t(1) )*sizeof(T) ) );
+	return						( (pointer)( USER_ALLOCATOR ).realloc_impl( p, (unsigned)std::max( (unsigned)n, (unsigned)size_t(1) )*sizeof(T) ) );
 #endif // #ifdef DEBUG
 }
 

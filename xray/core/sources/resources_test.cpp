@@ -45,7 +45,7 @@ public:
 	void   resources_callback (xray::resources::queries_result & queries)
 	{
 		TEST_CURE_ASSERT			(queries.is_successful(), return);
-		for ( u32 i=0; i<queries.size(); ++i )
+		for ( unsigned i=0; i<queries.size(); ++i )
 			TEST_CURE_ASSERT		(queries[i].is_success(), return);
 		LOGI_INFO					("resources:test", "callback called with success");
 	}
@@ -122,8 +122,8 @@ public:
 
 		if ( test_configuration.do_query_create_resource )
 		{
-			u32	src_buffer_size				=	creation_data_size;
-			u32 src_buffer_offs_to_raw_data	=	0;
+			unsigned	src_buffer_size				=	creation_data_size;
+			unsigned src_buffer_offs_to_raw_data	=	0;
 			if ( test_configuration.inplace_in_creation_or_inline_data )
 			{
 				R_ASSERT						(test_configuration.cook_type == cook_type_inplace_unmanaged);
@@ -134,7 +134,7 @@ public:
 			pstr src_buffer_data			=	test_configuration.inplace_in_creation_or_inline_data ? 
 												(pstr)MT_ALLOC(char, src_buffer_size) : (pstr)ALLOCA(src_buffer_size);
 
-			for ( u32 i=0; i<creation_data_size; ++i )
+			for ( unsigned i=0; i<creation_data_size; ++i )
 				src_buffer_data[src_buffer_offs_to_raw_data + i]	=	(i % 2) ? '0' : '1';
 
 			const_buffer	 src_buffer			(src_buffer_data, src_buffer_size);
@@ -145,7 +145,7 @@ public:
 				{ "create_resource_request1", src_buffer,	test_resource_class },
 			};
 
-			u32 const creation_requests_count	=	test_configuration.inplace_in_creation_or_inline_data ? 1 : array_size(creation_requests);
+			unsigned const creation_requests_count	=	test_configuration.inplace_in_creation_or_inline_data ? 1 : array_size(creation_requests);
 
 			query_create_resources_and_wait		(creation_requests, 
 												 creation_requests_count,
@@ -160,7 +160,7 @@ public:
 			if ( test_configuration.inplace_in_creation_or_inline_data )
 				R_ASSERT						(test_configuration.cook_type == cook_type_inplace_unmanaged);
 
-			u32 requests_count				=	test_configuration.inplace_in_creation_or_inline_data ? 
+			unsigned requests_count				=	test_configuration.inplace_in_creation_or_inline_data ? 
 												array_size(inplace_inline_request) : array_size(normal_request);
 
 			if ( test_configuration.cook_type == cook_type_translate_query )
@@ -202,7 +202,7 @@ public:
 
 	void unregister_cook (cook_base * cook)
 	{
-		u32 const time_for_cleanup	=	1000;
+		unsigned const time_for_cleanup	=	1000;
 
 		timing::timer				timer;
 		timer.start					();
@@ -312,7 +312,7 @@ public:
 
 	struct on_test_file_erased_predicate_type
 	{
-		on_test_file_erased_predicate_type (u32 files_left) : files_left(files_left) {}
+		on_test_file_erased_predicate_type (unsigned files_left) : files_left(files_left) {}
 		void   callback (bool result)
 		{
 			TEST_ASSERT	(result);
@@ -320,14 +320,14 @@ public:
 			--files_left;
 		}
 
-		u32				files_left;
+		unsigned				files_left;
 	};
 
 	void   delete_files_created_by_cook ()
 	{
-		on_test_file_erased_predicate_type on_test_file_erased_predicate((u32)s_created_files.size());
+		on_test_file_erased_predicate_type on_test_file_erased_predicate((unsigned)s_created_files.size());
 
-		for ( u32 i=0; i<s_created_files.size(); ++i )
+		for ( unsigned i=0; i<s_created_files.size(); ++i )
 		{
 			if ( s_created_files[i].length() )
 			{
@@ -337,7 +337,7 @@ public:
 			}
 		}
 
-		u32 const time_for_cleanup	=	1000;
+		unsigned const time_for_cleanup	=	1000;
 		timing::timer	timer;
 		timer.start					();
 		while ( on_test_file_erased_predicate.files_left && 
@@ -365,7 +365,7 @@ private:
 // 	query_fs_iterator_and_wait	("", boost::bind(& resource_tester::fs_callback, this, _1), & memory::g_mt_allocator);
 
 	fs::path_string		m_resource_path;
-	u32					m_test_iteration_ordinal;
+	unsigned					m_test_iteration_ordinal;
 	bool				m_stop_dispatch;
 };
 

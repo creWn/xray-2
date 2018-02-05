@@ -10,8 +10,8 @@
 namespace xray {
 namespace memory {
 
-inline void i_writer::w_u32(u32 d)
-{	w(&d,sizeof(u32));	}
+inline void i_writer::w_unsigned(unsigned d)
+{	w(&d,sizeof(unsigned));	}
 
 inline void i_writer::w_u16(u16 d)
 {	w(&d,sizeof(u16));	}
@@ -32,7 +32,7 @@ inline void i_writer::w_float(float d)
 {	w(&d,sizeof(float));}
 
 inline void i_writer::w_stringZ(const char *p)
-{	w(p,(u32)strlen(p)+1);					}
+{	w(p,(unsigned)strlen(p)+1);					}
 
 inline void i_writer::w_fvector3(const math::float3 &v)	
 {	w(&v, sizeof(math::float3));	}

@@ -78,7 +78,7 @@ long   query_resource (pcstr const						request_path,
 }
 
 long   query_resources (request const*					requests, 
-					    u32 const						request_count, 
+					    unsigned const						request_count, 
 					    query_callback const&			callback, 
 					    memory::base_allocator*	const	allocator,
 						user_data_variant const *		user_data[],
@@ -105,7 +105,7 @@ private:
 };
 
 void   query_resources_and_wait	(request const *				requests, 
-					    		 u32 const						request_count, 
+					    		 unsigned const						request_count, 
 					    		 query_callback const &			callback, 
 					    		 memory::base_allocator * const	allocator,
 								 user_data_variant const *		user_data[],
@@ -153,7 +153,7 @@ long   query_create_resource  (pcstr							request_name,
 }
 
 long   query_create_resources  (creation_request const *		requests, 
-								u32 const						request_count, 
+								unsigned const						request_count, 
 								query_callback const &			callback, 
 								memory::base_allocator * const	allocator,
 								user_data_variant const *		user_data[],
@@ -181,7 +181,7 @@ private:
 };
 
 void   query_create_resources_and_wait  (creation_request const *		requests, 
-										 u32 const						request_count, 
+										 unsigned const						request_count, 
 										 query_callback const &			callback, 
 										 memory::base_allocator * const	allocator,
 										 user_data_variant const *		user_data[],
@@ -257,12 +257,12 @@ memory::base_allocator *   unmanaged_allocator ()
 	return						& memory::g_resources_unmanaged_allocator;
 }
 
-pvoid   allocate_unmanaged_memory (u32 size, pcstr type_name)
+pvoid   allocate_unmanaged_memory (unsigned size, pcstr type_name)
 {
 	return						g_resources_manager->allocate_unmanaged_memory (size, type_name);
 }
 
-managed_resource *   allocate_managed_resource (u32 size)
+managed_resource *   allocate_managed_resource (unsigned size)
 {
 	return						g_resources_manager->allocate_managed_resource (size);
 }

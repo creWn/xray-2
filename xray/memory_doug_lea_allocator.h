@@ -17,7 +17,7 @@ namespace memory {
 class XRAY_CORE_API doug_lea_allocator : public base_allocator {
 public:
 					doug_lea_allocator	( );
-			void	user_thread_id		( u32 user_thread_id ) const;
+			void	user_thread_id		( unsigned user_thread_id ) const;
 			void	user_current_thread_id	( ) const;
 			pvoid	malloc_impl			( size_t size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION );
 			pvoid	realloc_impl		( pvoid pointer, size_t new_size XRAY_CORE_DEBUG_PARAMETERS_DESCRIPTION_DECLARATION XRAY_CORE_DEBUG_PARAMETERS_DECLARATION );
@@ -40,7 +40,7 @@ private:
 
 public:
 	pvoid			m_arena;
-	mutable u32		m_user_thread_id;
+	mutable unsigned		m_user_thread_id;
 }; // class doug_lea_allocator
 
 #else // #if !XRAY_USE_CRT_MEMORY_ALLOCATOR

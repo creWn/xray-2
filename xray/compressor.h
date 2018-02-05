@@ -15,8 +15,8 @@ namespace xray {
 class XRAY_CORE_API compressor
 {
 public:
-	virtual xray::signalling_bool	compress	(const_buffer src, mutable_buffer dest, u32& out_size) = 0;
-	virtual xray::signalling_bool	decompress	(const_buffer src, mutable_buffer dest, u32& out_size) = 0;
+	virtual xray::signalling_bool	compress	(const_buffer src, mutable_buffer dest, unsigned& out_size) = 0;
+	virtual xray::signalling_bool	decompress	(const_buffer src, mutable_buffer dest, unsigned& out_size) = 0;
 
 	virtual ~compressor () {}
 

@@ -15,7 +15,7 @@ namespace tasks {
 
 typedef	memory::fixed_size_allocator<task_type, threading::multi_threading_mutex_policy>	tasks_types_allocator; 
 
-static u32 const						s_task_types_arena_size			=	1024 * 1024;
+static unsigned const						s_task_types_arena_size			=	1024 * 1024;
 static char								s_task_types_arena					[s_task_types_arena_size];
 static tasks_types_allocator *			s_task_types_allocator			=	NULL;
 static threading::atomic32_type			s_task_types_creation_flag		=	0;

@@ -15,30 +15,30 @@ inline void ARRAY_CHUNK_READER::construct		( )
 {
 	impl( ).m_last_position	= 0;
 	reader&	reader			= impl( ).reader( );
-	impl( ).m_chunks		= reader.pointer( ) + reader.r_u32( );
+	impl( ).m_chunks		= reader.pointer( ) + reader.r_unsigned( );
 	ASSERT					( impl( ).m_chunks < reader.pointer( ) + reader.elapsed( ) );
 }
 
 TEMPLATE_SIGNATURE
-inline u32 ARRAY_CHUNK_READER::chunk_position	( u32 const chunk_id )
+inline unsigned ARRAY_CHUNK_READER::chunk_position	( unsigned const chunk_id )
 {
 	reader&	reader			= impl( ).reader( );
 	if ( impl( ).m_last_position && (impl( ).m_last_position < reader.length( )) ) {
 		reader.seek			( impl( ).m_last_position );
-		reader.r_u32		( );
-		u32 const size		= reader.r_u32( ) & 0x3fffffff;
+		reader.r_unsigned		( );
+		unsigned const size		= reader.r_unsigned( ) & 0x3fffffff;
 		reader.advance		( size );
-		u32 const result	= reader.tell( );
-		if ( reader.r_u32( ) == chunk_id ) {
+		unsigned const result	= reader.tell( );
+		if ( reader.r_unsigned( ) == chunk_id ) {
 			impl( ).m_last_position	= result;
 			return			( result );
 		}
 	}
 
 	if ( ( reader.pointer( ) + reader.elapsed( ) ) <= ( impl( ).m_chunks + chunk_id ) )
-		return				( u32( -1 ) );
+		return				( unsigned( -1 ) );
 
-	u32 const result		= impl( ).m_chunks[chunk_id];
+	unsigned const result		= impl( ).m_chunks[chunk_id];
 	impl( ).m_last_position	= result;
 	return					( result );
 }

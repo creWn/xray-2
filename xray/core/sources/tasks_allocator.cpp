@@ -15,7 +15,7 @@ task_allocator::task_allocator ()
 	m_free_list.pointer					=	NULL;
 	m_free_list.counter					=	0;
 
-	for ( u32 i=0; i<max_task_count; ++i )
+	for ( unsigned i=0; i<max_task_count; ++i )
 	{
 		task * const current_task		=	(task *)((pbyte)m_task_buffer + (i * granularity));
 		task * const next_task			=	(task *)((pbyte)m_task_buffer + ((i+1) * granularity));
@@ -76,7 +76,7 @@ void   task_allocator::deallocate (task * freeing_task)
 
 void   task_allocator::check_all_free ()
 {
-	u32 free_count						=	0;
+	unsigned free_count						=	0;
 	
 	task const * current_task			=	m_free_list.pointer;
 	while ( current_task )
@@ -85,7 +85,7 @@ void   task_allocator::check_all_free ()
 		current_task					=	current_task->m_next_task_in_allocator;
 	}
 
-	R_ASSERT_CMP							(free_count, ==, (u32)max_task_count);
+	R_ASSERT_CMP							(free_count, ==, (unsigned)max_task_count);
 }
 
 } // namespace tasks

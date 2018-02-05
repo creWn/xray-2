@@ -45,7 +45,7 @@ struct MEM_BLK : public BLK_NODE
 class ppmd_allocator
 {
 public:
-	ppmd_allocator(xray::memory::base_allocator* const allocator, u32 SASize) : m_allocator(allocator)
+	ppmd_allocator(xray::memory::base_allocator* const allocator, unsigned SASize) : m_allocator(allocator)
 	{
 		SubAllocatorSize				=	0;
 		StartSubAllocator					(SASize);
