@@ -4,7 +4,7 @@
 library
 C#
 .cs
-H:\xray2\xray2\engine\xray\wpf_controls\obj\Debug\
+F:\X-Ray\xray-2\xray\wpf_controls\obj\Debug\
 xray.editor.wpf_controls
 none
 false
@@ -13,6 +13,8 @@ DEBUG;TRACE
 14815739119
 
 38-657423392
-14-1208653380
+14-1511119934
 color_ramp.xaml;property_grid_editors\Boolean_editor.xaml;property_grid_editors\collection_editor.xaml;property_grid_editors\combo_box_editor.xaml;property_grid_editors\default_editor.xaml;property_grid_editors\external_editor.xaml;property_grid_editors\Int32_editor.xaml;property_grid_editors\many_editor.xaml;property_grid_editors\string_select_file_editor.xaml;property_grid_editors\Single_editor.xaml;property_grid_editors\String_editor.xaml;property_grid.xaml;property_grid_item_editors\color_range_editor.xaml;property_grid_item_editors\common_item_editor.xaml;
+
+True
 
